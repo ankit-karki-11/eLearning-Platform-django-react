@@ -22,6 +22,7 @@ import {
 } from "@/features/api/authApi";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 // const [error, setError] = useState(null);
 
 const Login = () => {
@@ -51,6 +52,8 @@ const Login = () => {
         isSuccess: loginIsSuccess
     }] = useLoginUserMutation();
 
+    const navigate= useNavigate();
+
     const changeInputHandler = (e, type) => {
         const { name, value } = e.target;
         if (type === "login") {
@@ -66,13 +69,6 @@ const Login = () => {
         }
     }
 
-    // const handleRegistration = async (type) => {
-    //     const inputData = type === "signup" ? signupInput : loginInput;
-    //     const action = type === "signup" ? registerUser : loginUser;
-    //     await action(inputData);
-    //     console.log(inputData);
-    // };
-
     const handleRegistration = async (type) => {
         const inputData = type === "signup" ? signupInput : loginInput;
         const action = type === "signup" ? registerUser : loginUser;
@@ -82,7 +78,7 @@ const Login = () => {
             console.log("Success:", result);
         } catch (err) {
             console.error("Error:", err);
-            // Optionally: show toast or error UI
+          
         }
     };
 
@@ -95,6 +91,7 @@ const Login = () => {
         }
         if (loginIsSuccess && loginData) {
             toast.success(loginData.message || "Login Successful.")
+            navigate("/");
         }
         if (loginError) {
             toast.error(loginData.data.message || " Login Failed")
@@ -103,7 +100,7 @@ const Login = () => {
         loginIsLoading, registerIsLoading, loginIsSuccess, registerIsSuccess, registerData, registerError, loginData, loginError
     ])
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-100 p-4">
+        <div className="flex mt-16 items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-100 p-4">
             <Tabs defaultValue="signup" className="w-full max-w-md">
                 <TabsList className="grid grid-cols-2 w-full mb-4 bg-gray-100 p- rounded-md shadow-inner">
                     <TabsTrigger value="signup" className="rounded-md">Signup</TabsTrigger>
