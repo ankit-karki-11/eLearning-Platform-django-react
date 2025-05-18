@@ -1,17 +1,23 @@
 from django.db import models
 from users.models import UserAccount
 from django.utils.text import slugify
-
+from django.core.validators import MinValueValidator
 
 #course
 class Category(models.Model):
-    name=models.CharField(max_length=100,unique=True)
+    title=models.CharField(max_length=100,unique=True)
+    slug=models.SlugField(max_length=200,unique=True,null=True,blank=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return self.name
+        return self.title
     
+    def save(self,*args,**kwargs):
+        if not self.slug:
+            self.slug=slugify(self.title)
+            super().save(*args, **kwargs)
+            
     class Meta:
         db_table="category"
         verbose_name_plural="Categories"
@@ -20,15 +26,40 @@ class Category(models.Model):
     
     
 class Course(models.Model):
+    LEVEL_CHOICES = [
+        ('beginner', 'Beginner'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced'),
+    ]
+    
     title=models.CharField(max_length=200,unique=True)
     slug=models.SlugField(max_length=200,unique=True,null=True,blank=True)
     description=models.TextField(null=True,blank=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
-    price=models.DecimalField(max_digits=8,decimal_places=2,default=0.0)
     
+    price = models.DecimalField(
+        max_digits=8, 
+        decimal_places=2, 
+        default=0.0,
+        validators=[MinValueValidator(0.0)]
+    )
+    
+    course_duration = models.PositiveIntegerField(
+        help_text="Duration in minutes",
+        default=0,
+        null=True,
+        blank=True
+    )
+    
+    level = models.CharField(
+        max_length=20,
+        choices=LEVEL_CHOICES,
+        default='beginner'
+    )
     instructor=models.ForeignKey(
         UserAccount,on_delete=models.CASCADE, related_name='courses')
+    
     
     category=models.ForeignKey(
         Category,on_delete=models.CASCADE,related_name="courses")
