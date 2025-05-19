@@ -27,6 +27,7 @@ import { Button } from './ui/button'
 import DarkMode from '@/DarkMode'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     const user = true;
@@ -36,8 +37,11 @@ const Navbar = () => {
             {/* desktop */}
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hidden md:flex justify-between items-center h-full'>
                 <div className='flex items-center gap-2'>
-                    <School size={"20"} />
-                    <h1 className='hidden md:block font-extrabold text-xl'>Padhai</h1>
+                    <Link to={""}>
+
+                        <h1 className='hidden md:block font-extrabold text-xl'>Padhai</h1>
+                    </Link>
+
                 </div>
 
                 {/* user icons and dark mode icon */}
@@ -56,16 +60,18 @@ const Navbar = () => {
                                     <DropdownMenuSeparator />
                                     <DropdownMenuGroup>
                                         <DropdownMenuItem>
-                                            Profile
+                                            <Link to="my-profile"> Profile</Link>
+
                                         </DropdownMenuItem>
-                                        <DropdownMenuItem>
+                                        {/* <DropdownMenuItem>
                                             Edit Profile
+                                        </DropdownMenuItem> */}
+                                        <DropdownMenuItem>
+                                            <Link to="my-learning">My Learning </Link>
                                         </DropdownMenuItem>
                                         <DropdownMenuItem>
-                                            My Learning
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem>
-                                            My courses
+                                            <Link to="my-learning">My courses </Link>
+
                                         </DropdownMenuItem>
                                     </DropdownMenuGroup>
                                     <DropdownMenuSeparator />
@@ -102,7 +108,7 @@ const Navbar = () => {
 export default Navbar
 
 const MobileNavbar = () => {
-    const role="instructor"
+    const role = "instructor"
     return (
         <Sheet>
             <SheetTrigger asChild>
@@ -122,15 +128,15 @@ const MobileNavbar = () => {
                     </p>
                 </nav>
                 {
-                    role == "instructor" &&(
-<SheetFooter>
-                    <SheetClose asChild>
-                        <Button >My Dashboard</Button>
-                    </SheetClose>
-                </SheetFooter>
+                    role == "instructor" && (
+                        <SheetFooter>
+                            <SheetClose asChild>
+                                <Button >My Dashboard</Button>
+                            </SheetClose>
+                        </SheetFooter>
                     )
-      }
-                
+                }
+
             </SheetContent>
         </Sheet>
     );

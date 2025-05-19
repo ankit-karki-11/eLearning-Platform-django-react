@@ -1,65 +1,84 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { CardContent, CardFooter } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowRight, Clock, Tag } from 'lucide-react';
+import { ArrowRight, Clock, Tag, Star, ShoppingCart } from 'lucide-react';
 import React from 'react';
 
 const Course = () => {
   return (
-    <Card className="overflow-hidden max-w-sm transition-all hover:shadow-lg">
-      {/* Image container with proper aspect ratio and positioning */}
-      <div className="relative">
+    <div className="overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:-translate-y-1">
+      {/* Course image */}
+      <div className="relative h-36 overflow-hidden">
         <img
           src='https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80'
           alt="Modern Web Development course"
-          className="w-full h-48 object-cover"
+          className="w-full h-full object-cover"
         />
-        <div className="absolute top-4 left-4">
-          <Badge className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-3 py-1">
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent"></div>
+        
+        {/* Badge */}
+        <div className="absolute top-2 left-2">
+          <Badge className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs px-2 py-0.5">
             Advanced
           </Badge>
         </div>
+        
+        {/* Rating chip */}
+        <div className="absolute top-2 right-2 flex items-center gap-1 bg-black/70 backdrop-blur px-1.5 py-0.5 rounded-full">
+          <Star className="h-3 w-3 text-yellow-400 fill-yellow-400" />
+          <span className="text-xs font-medium text-white">4</span>
+        </div>
       </div>
 
-      {/* Content area with improved spacing and organization */}
-      <CardContent className="pt-5 pb-2">
-        <h3 className="text-xl font-bold mb-4 text-gray-900">
-          Modern Web Development
+      <CardContent className="px-3 pt-2 pb-1 space-y-2">
+        <h3 className="font-semibold text-sm tracking-tight text-gray-900 dark:text-white line-clamp-2 ">
+          Modern Web Development with React & Next.js
         </h3>
 
-        <div className="space-y-4">
-          {/* Instructor info with better alignment */}
-          <div className="flex items-center gap-3">
-            <Avatar className="h-9 w-9 border">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback className="bg-indigo-100 text-indigo-800">RG</AvatarFallback>
-            </Avatar>
-            <span className="font-medium text-gray-700">Dr. Ram Gopal</span>
+        {/* Instructor */}
+        <div className="flex items-center gap-2">
+          <Avatar className="h-7 w-7 border border-white dark:border-gray-800 shadow-sm">
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback className="bg-indigo-100 text-indigo-800 text-xs font-medium">RG</AvatarFallback>
+          </Avatar>
+          <div>
+            <p className="font-medium text-xs">Dr. Ram Gopal</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">Google</p>
           </div>
+        </div>
 
-          {/* Course details with icons */}
-          <div className="grid grid-cols-2 gap-2">
-            <div className="flex items-center gap-2 text-gray-600">
-              <Tag size={16} />
-              <span className="text-sm">Web Development</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-600">
-              <Clock size={16} />
-              <span className="text-sm">2 Weeks</span>
-            </div>
+        {/* Stats */}
+        <div className="flex items-center justify-between text-xs pt-1">
+          <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
+            <Tag className="h-3 w-3 text-indigo-500" />
+            <span>Web Dev(1200)</span>
+          </div>
+          <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
+            <Clock className="h-3 w-3 text-indigo-500" />
+            <span>24 hrs</span>
           </div>
         </div>
       </CardContent>
 
-      <CardFooter className="flex items-center justify-between pt-2 pb-5 px-6">
-        <span className="font-bold text-lg text-gray-900">₹ 250</span>
-        <Button className="bg-gray-950 hover:bg-gray-900">
-          Enroll Now
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+      <CardFooter className="flex items-center justify-between px-3 pb-3 pt-1">
+        <div className="flex flex-col">
+          <span className="text-sm font-bold text-gray-900 dark:text-white">Rs 250</span>
+        </div>
+        <div className="flex gap-1">
+          <Button variant="outline" size="sm" className="p-2 h-8 w-8">
+            <ShoppingCart className="h-4 w-4" />
+          </Button>
+          <Button size="sm" className="h-8 px-3 bg-gray-900 hover:bg-gray-800 text-white">
+            Enroll
+            <ArrowRight className="ml-1 h-3 w-3" />
+          </Button>
+        </div>
       </CardFooter>
-    </Card>
+     
+    </div>
+
+    
   );
 };
 
