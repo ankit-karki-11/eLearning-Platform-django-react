@@ -82,7 +82,7 @@ class UserAccountViewSet(ModelViewSet):
     
    
     @action(detail=False, methods=["POST"], permission_classes=[IsAuthenticated])
-    def update_contact_info(self, request):
+    def update_profile(self, request):
         user = request.user
         data = request.data
 
