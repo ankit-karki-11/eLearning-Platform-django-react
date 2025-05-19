@@ -24,7 +24,6 @@ const MyLearning = () => {
         </div>
     )
 }
-
 export default MyLearning
 
 // Skeleton component for loading state

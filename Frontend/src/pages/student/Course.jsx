@@ -50,13 +50,13 @@ const Course = () => {
 
         {/* Stats */}
         <div className="flex items-center justify-between text-xs pt-1">
-          <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
+          {/* <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
             <Tag className="h-3 w-3 text-indigo-500" />
             <span>Web Dev(1200)</span>
-          </div>
+          </div> */}
           <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
             <Clock className="h-3 w-3 text-indigo-500" />
-            <span>24 hrs</span>
+            <span>Duration:   24 hrs</span>
           </div>
         </div>
       </CardContent>
