@@ -19,22 +19,16 @@ import { Input } from '@/components/ui/input'
 import Course from './Course'
 import { useLoadUserQuery } from '@/features/api/authApi'
 
-
-// query in api use {}
-// mutuation becz of post use []
-
 const Profile = () => {
-     const {data,isLoading}=useLoadUserQuery();
-       console.log(data);
-    // const isLoading = true;
-    const enrolledCourses = [];
-    // const certificates = [];
-    
-    if (isLoading) return <h1>Profile is Loading.....</h1>
+    // query in api use {}
+    // mutuation becz of post use []
 
+    const { data, isLoading } = useLoadUserQuery();
     console.log(data);
-    const user =data;
-    
+    const enrolledCourses = [1];
+    const certificates = [];
+
+
     return (
         <div className='max-w-4xl mx-auto py-24 px-4 sm:px-6 lg:px-8'>
             <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm daek:shadow-none border border-gray-100 dark:border-gray-800 overflow-hidden">
@@ -42,10 +36,10 @@ const Profile = () => {
                 <div className='h-24 relative'>
                     <div className='absolute -bottom-16 left-6'>
                         <Avatar className='h-32 w-32 border-4 border-white dark:border-gray-900'>
-                            <AvatarImage src={user.avatar} />
-                            <AvatarImage src={user.profile_image || "https://github.com/shadcn.png"} />
+                            {/* <AvatarImage src={user.avatar} /> */}
+                            <AvatarImage src='https://github.com/shadcn.png'/>
                             <AvatarFallback className='bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-2xl font-bold'>
-                                {user.full_name.split(' ').map(n => n[0]).join('')}
+                                {/* {user.name.split(' ').map(n => n[0]).join('')} */}
                             </AvatarFallback>
                         </Avatar>
                     </div>
@@ -57,27 +51,27 @@ const Profile = () => {
                         <div className="space-y-4">
                             <div>
                                 <h1 className="text-xl font-bold text-gray-900 dark:text-gray-200">
-                                    {user.full_name}
+                                   Test name
                                 </h1>
                             </div>
                             <p className="text-sm font-sm text-gray-900 dark:text-gray-200 max-w-lg">
-                            {user.role}
+                                Test bio
                             </p>
 
                             <div className='flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400'>
                                 <div className='flex items-center gap-1.5'>
                                     <Mail className='h-4 w-4' />
-                                    <span> {user.email}</span>
+                                    <span> Test email</span>
 
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Calendar1 className='h-4 w-4' />
-                                    <span> {user.created_at}</span>
+                                    <span> user.created_at</span>
 
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Phone className='h-4 w-4' />
-                                    <span> {user.phone}</span>
+                                    <span> user.phone</span>
                                 </div>
                             </div>
                         </div>
@@ -143,7 +137,52 @@ const Profile = () => {
                         </div>
                     </div>
 
-                    
+                    {/* Improved Tabs Section using Shadcn UI */}
+                    <Tabs defaultValue="courses" className="mt-8">
+                        <TabsList className="grid w-full grid-cols-2">
+                            <TabsTrigger value="courses">My Courses</TabsTrigger>
+                            <TabsTrigger value="certificates">Certificates</TabsTrigger>
+                        </TabsList>
+
+                        <TabsContent value="courses" className="mt-6 py-8">
+                            {enrolledCourses.length === 0 ? (
+                                <div className="text-center py-12">
+                                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-200">
+                                        You haven't enrolled in any courses yet
+                                    </h3>
+                                    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                                        Browse our courses to get started on your learning journey.
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="grid gap-6">
+                                    {enrolledCourses.map((course, index) => (
+                                        <Course key={index} {...course} />
+                                    ))}
+                                </div>
+                            )}
+                        </TabsContent>
+
+                        <TabsContent value="certificates" className="mt-6 py-8">
+                            {certificates.length === 0 ? (
+                                <div className="text-center py-12">
+                                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-200">
+                                        No certificates yet
+                                    </h3>
+                                    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                                        Complete courses to earn certificates.
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="grid gap-6">
+                                    {/* Render certificates here */}
+                                    {certificates.map((cert, index) => (
+                                        <Certificate key={index} {...cert} />
+                                    ))}
+                                </div>
+                            )}
+                        </TabsContent>
+                    </Tabs>
                 </div>
             </div>
         </div>

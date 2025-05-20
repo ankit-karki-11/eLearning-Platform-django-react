@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/tabs";
 import {
     useLoginUserMutation,
-    useRegisterUserMutation 
+    useRegisterUserMutation
 } from "@/features/api/authApi";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -52,7 +52,8 @@ const Login = () => {
         isSuccess: loginIsSuccess
     }] = useLoginUserMutation();
 
-    const navigate= useNavigate();
+    // console.log(data);
+    const navigate = useNavigate();
 
     const changeInputHandler = (e, type) => {
         const { name, value } = e.target;
@@ -78,7 +79,7 @@ const Login = () => {
             console.log("Success:", result);
         } catch (err) {
             console.error("Error:", err);
-          
+
         }
     };
 
@@ -87,18 +88,18 @@ const Login = () => {
             toast.success(registerData.message || "Signup Successful.")
         }
         if (registerError) {
-            toast.error(registerData.data.message || " Signup Failed")
+            toast.error(registerError.data?.message || "Signup Failed")
         }
         if (loginIsSuccess && loginData) {
             toast.success(loginData.message || "Login Successful.")
+            console.log(loginData);
             navigate("/");
         }
         if (loginError) {
-            toast.error(loginData.data.message || " Login Failed")
+            toast.error(loginError.data?.message || "Login Failed")
         }
-    }, [
-        loginIsLoading, registerIsLoading, loginIsSuccess, registerIsSuccess, registerData, registerError, loginData, loginError
-    ])
+    }, [loginIsLoading, registerIsLoading, loginIsSuccess, registerIsSuccess, registerData, registerError, loginData, loginError, navigate])
+    
     return (
         <div className="flex mt-16 items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-100 p-4">
             <Tabs defaultValue="signup" className="w-full max-w-md">

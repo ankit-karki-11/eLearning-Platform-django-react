@@ -1,5 +1,6 @@
 import { Menu, School } from 'lucide-react'
 import React from 'react'
+// import {logo.png} from public 
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -39,7 +40,11 @@ const Navbar = () => {
                 <div className='flex items-center gap-2'>
                     <Link to={""}>
 
-                        <h1 className='hidden md:block font-extrabold text-xl'>Padhai</h1>
+                        {/* <h1 className='hidden md:block font-extrabold text-xl'>padhai   {..logo.png}</h1>
+                             */}
+                        <h1 className='hidden md:block font-extrabold text-xl'>
+                            <img src="/logo.png" alt="Logo" className='inline-block h-6' /> padhai
+                        </h1>
                     </Link>
 
                 </div>
@@ -75,12 +80,13 @@ const Navbar = () => {
                                         </DropdownMenuItem>
                                     </DropdownMenuGroup>
                                     <DropdownMenuSeparator />
-                                    <DropdownMenuItem>
-                                        Log out
-                                    </DropdownMenuItem>
+                                       <DropdownMenuItem >
+                                        {/* onClick={logoutHandler} */}
+                                            Log out
+                                        </DropdownMenuItem>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem>
-                                        Dashboard
+                                        Dashboard   
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
@@ -93,7 +99,6 @@ const Navbar = () => {
                     <DarkMode />
                 </div>
             </div>
-
             {/* mobile view */}
             <div className='flex md:hidden items-center justify-between px-4 h-full'>
                 <h1>Padhai</h1>
@@ -104,9 +109,7 @@ const Navbar = () => {
         </div>
     )
 }
-
 export default Navbar
-
 const MobileNavbar = () => {
     const role = "instructor"
     return (
@@ -136,7 +139,6 @@ const MobileNavbar = () => {
                         </SheetFooter>
                     )
                 }
-
             </SheetContent>
         </Sheet>
     );

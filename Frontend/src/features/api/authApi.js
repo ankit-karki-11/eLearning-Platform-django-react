@@ -1,47 +1,96 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-const USER_API = "http://localhost:8000/api/v1/auth/"
+// const USER_API = "http://localhost:8000/api/v1/auth/"
+const USER_API = "http://localhost:8000/api/v1/";
+
+// get garney belama query use hunchaW
 
 export const authApi = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQuery({
         baseUrl: USER_API,
-        credentials: "include"
-
+        // credentials: "include", 
+        prepareHeaders: (headers) => {
+            const token = localStorage.getItem("accessToken");
+            if (token) {
+                headers.set("Authorization", `Bearer ${token}`);
+            }
+            return headers;
+        },
     }),
-    
+
     endpoints: (builder) => ({
         registerUser: builder.mutation({
             query: (inputData) => ({
-                url: "register/",
+                url: "auth/register/",
                 method: "POST",
                 body: inputData,
             })
         }),
         loginUser: builder.mutation({
             query: (inputData) => ({
-                url: "login/",
+                url: "auth/login/",
                 method: "POST",
                 body: inputData,
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
-                    const { result } = await queryFulfilled;
-                    console.log(data);
-                    // dispatch(userLoggedIn(user:result.data.user));
-                    dispatch(userLoggedIn({user:result.data.user}));
+                    const { data } = await queryFulfilled; // Correct destructuring
+                    // Save access and refresh tokens
+                    localStorage.setItem("accessToken", data.access);
+                    localStorage.setItem("refreshToken", data.refresh);
+                    // Dispatch userLoggedIn only if user data exists in response
+                    if (data.user) {
+                        dispatch(userLoggedIn({ user: data.user }));
+                    }
+                    console.log("Tokens saved to localStorage:", data);
+                } catch (error) {
+                    console.log("Login error:", error);
+                }
+            }
+
+        }),
+
+        // logout user
+        logoutUser: builder.mutation({
+            query: (inputData) => ({
+                url: "auth/logout/",
+                method: "GET"
+            }),
+            async onQueryStarted(_, { queryFulfilled, dispatch }) {
+                try {
+                    dispatch(userLoggedOut());
                 } catch (error) {
                     console.log(error);
                 }
             }
         }),
 
-        // logout user
+
+        loadUser: builder.query({
+            query: () => ({
+                url: "users/me/",
+                method: "GET"
+            }),
+            async onQueryStarted(_, { queryFulfilled, dispatch }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(userLoggedIn({ user: data.user }));
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+        }),
+
+
+
     })
 })
 
-export const{
+export const {
     useRegisterUserMutation,
     useLoginUserMutation,
+    useLoadUserQuery
 } = authApi;
 
 export default authApi;
