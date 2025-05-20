@@ -12,9 +12,11 @@ from django.db.models import Sum
 # from users.models
 
 class UserAccountViewSet(ModelViewSet):
+    #handle all use acc with tole based access
     queryset = UserAccount.objects.all()
     serializer_class = UserAccountSerializer
 
+#set permission per action:
     def get_permissions(self):
         if self.action == "create":
             self.permission_classes = []
@@ -49,8 +51,9 @@ class UserAccountViewSet(ModelViewSet):
             return super().destroy(request, *args, **kwargs)
         return Response(status=status.HTTP_403_FORBIDDEN, data={"detail": "Forbidden"})
 
+#some custom actions are:
     @action(detail=False, methods=["GET"])
-    # ! Returns a user by email if exists
+    #  Returns a user by email if exists
     def get_user_by_email(self, request):
         email = request.query_params.get("email")
         user = UserAccount.objects.filter(email=email).first()
@@ -61,12 +64,12 @@ class UserAccountViewSet(ModelViewSet):
         )
 
     @action(detail=False, methods=["GET"], permission_classes=[IsAuthenticated])
-    # ! Returns the current logged-in user's info
+    #  Returns the current logged-in user's info
     def get_user(self, request):
         return Response(UserAccountSerializer(request.user).data)
 
     @action(detail=False, methods=["GET"], permission_classes=[IsAdminUser])
-    # Admin-only(Returns all students)
+    # Admin-only(Returns all list of students)
     def get_students(self, request):
         students = UserAccount.objects.filter(role="student")
         return Response(UserAccountSerializer(students, many=True).data)
@@ -75,7 +78,6 @@ class UserAccountViewSet(ModelViewSet):
     @action(detail=False, methods=["GET"], permission_classes=[IsAdminUser])
     # get admins
     # returns all users with role admin
-    
     def get_admins(self,request):
         admins = UserAccount.objects.filter(role="admin")
         return Response(UserAccountSerializer(admins, many=True).data)
@@ -111,3 +113,4 @@ class UserAccountViewSet(ModelViewSet):
         return Response(
             status=status.HTTP_400_BAD_REQUEST, data={"detail": "Role parameter is required"}
         )
+    

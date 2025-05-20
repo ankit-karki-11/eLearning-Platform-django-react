@@ -27,17 +27,15 @@ class UserAccountManager(BaseUserManager):
         user.is_superuser=True
         user.role="admin"
         user.save(using=self._db)
+        
         return user
     
     # UserAccount Model
 class UserAccount(AbstractBaseUser,PermissionsMixin):
-        #role choices for user type
-        # instructor is optional
-        # admin can create course
         ROLE_CHOICES=[
             ("admin","Admin"),
             ("student","Student"),
-            # ("instructor","Instructor"),
+           # ("instructor", "Instructor"),
         ]
         
         email=models.EmailField(
@@ -46,8 +44,10 @@ class UserAccount(AbstractBaseUser,PermissionsMixin):
         )
         
         full_name=models.CharField(max_length=225)
+        
         phone_number = models.CharField(max_length=10, blank=True, null=True)
-        role=models.CharField(max_length=10,choices=ROLE_CHOICES,default="student",)
+        role=models.CharField(max_length=10,choices=ROLE_CHOICES,default="student")
+        
         profile_image=models.ImageField(
             upload_to="profile_images/%Y/%m/%d/",
             blank=True,
