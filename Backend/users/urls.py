@@ -11,7 +11,7 @@ router = DefaultRouter()
 router.register("", UserAccountViewSet, basename="user")
 
 urlpatterns = [
-    path('me/',UserAccountViewSet.as_view({'get':'get_user'}),name='get_user'),
+    path('profile/',UserAccountViewSet.as_view({'get':'get_user'}),name='get_user'),
     
 ]
 urlpatterns += router.urls

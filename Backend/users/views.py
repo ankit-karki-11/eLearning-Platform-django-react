@@ -100,13 +100,16 @@ class UserAccountViewSet(ModelViewSet):
             user.full_name = full_name
              # If there’s a new profile image uploaded...
         if profile_image:
-            # ...and if there’s already an image saved on Cloudinary, delete the old one first
+            # and if there’s already an image saved on Cloudinary, delete the old one first
             if user.profile_image_public_id:
                 cloudinary.uploader.destroy(user.profile_image_public_id)
                   # Upload the new image to Cloudinary
             upload_result=cloudinary.uploader.upload(profile_image)
-            user.profile_image =upload_result.get("secure_url")
+            # Update both Cloudinary and local image fields
+            user.profile_image_url =upload_result.get("secure_url")
             user.profile_image_public_id=upload_result.get("public_id")
+            # Save file locally for avatar fallback
+            user.profile_image=profile_image
             
         if phone_number:
             user.phone_number = phone_number
