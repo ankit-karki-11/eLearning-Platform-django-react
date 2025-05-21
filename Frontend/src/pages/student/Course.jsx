@@ -1,85 +1,67 @@
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { CardContent, CardFooter } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowRight, Clock, Tag, Star, ShoppingCart } from 'lucide-react';
-import React from 'react';
+import { Button } from '@/components/ui/button'
+import { ArrowRight, Clock, Star, ShoppingCart } from 'lucide-react'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 const Course = () => {
   return (
-    <div className="overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:-translate-y-1">
-      {/* Course image */}
-      <div className="relative h-36 overflow-hidden">
+    <div className="overflow-hidden rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-all">
+      {/* Course image with minimal overlay */}
+      <div className="relative h-40 w-full overflow-hidden">
         <img
           src='https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80'
           alt="Modern Web Development course"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/30 to-transparent"></div>
         
-        {/* Badge */}
-        <div className="absolute top-2 left-2">
-          <Badge className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs px-2 py-0.5">
-            Advanced
-          </Badge>
-        </div>
-        
-        {/* Rating chip */}
-        <div className="absolute top-2 right-2 flex items-center gap-1 bg-black/70 backdrop-blur px-1.5 py-0.5 rounded-full">
-          <Star className="h-3 w-3 text-yellow-400 fill-yellow-400" />
-          <span className="text-xs font-medium text-white">4</span>
+        {/* Minimal rating badge */}
+        <div className="absolute top-2 right-2 flex items-center gap-1 bg-gray-900/80 backdrop-blur px-2 py-1 rounded">
+          {/* <Star className="h-3 w-3 text-gray-200" /> */}
+          <span className="text-xs font-medium text-white">Advanced</span>
         </div>
       </div>
 
-      <CardContent className="px-3 pt-2 pb-1 space-y-2">
-        <h3 className="font-semibold text-sm tracking-tight text-gray-900 dark:text-white line-clamp-2 ">
+      {/* Course content */}
+      <div className="p-3 space-y-3">
+        {/* Title */}
+        <h3 className="font-medium text-gray-900 dark:text-gray-100 line-clamp-2 text-sm leading-snug">
           Modern Web Development with React & Next.js
         </h3>
 
         {/* Instructor */}
         <div className="flex items-center gap-2">
-          <Avatar className="h-7 w-7 border border-white dark:border-gray-800 shadow-sm">
+          <Avatar className="h-6 w-6 border border-gray-200 dark:border-gray-700">
             <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback className="bg-indigo-100 text-indigo-800 text-xs font-medium">RG</AvatarFallback>
+            <AvatarFallback className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-xs">RG</AvatarFallback>
           </Avatar>
           <div>
-            <p className="font-medium text-xs">Dr. Ram Gopal</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">Google</p>
+            <p className="text-xs font-medium text-gray-900 dark:text-gray-200">Dr. Ram Gopal</p>
+            <p className="text-xs text-gray-500 dark:text-gray-500">Google</p>
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="flex items-center justify-between text-xs pt-1">
-          {/* <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-            <Tag className="h-3 w-3 text-indigo-500" />
-            <span>Web Dev(1200)</span>
-          </div> */}
-          <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-            <Clock className="h-3 w-3 text-indigo-500" />
-            <span>Duration:   24 hrs</span>
+        {/* Metadata */}
+        <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-gray-800 pt-2">
+          <div className="flex items-center gap-1">
+            <Clock className="h-3 w-3" />
+            <span>24 hrs</span>
           </div>
+          <div className="font-medium text-gray-900 dark:text-gray-100">Rs 250</div>
         </div>
-      </CardContent>
+      </div>
 
-      <CardFooter className="flex items-center justify-between px-3 pb-3 pt-1">
-        <div className="flex flex-col">
-          <span className="text-sm font-bold text-gray-900 dark:text-white">Rs 250</span>
-        </div>
-        <div className="flex gap-1">
-          <Button variant="outline" size="sm" className="p-2 h-8 w-8">
-            <ShoppingCart className="h-4 w-4" />
-          </Button>
-          <Button size="sm" className="h-8 px-3 bg-gray-900 hover:bg-gray-800 text-white">
-            Enroll
-            <ArrowRight className="ml-1 h-3 w-3" />
-          </Button>
-        </div>
-      </CardFooter>
-     
+      {/* Footer actions */}
+      <div className="px-3 pb-3 flex items-center justify-between border-t border-gray-100 dark:border-gray-800">
+        <Button variant="ghost" size="sm" className="p-2 h-8 w-8 text-gray-500 hover:text-gray-900 dark:hover:text-gray-100">
+          <ShoppingCart className="h-4 w-4" />
+        </Button>
+        <Button size="sm" className="h-8 px-3 bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-white text-xs">
+          Enroll
+          <ArrowRight className="ml-1 h-3 w-3" />
+        </Button>
+      </div>
     </div>
+  )
+}
 
-    
-  );
-};
-
-export default Course;
+export default Course

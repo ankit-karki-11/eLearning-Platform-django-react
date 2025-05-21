@@ -2,3 +2,15 @@
 *{
     font-family: 'Ubuntu', sans-serif;
 }
+@keyframes line-expand {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+.animate-line-expand {
+  animation: line-expand 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
