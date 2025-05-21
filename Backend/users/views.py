@@ -9,6 +9,7 @@ from users.serializers import UserAccountSerializer
 from rest_framework import status
 from users.models import UserAccount
 from django.db.models import Sum
+import cloudinary.uploader
 # from users.models
 
 class UserAccountViewSet(ModelViewSet):
@@ -83,23 +84,36 @@ class UserAccountViewSet(ModelViewSet):
         return Response(UserAccountSerializer(admins, many=True).data)
     
    
-    @action(detail=False, methods=["POST"], permission_classes=[IsAuthenticated])
+    @action(detail=False, methods=["POST"], permission_classes=[IsAuthenticated], url_path="profile/update")
     def update_profile(self, request):
+        # Get the current logged-in user 
         user = request.user
         data = request.data
 
         full_name = data.get("full_name")
-        profile_image = data.get("profile_image")
+        
         phone_number = data.get("phone_number")
-
+        
+        profile_image=request.FILES.get("profile_image")
+        
         if full_name:
             user.full_name = full_name
+             # If there’s a new profile image uploaded...
         if profile_image:
-            user.profile_image = profile_image
+            # ...and if there’s already an image saved on Cloudinary, delete the old one first
+            if user.profile_image_public_id:
+                cloudinary.uploader.destroy(user.profile_image_public_id)
+                  # Upload the new image to Cloudinary
+            upload_result=cloudinary.uploader.upload(profile_image)
+            user.profile_image =upload_result.get("secure_url")
+            user.profile_image_public_id=upload_result.get("public_id")
+            
         if phone_number:
             user.phone_number = phone_number
 
+        # Save all changes to the user object in the database
         user.save()
+         # Return the updated user data
         return Response(UserAccountSerializer(user).data, status=status.HTTP_200_OK)
 
 
