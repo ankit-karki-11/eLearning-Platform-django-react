@@ -24,7 +24,8 @@ import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 // const [error, setError] = useState(null);
-
+import { useDispatch } from "react-redux";
+import { authApi } from "@/features/api/authApi";
 const Login = () => {
 
     const [loginInput, setLoginInput] = useState({
@@ -54,6 +55,7 @@ const Login = () => {
 
     // console.log(data);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const changeInputHandler = (e, type) => {
         const { name, value } = e.target;
@@ -92,7 +94,16 @@ const Login = () => {
         }
         if (loginIsSuccess && loginData) {
             toast.success(loginData.message || "Login Successful.")
-            console.log(loginData);
+
+                        // ✅ Store tokens
+            localStorage.setItem("accessToken", loginData.access);
+            localStorage.setItem("refreshToken", loginData.refresh);
+
+            // ✅ Invalidate user cache or refetch user info
+            dispatch(authApi.util.invalidateTags(["User"])); // if you use tags
+            dispatch(authApi.endpoints.loadUser.initiate());
+
+            // console.log(loginData);
             navigate("/");
         }
         if (loginError) {
