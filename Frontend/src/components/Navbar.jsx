@@ -28,7 +28,7 @@ import { toast } from 'sonner';
 import { authApi } from '@/features/api/authApi'; // important for resetApiState
 
 const Navbar = () => {
-  const { data: user, refetch } = useLoadUserQuery();
+  const { data: user, isLoading, refetch } = useLoadUserQuery();
   const [logoutUser, { data, isSuccess }] = useLogoutUserMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const Navbar = () => {
     <div className='h-16 w-full dark:bg-[#0A0A0A]/80 bg-white/80 border-b dark:border-b-gray-800/80 border-b-gray-200/80 backdrop-blur-lg fixed top-0 left-0 right-0 duration-300 z-10'>
       {/* desktop */}
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hidden md:flex justify-between items-center h-full'>
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-2 px-8'>
           <Link to="/">
             <h1 className='hidden md:block font-extrabold text-xl'>
               <img src="/logo.png" alt="Logo" className='inline-block h-6' /> padhai
@@ -65,17 +65,18 @@ const Navbar = () => {
         </div>
 
         {/* user icons and dark mode icon */}
-        <div className='flex items-center gap-4'>
-          {user ? (
+        <div className='flex items-center gap-4 px-8'>
+          { isLoading ? null : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Avatar className='cursor-pointer'>
                   <AvatarImage src={user.profile_image_url || "https://github.com/shadcn.png"} />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
+              
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel> <h2>{user.full_name}</h2></DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <DropdownMenuItem>

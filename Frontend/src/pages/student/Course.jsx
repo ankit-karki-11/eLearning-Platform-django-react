@@ -7,13 +7,18 @@ const Course = () => {
     <div className="overflow-hidden rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-all">
       {/* Course image with minimal overlay */}
       <div className="relative h-40 w-full overflow-hidden">
-        <img
-          src='https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80'
-          alt="Modern Web Development course"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/30 to-transparent"></div>
-        
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/30 to-transparent">
+          <img
+            // src='https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80'
+            src="/course1.png"
+            // src="/logo.png"
+            alt="Modern Web Development course"
+            className="w-full h-full object-contain"
+          />
+
+
+        </div>
+
         {/* Minimal rating badge */}
         <div className="absolute top-2 right-2 flex items-center gap-1 bg-gray-900/80 backdrop-blur px-2 py-1 rounded">
           {/* <Star className="h-3 w-3 text-gray-200" /> */}
