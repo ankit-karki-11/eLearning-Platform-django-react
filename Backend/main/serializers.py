@@ -8,7 +8,7 @@ class CategorySerializer(serializers.ModelSerializer):
         model=Category
         fields=[
             "id",
-            "name",
+            "title",
             "created_at",
             "updated_at",
         ]
@@ -18,7 +18,7 @@ class CategoryListSerializer(serializers.ModelSerializer):
         model=Category
         fields=[
             "id",
-            "name",
+            "title",
         ]
 
 # CourseSerializer: Detailed view for single course (CRUD)
@@ -108,7 +108,7 @@ class CourseListSerializer(serializers.ModelSerializer):
 class SectionSerializer(serializers.ModelSerializer):
     course=serializers.PrimaryKeyRelatedField(
         queryset=Course.objects.all(),
-        source="course",
+        # source="course",
         write_only=True,
         error_messages={
             "does_not_exist": "Course does not exist.",
@@ -125,6 +125,7 @@ class SectionSerializer(serializers.ModelSerializer):
             "title",
             "course",
             "order",
+            "attachments",
             "is_free",
             "video",
             "created_at",

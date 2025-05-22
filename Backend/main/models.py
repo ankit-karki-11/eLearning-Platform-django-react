@@ -2,6 +2,7 @@ from django.db import models
 from users.models import UserAccount
 from django.utils.text import slugify
 from django.core.validators import MinValueValidator
+from django.core.exceptions import ValidationError  
 
 #course
 class Category(models.Model):
@@ -16,7 +17,7 @@ class Category(models.Model):
     def save(self,*args,**kwargs):
         if not self.slug:
             self.slug=slugify(self.title)
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
             
     class Meta:
         db_table="category"
@@ -45,9 +46,18 @@ class Course(models.Model):
         validators=[MinValueValidator(0.0)]
     )
     
-    course_duration = models.PositiveIntegerField(
-        help_text="Duration in minutes",
-        default=0,
+    course_duration = models.DecimalField(
+        help_text="Duration in hours",
+        max_digits=5,
+        decimal_places=2,
+        default=0.0,
+        validators=[MinValueValidator(0.0)],
+        null=True,
+        blank=True
+    )
+    recommended_hours_per_week = models.PositiveIntegerField(
+        help_text="Recommended study hours per week(generally 5 hour)",
+        default=5,
         null=True,
         blank=True
     )
@@ -57,9 +67,7 @@ class Course(models.Model):
         choices=LEVEL_CHOICES,
         default='beginner'
     )
-    instructor=models.ForeignKey(
-        UserAccount,on_delete=models.CASCADE, related_name='courses')
-    
+   
     
     category=models.ForeignKey(
         Category,on_delete=models.CASCADE,related_name="courses")
@@ -70,17 +78,33 @@ class Course(models.Model):
     def save(self,*args,**kwargs):
         if not self.slug:
             self.slug=slugify(self.title)
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
     
     def __str__(self):
         return self.title
 
+    def enrolled_students(self):
+        return[enrollment.student for enrollment in self.enrollments.all()]
+    
+    def total_enrolled(self):
+        return self.enrollments.count()
 
+    def completed_students(self):
+        return self.enrollments.filter(status='completed')
+    def certified_students(self):
+        return self.enrollments.filter(status='certified')
+    
+    def duration_in_weeks(self):
+        if self.recommended_hours_per_week and self.course_duration:
+            weeks = self.course_duration / self.recommended_hours_per_week
+            return round(weeks, 2)
+        return None
+     
     class Meta:
         db_table="course"
         verbose_name_plural="Courses"
         ordering=["-created_at"]
-        
+
     
 #Section Model
 class Section(models.Model):
@@ -145,6 +169,11 @@ class Cart(models.Model):
 
 #Enrollment model
 class Enrollment(models.Model):
+    STATUS_CHOICES=[
+        ('in_progress','In Progress'),
+        ('completed','Completed'),
+        ('certified','Certified'),
+    ]
     student=models.ForeignKey(
         UserAccount,
         on_delete=models.CASCADE,
@@ -158,15 +187,19 @@ class Enrollment(models.Model):
         related_name='enrollments' 
     )
     
-    completed=models.BooleanField(default=False)
-    certificate_issued=models.BooleanField(default=False)
+    status=models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='in_progress'
+    )
+    
     last_accessed = models.DateTimeField(null=True, blank=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     
      # This method defines how each enrollment will be shown as a string (e.g., in admin panel or logs)
     def __str__(self):
-       return f"{self.student.full_name} -> {self.course.title}"
+       return f"{self.student.full_name} -> {self.course.title} ({self.status})"
    
     class Meta:
         db_table="enrollment"
@@ -175,6 +208,19 @@ class Enrollment(models.Model):
         unique_together = ["student", "course"]
             
             
+    # mark completed course
+    def mark_completed(self):
+        if self.status=='in_progress':
+            self.status='completed'
+        self.save()
+            
+    # issue certificate
+    def issue_certificate(self):
+        if self.status !='completed':
+            raise validationError("Course should be completed for issuing certificate")
+        self.status='certified'
+        self.save()
+        
 ########## payment-enroll-and instructor can add course expiration date,need to work on this feature ##################
 #Payment model
 class Payment(models.Model):
