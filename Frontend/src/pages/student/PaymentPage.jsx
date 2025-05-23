@@ -1,42 +1,41 @@
 import React from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { useLoadCourseQuery } from '@/features/api/courseApi'
-import { useLoadUserQuery } from '@/features/api/authApi'
-import { Button } from '@/components/ui/button'
-import { toast } from 'sonner'
+import { useLoadUserQuery } from '@/features/api/authApi';
+import { useLoadCourseQuery } from '@/features/api/courseApi';
+import { useParams } from 'react-router-dom'
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 const PaymentPage = () => {
-  const { slug } = useParams()
-  const navigate = useNavigate()
+  const {slug}=useParams();
+  // load the courses
+  // get={}
+  const {data,isLoading,error,isSuccess}=useLoadCourseQuery();
+  const{data:user,isLoading:userLoading,isSuccess:userSuccess,error:userError}=useLoadUserQuery();
 
-  const { data, isLoading, error } = useLoadCourseQuery()
-  const { data: user, isLoading: userLoading } = useLoadUserQuery()
+  if(isLoading || userLoading)
+    return <p>Loading your course.....</p>
 
-  if (isLoading || userLoading) return <p>Loading...</p>
-  if (error) return <p>Error loading course</p>
-  // if (!user) return navigate('/login')
+  if(error)
+    return <p>Error Loading your course</p>
+    
 
   const course = data?.find(c => c.slug === slug)
-  if (!course) return <p>Course not found</p>
+  if (! course)
+    return <p> Course not found </p>
 
   const handlePayment = () => {
-    //write esewa or khalti logic here
-    toast.message("Payment Gatewar adding part is developing ")
+    //write esewa logic here
+    toast.message("Payment gateway is developing")
   }
-
   return (
-    <div className="max-w-xl mx-auto mt-24 p-6 bg-white shadow rounded">
-      <h1 className="text-2xl font-bold mb-4">Confirm Payment</h1>
-      <div className='font-medium '>
-        <p className="text-lg mb-2">Course: {course.title}</p>
-        <p className="text-md mb-4 text-gray-600">Price: रु {course.price}</p>
+    <div className='max-w-xl mx-auto p-12 bg-gray-50 mt-24 shadow rounded-2xl' >
+      <h1>Confirm Payment</h1>
+      <p>{course.title}</p>
+      <p>{course.price}</p>
 
-        <Button className="w-full" onClick={handlePayment}>
-          Proceed to Pay
-        </Button>
-
-      </div>
-
+      <Button onClick={handlePayment}>
+        Proceed to Pay
+      </Button>
     </div>
   )
 }

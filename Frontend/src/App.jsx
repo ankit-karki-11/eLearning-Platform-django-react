@@ -51,7 +51,7 @@ const appRouter = createBrowserRouter([
       {
         path:"payment/:slug",
         element: <Payment/>
-      }
+      },
       
     ],
   },

@@ -28,7 +28,11 @@ import { useDispatch } from "react-redux";
 import { authApi } from "@/features/api/authApi";
 // import {}
 const Login = () => {
-
+      // for redirecting to the page after login
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search)
+    const redirect = searchParams.get("redirect") || "/"
+    
     const [loginInput, setLoginInput] = useState({
         email: "",
         password: "",
@@ -86,10 +90,7 @@ const Login = () => {
         }
     };
 
-    // for redirecting to the page after login
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search)
-    const redirect = searchParams.get("redirect") || "/"
+  
 
     useEffect(() => {
         if (registerIsSuccess && registerData) {

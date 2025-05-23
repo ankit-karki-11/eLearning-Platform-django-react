@@ -14,7 +14,6 @@ const Courses = () => {
       </div>
     )
   }
-
   if (error) {
     return <p>Error loading courses</p>
   }

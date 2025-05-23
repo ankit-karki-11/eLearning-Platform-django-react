@@ -36,7 +36,7 @@ const Coursedetails = () => {
                 <div className="container mx-auto px-4 py-12">
                     <div className="flex flex-col md:flex-row items-center gap-8">
                         <img
-                            src={course.thumbnail || "course1.png"}
+                            src={course.thumbnail|| "/course1.png"}
                             alt="Course thumbnail"
                             className="w-80 h-50 object-cover rounded-xl shadow-lg border-2 border-red"
                         />
@@ -91,7 +91,6 @@ const Coursedetails = () => {
                             </div>
                             {isLoadinguser ? null : (
                                 <Button onClick={handleBuyNow}>
-
                                     Buy Now
                                 </Button>
                             )}
