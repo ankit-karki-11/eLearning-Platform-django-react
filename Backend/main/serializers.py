@@ -77,6 +77,9 @@ class CourseSerializer(serializers.ModelSerializer):
             "price",
             "is_published",
             "slug",
+            "level",
+            "recommended_hours_per_week",
+            "course_duration",
         ]
         
     def get_sections(self, obj):
@@ -92,6 +95,7 @@ class CourseListSerializer(serializers.ModelSerializer):
         fields=[
             "id",
             "title",
+            "slug",
             "description",
             "thumbnail",
             "category",
@@ -100,7 +104,9 @@ class CourseListSerializer(serializers.ModelSerializer):
             "admin",
             "price",
             "is_published",
-            "slug",
+            "level",
+            "recommended_hours_per_week",
+            "course_duration",
         ]
         
         

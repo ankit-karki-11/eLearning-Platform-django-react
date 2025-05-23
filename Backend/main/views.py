@@ -72,9 +72,6 @@ class CourseViewSet(ModelViewSet):
     lookup_field="slug"
     filter_backends = [filters.SearchFilter]    # Allows searching by title
     
-    # filter_backends = [DjangoFilterBackend]  # Allows filtering by category
-    # filterset_fields = ['category']  # Specify the filter fields
-    
     def create(self, request, *args, **kwargs):
         try:
           #check if user is admin

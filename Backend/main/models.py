@@ -217,7 +217,7 @@ class Enrollment(models.Model):
     # issue certificate
     def issue_certificate(self):
         if self.status !='completed':
-            raise validationError("Course should be completed for issuing certificate")
+            raise ValidationError("Course should be completed for issuing certificate")
         self.status='certified'
         self.save()
         
