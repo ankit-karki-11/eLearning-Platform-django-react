@@ -26,12 +26,14 @@ import { toast } from 'sonner'
 // mutuation becz of post use []
 
 const Profile = () => {
-    // forgetting the data of user
+    // for getting the data of user
     const [full_name, setFull_name] = useState("");
     const [profile_image, setProfile_image] = useState("");
     const [phone_number, setPhone_number] = useState("");
     
+    // 1.bring query
     const { data, isLoading, refetch } = useLoadUserQuery();
+
     const [updateUser, { data: updateUserdata, isLoading: updateUserIsLoading, error, isError, isSuccess }] = useUpdateUserMutation();
 
 
@@ -39,7 +41,7 @@ const Profile = () => {
         const file = e.target.files?.[0];
         if (file) setProfile_image(file);
     }
-
+    // 2.createcoursehandler
     const updateUserHandler = async () => {
         // apI integration via rtk
         console.log(full_name, profile_image, phone_number);

@@ -25,7 +25,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useLogoutUserMutation, useLoadUserQuery } from '@/features/api/authApi';
 import { useDispatch } from 'react-redux';
 import { toast } from 'sonner';
-import { authApi } from '@/features/api/authApi'; // important for resetApiState
+import { authApi } from '@/features/api/authApi';
 
 const Navbar = () => {
   const { data: user, isLoading, refetch } = useLoadUserQuery();

@@ -10,6 +10,10 @@ import Courses from './pages/student/Courses'
 import MyLearning from './pages/student/MyLearning'
 import Profile from './pages/student/Profile'
 
+import Course from './pages/student/Course'
+import Coursedetails from './pages/student/Coursedetails'
+import Payment from './pages/student/PaymentPage'
+
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -20,8 +24,8 @@ const appRouter = createBrowserRouter([
         element: (
           <>
             <Hero />,
-            <Courses />
-            
+            <Courses />,
+            <Payment/>
            
           </>
 
@@ -32,11 +36,6 @@ const appRouter = createBrowserRouter([
         path:"login",
         element: <Login />,
       },
-      //  {
-      //   path:"logout",
-      //   element: <Login />,
-      // },
-
        {
         path:"my-learning",
         element:  <MyLearning />,
@@ -44,7 +43,16 @@ const appRouter = createBrowserRouter([
        {
         path:"profile",
         element:  <Profile />,
+      },
+       {
+        path:"courses/course-detail/:slug",
+        element:  <Coursedetails />,
+      },
+      {
+        path:"payment/:slug",
+        element: <Payment/>
       }
+      
     ],
   },
 

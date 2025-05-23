@@ -22,10 +22,11 @@ import {
 } from "@/features/api/authApi";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // const [error, setError] = useState(null);
 import { useDispatch } from "react-redux";
 import { authApi } from "@/features/api/authApi";
+// import {}
 const Login = () => {
 
     const [loginInput, setLoginInput] = useState({
@@ -85,6 +86,11 @@ const Login = () => {
         }
     };
 
+    // for redirecting to the page after login
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search)
+    const redirect = searchParams.get("redirect") || "/"
+
     useEffect(() => {
         if (registerIsSuccess && registerData) {
             toast.success(registerData.message || "Signup Successful.")
@@ -95,22 +101,23 @@ const Login = () => {
         if (loginIsSuccess && loginData) {
             toast.success(loginData.message || "Login Successful.")
 
-                        // ✅ Store tokens
+            // Store accessToken and refreshToken
             localStorage.setItem("accessToken", loginData.access);
             localStorage.setItem("refreshToken", loginData.refresh);
 
-            // ✅ Invalidate user cache or refetch user info
-            dispatch(authApi.util.invalidateTags(["User"])); // if you use tags
+            // Invalidate user cache or refetch user info
+            dispatch(authApi.util.invalidateTags(["User"])); 
             dispatch(authApi.endpoints.loadUser.initiate());
 
-            // console.log(loginData);
-            navigate("/");
+
+            navigate(redirect);
+
         }
         if (loginError) {
             toast.error(loginError.data?.message || "Login Failed")
         }
-    }, [loginIsLoading, registerIsLoading, loginIsSuccess, registerIsSuccess, registerData, registerError, loginData, loginError, navigate])
-    
+    }, [loginIsLoading, registerIsLoading, loginIsSuccess, registerIsSuccess, registerData, registerError, loginData, loginError, navigate, redirect])
+
     return (
         <div className="flex mt-16 items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-100 p-4">
             <Tabs defaultValue="signup" className="w-full max-w-md">

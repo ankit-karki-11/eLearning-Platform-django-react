@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// const USER_API = "http://localhost:8000/api/v1/auth/"
+
 const USER_API = "http://localhost:8000/api/v1/";
 
-// get garney belama query use hunchaW
 
+// use query for 'GET' methods
 export const authApi = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQuery({
