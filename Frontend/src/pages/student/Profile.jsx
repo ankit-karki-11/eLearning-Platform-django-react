@@ -41,7 +41,7 @@ const Profile = () => {
         const file = e.target.files?.[0];
         if (file) setProfile_image(file);
     }
-    // 2.createcoursehandler
+   
     const updateUserHandler = async () => {
         // apI integration via rtk
         console.log(full_name, profile_image, phone_number);

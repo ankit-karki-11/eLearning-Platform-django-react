@@ -28,11 +28,11 @@ const Hero = () => {
         </p>
 
         <div className='mt-8 flex flex-col sm:flex-row justify-center gap-3'>
-          <Button className="group px-5 py-3.5 text-sm font-medium rounded-lg bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-white transition-all">
+          <Button className="group px-5 py-6 text-sm font-medium rounded-lg bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-white transition-all">
             <span>Start learning</span>
             <ArrowRight className="ml-2 h-4 w-4 transition-all group-hover:translate-x-0.5" />
           </Button>
-          <Button variant="outline" className="px-5 py-3.5 text-sm font-medium rounded-lg border-gray-900 dark:border-gray-200 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-900/50">
+          <Button variant="outline" className="px-5 py-6 text-sm font-medium rounded-lg border-gray-900 dark:border-gray-200 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-900/50">
             <span>Explore courses</span>
           </Button>
         </div>

@@ -44,7 +44,8 @@ const Navbar = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(authApi.util.resetApiState()); // clears all cached queries
+      // clears all cached queries
+      dispatch(authApi.util.resetApiState()); 
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       toast.success(data?.message || "Logged out successfully");
@@ -53,7 +54,7 @@ const Navbar = () => {
   }, [isSuccess, dispatch, data, navigate]);
 
   return (
-    <div className='h-16 w-full dark:bg-[#0A0A0A]/80 bg-white/80 border-b dark:border-b-gray-800/80 border-b-gray-200/80 backdrop-blur-lg fixed top-0 left-0 right-0 duration-300 z-10'>
+    <div className='h-16 w-full dark:bg-[#0A0A0A]/80 bg-white/80  dark:border-b-gray-800/80 backdrop-blur-lg fixed top-0 left-0 right-0 duration-300 z-10'>
       {/* desktop */}
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hidden md:flex justify-between items-center h-full'>
         <div className='flex items-center gap-2 px-8'>

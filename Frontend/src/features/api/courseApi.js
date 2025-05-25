@@ -12,20 +12,31 @@ export const courseApi = createApi({
     }),
     // create endpoints:
     endpoints: (builder) => ({
-        // createCourse:builder.mutation({
-        //     query:(Title,category)=>({
-        //         url:"/",
-        //         method:"POST",
-        //         body:{Title,category}
-        //     })
-        // }),
-
+        // add course
+        createCourse: builder.mutation({
+            query: (title, category) => ({
+                url: "course/",
+                method: "POST",
+                body: { title, category }
+            }),
+        }),
+        //loadcourse
         LoadCourse: builder.query({
             query: () => ({
                 url: "course/",
                 method: "GET",
                 // body:{Title,category}
-            })
+            }),
+        }),
+        // updatecourse
+        UpdateCourse:builder.mutation({
+             query: ({id,data}) => ({
+                url: `course/${id}/`,
+                method: "POST",
+                body:data,
+                // credentials:"include"
+            }),
+
         })
 
     })
@@ -33,6 +44,7 @@ export const courseApi = createApi({
 })
 
 export const {
-    // useCreateCourseMutation,
-    useLoadCourseQuery
+    useCreateCourseMutation,
+    useLoadCourseQuery,
+    useUpdateCourseMutation
 } = courseApi;
