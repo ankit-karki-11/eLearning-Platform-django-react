@@ -32,6 +32,14 @@ class Course(models.Model):
         ('intermediate', 'Intermediate'),
         ('advanced', 'Advanced'),
     ]
+    LANGUAGES_CHOICES = [
+        ('english', 'English'),
+        ('nepali', 'Nepali'),
+        ('sanskrit', 'Sanskrit'),
+        ('maithili', 'Maithili'),
+        ('hindi', 'Hindi'),
+        ('nepenglish', 'NepEnglish'),
+    ]
     
     title=models.CharField(max_length=200,unique=True)
     slug=models.SlugField(max_length=200,unique=True,null=True,blank=True)
@@ -68,6 +76,15 @@ class Course(models.Model):
         default='beginner'
     )
    
+    language = models.CharField(
+        max_length=50,
+        choices=LANGUAGES_CHOICES,
+        default='english'
+    )
+   
+     # Stats
+    average_rating = models.FloatField(default=0)
+    total_students = models.PositiveIntegerField(default=0)
     
     category=models.ForeignKey(
         Category,on_delete=models.CASCADE,related_name="courses")
@@ -114,7 +131,12 @@ class Section(models.Model):
     )
     order=models.PositiveIntegerField()
     is_free=models.BooleanField(default=False)
-    video=models.FileField(upload_to="videos/",null=True, blank=True)
+    video = models.FileField(
+        upload_to="section_videos/%Y/%m/%d/",  # Better file organization
+        null=True, 
+        blank=True,
+        help_text="Upload section video file"
+    )
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     
@@ -124,19 +146,14 @@ class Section(models.Model):
     def can_change(self,user):
         #who can change the section
         # if user is admin then he can change the section
-        if user.role=="admin":
-            return True
+       return user.role == "admin"
         #no other user can change the section
-        return False
+        
     def can_delete(self,user):
         #who can delete the section
         # if user is admin then he can delete the section
-        if user.role=="admin":
-            return True
-        #no other user can delete the section
-        return False
-        
-    
+        return user.role == "admin"
+
     class Meta:
         db_table = "section"
         verbose_name_plural = "Sections"

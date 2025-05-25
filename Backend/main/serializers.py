@@ -80,6 +80,9 @@ class CourseSerializer(serializers.ModelSerializer):
             "level",
             "recommended_hours_per_week",
             "course_duration",
+            "language",
+            "average_rating",
+            "total_students",
         ]
         
     def get_sections(self, obj):
@@ -107,6 +110,9 @@ class CourseListSerializer(serializers.ModelSerializer):
             "level",
             "recommended_hours_per_week",
             "course_duration",
+            "language",
+            "average_rating",
+            "total_students",
         ]
         
         
