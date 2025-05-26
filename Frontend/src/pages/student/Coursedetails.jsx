@@ -1,11 +1,14 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useLoadCourseQuery } from '@/features/api/courseApi'
-import { Clock, File, FileArchiveIcon, Play, Star, Users, BookOpen, Award, Check, Globe, ChevronRight, BarChart2, HelpCircle, Shield, BadgeCheck, User, Calendar, Target, Download } from 'lucide-react'
+import { Clock, File, FileArchiveIcon, Play, Star, Users, BookOpen, Award, Check, Globe, ChevronRight, BarChart2, HelpCircle, Shield, BadgeCheck, User, Calendar, Target, Download, ArrowBigDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useLoadUserQuery } from '@/features/api/authApi'
 import { toast } from 'sonner'
 import { Progress } from '@/components/ui/progress'
+
+// react player
+import ReactPlayer from 'react-player/youtube'
 
 const CourseDetails = () => {
     const { slug } = useParams()
@@ -81,19 +84,15 @@ const CourseDetails = () => {
         }
     ]
 
-    const learningOutcomes = [
-        "Master React fundamentals and core concepts",
-        "Build dynamic, interactive web applications",
-       
-    ]
+
 
     const features = [
         { icon: <FileArchiveIcon className="h-5 w-5" />, text: "Certificate of completion" },
         { icon: <Clock className="h-5 w-5" />, text: "Lifetime access" },
-      
+
     ]
 
-    
+
     // Calculate overall progress
     const totalLessons = courseSections.reduce((sum, section) => sum + section.lessons, 0)
     const completedLessons = courseSections.reduce((sum, section) => sum + section.completed, 0)
@@ -167,7 +166,7 @@ const CourseDetails = () => {
                                 </div> */}
                             </div>
 
-                            
+
                         </div>
 
                         {/* Course Preview - 1 column */}
@@ -179,8 +178,12 @@ const CourseDetails = () => {
                                     className="w-full h-48 object-cover"
                                 />
                                 <div className="absolute inset-0 bg-opacity-30 flex items-center justify-center">
-                                    <button className="bg-white rounded-full p-3 hover:scale-110 transition-transform">
-                                        <Play className="h-6 w-6 text-red-400 fill-current" />
+                                    <button
+                                        onClick={() => window.open('https://youtu.be/TjCRfuIsOEE?si=zmZ0DbKROE5gg8Yh', '_blank')}
+                                        className="bg-white rounded-full p-3 hover:scale-110 transition-transform"
+                                    >
+                                        <Play className="h-6 w-6 text-gray-900" />
+
                                     </button>
                                 </div>
                                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
@@ -197,63 +200,92 @@ const CourseDetails = () => {
                 <div className="grid lg:grid-cols-3 gap-8">
                     {/* Left Content - 2 columns */}
                     <div className="lg:col-span-2 space-y-8">
-                        
-                     
                         <div className="border rounded-lg p-6">
                             {/* <div className="p-4 border rounded-lg text-center"> */}
-                               <h2 className="text-2xl font-bold mb-6 flex items-center">
+                            <h2 className="text-2xl font-bold mb-6 flex items-center">
                                 <Award className="h-6 w-6 mr-3" />
                                 Description
                             </h2>
-                                <p className="text-sm text-gray-600"> {course.description}</p>
+                            <p className="text-sm text-gray-600"> {course.description}</p>
                             {/* </div> */}
-                           
+
                         </div>
 
                         {/* Learning Outcomes */}
                         <div className="border rounded-lg p-6">
                             <h2 className="text-2xl font-bold mb-6 flex items-center">
                                 <Award className="h-6 w-6 mr-3" />
-                                What you'll learn
+                                Requirements and Learning Outcomes
                             </h2>
-                            <div className="grid md:grid-cols-2 gap-4">
-                                {learningOutcomes.map((outcome, index) => (
-                                    <div key={index} className="flex items-start">
-                                        <Check className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
-                                        <span className="text-gray-700">{outcome}</span>
-                                    </div>
-                                ))}
+
+                            <div className="grid md:grid-cols-1 gap-6">
+                                <div className="border rounded-lg p-6">
+                                    <h2 className="text-xl font-bold mb-4">Requirements</h2>
+                                    <ul className="space-y-2 text-gray-700">
+                                        {course.requirements?.split('\n').map((req, index) => (
+                                            <li key={index} className="flex items-start">
+                                                <Check className="h-4 w-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                                                <span>{req.trim()}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
+
+
+                            <div className="grid md:grid-cols-1 mt-4 gap-6">
+                                <div className="border rounded-lg p-6">
+                                    <h2 className="text-xl font-bold mb-4">Learning Outcomes</h2>
+
+                                    <ul className="space-y-2 text-gray-700">
+                                        {course.learning_outcomes?.split('\n').map((req, index) => (
+                                            <li key={index} className="flex items-start">
+                                                <Check className="h-4 w-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                                                <span>{req.trim()}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+
+
+                                </div>
+                            </div>
+                            <div className='grid md:grif-cols-1 mt-4 gap-6'>
+                                <div className="border rounded-lg p-6">
+                                    <h2 className="text-xl font-bold mb-6">Course Syllabus</h2>
+                                    <ul className=" list-inside text-gray-700 space-y-2">
+
+                                        {course.syllabus?.split('\n').map((line, index) => {
+                                            const trimmed = line.trim();
+                                            if (!trimmed) return null;
+
+                                            return (
+
+                                                <li key={index} className=" text-l font-bold">
+                                                    {/* <ArrowBigDown className="h-4 w-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" /> */}
+                                                    {trimmed}
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </div>
+                            </div>
+
                         </div>
 
                         {/* Course Content */}
-                        <div className="border rounded-lg p-6">
+                        {/* <div className="border rounded-lg p-6">
                             <div className="flex justify-between items-center mb-6">
                                 <h2 className="text-2xl font-bold flex items-center">
                                     <BookOpen className="h-6 w-6 mr-3" />
                                     Course Content
                                 </h2>
-                                <div className="text-sm text-gray-600">
-                                    {courseSections.length} sections • {totalLessons} lessons
-                                </div>
+
                             </div>
-
-                            {/* Progress Bar */}
-                            {completedLessons > 0 && (
-                                <div className="mb-6">
-                                    <div className="flex justify-between items-center mb-2">
-                                        <span className="text-sm font-medium">Course Progress</span>
-                                        <span className="text-sm text-gray-600">{progressPercentage}%</span>
-                                    </div>
-                                    <Progress value={progressPercentage} className="h-2" />
-                                </div>
-                            )}
-
-                            {/* Sections */}
+                        
                             <div className="space-y-4">
                                 {courseSections.map((section, sectionIndex) => (
                                     <div key={sectionIndex} className="border rounded-lg overflow-hidden">
-                                        {/* Section Header */}
+                                       
                                         <div className="bg-gray-50 px-4 py-3">
                                             <div className="flex justify-between items-center">
                                                 <div className="flex items-center">
@@ -265,69 +297,14 @@ const CourseDetails = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        
-                                        {/* Section Content */}
-                                        <div className="divide-y">
-                                            {Array.from({ length: section.lessons }).map((_, lessonIndex) => (
-                                                <div key={lessonIndex} className="px-4 py-3 flex items-center justify-between hover:bg-gray-50">
-                                                    <div className="flex items-center">
-                                                        <Play className="h-4 w-4 text-gray-500 mr-3" />
-                                                        <span className="text-gray-700">
-                                                            Lesson {lessonIndex + 1}: {section.title} fundamentals
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-sm text-gray-500">10 min</span>
-                                                </div>
-                                            ))}
-                                        </div>
                                     </div>
                                 ))}
                             </div>
-                        </div>
+                        </div> */}
 
-                        {/* Requirements & Description */}
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div className="border rounded-lg p-6">
-                                <h2 className="text-xl font-bold mb-4">Requirements</h2>
-                                <ul className="space-y-2 text-gray-700">
-                                    <li className="flex items-start">
-                                        <Check className="h-4 w-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                                        Basic HTML, CSS, JavaScript knowledge
-                                    </li>
-                                    <li className="flex items-start">
-                                        <Check className="h-4 w-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                                        Computer with internet connection
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="border rounded-lg p-6">
-                                <h2 className="text-xl font-bold mb-4">Who is this for?</h2>
-                                <ul className="space-y-2 text-gray-700">
-                                    <li className="flex items-start">
-                                        <Target className="h-4 w-4 text-blue-500 mt-0.5 mr-2 flex-shrink-0" />
-                                        Beginner developers
-                                    </li>
-                                    <li className="flex items-start">
-                                        <Target className="h-4 w-4 text-blue-500 mt-0.5 mr-2 flex-shrink-0" />
-                                        Frontend developers
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
 
                         {/* Course Features */}
-                        <div className="border rounded-lg p-6">
-                            <h2 className="text-xl font-bold mb-4">Course Features</h2>
-                            <div className="grid md:grid-cols-2 gap-4">
-                                {features.map((feature, index) => (
-                                    <div key={index} className="flex items-center p-3 bg-gray-50 rounded-lg">
-                                        <div className="text-gray-600 mr-3">{feature.icon}</div>
-                                        <span className="text-gray-700">{feature.text}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        
                     </div>
 
                     {/* Right Sidebar - 1 column */}
@@ -372,13 +349,12 @@ const CourseDetails = () => {
 
                                     {/* Money Back Guarantee */}
                                     <div className="mt-4 p-3 rounded-lg text-center">
-                                       <Button variant="outline">Add to Cart</Button>
+                                        <Button variant="outline">Add to Cart</Button>
                                     </div>
+
                                 </div>
                             </div>
-
-                            {/* Course Includes */}
-                            <div className="border rounded-lg p-6">
+                               <div className="border rounded-lg p-6">
                                 <h3 className="font-bold mb-4">This course includes:</h3>
                                 <div className="space-y-3">
                                     <div className="flex items-center">
@@ -390,22 +366,11 @@ const CourseDetails = () => {
                                         <BadgeCheck className="h-4 w-4 text-gray-500 mr-3" />
                                         <span className="text-sm">Certificate of completion</span>
                                     </div>
-                                    {/* <div className="flex items-center">
-                                        <Users className="h-4 w-4 text-gray-500 mr-3" />
-                                        <span className="text-sm">Access to community</span>
-                                    </div> */}
+                                   
                                 </div>
                             </div>
-
-                            {/* Share Course */}
-                            {/* <div className="border rounded-lg p-4">
-                                <h3 className="font-medium mb-3">Share this course</h3>
-                                <div className="flex space-x-2">
-                                    <Button variant="outline" size="sm" className="flex-1">Share</Button>
-                                    <Button variant="outline" size="sm" className="flex-1">Wishlist</Button>
-                                </div>
-                            </div> */}
                         </div>
+                        
                     </div>
                 </div>
             </div>
