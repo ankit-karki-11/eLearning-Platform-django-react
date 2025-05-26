@@ -81,11 +81,32 @@ class Course(models.Model):
         choices=LANGUAGES_CHOICES,
         default='english'
     )
-   
+    
+
      # Stats
     average_rating = models.FloatField(default=0)
     total_students = models.PositiveIntegerField(default=0)
     
+    # course conrent/features
+    requirements=models.TextField(
+        null=True,blank=True,
+        help_text="What students should know before taking this course (one per line or bullet points)",
+        default="No specific requirements"
+    )
+    
+    learning_outcomes=models.TextField(
+        null=True,blank=True,
+        help_text="What students will learn (one per line or bullet points)",
+        default="Students will learn the skills and knowledge related to this course"
+    )
+    
+    syllabus=models.TextField(
+        null=True,blank=True,
+        help_text="Course outline or weekly/module-based syllabus (one topic per line)",
+        default="Syllabus will be provided in the course"
+    )
+    
+    # related fields
     category=models.ForeignKey(
         Category,on_delete=models.CASCADE,related_name="courses")
     
@@ -240,59 +261,56 @@ class Enrollment(models.Model):
         
 ########## payment-enroll-and instructor can add course expiration date,need to work on this feature ##################
 #Payment model
-class Payment(models.Model):
-    PaymentStatusChoices = [
-        ("pending", "Pending"),
-        ("completed", "Completed"),
-        ("failed", "Failed"),
-        ("cancelled", "Cancelled"),
-    ]
+# class Payment(models.Model):
+#     PaymentStatusChoices = [
+#         ("pending", "Pending"),
+#         ("completed", "Completed"),
+#         ("failed", "Failed"),
+#         ("cancelled", "Cancelled"),
+#     ]    
+#     student=models.ForeignKey(
+#         UserAccount,
+#         on_delete=models.CASCADE,
+#         limit_choices_to={'role': 'student'},
+#         related_name='payments'
+#     )
     
-    #  related_name='payments' because student and course can have multiple payments
+#     course=models.ForeignKey(
+#         Course,
+#         on_delete=models.CASCADE,
+#         related_name="payments"
+#     )
+#     amount=models.DecimalField(max_digits=8,decimal_places=2)
+#     payment_date=models.DateTimeField(auto_now_add=True)
+#     payment_method=models.CharField(max_length=50)
+#     transaction_id=models.CharField(max_length=100,unique=True)
+#     pidx = models.CharField(max_length=100, null=True, blank=True)
+#     status=models.CharField(
+#         max_length=20,
+#         choices=PaymentStatusChoices,
+#         default="pending"
+#     )
+#     paid_at = models.DateTimeField(auto_now_add=True)
+#     created_at=models.DateTimeField(auto_now_add=True)
+#     updated_at=models.DateTimeField(auto_now=True)
     
-    student=models.ForeignKey(
-        UserAccount,
-        on_delete=models.CASCADE,
-        limit_choices_to={'role': 'student'},
-        related_name='payments'
-    )
+#     def __str__(self):
+#         return f"{self.student.full_name} - {self.course.title} - {self.amount} - {self.status}"
     
-    course=models.ForeignKey(
-        Course,
-        on_delete=models.CASCADE,
-        related_name="payments"
-    )
-    amount=models.DecimalField(max_digits=8,decimal_places=2)
-    payment_date=models.DateTimeField(auto_now_add=True)
-    payment_method=models.CharField(max_length=50)
-    transaction_id=models.CharField(max_length=100,unique=True)
-    pidx = models.CharField(max_length=100, null=True, blank=True)
-    status=models.CharField(
-        max_length=20,
-        choices=PaymentStatusChoices,
-        default="pending"
-    )
-    paid_at = models.DateTimeField(auto_now_add=True)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now=True)
-    
-    def __str__(self):
-        return f"{self.student.full_name} - {self.course.title} - {self.amount} - {self.status}"
-    
-    # if payment status is competed then create enrollment for the student in the course
-    def save(self,*args,**kwargs):
-        if self.status == "completed":
-            # Check if the enrollment already exists
-            if not Enrollment.objects.filter(student=self.student, course=self.course).exists():
-                # Create a new enrollment
-                Enrollment.objects.create(student=self.student, course=self.course)
-        super().save(*args, **kwargs)
+  
+#     def save(self,*args,**kwargs):
+#         if self.status == "completed":
+         
+#             if not Enrollment.objects.filter(student=self.student, course=self.course).exists():
+              
+#                 Enrollment.objects.create(student=self.student, course=self.course)
+#         super().save(*args, **kwargs)
         
-    class Meta:
-        db_table="payment"
-        verbose_name_plural="Payments"
-        ordering=["-payment_date"]
-        unique_together = ["student", "course"]
+#     class Meta:
+#         db_table="payment"
+#         verbose_name_plural="Payments"
+#         ordering=["-payment_date"]
+#         unique_together = ["student", "course"]
         
 
 class Attachment(models.Model):

@@ -12,6 +12,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import filters
 from django.db.models import Sum
 from django.db import IntegrityError
+from payments.models import Payment
 # from django_filters.rest_framework import DjangoFilterBackend
 
 # Create your views here.

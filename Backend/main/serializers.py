@@ -83,6 +83,9 @@ class CourseSerializer(serializers.ModelSerializer):
             "language",
             "average_rating",
             "total_students",
+            "requirements",
+            "learning_outcomes",
+            "syllabus",
         ]
         
     def get_sections(self, obj):
@@ -113,6 +116,10 @@ class CourseListSerializer(serializers.ModelSerializer):
             "language",
             "average_rating",
             "total_students",
+            "requirements",
+            "learning_outcomes",
+            "syllabus",
+   
         ]
         
         
@@ -266,57 +273,57 @@ class EnrollmentSerializer(serializers.ModelSerializer):
             "updated_at",
         ]
 
-class PaymentSerializer(serializers.ModelSerializer):
-    course=CourseListSerializer(read_only=True)
-    course_id=serializers.PrimaryKeyRelatedField(
-        queryset=Course.objects.all(),
-        source="course",
-        write_only=True,
-        error_messages={
-            "does_not_exist": "Course does not exist.",
-            "required": "Course is required.",
-        },
-    )
-    student=UserAccountListSerializer(read_only=True)
-    student_id=serializers.PrimaryKeyRelatedField(
-        queryset=UserAccount.objects.filter(role="student"),
-        source="student",
-        write_only=True,
-        error_messages={
-            "does_not_exist": "Student does not exist.",
-            "required": "Student is required.",
-        },
-    )
+# class PaymentSerializer(serializers.ModelSerializer):
+#     course=CourseListSerializer(read_only=True)
+#     course_id=serializers.PrimaryKeyRelatedField(
+#         queryset=Course.objects.all(),
+#         source="course",
+#         write_only=True,
+#         error_messages={
+#             "does_not_exist": "Course does not exist.",
+#             "required": "Course is required.",
+#         },
+#     )
+#     student=UserAccountListSerializer(read_only=True)
+#     student_id=serializers.PrimaryKeyRelatedField(
+#         queryset=UserAccount.objects.filter(role="student"),
+#         source="student",
+#         write_only=True,
+#         error_messages={
+#             "does_not_exist": "Student does not exist.",
+#             "required": "Student is required.",
+#         },
+#     )
     
-    class Meta:
-        model=Payment
-        fields=[
-            "id",
-            "pidx",
-            "student_id",
-            "course_id",
-            "amount",
-            "payment_method",
-            "transaction_id",
-            "status",
-        ]
+#     class Meta:
+#         model=Payment
+#         fields=[
+#             "id",
+#             "pidx",
+#             "student_id",
+#             "course_id",
+#             "amount",
+#             "payment_method",
+#             "transaction_id",
+#             "status",
+#         ]
 
-class PaymentListSerializer(serializers.ModelSerializer):
-    course=CourseListSerializer(read_only=True)
-    student=UserAccountListSerializer(read_only=True)
+# class PaymentListSerializer(serializers.ModelSerializer):
+#     course=CourseListSerializer(read_only=True)
+#     student=UserAccountListSerializer(read_only=True)
     
-    class Meta:
-        model=Payment
-        fields=[
-            "id",
-            "pidx",
-            "student",
-            "course",
-            "amount",
-            "payment_method",
-            "transaction_id",
-            "status",
-        ]   
+#     class Meta:
+#         model=Payment
+#         fields=[
+#             "id",
+#             "pidx",
+#             "student",
+#             "course",
+#             "amount",
+#             "payment_method",
+#             "transaction_id",
+#             "status",
+#         ]   
         
 # class CertificateSerializer(serializers.ModelSerializer):
 #     course=CourseListSerializer(read_only=True)
