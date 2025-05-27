@@ -13,6 +13,7 @@ import Profile from './pages/student/Profile'
 import Course from './pages/student/Course'
 import Coursedetails from './pages/student/Coursedetails'
 import Payment from './pages/student/PaymentPage'
+import PaymentSuccess from './pages/student/PaymentSuccess'
 
 const appRouter = createBrowserRouter([
   {
@@ -52,7 +53,10 @@ const appRouter = createBrowserRouter([
         path:"payment/:slug",
         element: <Payment/>
       },
-      
+        {
+          path:"/payment/success",
+        element:<PaymentSuccess /> 
+      }     
     ],
   },
 

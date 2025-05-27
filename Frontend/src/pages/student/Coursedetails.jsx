@@ -66,7 +66,7 @@ const CourseDetails = () => {
         }
     }
 
-    // Sample course data
+    // Sample course
     const courseSections = [
         {
             title: "Introduction to ReactJS",
@@ -100,26 +100,13 @@ const CourseDetails = () => {
 
     return (
         <div className="min-h-screen mt-14">
-            {/* Breadcrumb */}
-            {/* <div className="border-b">
-                <div className="container mx-auto px-4 py-3">
-                    <div className="flex items-center space-x-2 text-sm">
-                        <span className="text-gray-500">Home</span>
-                        <ChevronRight className="h-4 w-4 text-gray-400" />
-                        <span className="text-gray-500">Courses</span>
-                        <ChevronRight className="h-4 w-4 text-gray-400" />
-                        <span className="text-gray-900 font-medium">{course.title}</span>
-                    </div>
-                </div>
-            </div> */}
 
-            {/* Hero Section */}
             <div className="bg-gray-900 text-white">
                 <div className="container mx-auto px-4 py-12">
                     <div className="grid lg:grid-cols-3 gap-8">
                         {/* Course Info - 2 columns */}
                         <div className="lg:col-span-2">
-                            {/* Course Tags */}
+                         
                             <div className="flex flex-wrap items-center gap-3 mb-6">
                                 <span className="px-3 py-1 bg-white text-gray-900 text-sm font-medium rounded-full">
                                     {course.level}
@@ -136,40 +123,32 @@ const CourseDetails = () => {
                                 </span>
                             </div>
 
-                            {/* Course Title */}
+                         
                             <h1 className="text-3xl md:text-4xl font-bold mb-4">
                                 {course.title}
                             </h1>
 
-                            {/* Course Description */}
+                           
                             {/* <p className="text-lg text-gray-300 mb-6 leading-relaxed">
                                 {course.description}
                             </p> */}
 
-                            {/* Course Stats */}
+                           
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                                 <div className="flex items-center">
                                     <Clock className="h-5 w-5 mr-2" />
                                     <span>{course.course_duration}h total</span>
                                 </div>
-                                {/* <div className="flex items-center">
-                                    <BookOpen className="h-5 w-5 mr-2" />
-                                    <span>{courseSections.length} sections</span>
-                                </div> */}
                                 <div className="flex items-center">
                                     <Globe className="h-5 w-5 mr-2" />
                                     <span>{course.language}</span>
                                 </div>
-                                {/* <div className="flex items-center">
-                                    <Download className="h-5 w-5 mr-2" />
-                                    <span>Resources</span>
-                                </div> */}
+                                
                             </div>
 
 
                         </div>
-
-                        {/* Course Preview - 1 column */}
+                        {/* Course thumbnail - 1 column */}
                         <div className="lg:col-span-1">
                             <div className="relative rounded-lg overflow-hidden">
                                 <img
@@ -201,13 +180,13 @@ const CourseDetails = () => {
                     {/* Left Content - 2 columns */}
                     <div className="lg:col-span-2 space-y-8">
                         <div className="border rounded-lg p-6">
-                            {/* <div className="p-4 border rounded-lg text-center"> */}
+                          
                             <h2 className="text-2xl font-bold mb-6 flex items-center">
                                 <Award className="h-6 w-6 mr-3" />
                                 Description
                             </h2>
                             <p className="text-sm text-gray-600"> {course.description}</p>
-                            {/* </div> */}
+                          
 
                         </div>
 
@@ -261,7 +240,6 @@ const CourseDetails = () => {
                                             return (
 
                                                 <li key={index} className=" text-l font-bold">
-                                                    {/* <ArrowBigDown className="h-4 w-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" /> */}
                                                     {trimmed}
                                                 </li>
                                             );
@@ -271,48 +249,15 @@ const CourseDetails = () => {
                             </div>
 
                         </div>
-
-                        {/* Course Content */}
-                        {/* <div className="border rounded-lg p-6">
-                            <div className="flex justify-between items-center mb-6">
-                                <h2 className="text-2xl font-bold flex items-center">
-                                    <BookOpen className="h-6 w-6 mr-3" />
-                                    Course Content
-                                </h2>
-
-                            </div>
-                        
-                            <div className="space-y-4">
-                                {courseSections.map((section, sectionIndex) => (
-                                    <div key={sectionIndex} className="border rounded-lg overflow-hidden">
-                                       
-                                        <div className="bg-gray-50 px-4 py-3">
-                                            <div className="flex justify-between items-center">
-                                                <div className="flex items-center">
-                                                    <ChevronRight className="h-5 w-5 text-gray-500 mr-2" />
-                                                    <h3 className="font-medium">{section.title}</h3>
-                                                </div>
-                                                <div className="text-sm text-gray-500">
-                                                    {section.duration} • {section.lessons} lessons
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div> */}
-
-
-                        {/* Course Features */}
                         
                     </div>
 
                     {/* Right Sidebar - 1 column */}
                     <div className="lg:col-span-1">
                         <div className="sticky top-4 space-y-6">
-                            {/* Pricing Card */}
+                          
                             <div className="border rounded-lg overflow-hidden">
-                                {/* Price Header */}
+                               
                                 <div className="p-6 border-b">
                                     <div className="text-center">
                                         <div className="text-3xl font-bold text-gray-900 mb-1">
@@ -327,7 +272,6 @@ const CourseDetails = () => {
                                     </div>
                                 </div>
 
-                                {/* Purchase Section */}
                                 <div className="p-6">
                                     {!isLoadingUser ? (
                                         <Button
@@ -347,7 +291,7 @@ const CourseDetails = () => {
                                         One time purchase, lifetime access
                                     </p>
 
-                                    {/* Money Back Guarantee */}
+                                   
                                     <div className="mt-4 p-3 rounded-lg text-center">
                                         <Button variant="outline">Add to Cart</Button>
                                     </div>

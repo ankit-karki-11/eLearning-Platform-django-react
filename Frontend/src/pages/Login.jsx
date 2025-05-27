@@ -26,9 +26,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 // const [error, setError] = useState(null);
 import { useDispatch } from "react-redux";
 import { authApi } from "@/features/api/authApi";
-// import {}
+
 const Login = () => {
-      // for redirecting to the page after login
+    // for redirecting to the page after login
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)
     const redirect = searchParams.get("redirect") || "/"

@@ -85,10 +85,10 @@ const Profile = () => {
                         </Avatar>
                     </div>
                 </div>
-                {/* profile content */}
+                
                 <div className="pt-20 px-6 pb-6">
                     <div className='flex flex-col md:flex-row md:justify-between md:items-start gap-6'>
-                        {/* profile info */}
+                        
                         <div className="space-y-4">
                             <div>
                                 <h1 className="text-xl font-bold text-gray-900 dark:text-gray-200">
@@ -116,7 +116,7 @@ const Profile = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* active buttons */}
+                   
                         <div className="flex gap-2">
                             
                             <Dialog>
@@ -195,7 +195,7 @@ const Profile = () => {
                         </div>
                     </div>
 
-                    {/* Improved Tabs Section using Shadcn UI */}
+                    
                     <Tabs defaultValue="courses" className="mt-8">
                         <TabsList className="grid w-full grid-cols-2">
                             <TabsTrigger value="courses">My Courses</TabsTrigger>

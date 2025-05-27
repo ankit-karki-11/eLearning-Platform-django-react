@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
+import { useCreatePaymentMutation } from '@/features/api/paymentApi'
 
 const PaymentPage = () => {
   const { slug } = useParams()
@@ -14,7 +15,6 @@ const PaymentPage = () => {
     error,
     isSuccess
   } = useLoadCourseQuery()
-
   const {
     data: user,
     isLoading: userLoading,
@@ -22,15 +22,16 @@ const PaymentPage = () => {
     error: userError
   } = useLoadUserQuery()
 
-  if (isLoading || userLoading) {
+  const [createPayment, { isLoading: isCreating }] = useCreatePaymentMutation()
+
+  if (isLoading || userLoading)
     return (
       <div className="flex items-center justify-center h-screen">
         <Loader2 className="w-8 h-8 animate-spin" />
       </div>
     )
-  }
 
-  if (error || userError) {
+  if (error || userError)
     return (
       <div className="flex items-center justify-center h-screen">
         <p className="text-lg font-medium text-red-500">
@@ -38,45 +39,26 @@ const PaymentPage = () => {
         </p>
       </div>
     )
-  }
 
   const course = courses?.find(c => c.slug === slug)
-  if (!course) {
+  if (!course)
     return (
       <div className="flex items-center justify-center h-screen">
         <p className="text-lg font-medium">Course not found</p>
       </div>
     )
-  }
 
   const handlePayment = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/payments/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('access')}`
-        },
-        body: JSON.stringify({ course: course.id })
-      })
+      const response = await createPayment({ course: course.id }).unwrap()
+      const { payment_url, esewa_payload } = response
 
-      if (!res.ok) {
-        throw new Error('Failed to initiate payment')
-      }
-
-      const data = await res.json()
-      const payload = data?.esewa_payload || data?.payment?.esewa_payload
-
-      if (!payload) {
-        toast.error("Invalid payment payload")
-        return
-      }
-
+      // Create and auto-submit a form to redirect to eSewa
       const form = document.createElement('form')
       form.method = 'POST'
-      form.action = 'https://rc-epay.esewa.com.np/api/epay/main/v2/form'
+      form.action = payment_url
 
-      Object.entries(payload).forEach(([key, value]) => {
+      Object.entries(esewa_payload).forEach(([key, value]) => {
         const input = document.createElement('input')
         input.type = 'hidden'
         input.name = key
@@ -88,7 +70,7 @@ const PaymentPage = () => {
       form.submit()
     } catch (err) {
       console.error(err)
-      toast.error('Payment failed to start')
+      toast.error('Failed to initiate payment')
     }
   }
 
@@ -112,7 +94,9 @@ const PaymentPage = () => {
 
               <div className="flex justify-between items-center border-b border-gray-200 pb-4">
                 <span className="text-gray-600">Price</span>
-                <span className="font-bold text-gray-900">रु {course.price}</span>
+                <span className="font-bold text-gray-900">
+                  रु {course.price}
+                </span>
               </div>
 
               <div className="flex justify-between items-center border-b border-gray-200 pb-4">
@@ -121,15 +105,20 @@ const PaymentPage = () => {
               </div>
 
               <div className="flex justify-between items-center pb-6">
-                <span className="text-lg font-semibold text-gray-900">Total</span>
-                <span className="text-xl font-bold text-gray-900">रु {course.price}</span>
+                <span className="text-lg font-semibold text-gray-900">
+                  Total
+                </span>
+                <span className="text-xl font-bold text-gray-900">
+                  रु {course.price}
+                </span>
               </div>
 
               <Button
                 onClick={handlePayment}
+                disabled={isCreating}
                 className="w-full py-6 text-lg font-medium bg-black hover:bg-gray-800 transition-colors"
               >
-                Proceed to Payment
+                {isCreating ? 'Processing...' : 'Proceed to Payment'}
               </Button>
             </div>
           </div>

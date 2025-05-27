@@ -4,15 +4,8 @@ import { ArrowRight, Sparkles } from 'lucide-react'
 const Hero = () => {
   return (
     <div className='relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950 overflow-hidden'>
-      {/* Futuristic grid background */}
-      <div className="absolute inset-0 overflow-hidden opacity-10 dark:opacity-[0.03]">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-      </div>
-
-     
-
+      
       <div className='relative max-w-3xl mx-auto text-center'>
-        {/* Minimal badge */}
         <div className="inline-flex items-center px-3 py-1.5 mb-6 rounded-full bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-200 text-xs font-mono tracking-wider">
           <Sparkles className="mr-2 h-3 w-3" />
           AI-POWERED EDUCATION
@@ -37,7 +30,7 @@ const Hero = () => {
           </Button>
         </div>
 
-        {/* Minimal stats */}
+        
         <div className="mt-12 grid grid-cols-3 gap-2 text-center text-gray-900 dark:text-gray-300 max-w-md mx-auto">
           <div className="p-3">
             <div className="text-2xl font-medium">1K+</div>

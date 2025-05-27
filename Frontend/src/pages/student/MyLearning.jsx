@@ -26,7 +26,7 @@ const MyLearning = () => {
 }
 export default MyLearning
 
-// Skeleton component for loading state
+// Skeleton for loading 
 const MyLearningSkeleton = () => (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {[...Array(3)].map((_, index) => (
