@@ -69,7 +69,7 @@ class Payment(models.Model):
         unique_together = ["student", "course"]
     @property
     def esewa_payload(self):
-        # """Generate payload for eSewa payment initiation"""
+       
         return {
             "amount": str(self.amount),
             "tax_amount": "0",
