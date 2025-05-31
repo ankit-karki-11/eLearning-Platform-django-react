@@ -3,11 +3,13 @@ import authReducer from '../features/authSlice';
 import authApi from '@/features/api/authApi';
 import { courseApi } from '@/features/api/courseApi';
 import { paymentApi } from '@/features/api/paymentApi';
+import { categoryApi } from '@/features/api/categoryApi';
 
 const rootReducer = combineReducers({
-     [authApi.reducerPath]:authApi.reducer,
-     [courseApi.reducerPath]:courseApi.reducer,
-    [paymentApi.reducerPath]:paymentApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
+    [courseApi.reducerPath]: courseApi.reducer,
+    [paymentApi.reducerPath]: paymentApi.reducer,
+    [categoryApi.reducerPath]: categoryApi.reducer,
     auth: authReducer,
 
 });

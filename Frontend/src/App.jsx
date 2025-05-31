@@ -12,9 +12,12 @@ import Profile from './pages/student/Profile'
 
 import Course from './pages/student/Course'
 import Coursedetails from './pages/student/Coursedetails'
+
 import Checkout from './pages/student/Checkout'
 import PaymentSuccess from './pages/student/PaymentSuccess'
-import Category from './pages/student/Category'
+
+import Categories from './pages/student/Categories'
+import CategoryDetails from './pages/student/CategoryDetails'
 
 const appRouter = createBrowserRouter([
   {
@@ -26,7 +29,7 @@ const appRouter = createBrowserRouter([
         element: (
           <>
             <Hero />
-            <Category/>
+            <Categories/>
             <Courses />
             <Checkout/>
            
@@ -48,6 +51,10 @@ const appRouter = createBrowserRouter([
         element:  <Profile />,
       },
        {
+        path:"category/:slug",
+        element:  <CategoryDetails/>,
+      }, 
+      {
         path:"courses/course-detail/:slug",
         element:  <Coursedetails />,
       },

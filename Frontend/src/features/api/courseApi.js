@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 const COURSE_API = "http://localhost:8000/api/v1/main/";
 
 import React from 'react'
@@ -29,13 +30,22 @@ export const courseApi = createApi({
             }),
         }),
         // updatecourse
-        UpdateCourse:builder.mutation({
-             query: ({id,data}) => ({
+        UpdateCourse: builder.mutation({
+            query: ({ id, data }) => ({
                 url: `course/${id}/`,
                 method: "POST",
-                body:data,
+                body: data,
                 // credentials:"include"
             }),
+
+        }),
+        DeleteCourse: builder.mutation({
+            query: (id) => ({
+                url: `course/${id}/`,
+                method: "DELETE",
+                // credentials:"include"
+
+            })
 
         })
 
@@ -46,5 +56,6 @@ export const courseApi = createApi({
 export const {
     useCreateCourseMutation,
     useLoadCourseQuery,
-    useUpdateCourseMutation
+    useUpdateCourseMutation,
+    useDeleteCourseMutation
 } = courseApi;
