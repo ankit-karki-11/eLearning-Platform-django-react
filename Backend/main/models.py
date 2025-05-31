@@ -81,8 +81,6 @@ class Course(models.Model):
         choices=LANGUAGES_CHOICES,
         default='english'
     )
-    
-
      # Stats
     average_rating = models.FloatField(default=0)
     total_students = models.PositiveIntegerField(default=0)
@@ -106,7 +104,6 @@ class Course(models.Model):
         default="Syllabus will be provided in the course"
     )
     
-    # related fields
     category=models.ForeignKey(
         Category,on_delete=models.CASCADE,related_name="courses")
     

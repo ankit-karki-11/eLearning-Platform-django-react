@@ -26,27 +26,26 @@ class Payment(models.Model):
         related_name="payments"
     )
     
-    amount=models.DecimalField(max_digits=8,decimal_places=2)
-    payment_date=models.DateTimeField(auto_now_add=True)
-    
-    payment_method=models.CharField(max_length=50, choices=[
-        ("esewa", "eSewa"),
+    PaymentGatewayChoices=[
         ("khalti", "Khalti"),
-        ("cash", "Cash"),
-        ("cheque", "Cheque"),
-        ("offline", "Offline"),
-    ],
-     default="esewa"
+        ("esewa", "eSewa"),
+        ("manual", "Manual"),
+    ]
+    payment_gateway=models.CharField(
+        max_length=20,
+        choices=PaymentGatewayChoices,
+        default="khalti"
     )
     
+    amount = models.PositiveIntegerField(help_text="Amount in paisa (e.g., 1 Rs = 100 paisa)")
     transaction_id=models.CharField(max_length=100,unique=True) #orderid or pid
-    pidx = models.CharField(max_length=100, null=True, blank=True) # eSewa refId
+    pidx = models.CharField(max_length=100, null=True, blank=True) # khalti refId
     status=models.CharField(
         max_length=20,
         choices=PaymentStatusChoices,
         default="pending"
     )
-    paid_at = models.DateTimeField(auto_now_add=True)
+    
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     
@@ -62,36 +61,10 @@ class Payment(models.Model):
                 Enrollment.objects.create(student=self.student, course=self.course)
         super().save(*args, **kwargs)
         
+        
     class Meta:
         db_table="payment"
         verbose_name_plural="Payments"
-        ordering=["-payment_date"]
+        ordering=["-created_at"]  
         unique_together = ["student", "course"]
-    @property
-    def esewa_payload(self):
-       
-        return {
-            "amount": str(self.amount),
-            "tax_amount": "0",
-            "total_amount": str(self.amount),
-            "transaction_uuid": str(self.transaction_id),
-            "product_code": str(self.course.id),
-            "product_service_charge": "0",
-            "product_delivery_charge": "0",
-            "success_url": settings.ESEWA_SUCCESS_URL,
-            "failure_url": settings.ESEWA_FAILURE_URL,
-            "signed_field_names": "total_amount,transaction_uuid,product_code",
-            "signature": self.generate_signature()
-        }
-    
-    def generate_signature(self):
-        """Generate SHA256 signature for eSewa"""
-        import hashlib
-        import hmac
-        import base64
-        
-        secret = settings.ESEWA_SECRET_KEY.encode('utf-8')
-        message = f"total_amount={self.amount},transaction_uuid={self.transaction_id},product_code={self.course.id}".encode('utf-8')
-        
-        dig = hmac.new(secret, message, hashlib.sha256).digest()
-        return base64.b64encode(dig).decode() 
+   

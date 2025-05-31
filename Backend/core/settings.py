@@ -12,6 +12,10 @@ env = environ.Env()
 environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
 cloudinary.config(secure=True)
 
+env = environ.Env()
+KHALTI_SECRET_KEY = env("KHALTI_SECRET_KEY")
+KHALTI_PUBLIC_KEY = env("KHALTI_PUBLIC_KEY")
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -42,15 +46,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
     "payments",
+    # "django_esewa",
 ]
-
-ESEWA_MERCHANT_ID = "EPAYTEST"
-ESEWA_PAYMENT_URL = "https://rc-epay.esewa.com.np/api/epay/main/v2/form"
-ESEWA_SUCCESS_URL = "https://yourdomain.com/payment/success"
-ESEWA_FAILURE_URL = "https://yourdomain.com/payment/failure"
-ESEWA_VERIFICATION_URL = "https://rc-epay.esewa.com.np/api/epay/transaction/status/"
-ESEWA_SECRET_KEY = "8gBm/:&EnhH.1/q"
-
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  
