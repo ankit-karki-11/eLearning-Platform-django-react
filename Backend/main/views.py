@@ -30,14 +30,24 @@ class CustomPermission(permissions.BasePermission):
 class CategoryViewSet(ModelViewSet):
     queryset=Category.objects.all()
     serializer_class=CategorySerializer
-    # permission_classes=[IsAdminUser]
+    permission_classes=[CustomPermission]
+    search_fields=["title"]
+    # filterset_fields=["category","is_published","admin"]
+    lookup_field="slug"
+    filter_backends = [filters.SearchFilter] 
     
     def create(self, request, *args, **kwargs):
         try:
-            return super().create(request, *args, **kwargs)
+          #check if user is admin
+          if not request.user.role=="admin":
+              return Response(
+                  status=status.HTTP_403_FORBIDDEN,
+                  data={"detail":"Only admin can create course"}
+              )
+              return super().create(request, *args, **kwargs)
         except Exception as e:
-            return Response(
-                status=status.HTTP_409_CONFLICT,data={"detail":"Duplicate category name"}
+              return Response(
+                status=status.HTTP_409_CONFLICT,data={"detail":"Duplicate Category title"}
                )
             
     def update(self, request, *args, **kwargs):
@@ -55,13 +65,19 @@ class CategoryViewSet(ModelViewSet):
                 status=status.HTTP_409_CONFLICT,data={"detail":"Category cannot be deleted"}
                )
     
-    def get_serializer(self, *args, **kwargs):
-        if self.action == "list":
-            kwargs["many"] = True
-            return CategoryListSerializer(*args, **kwargs)
-        return super().get_serializer(*args, **kwargs)
+    # def get_serializer(self, *args, **kwargs):
+    #     if self.action == "list":
+    #         kwargs["many"] = True
+    #         return CategoryListSerializer(*args, **kwargs)
+    #     return super().get_serializer(*args, **kwargs)
     
-
+    @action(detail=True, methods=["get"], permission_classes=[IsAuthenticated])
+    def get_all_category(self,request,slug=None):
+        category=self.get_object()
+        serializer=self.get_serializer(category)
+        return Response(serializer.data)
+    
+    
 # course viewset
 class CourseViewSet(ModelViewSet):
     queryset=Course.objects.all()
@@ -96,6 +112,7 @@ class CourseViewSet(ModelViewSet):
                     data={"detail":"Course cannot be unpublished as it has enrolled students"}
                 )
             
+    
         return super().update(request, *args, **kwargs)
           
     def destroy(self, request, *args, **kwargs):
