@@ -58,11 +58,11 @@ const CourseDetails = () => {
         </div>
     )
 
-    const handleEnroll = () => {
+    const handlepaywithkhalti = () => {
         if (user) {
-            navigate(`/payment/${course.slug}`)
+            navigate(`/checkout/${course.slug}`)
         } else {
-            navigate(`/login?redirect=/payment/${course.slug}`)
+            navigate(`/login?redirect=/checkout/${course.slug}`)
         }
     }
 
@@ -275,10 +275,10 @@ const CourseDetails = () => {
                                 <div className="p-6">
                                     {!isLoadingUser ? (
                                         <Button
-                                            onClick={handleEnroll}
+                                            onClick={handlepaywithkhalti}
                                             className="w-full py-3 text-lg font-semibold bg-green-600 hover:bg-green-700 text-white"
                                         >
-                                            Pay Via eSewa
+                                            Pay Via Khalti
                                         </Button>
                                     ) : (
                                         <Button disabled className="w-full py-3">

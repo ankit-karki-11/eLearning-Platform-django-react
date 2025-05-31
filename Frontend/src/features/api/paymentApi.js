@@ -1,33 +1,28 @@
-// src/features/api/paymentApi.js
-import { api } from './api'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const paymentApi = api.injectEndpoints({
-  endpoints: (builder) => ({
-    createPayment: builder.mutation({
-      query: (data) => ({
-        url: '/payments/',
-        method: 'POST',
-        body: data
-      })
+export const paymentApi = createApi({
+    reducerPath: 'paymentApi',
+    baseQuery: fetchBaseQuery({
+        baseUrl: 'http://localhost:8000/api/v1/',
+        prepareHeaders: (headers) => {
+            const token = localStorage.getItem('accessToken')
+            if (token) {
+                headers.set('Authorization', `Bearer ${token}`)
+            }
+            return headers
+    },
+
     }),
-    verifyEsewa: builder.mutation({
-      query: (data) => ({
-        url: '/payments/verify-esewa/',
-        method: 'POST',
-        body: data
-      })
-    }),
-    retryEsewa: builder.mutation({
-      query: (paymentId) => ({
-        url: `/payments/${paymentId}/retry-esewa/`,
-        method: 'POST'
-      })
-    }),
-  })
+    endpoints: (builder) => ({
+        CreateKhaltiPayment: builder.mutation({
+            query:(body)=> ({
+                url: 'payments/initiate_khalti_payment/',
+                method: 'POST',
+                body,
+
+            })
+    })
+})
 })
 
-export const {
-  useCreatePaymentMutation,
-  useVerifyEsewaMutation,
-  useRetryEsewaMutation
-} = paymentApi
+export const { useCreateKhaltiPaymentMutation } = paymentApi

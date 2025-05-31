@@ -8,7 +8,7 @@ export const authApi = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQuery({
         baseUrl: USER_API,
-        // credentials: "include", 
+        credentials: "include", 
         prepareHeaders: (headers) => {
             const token = localStorage.getItem("accessToken");
             if (token) {

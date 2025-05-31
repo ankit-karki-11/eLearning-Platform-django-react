@@ -59,8 +59,8 @@ const Navbar = () => {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hidden md:flex justify-between items-center h-full'>
         <div className='flex items-center gap-2 px-8'>
           <Link to="/">
-            <h1 className='hidden md:block font-extrabold text-xl'>
-              <img src="/logo.png" alt="Logo" className='inline-block h-6' /> padhai
+            <h1 className='hidden md:block font-bold text-xl'>
+              <img src="/logo.png" alt="Logo" className='inline-block h-6' />Padhai
             </h1>
           </Link>
         </div>

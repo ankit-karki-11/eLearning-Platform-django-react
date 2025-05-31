@@ -12,8 +12,9 @@ import Profile from './pages/student/Profile'
 
 import Course from './pages/student/Course'
 import Coursedetails from './pages/student/Coursedetails'
-import Payment from './pages/student/PaymentPage'
+import Checkout from './pages/student/Checkout'
 import PaymentSuccess from './pages/student/PaymentSuccess'
+import Category from './pages/student/Category'
 
 const appRouter = createBrowserRouter([
   {
@@ -24,9 +25,10 @@ const appRouter = createBrowserRouter([
         path: "/",
         element: (
           <>
-            <Hero />,
-            <Courses />,
-            <Payment/>
+            <Hero />
+            <Category/>
+            <Courses />
+            <Checkout/>
            
           </>
 
@@ -50,13 +52,18 @@ const appRouter = createBrowserRouter([
         element:  <Coursedetails />,
       },
       {
-        path:"payment/:slug",
-        element: <Payment/>
+        path:"checkout/:slug",
+        element: <Checkout/>
       },
-        {
-          path:"/payment/success",
-        element:<PaymentSuccess /> 
-      }     
+     {
+        path:"course/:slug",
+        element: <Course />
+      },
+      {
+        path:"payment-success",
+        element: <PaymentSuccess />
+      },
+      
     ],
   },
 

@@ -90,8 +90,6 @@ const Login = () => {
         }
     };
 
-  
-
     useEffect(() => {
         if (registerIsSuccess && registerData) {
             toast.success(registerData.message || "Signup Successful.")
