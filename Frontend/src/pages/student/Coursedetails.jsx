@@ -106,44 +106,55 @@ const CourseDetails = () => {
                     <div className="grid lg:grid-cols-3 gap-8">
                         {/* Course Info - 2 columns */}
                         <div className="lg:col-span-2">
-                         
+
                             <div className="flex flex-wrap items-center gap-3 mb-6">
                                 <span className="px-3 py-1 bg-white text-gray-900 text-sm font-medium rounded-full">
-                                    {course.level}
+                                   {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
                                 </span>
-                                <div className="flex items-center text-yellow-400">
+                                {/* <div className="flex items-center text-yellow-400">
                                     <Star className="h-4 w-4 fill-current" />
                                     <span className="ml-1 text-sm">4.8 (2.3k)</span>
-                                </div>
-                                <span className="text-sm text-gray-300 flex items-center">
-                                    <Users className="h-4 w-4 mr-1" /> 12,450 students
-                                </span>
-                                <span className="text-sm text-gray-300 flex items-center">
-                                    <Calendar className="h-4 w-4 mr-1" /> Updated 2024
-                                </span>
+                                </div> */}
+                                {/* <span className="text-sm text-gray-300 flex items-center">
+                                    <Globe className="h-4 w-4 mr-2" />
+                                    <span>{course.language}</span>
+                                </span> */}
+                                    <span className="text-sm text-gray-300 flex items-center">
+                                        <Calendar className="h-4 w-4 mr-1" />
+                                    
+                                        <span>
+                                            {new Date(course.created_at).toLocaleDateString('en-US', {
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric',
+                                            })}
+                                        </span>
+                                    </span>
                             </div>
 
-                         
-                            <h1 className="text-3xl md:text-4xl font-bold mb-4">
+
+                            <h1 className="text-3xl md:text-4xl font-bold mb-4 uppercase">
                                 {course.title}
                             </h1>
 
-                           
-                            {/* <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                                {course.description}
-                            </p> */}
 
-                           
+                            <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                                {course.description}
+                            </p>
+
+
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                                 <div className="flex items-center">
                                     <Clock className="h-5 w-5 mr-2" />
-                                    <span>{course.course_duration}h total</span>
+                                    <span>{course.course_duration} hours</span>
                                 </div>
                                 <div className="flex items-center">
                                     <Globe className="h-5 w-5 mr-2" />
-                                    <span>{course.language}</span>
+                                     {course.language.charAt(0).toUpperCase() + course.language.slice(1)}
                                 </div>
+
                                 
+
                             </div>
 
 
@@ -179,7 +190,7 @@ const CourseDetails = () => {
                 <div className="grid lg:grid-cols-3 gap-8">
                     {/* Left Content - 2 columns */}
                     <div className="lg:col-span-2 space-y-8">
-                        <div className="border rounded-lg p-6">
+                        {/* <div className="border rounded-lg p-6">
                           
                             <h2 className="text-2xl font-bold mb-6 flex items-center">
                                 <Award className="h-6 w-6 mr-3" />
@@ -188,22 +199,17 @@ const CourseDetails = () => {
                             <p className="text-sm text-gray-600"> {course.description}</p>
                           
 
-                        </div>
+                        </div> */}
 
                         {/* Learning Outcomes */}
-                        <div className="border rounded-lg p-6">
-                            <h2 className="text-2xl font-bold mb-6 flex items-center">
-                                <Award className="h-6 w-6 mr-3" />
-                                Requirements and Learning Outcomes
-                            </h2>
-
+                        <div>
                             <div className="grid md:grid-cols-1 gap-6">
                                 <div className="border rounded-lg p-6">
                                     <h2 className="text-xl font-bold mb-4">Requirements</h2>
                                     <ul className="space-y-2 text-gray-700">
                                         {course.requirements?.split('\n').map((req, index) => (
                                             <li key={index} className="flex items-start">
-                                                <Check className="h-4 w-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                                                <Check className="h-5 w-5 text-black mt-0.5 mr-2 flex-shrink-0" />
                                                 <span>{req.trim()}</span>
                                             </li>
                                         ))}
@@ -219,7 +225,7 @@ const CourseDetails = () => {
                                     <ul className="space-y-2 text-gray-700">
                                         {course.learning_outcomes?.split('\n').map((req, index) => (
                                             <li key={index} className="flex items-start">
-                                                <Check className="h-4 w-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                                                  <Check className="h-5 w-5 text-black mt-0.5 mr-2 flex-shrink-0" />
                                                 <span>{req.trim()}</span>
                                             </li>
                                         ))}
@@ -249,15 +255,15 @@ const CourseDetails = () => {
                             </div>
 
                         </div>
-                        
+
                     </div>
 
                     {/* Right Sidebar - 1 column */}
                     <div className="lg:col-span-1">
                         <div className="sticky top-4 space-y-6">
-                          
+
                             <div className="border rounded-lg overflow-hidden">
-                               
+
                                 <div className="p-6 border-b">
                                     <div className="text-center">
                                         <div className="text-3xl font-bold text-gray-900 mb-1">
@@ -276,9 +282,10 @@ const CourseDetails = () => {
                                     {!isLoadingUser ? (
                                         <Button
                                             onClick={handlepaywithkhalti}
-                                            className="w-full py-3 text-lg font-semibold bg-green-600 hover:bg-green-700 text-white"
+                                            className="w-60 py-4 text-lg items-center justify-center font-semibold bg-black hover:bg-gray-950 text-white"
                                         >
-                                            Pay Via Khalti
+                                            Buy Now
+                                            
                                         </Button>
                                     ) : (
                                         <Button disabled className="w-full py-3">
@@ -291,30 +298,31 @@ const CourseDetails = () => {
                                         One time purchase, lifetime access
                                     </p>
 
-                                   
+
                                     <div className="mt-4 p-3 rounded-lg text-center">
                                         <Button variant="outline">Add to Cart</Button>
                                     </div>
 
                                 </div>
                             </div>
-                               <div className="border rounded-lg p-6">
+                            <div className="border rounded-lg p-6">
                                 <h3 className="font-bold mb-4">This course includes:</h3>
                                 <div className="space-y-3">
                                     <div className="flex items-center">
                                         <Clock className="h-4 w-4 text-gray-500 mr-3" />
-                                        <span className="text-sm">{course.course_duration} hours on-demand video</span>
+                                        <span className="text-sm">{course.course_duration} hours of lectures</span>
+
                                     </div>
-                                   
+
                                     <div className="flex items-center">
                                         <BadgeCheck className="h-4 w-4 text-gray-500 mr-3" />
                                         <span className="text-sm">Certificate of completion</span>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
