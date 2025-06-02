@@ -55,19 +55,19 @@ const Checkout = () => {
         try {
             const res = await initiate_khalti_payment({
                 course_id: course.id,
-                amount: course.price * 100,//in paisa
+                amount: course.price * 100,
                 purchase_order_id: course.slug,
                 purchase_order_name: course.title,
-            }).unwrap()
+                return_url: `${window.location.origin}/payment-success`, // Add return_url
+            }).unwrap();
             toast.success("Payment initiated successfully")
+            toast.success("Redirecting to Khalti...");
             window.location.href = res.payment_url
-            //window.location.href = "https://www.khalti.com/epay/epay2?token=" + res.token
+            // window.location.href = "https://www.khalti.com/epay/epay2?token=" + res.token
         } catch (error) {
             console.log(error);
-            toast.error("something went wrong while initiating payment, please try again later")
-
+            toast.error("Failed to initiate payment. Please try again.");
         }
-
     }
     return (
         <div className="min-h-screen bg-white">
