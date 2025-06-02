@@ -8,9 +8,10 @@ import { useLoadUserQuery } from '@/features/api/authApi'
 import { useCreateKhaltiPaymentMutation } from '@/features/api/paymentApi'
 
 const Checkout = () => {
-    const {} = useLoadCourseQuery()
-    const {} = useLoadUserQuery
-    const[initiate_khalti_payment,{isLoading:paymentLoading , isSuccess:paymentSuccess}]=useCreateKhaltiPaymentMutation()
+    const { } = useLoadCourseQuery()
+    const { } = useLoadUserQuery
+    const [initiate_khalti_payment,
+        { isLoading: paymentLoading, isSuccess: paymentSuccess }] = useCreateKhaltiPaymentMutation()
     const { slug } = useParams()
 
     const {
@@ -50,25 +51,24 @@ const Checkout = () => {
             </div>
         )
 
-  const handlePayment = async () => {
-    try{
-        const res=await initiate_khalti_payment({
-            course_id: course.id,
-            amount: course.price * 100,//in paisa
-            purchase_order_id: course.slug,
-            purchase_order_name : course.title,
-        }).unwrap()
-        toast.success("Payment initiated successfully")
-        window.location.href = res.payment_url
-        //window.location.href = "https://www.khalti.com/epay/epay2?token=" + res.token
-    }catch(error){
-        console.log(error);
-        toast.error("something went wrong while initiating payment, please try again later")
+    const handlePayment = async () => {
+        try {
+            const res = await initiate_khalti_payment({
+                course_id: course.id,
+                amount: course.price * 100,//in paisa
+                purchase_order_id: course.slug,
+                purchase_order_name: course.title,
+            }).unwrap()
+            toast.success("Payment initiated successfully")
+            window.location.href = res.payment_url
+            //window.location.href = "https://www.khalti.com/epay/epay2?token=" + res.token
+        } catch (error) {
+            console.log(error);
+            toast.error("something went wrong while initiating payment, please try again later")
+
+        }
 
     }
-
-  }
-
     return (
         <div className="min-h-screen bg-white">
             <div className="max-w-md mx-auto pt-24 pb-12 px-6">
@@ -86,7 +86,6 @@ const Checkout = () => {
                                 <h2 className="text-m font-semibold text-gray-900 mb-2">
                                     {course.title}
                                 </h2>
-
                             </div>
 
                             <div className="flex justify-between items-center border-b border-gray-200 pb-4">
@@ -115,7 +114,7 @@ const Checkout = () => {
                                 disabled={paymentLoading}
                                 className="w-full py-6 text-lg font-medium bg-black hover:bg-gray-800 transition-colors"
                             >
-                               {paymentLoading ? (
+                                {paymentLoading ? (
                                     <Loader2 className="w-5 h-5 animate-spin" />
                                 ) : (
                                     'Confirm Payment'
@@ -123,7 +122,7 @@ const Checkout = () => {
                             </Button>
 
                         </div>
-                        
+
                     </div>
 
                     <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">

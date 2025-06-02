@@ -109,7 +109,7 @@ const CourseDetails = () => {
 
                             <div className="flex flex-wrap items-center gap-3 mb-6">
                                 <span className="px-3 py-1 bg-white text-gray-900 text-sm font-medium rounded-full">
-                                   {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
+                                    {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
                                 </span>
                                 {/* <div className="flex items-center text-yellow-400">
                                     <Star className="h-4 w-4 fill-current" />
@@ -119,17 +119,17 @@ const CourseDetails = () => {
                                     <Globe className="h-4 w-4 mr-2" />
                                     <span>{course.language}</span>
                                 </span> */}
-                                    <span className="text-sm text-gray-300 flex items-center">
-                                        <Calendar className="h-4 w-4 mr-1" />
-                                    
-                                        <span>
-                                            {new Date(course.created_at).toLocaleDateString('en-US', {
-                                                year: 'numeric',
-                                                month: 'long',
-                                                day: 'numeric',
-                                            })}
-                                        </span>
+                                <span className="text-sm text-gray-300 flex items-center">
+                                    <Calendar className="h-4 w-4 mr-1" />
+
+                                    <span>
+                                        {new Date(course.created_at).toLocaleDateString('en-US', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric',
+                                        })}
                                     </span>
+                                </span>
                             </div>
 
 
@@ -138,9 +138,9 @@ const CourseDetails = () => {
                             </h1>
 
 
-                            <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                            {/* <p className="text-lg text-gray-300 mb-6 leading-relaxed">
                                 {course.description}
-                            </p>
+                            </p> */}
 
 
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -150,10 +150,10 @@ const CourseDetails = () => {
                                 </div>
                                 <div className="flex items-center">
                                     <Globe className="h-5 w-5 mr-2" />
-                                     {course.language.charAt(0).toUpperCase() + course.language.slice(1)}
+                                    {course.language.charAt(0).toUpperCase() + course.language.slice(1)}
                                 </div>
 
-                                
+
 
                             </div>
 
@@ -190,16 +190,16 @@ const CourseDetails = () => {
                 <div className="grid lg:grid-cols-3 gap-8">
                     {/* Left Content - 2 columns */}
                     <div className="lg:col-span-2 space-y-8">
-                        {/* <div className="border rounded-lg p-6">
-                          
+                        <div className="border rounded-lg p-6">
+
                             <h2 className="text-2xl font-bold mb-6 flex items-center">
                                 <Award className="h-6 w-6 mr-3" />
                                 Description
                             </h2>
                             <p className="text-sm text-gray-600"> {course.description}</p>
-                          
 
-                        </div> */}
+
+                        </div>
 
                         {/* Learning Outcomes */}
                         <div>
@@ -225,7 +225,7 @@ const CourseDetails = () => {
                                     <ul className="space-y-2 text-gray-700">
                                         {course.learning_outcomes?.split('\n').map((req, index) => (
                                             <li key={index} className="flex items-start">
-                                                  <Check className="h-5 w-5 text-black mt-0.5 mr-2 flex-shrink-0" />
+                                                <Check className="h-5 w-5 text-black mt-0.5 mr-2 flex-shrink-0" />
                                                 <span>{req.trim()}</span>
                                             </li>
                                         ))}
@@ -266,6 +266,7 @@ const CourseDetails = () => {
 
                                 <div className="p-6 border-b">
                                     <div className="text-center">
+                                   
                                         <div className="text-3xl font-bold text-gray-900 mb-1">
                                             रू{course.price}
                                             {course.original_price && (
@@ -285,7 +286,7 @@ const CourseDetails = () => {
                                             className="w-60 py-4 text-lg items-center justify-center font-semibold bg-black hover:bg-gray-950 text-white"
                                         >
                                             Buy Now
-                                            
+
                                         </Button>
                                     ) : (
                                         <Button disabled className="w-full py-3">

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Clock, ShoppingCart } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate} from "react-router-dom"
 
 const Course = ({ course }) => {
   const navigate = useNavigate();

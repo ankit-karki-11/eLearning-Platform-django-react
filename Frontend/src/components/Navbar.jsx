@@ -60,7 +60,7 @@ const Navbar = () => {
         <div className='flex items-center gap-2 px-8'>
           <Link to="/">
             <h1 className='hidden md:block font-bold text-xl'>
-              <img src="/logo.png" alt="Logo" className='inline-block h-6' />Padhai
+              <img src="/logo.png" alt="Logo" className='inline-block h-6' />
             </h1>
           </Link>
         </div>
