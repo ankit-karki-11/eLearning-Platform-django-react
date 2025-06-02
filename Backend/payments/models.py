@@ -39,6 +39,7 @@ class Payment(models.Model):
     
     amount = models.PositiveIntegerField(help_text="Amount in paisa (e.g., 1 Rs = 100 paisa)")
     transaction_id=models.CharField(max_length=100,unique=True) #orderid or pid
+    purchase_order_id = models.CharField(max_length=100, blank=True, null=True)
     pidx = models.CharField(max_length=100, null=True, blank=True) # khalti refId
     status=models.CharField(
         max_length=20,

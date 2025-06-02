@@ -34,6 +34,7 @@ class PaymentSerializer(serializers.ModelSerializer):
         fields = [
             "id", 
             "transaction_id",
+            "purchase_order_id",
             "pidx",
             "student_id",
             "student",
