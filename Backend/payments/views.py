@@ -9,6 +9,8 @@ from django.db.models.functions import TruncMonth
 import calendar
 import requests
 from django.conf import settings
+from main.models import Course,Enrollment
+
 
 from .models import Payment
 from .serializers import PaymentSerializer
@@ -104,6 +106,7 @@ class PaymentViewSet(ModelViewSet):
         chart_data = [{"month": month, "earning": earning} for month, earning in months.items()]
 
         return Response(chart_data)
+    
     @action(detail=False, methods=["POST"], permission_classes=[IsAuthenticated])
     def initiate_khalti_payment(self, request):
         try:
@@ -189,10 +192,20 @@ class PaymentViewSet(ModelViewSet):
             data = response.json()
             payment_status = data.get("status")
 
-            if payment_status == "Completed":
-                # Update payment model
-                Payment.objects.filter(pidx=pidx).update(status="completed")
-
+            if payment_status == "completed":
+                payment=Payment.objects.get(pidx=pidx)
+                payment.status = "completed"
+                payment.save()
+                
+                # create a new enrollment record
+                enrollment, created = Enrollment.objects.get_or_create(
+                    student=payment.student,
+                    course=payment.course,
+                    # enrollment_date=payment.created_at,
+                    defaults={'status':'in_progress',
+                              'created_at': payment.created_at }
+                )
+                    
                 return Response({"detail": "Payment verified and marked as completed."}, status=status.HTTP_200_OK)
 
             return Response({"detail": f"Payment not completed. Current status: {payment_status}"}, status=status.HTTP_400_BAD_REQUEST)

@@ -256,60 +256,7 @@ class Enrollment(models.Model):
         self.status='certified'
         self.save()
         
-########## payment-enroll-and instructor can add course expiration date,need to work on this feature ##################
-#Payment model
-# class Payment(models.Model):
-#     PaymentStatusChoices = [
-#         ("pending", "Pending"),
-#         ("completed", "Completed"),
-#         ("failed", "Failed"),
-#         ("cancelled", "Cancelled"),
-#     ]    
-#     student=models.ForeignKey(
-#         UserAccount,
-#         on_delete=models.CASCADE,
-#         limit_choices_to={'role': 'student'},
-#         related_name='payments'
-#     )
-    
-#     course=models.ForeignKey(
-#         Course,
-#         on_delete=models.CASCADE,
-#         related_name="payments"
-#     )
-#     amount=models.DecimalField(max_digits=8,decimal_places=2)
-#     payment_date=models.DateTimeField(auto_now_add=True)
-#     payment_method=models.CharField(max_length=50)
-#     transaction_id=models.CharField(max_length=100,unique=True)
-#     pidx = models.CharField(max_length=100, null=True, blank=True)
-#     status=models.CharField(
-#         max_length=20,
-#         choices=PaymentStatusChoices,
-#         default="pending"
-#     )
-#     paid_at = models.DateTimeField(auto_now_add=True)
-#     created_at=models.DateTimeField(auto_now_add=True)
-#     updated_at=models.DateTimeField(auto_now=True)
-    
-#     def __str__(self):
-#         return f"{self.student.full_name} - {self.course.title} - {self.amount} - {self.status}"
-    
-  
-#     def save(self,*args,**kwargs):
-#         if self.status == "completed":
-         
-#             if not Enrollment.objects.filter(student=self.student, course=self.course).exists():
-              
-#                 Enrollment.objects.create(student=self.student, course=self.course)
-#         super().save(*args, **kwargs)
         
-#     class Meta:
-#         db_table="payment"
-#         verbose_name_plural="Payments"
-#         ordering=["-payment_date"]
-#         unique_together = ["student", "course"]
-        
-
 class Attachment(models.Model):
     section=models.ForeignKey(
         Section,

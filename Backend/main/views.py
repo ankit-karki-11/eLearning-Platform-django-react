@@ -192,7 +192,6 @@ class CourseViewSet(ModelViewSet):
                 data={"detail": "Course not found."}
             )
     
-
 # section viewset
 class SectionViewSet(ModelViewSet):
     queryset=Section.objects.all()
@@ -292,6 +291,35 @@ class CartViewSet(ModelViewSet):
         })
 
 #enrollment viewset
+from rest_framework import viewsets, status, permissions, filters
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+
+class EnrollmentViewSet(viewsets.ModelViewSet):
+    queryset = Enrollment.objects.all()
+    serializer_class = EnrollmentSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['created_at', 'updated_at']
+    ordering = ['-created_at']
+
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve', 'mark_completed']:
+            return [permissions.IsAuthenticated()]
+        # Only admins can create or delete enrollments (optional, adjust as needed)
+        return [permissions.IsAdminUser()]
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_staff or user.role == 'admin':
+            return Enrollment.objects.all()
+        return Enrollment.objects.filter(student=user)
+
+    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
+    def mark_completed(self, request, pk=None):
+        enrollment = get_object_or_404(Enrollment, pk=pk, student=request.user)
+        enrollment.mark_completed()
+        return Response({'status': 'Enrollment marked as completed'}, status=status.HTTP_200_OK)
 
 #payment viewset
 
