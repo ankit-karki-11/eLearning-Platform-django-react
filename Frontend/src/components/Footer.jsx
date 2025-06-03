@@ -53,7 +53,6 @@ const Footer = () => {
         <div className="pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-4">
             <p className="text-xs text-gray-500 dark:text-gray-400 font-mono tracking-wider">
-              © 2025 AI EDUCATION PLATFORM
             </p>
           </div>
           

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useLoadCourseQuery } from '@/features/api/courseApi'
-import { Clock, File, FileArchiveIcon, Play, Star, Users, BookOpen, Award, Check, Globe, ChevronRight, BarChart2, HelpCircle, Shield, BadgeCheck, User, Calendar, Target, Download, ArrowBigDown } from 'lucide-react'
+import { Clock, Play, BookOpen, Award, Check, Globe, ChevronRight, BarChart2, HelpCircle, Shield, BadgeCheck, User, Calendar, Target, Download, ArrowBigDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useLoadUserQuery } from '@/features/api/authApi'
 import { toast } from 'sonner'
@@ -9,6 +9,7 @@ import { Progress } from '@/components/ui/progress'
 
 // react player
 import ReactPlayer from 'react-player/youtube'
+// const paymentStatus = "completed";
 
 const CourseDetails = () => {
     const { slug } = useParams()
@@ -65,38 +66,6 @@ const CourseDetails = () => {
             navigate(`/login?redirect=/checkout/${course.slug}`)
         }
     }
-
-    // Sample course
-    const courseSections = [
-        {
-            title: "Introduction to ReactJS",
-            duration: "45 min",
-            lessons: 2,
-            completed: 1,
-            resources: 2
-        },
-        {
-            title: "Core Concepts",
-            duration: "1.2 hrs",
-            lessons: 2,
-            completed: 1,
-            resources: 2
-        }
-    ]
-
-
-
-    const features = [
-        { icon: <FileArchiveIcon className="h-5 w-5" />, text: "Certificate of completion" },
-        { icon: <Clock className="h-5 w-5" />, text: "Lifetime access" },
-
-    ]
-
-
-    // Calculate overall progress
-    const totalLessons = courseSections.reduce((sum, section) => sum + section.lessons, 0)
-    const completedLessons = courseSections.reduce((sum, section) => sum + section.completed, 0)
-    const progressPercentage = Math.round((completedLessons / totalLessons) * 100)
 
     return (
         <div className="min-h-screen mt-14">
@@ -266,7 +235,7 @@ const CourseDetails = () => {
 
                                 <div className="p-6 border-b">
                                     <div className="text-center">
-                                   
+
                                         <div className="text-3xl font-bold text-gray-900 mb-1">
                                             रू{course.price}
                                             {course.original_price && (
@@ -305,6 +274,43 @@ const CourseDetails = () => {
                                     </div>
 
                                 </div>
+
+                                {/* <div className="p-6">
+                                    {!isLoadingUser ? (
+                                        paymentStatus === "completed" ? (
+                                            <Button
+                                                onClick={() => navigate("/my-learning")}
+                                                className="w-60 py-4 text-lg items-center justify-center font-semibold bg-green-600 hover:bg-green-700 text-white"
+                                            >
+                                                Go to My Learning
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                onClick={handlepaywithkhalti}
+                                                className="w-60 py-4 text-lg items-center justify-center font-semibold bg-black hover:bg-gray-950 text-white"
+                                            >
+                                                Buy Now
+                                            </Button>
+                                        )
+                                    ) : (
+                                        <Button disabled className="w-full py-3">
+                                            <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent mr-2"></div>
+                                            Loading...
+                                        </Button>
+                                    )}
+
+                                    <p className="text-center text-sm text-gray-500 mt-3">
+                                        One-time purchase, lifetime access
+                                    </p>
+
+                                    {paymentStatus !== "completed" && (
+                                        <div className="mt-4 p-3 rounded-lg text-center">
+                                            <Button variant="outline">Add to Cart</Button>
+                                        </div>
+                                    )}
+                                </div> */}
+
+
                             </div>
                             <div className="border rounded-lg p-6">
                                 <h3 className="font-bold mb-4">This course includes:</h3>

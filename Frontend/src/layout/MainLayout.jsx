@@ -1,5 +1,5 @@
+import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import Footer from '@/pages/student/Footer'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 

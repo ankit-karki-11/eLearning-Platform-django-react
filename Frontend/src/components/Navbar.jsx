@@ -110,11 +110,11 @@ const Navbar = () => {
             </DropdownMenu>
           ) : (
             <div className='flex items-center gap-3'>
-              <Button variant='ghost' className='px-4'>
+              {/* <Button variant='ghost' className='px-4'>
                 <Link to="/login">Sign in</Link>
-              </Button>
+              </Button> */}
               <Button className='px-4'>
-                <Link to="/register">Get started</Link>
+                <Link to="/login">Get started</Link>
               </Button>
             </div>
           )}
