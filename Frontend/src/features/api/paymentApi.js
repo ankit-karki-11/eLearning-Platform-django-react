@@ -23,15 +23,6 @@ export const paymentApi = createApi({
             })
 
         }),
-        CompleteKhaltiPayment: builder.mutation({
-            query: (body) => ({
-                url: 'payments/complete_payment/',
-                method: 'PATCH',
-                body,
-
-            })
-
-        }),
         VerifyKhaltiPayment: builder.mutation({
             query: (body) => ({
                 url: 'payments/verify_khalti_payment/',
@@ -41,6 +32,16 @@ export const paymentApi = createApi({
             })
 
         }),
+        CompleteKhaltiPayment: builder.mutation({
+            query: (body) => ({
+                url: 'payments/complete_payment/',
+                method: 'PATCH',
+                body,
+
+            })
+
+        }),
+        
     })
 })
 

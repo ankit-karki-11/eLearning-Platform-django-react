@@ -18,6 +18,7 @@ import PaymentSuccess from './pages/student/PaymentSuccess'
 
 import Categories from './pages/student/Categories'
 import CategoryDetails from './pages/student/CategoryDetails'
+import CourseProgress from './pages/student/CourseProgress'
 
 const appRouter = createBrowserRouter([
   {
@@ -70,6 +71,11 @@ const appRouter = createBrowserRouter([
         path:"payment-success",
         element: <PaymentSuccess />
       },
+       {
+        path:"course-progress/${course.slug}/learn",
+        element: <CourseProgress />
+      },
+      
       
     ],
   },

@@ -1,40 +1,38 @@
 import React from 'react'
 import Course from './Course';
-import { useLoadUserQuery } from '@/features/api/authApi';
-import { useLoadCourseQuery } from '@/features/api/courseApi';
-import { User } from 'lucide-react';
 import { useLoadMyEnrollmentsQuery } from '@/features/api/enrollmentApi';
 
 const MyLearning = () => {
-    const {data:LoadUserData,isLoading:IsUserLoading} = useLoadUserQuery();
-    const {data, isLoading }= useLoadMyEnrollmentsQuery();
-    // const isLoading = false;
-    const myLearningCourses = data || [];
-    // const myLearningCourses =data?.student.Course|| [];
+    const { data: enrollments, isLoading } = useLoadMyEnrollmentsQuery();
+    
     return (
         <div className='max-w-4xl m-auto my-24 px-4 md:px-0'>
-            <h1 className='font-bold text-2xl'> My Learning 
-                <div className='my-5'>
-                    {
-                        isLoading ? (<MyLearningSkeleton />
-
-                        ) : myLearningCourses.length === 0 ?
-                            (<p>You aren't enrolled in any course</p>) :
-                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-                           {
-                             myLearningCourses.map((enrollment,index)=> (
-                                   <Course key={index} course={enrollment.course} />
-                        ))}
-                            </div>
-                    }
+            <h1 className='font-bold text-2xl mb-5'>My Learning</h1>
+            
+            {isLoading ? (
+                <MyLearningSkeleton />
+            ) : enrollments?.length === 0 ? (
+                <div className="bg-gray-100 dark:bg-gray-800 p-8 rounded-lg text-center">
+                    <p className="text-gray-600 dark:text-gray-300">
+                        You haven't enrolled in any courses yet.
+                    </p>
                 </div>
-            </h1>
+            ) : (
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+                    {enrollments.map((enrollment) => (
+                        <Course 
+                            key={enrollment.course._id} 
+                            course={enrollment.course} 
+                            isEnrolled={true} 
+                        />
+                    ))}
+                </div>
+            )}
         </div>
-    )
+    );
 }
-export default MyLearning
 
-// Skeleton for loading 
+// Skeleton loader remains the same
 const MyLearningSkeleton = () => (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {[...Array(3)].map((_, index) => (
@@ -45,3 +43,5 @@ const MyLearningSkeleton = () => (
         ))}
     </div>
 );
+
+export default MyLearning;
