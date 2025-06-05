@@ -4,11 +4,11 @@ import { useLoadMyEnrollmentsQuery } from '@/features/api/enrollmentApi';
 
 const MyLearning = () => {
     const { data: enrollments, isLoading } = useLoadMyEnrollmentsQuery();
-    
+
     return (
         <div className='max-w-4xl m-auto my-24 px-4 md:px-0'>
             <h1 className='font-bold text-2xl mb-5'>My Learning</h1>
-            
+
             {isLoading ? (
                 <MyLearningSkeleton />
             ) : enrollments?.length === 0 ? (
@@ -19,11 +19,11 @@ const MyLearning = () => {
                 </div>
             ) : (
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-                    {enrollments.map((enrollment) => (
-                        <Course 
-                            key={enrollment.course._id} 
-                            course={enrollment.course} 
-                            isEnrolled={true} 
+                    {enrollments?.map((enrollment) => (
+                        <Course
+                            key={enrollment.course._id}
+                            course={enrollment.course}
+                            isEnrolled={true}
                         />
                     ))}
                 </div>

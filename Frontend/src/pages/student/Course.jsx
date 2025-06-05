@@ -2,12 +2,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+// isEnrolled Prop
 const Course = ({ course, isEnrolled = false }) => {
   const navigate = useNavigate();
 
   return (
     <div className="overflow-hidden rounded-xl bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-all w-full flex flex-col">
-      {/* Course Thumbnail with Level Label */}
+     
       <div className="relative aspect-video bg-gray-100 dark:bg-gray-800 overflow-hidden group">
         <img
           src={course.thumbnail || "course1.png"}
@@ -42,7 +43,7 @@ const Course = ({ course, isEnrolled = false }) => {
           <Button
             size="sm"
             className="w-full h-9 text-sm font-medium gap-1.5 bg-green-600 hover:bg-green-700"
-            onClick={() => navigate(`course-progress/${course.slug}`)}
+            onClick={() => navigate(`/course-progress/${course.slug}/progress`)}
           >
             Continue Learning
             <ArrowRight className="h-4 w-4" />
