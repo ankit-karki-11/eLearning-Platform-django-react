@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import UserAccount
+
 from django.utils.text import slugify
 from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError  
@@ -150,7 +151,7 @@ class Section(models.Model):
     order=models.PositiveIntegerField()
     is_free=models.BooleanField(default=False)
     video = models.FileField(
-        upload_to="section_videos/%Y/%m/%d/",  # Better file organization
+        upload_to="section_videos/%Y/%m/%d/", 
         null=True, 
         blank=True,
         help_text="Upload section video file"
@@ -179,6 +180,7 @@ class Section(models.Model):
         unique_together = ["course", "title"]
         
     
+ 
 # cart model
 class Cart(models.Model):
     student=models.ForeignKey(
@@ -255,7 +257,75 @@ class Enrollment(models.Model):
             raise ValidationError("Course should be completed for issuing certificate")
         self.status='certified'
         self.save()
+    
+    def progress_percentage(self):
+        total_sections=self.course.sections.count()
+        if total_sections == 0:
+            return 0
         
+        completed_sections = self.section_progress.filter(is_completed=True).count()
+        return round((completed_sections / total_sections) * 100, 2)
+    
+    @property
+    def section_progress(self):
+        return self.section_progresses.all()
+    
+    @property
+    def total_sections(self):
+        return self.sections.count()
+    
+    @property
+    def completed_sections(self):
+        return self.sections.filter(is_completed=True).count()
+    
+    @property
+    def progress(self):
+        return self.completed_sections / self.total_sections * 100
+    
+    # check if course is completed
+    @property
+    def is_completed(self):
+        return self.status == 'completed'
+    
+    # check if course is certified
+    @property
+    def is_certified(self):
+        return self.status == 'certified'
+    
+    # check if user has enrolled in the course
+    @property
+    def is_enrolled(self):
+        return self.student.courses.filter(pk=self.course.pk).exists()
+        
+
+#section-progress
+class SectionProgress(models.Model):
+    enrollment = models.ForeignKey(
+        Enrollment,
+        on_delete=models.CASCADE,
+        related_name='section_progresses'
+    )
+    section = models.ForeignKey(
+        Section,
+        on_delete=models.CASCADE,
+        related_name='progresses'
+    )
+    
+    is_completed = models.BooleanField(default=False)
+    watched_at = models.DateTimeField(auto_now=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        unique_together = ('enrollment', 'section')
+        db_table = "section_progress"
+        verbose_name = "Section Progress"
+        verbose_name_plural = "Section Progresses"
+
+    def __str__(self):
+        return f"{self.enrollment.student.full_name} - {self.section.title} ({'Completed' if self.is_completed else 'In Progress'})"
+   
         
 class Attachment(models.Model):
     section=models.ForeignKey(

@@ -323,6 +323,24 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
 
 #payment viewset
 
+#Courseprogress viewset
+
+class SectionProgressViewSet(ModelViewSet):
+    queryset = SectionProgress.objects.all()
+    serializer_class = SectionProgressSerializer
+    permission_classes = [IsAuthenticated]  # Default permission
+    
+    def get_queryset(self):
+        # Limit to student's own enrollments
+        user = self.request.user
+        if user.role == 'student':
+            return SectionProgress.objects.filter(enrollment__student=user)
+        return super().get_queryset()
+
+    def perform_create(self, serializer):
+        serializer.save()
+    
+
 #attachment viewset
 class AttachmentViewSet(ModelViewSet):
     queryset = Attachment.objects.all().select_related('section')

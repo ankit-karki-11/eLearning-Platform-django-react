@@ -24,6 +24,7 @@ const MyLearning = () => {
                             key={enrollment.course._id}
                             course={enrollment.course}
                             isEnrolled={true}
+                            progress={enrollment.progress_percentage}
                         />
                     ))}
                 </div>

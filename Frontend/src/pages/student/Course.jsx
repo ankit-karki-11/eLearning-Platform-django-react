@@ -3,12 +3,19 @@ import { ArrowRight, Clock, ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 // isEnrolled Prop
-const Course = ({ course, isEnrolled = false }) => {
+const Course = ({ course, isEnrolled = false, progress = 0 }) => {
   const navigate = useNavigate();
+  const handleContinueLearning = () => {
+    navigate(`/course-progress/${course.slug}/progress`);
+  };
+
+  const handleViewDetails = () => {
+    navigate(`/courses/course-detail/${course.slug}`);
+  };
 
   return (
     <div className="overflow-hidden rounded-xl bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-all w-full flex flex-col">
-     
+
       <div className="relative aspect-video bg-gray-100 dark:bg-gray-800 overflow-hidden group">
         <img
           src={course.thumbnail || "course1.png"}
@@ -32,6 +39,7 @@ const Course = ({ course, isEnrolled = false }) => {
             <span>{course.course_duration} hrs</span>
           </div>
           {!isEnrolled && (
+
             <div className="text-lg font-bold dark:text-white">रु {course.price}</div>
           )}
         </div>
@@ -39,15 +47,29 @@ const Course = ({ course, isEnrolled = false }) => {
 
       {/* Action Buttons */}
       <div className="px-4 pb-4">
+
+
         {isEnrolled ? (
-          <Button
-            size="sm"
-            className="w-full h-9 text-sm font-medium gap-1.5 bg-green-600 hover:bg-green-700"
-            onClick={() => navigate(`/course-progress/${course.slug}/progress`)}
-          >
-            Continue Learning
-            <ArrowRight className="h-4 w-4" />
-          </Button>
+          <>
+            <div className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+              Progress: {progress}% completed
+              <div className="w-full h-2 bg-gray-200 rounded mt-1">
+                <div
+                  className="h-full bg-green-500 rounded"
+                  style={{ width: `${progress}%` }}
+                ></div>
+              </div>
+            </div>
+
+            <Button
+              size="sm"
+              className="w-full h-9 text-sm font-medium gap-1.5 bg-green-600 hover:bg-green-700"
+              onClick={handleContinueLearning}
+            >
+              Continue Learning
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </>
         ) : (
           <div className="flex justify-between">
             <Button
@@ -60,7 +82,7 @@ const Course = ({ course, isEnrolled = false }) => {
             <Button
               size="sm"
               className="h-9 px-4 text-sm font-medium gap-1.5"
-              onClick={() => navigate(`/courses/course-detail/${course.slug}`)}
+              onClick={handleViewDetails}
             >
               View Details
               <ArrowRight className="h-4 w-4" />

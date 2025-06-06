@@ -260,6 +260,7 @@ class EnrollmentSerializer(serializers.ModelSerializer):
             "required": "Student is required.",
         },
     )
+    progress = serializers.SerializerMethodField()
     
     class Meta:
         model=Enrollment
@@ -271,8 +272,24 @@ class EnrollmentSerializer(serializers.ModelSerializer):
             "student_id",
             "created_at",
             "updated_at",
+            "progress",
         ]
-
+        
+    def get_progress(self, obj):
+        return obj.progress_percentage()
+        
+class SectionProgressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=SectionProgress
+        fields=[
+            "id",
+            "enrollment",
+            "section",
+            "isCompleted",
+            "watched_at"
+        ]
+        read_only_fields=['watched_at']
+        
 # class PaymentSerializer(serializers.ModelSerializer):
 #     course=CourseListSerializer(read_only=True)
 #     course_id=serializers.PrimaryKeyRelatedField(
