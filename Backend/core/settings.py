@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
     "payments",
-    # "django_esewa",
 ]
 
 MIDDLEWARE = [

@@ -303,6 +303,14 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
     ordering_fields = ['created_at', 'updated_at']
     ordering = ['-created_at']
 
+    lookup_field='course__slug'
+    
+    def get_object(self):
+        queryset = self.get_queryset()
+        slug = self.kwargs.get('course__slug') or self.kwargs.get('slug')
+        obj = get_object_or_404(queryset, course__slug=slug, student=self.request.user)
+        return obj
+    
     def get_permissions(self):
         if self.action in ['list', 'retrieve', 'mark_completed']:
             return [permissions.IsAuthenticated()]
@@ -321,6 +329,14 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
         enrollment.mark_completed()
         return Response({'status': 'Enrollment marked as completed'}, status=status.HTTP_200_OK)
 
+    @action(detail=True, methods=['get'], url_path='section/(?P<section_id>[^/.]+)')
+    def section_progress(self, request, course__slug=None, section_id=None):
+        enrollment = self.get_object()
+        progress = SectionProgress.objects.filter(enrollment=enrollment, section_id=section_id).first()
+        if not progress:
+            return Response({'detail': 'Progress not found'}, status=404)
+        serializer = SectionProgressSerializer(progress)
+        return Response(serializer.data)
 #payment viewset
 
 #Courseprogress viewset
