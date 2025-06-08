@@ -72,7 +72,7 @@ const appRouter = createBrowserRouter([
         element: <PaymentSuccess />
       },
        {
-        path:"course-progress/:slug/progress",
+        path:"course/:slug/progress",
         element: <CourseProgress />
       },
       

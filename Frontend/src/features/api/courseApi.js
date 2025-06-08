@@ -26,7 +26,7 @@ export const courseApi = createApi({
             query: () => ({
                 url: "course/",
                 method: "GET",
-                // body:{Title,category}
+
             }),
         }),
         // updatecourse
@@ -35,7 +35,7 @@ export const courseApi = createApi({
                 url: `course/${id}/`,
                 method: "POST",
                 body: data,
-                // credentials:"include"
+
             }),
 
         }),
@@ -43,12 +43,18 @@ export const courseApi = createApi({
             query: (id) => ({
                 url: `course/${id}/`,
                 method: "DELETE",
-                // credentials:"include"
+
 
             })
 
-        })
-
+        }),
+        //  Get sections by course slug
+        GetSectionsByCourse: builder.query({
+            query: (courseSlug) => ({
+                url: `course/${courseSlug}/sections/`,
+                method: "GET",
+            }),
+        }),
     })
 
 })
@@ -57,5 +63,6 @@ export const {
     useCreateCourseMutation,
     useLoadCourseQuery,
     useUpdateCourseMutation,
-    useDeleteCourseMutation
+    useDeleteCourseMutation,
+    useGetSectionsByCourseQuery
 } = courseApi;

@@ -2,7 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const COURSEPROGRESS_API = "http://localhost:8000/api/v1/main/";
 
-
+// courseprogress part is handled by enrollmentApi 
+// not sure if this is working or not.
 // create API slice
 export const CourseProgressApi = createApi({
     reducerPath: "CourseProgressApi",

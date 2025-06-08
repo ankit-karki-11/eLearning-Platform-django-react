@@ -25,6 +25,7 @@ const MyLearning = () => {
                             course={enrollment.course}
                             isEnrolled={true}
                             progress={enrollment.progress_percentage}
+                            onContinue={() => handleContinueLearning(enrollment.course.slug)}
                         />
                     ))}
                 </div>
