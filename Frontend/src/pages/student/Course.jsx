@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Clock, ShoppingCart } from "lucide-react";
+import { ArrowRight, Clock, ShoppingCart, Star, Users, Award } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const Course = ({ course, isEnrolled = false, progress = 10 }) => {
+const Course = ({ course, isEnrolled = false, progress = 0 }) => {
   const navigate = useNavigate();
 
   const handleContinueLearning = () => {
@@ -14,34 +14,69 @@ const Course = ({ course, isEnrolled = false, progress = 10 }) => {
   };
 
   return (
-    <div className="rounded-xl bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-all w-full flex flex-col border border-gray-200 dark:border-gray-800">
-      <div className="relative aspect-video overflow-hidden group">
+    <div className="rounded-xl bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-all w-full flex flex-col border border-gray-200 dark:border-gray-800 overflow-hidden group">
+      {/* Course Thumbnail with Badges */}
+      <div className="relative aspect-video overflow-hidden">
         <img
-          src={course.thumbnail || "course1.png"}
+          src={course.thumbnail || "/course-placeholder.jpg"}
           alt={course.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        <span className="absolute top-2 right-2 bg-white dark:bg-gray-800 text-xs font-medium px-2 py-1 rounded shadow-sm">
-          {course.level}
-        </span>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        
+        <div className="absolute top-3 left-3 flex flex-col gap-2">
+          {course.isBestSeller && (
+            <span className="bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded-md flex items-center gap-1">
+              <Award className="h-3 w-3" />
+              Bestseller
+            </span>
+          )}
+          <span className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-xs font-medium px-2 py-1 rounded-md">
+            {course.level}
+          </span>
+        </div>
       </div>
 
+      {/* Course Content */}
       <div className="p-4 flex flex-col gap-3 flex-grow">
-        <h3 className="font-semibold text-base line-clamp-2 dark:text-white">{course.title}</h3>
+        {/* Kept the original title style as requested */}
+        <h3 className="font-semibold text-base line-clamp-2 dark:text-white">
+          {course.title}
+        </h3>
 
+        {/* Instructor and Rating - New addition but subtle */}
+        {course.instructor && (
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            By {course.instructor}
+          </p>
+        )}
+
+        {/* Course Metadata */}
         <div className="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400">
           <div className="flex items-center gap-1.5">
             <Clock className="h-4 w-4" />
             <span>{course.course_duration} hrs</span>
           </div>
+          
+          {/* Rating display - subtle addition */}
+          {course.rating && (
+            <div className="flex items-center gap-1">
+              <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
+              <span>{course.rating.toFixed(1)}</span>
+            </div>
+          )}
+          
           {!isEnrolled && (
-            <span className="text-base font-semibold text-gray-900 dark:text-white">रु {course.price}</span>
+            <span className="text-base font-semibold text-gray-900 dark:text-white">
+              रु {course.price}
+            </span>
           )}
         </div>
 
+        {/* Progress for enrolled students */}
         {isEnrolled && (
           <>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
+            {/* <div className="text-sm text-gray-600 dark:text-gray-400">
               Progress: {progress}%
               <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded mt-1">
                 <div
@@ -49,7 +84,7 @@ const Course = ({ course, isEnrolled = false, progress = 10 }) => {
                   style={{ width: `${progress}%` }}
                 />
               </div>
-            </div>
+            </div> */}
 
             <Button
               size="sm"
@@ -63,6 +98,7 @@ const Course = ({ course, isEnrolled = false, progress = 10 }) => {
         )}
       </div>
 
+      {/* Actions for non-enrolled students */}
       {!isEnrolled && (
         <div className="px-4 pb-4 mt-auto flex items-center justify-between">
           <Button

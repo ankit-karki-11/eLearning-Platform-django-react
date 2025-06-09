@@ -9,8 +9,7 @@ export const CourseProgressApi = createApi({
     reducerPath: "CourseProgressApi",
     baseQuery: fetchBaseQuery({
         baseUrl: COURSEPROGRESS_API,
-        credentials: 'include'
-    }),
+        credentials: 'include'    }),
 
     endpoints: (builder) => ({
         getCourseProgress: builder.query({

@@ -18,7 +18,7 @@ import PaymentSuccess from './pages/student/PaymentSuccess'
 
 import Categories from './pages/student/Categories'
 import CategoryDetails from './pages/student/CategoryDetails'
-import CourseProgress from './pages/student/CourseProgress'
+import CoursePlayer from './pages/student/CoursePlayer'
 
 const appRouter = createBrowserRouter([
   {
@@ -73,7 +73,7 @@ const appRouter = createBrowserRouter([
       },
        {
         path:"course/:slug/progress",
-        element: <CourseProgress />
+        element: <CoursePlayer />
       },
       
       
