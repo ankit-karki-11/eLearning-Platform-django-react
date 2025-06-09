@@ -17,6 +17,9 @@ from rest_framework import viewsets, status, permissions, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+# from django_filters.rest_framework import DjangoFilterBackend
+
+# Create your views here.
 
 #custom permission class
 class CustomPermission(permissions.BasePermission):
@@ -66,7 +69,12 @@ class CategoryViewSet(ModelViewSet):
                 status=status.HTTP_409_CONFLICT,data={"detail":"Category cannot be deleted"}
                )
     
-   
+    # def get_serializer(self, *args, **kwargs):
+    #     if self.action == "list":
+    #         kwargs["many"] = True
+    #         return CategoryListSerializer(*args, **kwargs)
+    #     return super().get_serializer(*args, **kwargs)
+    
     @action(detail=True, methods=["get"], permission_classes=[IsAuthenticated])
     def get_all_category(self,request,slug=None):
         category=self.get_object()
@@ -194,14 +202,6 @@ class SectionViewSet(ModelViewSet):
     serializer_class=SectionSerializer
     permission_classes=[CustomPermission]
     
-    def get_queryset(self):
-        """Allow filtering by course_id"""
-        queryset = super().get_queryset()
-        course_id = self.request.query_params.get('course_id')
-        if course_id:
-            queryset = queryset.filter(course_id=course_id)
-        return queryset.order_by('order')
-    
     def create(self, request, *args, **kwargs):
         try:
             return super().create(request, *args, **kwargs)
@@ -296,7 +296,7 @@ class CartViewSet(ModelViewSet):
 
 #enrollment viewset
 
-class EnrollmentViewSet(ModelViewSet):
+class EnrollmentViewSet(viewsets.ModelViewSet):
     queryset = Enrollment.objects.all()
     serializer_class = EnrollmentSerializer
     filter_backends = [filters.OrderingFilter]

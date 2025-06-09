@@ -127,7 +127,6 @@ class SectionSerializer(serializers.ModelSerializer):
             "required": "Course is required.",
         },
     )
-    video_url=serializers.SerializerMethodField(read_only=True)
     attachments=serializers.SerializerMethodField(read_only=True)
     
     class Meta:
@@ -140,21 +139,10 @@ class SectionSerializer(serializers.ModelSerializer):
             "attachments",
             "is_free",
             "video",
-            "video_url",  
             "created_at",
             "updated_at",
         ]
-        read_only_fields = ["id", "created_at", "updated_at"]
-    
-    def get_video_url(self, obj):
-        # If video exists, return its URL
-        if obj.video: 
-            request = self.context.get('request')
-            if request:
-               return request.build_absolute_uri(obj.video.url)
-            return obj.video.url
-        return None
-    
+        
     def get_attachments(self, obj):
         attachments=obj.attachments.all()
         return AttachmentSerializer(attachments,many=True).data
@@ -174,14 +162,12 @@ class SectionListSerializer(serializers.ModelSerializer):
     class Meta:
         model=Section
         fields=[
-             "id",
+            "id",
             "title",
             "course",
             "order",
-            "attachments",
             "is_free",
             "video",
-            "video_url",  
             "created_at",
             "updated_at",
         ]
@@ -193,87 +179,53 @@ class EnrollmentSerializer(serializers.ModelSerializer):
         queryset=Course.objects.all(),
         source="course",
         write_only=True,
+        error_messages={
+            "does_not_exist": "Course does not exist.",
+            "required": "Course is required.",
+        },
     )
     student=UserAccountListSerializer(read_only=True)
     student_id=serializers.PrimaryKeyRelatedField(
         queryset=UserAccount.objects.filter(role="student"),
         source="student",
         write_only=True,
+        error_messages={
+            "does_not_exist": "Student does not exist.",
+            "required": "Student is required.",
+        },
     )
-    
-    status= serializers.ChoiceField(
-        choices=Enrollment.STATUS_CHOICES,
-        read_only=True,
-    )
-    last_accessed = serializers.DateTimeField(read_only=True)
     progress = serializers.SerializerMethodField()
     
     class Meta:
         model=Enrollment
         fields=[
             "id",
-            "course", "course_id",
-            "student", "student_id",
-            "status",
-            "progress",
-            "last_accessed",
+            "course",
+            "course_id",
+            "student",
+            "student_id",
             "created_at",
             "updated_at",
+            "progress",
         ]
-        
-        read_only_fields = [
-                "id", 
-                "progress",
-                "created_at",
-                "updated_at"
-            ]
         
     def get_progress(self, obj):
-        return obj.progress
+        return obj.progress_percentage()
         
 class SectionProgressSerializer(serializers.ModelSerializer):
-    section_title = serializers.CharField(source='section.title', read_only=True)
-    section_order = serializers.IntegerField(source='section.order', read_only=True)
-    video_url = serializers.SerializerMethodField()
-    
     class Meta:
-        model = SectionProgress
-        fields = [
-            'id',
-            'section',              
-            'section_title',        
-            'section_order',       
-            'is_completed',
-            'started_at',
-            'completed_at',
-            'last_accessed',
-            'video_url',            # From related section
-            'time_spent'          
+        model=SectionProgress
+        fields=[
+            "id",
+            "enrollment",
+            "section",
+            "isCompleted",
+            "watched_at"
         ]
-        read_only_fields = [
-            'id', 
-            'started_at', 
-            'completed_at',
-            'last_accessed',
-            'time_spent'
-        ]
-    
-    def get_video_url(self, obj):
-        if obj.section.video:
-            request = self.context.get('request')
-            return request.build_absolute_uri(obj.section.video.url) if request else obj.section.video.url
-        return None
-    
-    def validate(self, data):
-        """Prevent marking as complete if section has no video"""
-        if data.get('is_completed') and not self.instance.section.video:
-            raise serializers.ValidationError("Cannot complete a section with no video content")
-        return data
+        read_only_fields=['watched_at']
 
 class SectionWithCompletionSerializer(serializers.ModelSerializer):
     is_completed = serializers.SerializerMethodField()
-    video_url = serializers.SerializerMethodField()
-    attachments= serializers.SerializerMethodField()
     
     class Meta:
         model=Section
@@ -281,40 +233,14 @@ class SectionWithCompletionSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "order",
-            "is_free",
             "video",
-            "video_url",
-            "attachments",
             "is_completed",
-            "created_at",
-            "updated_at",
         ]
-        read_only_fields = ["id", "created_at", "updated_at"]
         
     def get_is_completed(self, obj):
-        user = self.context['request'].user
-        try:
-            enrollment = obj.course.enrollments.get(student=user)
-            return SectionProgress.objects.filter(
-                enrollment=enrollment, 
-                section=obj, 
-                is_completed=True
-            ).exists()
-        except Enrollment.DoesNotExist:
-            return False
-            
-    def get_video_url(self, obj):
-        if obj.video: 
-            request = self.context.get('request')
-            if request:
-                return request.build_absolute_uri(obj.video.url)
-            return obj.video.url
-        return None
-        
-    def get_attachments(self, obj):
-        attachments = obj.attachments.all()
-        return AttachmentSerializer(attachments, many=True, context=self.context).data
+        user=self.context['request'].user
+        enrollment = obj.course.enrollments.get(student=user)
+        return SectionProgress.objects.filter(enrollment=enrollment, section=obj, is_completed=True).exists()
 
 
 class CourseNestedSerializer(serializers.ModelSerializer):
@@ -322,40 +248,14 @@ class CourseNestedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = [
-            'id',
-            'title',
-            'slug',
-            'sections',
-            'created_at',
-            'updated_at',
-        ]
+        fields = ['id','title', 'slug', 'sections']
         
 class EnrolledCourseDetailSerializer(serializers.ModelSerializer):
-    course = CourseListSerializer(read_only=True)
     sections = SectionWithCompletionSerializer(many=True, read_only=True)
-    progress = serializers.SerializerMethodField()
     
     class Meta:
         model = Enrollment
-        fields = [
-            'course',
-            'sections',
-            'progress',
-            'status',
-            'last_accessed',
-            'created_at',
-            'updated_at',
-        ]
-    
-        read_only_fields = [
-            'progress',
-            'created_at',
-            'updated_at'
-        ]
-    
-    def get_progress(self, obj):
-        return obj.progress
+        fields = ['course','sections']
 
 class AttachmentSerializer(serializers.ModelSerializer):
     section_id=serializers.PrimaryKeyRelatedField(

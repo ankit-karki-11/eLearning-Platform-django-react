@@ -4,6 +4,8 @@ from users.models import UserAccount
 from django.utils.text import slugify
 from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError  
+from django.utils import timezone
+
 
 #course
 class Category(models.Model):
@@ -178,31 +180,6 @@ class Section(models.Model):
         verbose_name_plural = "Sections"
         ordering = ["order"]
         unique_together = ["course", "title"]
-        
-    
- 
-# cart model
-class Cart(models.Model):
-    student=models.ForeignKey(
-        UserAccount,
-        on_delete=models.CASCADE,
-        limit_choices_to={'role': 'student'},
-        related_name='carts'
-    )
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="carts")
-    
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-            return f"{self.student.full_name} :: {self.course.title}"
-
-    class Meta:
-            db_table = "cart"
-            verbose_name_plural = "Carts"
-            unique_together = ["student", "course"]    
-    
-
 
 #Enrollment model
 class Enrollment(models.Model):
@@ -233,18 +210,18 @@ class Enrollment(models.Model):
     last_accessed = models.DateTimeField(null=True, blank=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
-    
-     # This method defines how each enrollment will be shown as a string (e.g., in admin panel or logs)
-    def __str__(self):
-       return f"{self.student.full_name} -> {self.course.title} ({self.status})"
-   
+
     class Meta:
         db_table="enrollment"
         verbose_name_plural="Enrollments"
         ordering=["-created_at"]
         unique_together = ["student", "course"]
-            
-            
+    
+    
+     # This method defines how each enrollment will be shown as a string (e.g., in admin panel or logs)
+    def __str__(self):
+       return f"{self.student.full_name} -> {self.course.title} ({self.status})"
+   
     # mark completed course
     def mark_completed(self):
         if self.status=='in_progress':
@@ -254,34 +231,19 @@ class Enrollment(models.Model):
     # issue certificate
     def issue_certificate(self):
         if self.status !='completed':
-            raise ValidationError("Course should be completed for issuing certificate")
+            raise ValidationError("Course must be completed before certification")
         self.status='certified'
         self.save()
     
-    def progress_percentage(self):
-        total_sections=self.course.sections.count()
-        if total_sections == 0:
-            return 0
-        
-        completed_sections = self.section_progress.filter(is_completed=True).count()
-        return round((completed_sections / total_sections) * 100, 2)
-    
-    @property
-    def section_progress(self):
-        return self.section_progresses.all()
-    
-    @property
-    def total_sections(self):
-        return self.sections.count()
-    
-    @property
-    def completed_sections(self):
-        return self.sections.filter(is_completed=True).count()
-    
+
     @property
     def progress(self):
-        return self.completed_sections / self.total_sections * 100
-    
+        total=self.course.sections.count()
+        if total == 0:
+            return 0
+        completed=self.section_progresses.filter(is_completed=True).count()
+        return round((completed / total) * 100,2)
+        
     # check if course is completed
     @property
     def is_completed(self):
@@ -292,11 +254,6 @@ class Enrollment(models.Model):
     def is_certified(self):
         return self.status == 'certified'
     
-    # check if user has enrolled in the course
-    @property
-    def is_enrolled(self):
-        return self.student.courses.filter(pk=self.course.pk).exists()
-        
 
 #section-progress
 class SectionProgress(models.Model):
@@ -312,7 +269,7 @@ class SectionProgress(models.Model):
     )
     
     is_completed = models.BooleanField(default=False)
-    watched_at = models.DateTimeField(auto_now=True)
+    started_at = models.DateTimeField(auto_now=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -322,11 +279,49 @@ class SectionProgress(models.Model):
         db_table = "section_progress"
         verbose_name = "Section Progress"
         verbose_name_plural = "Section Progresses"
+      
 
     def __str__(self):
         return f"{self.enrollment.student.full_name} - {self.section.title} ({'Completed' if self.is_completed else 'In Progress'})"
    
-        
+    def save(self, *args, **kwargs):
+        """Auto-set completed_at timestamp when marking as complete"""
+        if self.is_completed and not self.completed_at:
+            self.completed_at = timezone.now()
+        elif not self.is_completed:
+            self.completed_at = None
+        super().save(*args, **kwargs)
+
+    @property
+    def time_spent(self):
+        """Calculate total time spent on this section"""
+        if self.is_completed and self.completed_at:
+            return (self.completed_at - self.started_at).total_seconds()
+        return (timezone.now() - self.started_at).total_seconds()
+
+ 
+# cart model
+class Cart(models.Model):
+    student=models.ForeignKey(
+        UserAccount,
+        on_delete=models.CASCADE,
+        limit_choices_to={'role': 'student'},
+        related_name='carts'
+    )
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="carts")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+            return f"{self.student.full_name} :: {self.course.title}"
+
+    class Meta:
+            db_table = "cart"
+            verbose_name_plural = "Carts"
+            unique_together = ["student", "course"]    
+    
+ 
 class Attachment(models.Model):
     section=models.ForeignKey(
         Section,
