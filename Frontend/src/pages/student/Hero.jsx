@@ -7,8 +7,8 @@ const Hero = () => {
       
       <div className='relative max-w-3xl mx-auto text-center'>
         <div className="inline-flex items-center px-3 py-1.5 mb-6 rounded-full bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-200 text-xs font-mono tracking-wider">
-          <Sparkles className="mr-2 h-3 w-3" />
-          AI-POWERED EDUCATION
+          <Sparkles className="mr-2 h-3 w-3 text-blue-500 dark:text-blue-400" />
+          AI-POWERED EDUCATION PLATFORM
         </div>
 
         <h1 className='text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-gray-900 dark:text-white mb-6 leading-tight'>

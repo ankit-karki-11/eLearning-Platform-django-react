@@ -54,28 +54,42 @@ const Navbar = () => {
 
   return (
     <div className='h-16 w-full dark:bg-gray-900/95 bg-white/95 border-b dark:border-gray-800 border-gray-200 backdrop-blur-lg fixed top-0 left-0 right-0 duration-300 z-50 shadow-sm'>
-      {/* Desktop Navigation */}
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hidden md:flex justify-between items-center h-full'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-full'>
+        {/* Logo/Brand */}
         <div className='flex items-center gap-2'>
           <Link to="/" className='flex items-center gap-2'>
             <img src="/logo.png" alt="Logo" className='h-8 w-auto' />
-            <span className='font-semibold text-lg text-gray-800 dark:text-gray-200'>Padhai</span>
+            <span className='font-semibold text-lg text-gray-800 dark:text-gray-200 hidden sm:inline'>Padhai</span>
           </Link>
         </div>
 
-        {/* User controls */}
+        {/* Desktop Navigation Links - Center */}
+        <div className='hidden md:flex items-center gap-6'>
+          <NavLink to="/course">Courses</NavLink>
+          <NavLink to="/my-learning">My Learning</NavLink>
+          {user?.role === "instructor" && (
+            <NavLink to="/instructor/dashboard">Instructor</NavLink>
+          )}
+        </div>
+
+        {/* User controls - Right side */}
         <div className='flex items-center gap-4'>
+          <div className='hidden md:block'>
+            <DarkMode />
+          </div>
+          
           {isLoading ? null : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className='flex items-center gap-3 cursor-pointer'>
-                  <Avatar className='h-9 w-9 border-2 border-gray-300 dark:border-gray-600'>
+                <Button variant="ghost" className="flex items-center gap-2 px-2 sm:px-4 h-10">
+                  <span className='hidden sm:inline'>{user.full_name}</span>
+                  <Avatar className='h-8 w-8 border-2 border-gray-300 dark:border-gray-600'>
                     <AvatarImage src={user.profile_image_url || "https://github.com/shadcn.png"} />
                     <AvatarFallback className='bg-gray-100 dark:bg-gray-700'>
                       {user.full_name?.charAt(0) || 'U'}
                     </AvatarFallback>
                   </Avatar>
-                </div>
+                </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end" sideOffset={10}>
                 <DropdownMenuLabel className='font-normal'>
@@ -98,6 +112,13 @@ const Navbar = () => {
                       My Learning
                     </Link>
                   </DropdownMenuItem>
+                  {user.role === "instructor" && (
+                    <DropdownMenuItem asChild>
+                      <Link to="/instructor/dashboard" className='w-full'>
+                        Instructor Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem 
@@ -109,34 +130,35 @@ const Navbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <div className='flex items-center gap-3'>
-              {/* <Button variant='ghost' className='px-4'>
+            <div className='flex items-center gap-2'>
+              <Button variant="ghost" className='hidden sm:inline-flex' asChild>
                 <Link to="/login">Sign in</Link>
-              </Button> */}
-              <Button className='px-4'>
-                <Link to="/login">Get started</Link>
+              </Button>
+              <Button className='px-3 sm:px-4' asChild>
+                <Link to="/register">Get started</Link>
               </Button>
             </div>
           )}
-          <div className='ml-2'>
-            <DarkMode />
+          
+          {/* Mobile menu button */}
+          <div className='md:hidden'>
+            <MobileNavbar logoutHandler={logoutHandler} user={user} />
           </div>
         </div>
-      </div>
-
-      {/* Mobile Navigation */}
-      <div className='flex md:hidden items-center justify-between px-4 h-full'>
-        <Link to="/" className='flex items-center gap-2'>
-          <img src="/logo.png" alt="Logo" className='h-7 w-auto' />
-          <span className='font-semibold text-gray-800 dark:text-gray-200'>Padhai</span>
-        </Link>
-        <MobileNavbar logoutHandler={logoutHandler} user={user} />
       </div>
     </div>
   );
 };
 
-export default Navbar;
+// Reusable NavLink component
+const NavLink = ({ to, children }) => (
+  <Link 
+    to={to} 
+    className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 transition-colors px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+  >
+    {children}
+  </Link>
+);
 
 // Mobile menu component
 const MobileNavbar = ({ logoutHandler, user }) => {
@@ -160,10 +182,14 @@ const MobileNavbar = ({ logoutHandler, user }) => {
           </div>
         </SheetHeader>
 
-        <nav className='flex flex-col space-y-3 mt-8'>
+        <nav className='flex flex-col space-y-2 mt-6'>
+          <SheetClose asChild>
+            <NavLink to="/course">Courses</NavLink>
+          </SheetClose>
+          
           {user && (
             <>
-              <div className='flex items-center gap-3 mb-4'>
+              <div className='flex items-center gap-3 mb-3 pt-2 border-t'>
                 <Avatar className='h-10 w-10'>
                   <AvatarImage src={user.profile_image_url || "https://github.com/shadcn.png"} />
                   <AvatarFallback>{user.full_name?.charAt(0) || 'U'}</AvatarFallback>
@@ -173,64 +199,45 @@ const MobileNavbar = ({ logoutHandler, user }) => {
                   <p className='text-xs text-gray-500'>{user.email}</p>
                 </div>
               </div>
+              
               <SheetClose asChild>
-                <Link 
-                  to="/my-learning" 
-                  className='px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
-                >
-                  My Learning
-                </Link>
+                <NavLink to="/my-learning">My Learning</NavLink>
               </SheetClose>
               <SheetClose asChild>
-                <Link 
-                  to="/profile" 
-                  className='px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
-                >
-                  Profile Settings
-                </Link>
+                <NavLink to="/profile">Profile Settings</NavLink>
               </SheetClose>
+              
+              {user.role === "instructor" && (
+                <SheetClose asChild>
+                  <NavLink to="/instructor/dashboard">Instructor Dashboard</NavLink>
+                </SheetClose>
+              )}
+              
               <button 
                 onClick={logoutHandler} 
-                className='px-3 py-2 rounded-md text-left text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors'
+                className='w-full text-left px-3 py-2 rounded-md text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors'
               >
                 Logout
               </button>
             </>
           )}
+          
           {!user && (
             <>
               <SheetClose asChild>
-                <Link 
-                  to="/login" 
-                  className='px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
-                >
-                  Sign in
-                </Link>
+                <NavLink to="/login">Sign in</NavLink>
               </SheetClose>
               <SheetClose asChild>
-                <Link 
-                  to="/register" 
-                  className='px-3 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors'
-                >
-                  Get started
-                </Link>
+                <Button className='w-full mt-2' asChild>
+                  <Link to="/register">Get started</Link>
+                </Button>
               </SheetClose>
             </>
           )}
         </nav>
-
-        {user?.role === "instructor" && (
-          <SheetFooter className="mt-8">
-            <SheetClose asChild>
-              <Button className='w-full' asChild>
-                <Link to="/instructor/dashboard">
-                  Instructor Dashboard
-                </Link>
-              </Button>
-            </SheetClose>
-          </SheetFooter>
-        )}
       </SheetContent>
     </Sheet>
   );
 };
+
+export default Navbar;

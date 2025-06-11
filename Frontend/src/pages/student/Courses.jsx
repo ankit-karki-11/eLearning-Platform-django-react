@@ -1,6 +1,7 @@
 import { useLoadCourseQuery } from '@/features/api/courseApi'
 import Course from './Course'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Button } from '@/components/ui/button'
 
 const Courses = () => {
   const { data, error, isLoading } = useLoadCourseQuery()
@@ -22,11 +23,20 @@ const Courses = () => {
     <div className="bg-gray-250">
       <div className="max-w-6xl mx-auto p-14">
         <h2 className="font-bold text-3xl text-left mb-8">Courses We Offered.</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {data?.map((course) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+          {data?.slice(0,6).map((course) => (
             <Course key={course.id} course={course} />
           ))}
         </div>
+       <div className="flex justify-center mt-12">
+          <Button onClick={() => window.location.href = '/course'}
+            className="px-8 py-4 text-lg font-medium border border-gray-300 hover:bg-gray-200 transition"
+            variant="outline"
+          >
+            Browse All Courses
+          </Button>
+        </div>
+     
       </div>
     </div>
   )

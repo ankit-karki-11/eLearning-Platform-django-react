@@ -19,6 +19,7 @@ import PaymentSuccess from './pages/student/PaymentSuccess'
 import Categories from './pages/student/Categories'
 import CategoryDetails from './pages/student/CategoryDetails'
 import CoursePlayer from './pages/student/CoursePlayer'
+import AllCourse from './pages/student/AllCourse'
 
 const appRouter = createBrowserRouter([
   {
@@ -30,53 +31,59 @@ const appRouter = createBrowserRouter([
         element: (
           <>
             <Hero />
-            <Categories/>
+
             <Courses />
-            <Checkout/>
-           
+            <Categories />
+            <MyLearning />
+
           </>
 
         ),
 
       },
       {
-        path:"login",
+        path: "login",
         element: <Login />,
       },
-       {
-        path:"my-learning",
-        element:  <MyLearning />,
-      },
-       {
-        path:"profile",
-        element:  <Profile />,
-      },
-       {
-        path:"category/:slug",
-        element:  <CategoryDetails/>,
-      }, 
       {
-        path:"courses/course-detail/:slug",
-        element:  <Coursedetails />,
+        path: "my-learning",
+        element: <MyLearning />,
       },
       {
-        path:"checkout/:slug",
-        element: <Checkout/>
+        path: "profile",
+        element: <Profile />,
       },
-     {
-        path:"course/:slug",
+      {
+        path: "category/:slug",
+        element: <CategoryDetails />,
+      },
+      {
+        path: "course/course-detail/:slug",
+        element: <Coursedetails />,
+      },
+      {
+        path: "checkout/:slug",
+        element: <Checkout />
+      },
+      {
+        path: "course/:slug",
         element: <Course />
       },
       {
-        path:"payment-success",
+        path: "course/",
+        element: <AllCourse />
+      },
+
+      {
+        path: "payment-success",
         element: <PaymentSuccess />
       },
-       {
-        path:"course/:slug/progress",
+      {
+        path: "course/:slug/progress",
         element: <CoursePlayer />
       },
-      
-      
+
+
     ],
   },
 

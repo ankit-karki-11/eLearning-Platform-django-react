@@ -10,15 +10,15 @@ const Course = ({ course, isEnrolled = false, progress = 0 }) => {
   };
 
   const handleViewDetails = () => {
-    navigate(`/courses/course-detail/${course.slug}`);
+    navigate(`/course/course-detail/${course.slug}`);
   };
 
   return (
     <div className="rounded-xl bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-all w-full flex flex-col border border-gray-200 dark:border-gray-800 overflow-hidden group">
-      {/* Course Thumbnail with Badges */}
+     
       <div className="relative aspect-video overflow-hidden">
         <img
-          src={course.thumbnail || "/course-placeholder.jpg"}
+          src={course.thumbnail || "/default.png"}
           alt={course.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
@@ -76,7 +76,7 @@ const Course = ({ course, isEnrolled = false, progress = 0 }) => {
         {/* Progress for enrolled students */}
         {isEnrolled && (
           <>
-            {/* <div className="text-sm text-gray-600 dark:text-gray-400">
+            <div className="text-sm text-gray-600 dark:text-gray-400">
               Progress: {progress}%
               <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded mt-1">
                 <div
@@ -84,11 +84,11 @@ const Course = ({ course, isEnrolled = false, progress = 0 }) => {
                   style={{ width: `${progress}%` }}
                 />
               </div>
-            </div> */}
+            </div>
 
             <Button
               size="sm"
-              className="w-full h-9 text-sm font-medium gap-1.5 bg-green-600 hover:bg-green-700"
+              className="w-full h-9 text-sm font-medium gap-1.5 bg-gray-600 hover:bg-gray-700"
               onClick={handleContinueLearning}
             >
               Continue Learning
