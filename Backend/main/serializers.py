@@ -60,6 +60,7 @@ class CourseSerializer(serializers.ModelSerializer):
         fields=[
             "id",
             "title",
+            "keywords",
             "description",
             "thumbnail",
             "category",
@@ -90,6 +91,7 @@ class CourseSerializer(serializers.ModelSerializer):
 class CourseListSerializer(serializers.ModelSerializer):
     admin=UserAccountListSerializer(read_only=True)
     category=CategoryListSerializer(read_only=True)
+    thumbnail = serializers.SerializerMethodField()
     
     class Meta:
         model=Course
@@ -97,6 +99,7 @@ class CourseListSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "slug",
+            "keywords",
             "description",
             "thumbnail",
             "category",
@@ -117,6 +120,13 @@ class CourseListSerializer(serializers.ModelSerializer):
    
         ]     
     
+    def get_thumbnail(self, obj):
+            request = self.context.get("request")
+            if obj.thumbnail and request:
+                return request.build_absolute_uri(obj.thumbnail.url)
+            return None
+
+
 class SectionSerializer(serializers.ModelSerializer):
     course=serializers.PrimaryKeyRelatedField(
         queryset=Course.objects.all(),
@@ -280,7 +290,7 @@ class SectionWithCompletionSerializer(serializers.ModelSerializer):
         fields=[
             "id",
             "title",
-            "description",
+            # "description",
             "order",
             "is_free",
             "video",
@@ -326,21 +336,22 @@ class CourseNestedSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'slug',
+            'description',
             'sections',
             'created_at',
             'updated_at',
         ]
         
 class EnrolledCourseDetailSerializer(serializers.ModelSerializer):
-    course = CourseListSerializer(read_only=True)
-    sections = SectionWithCompletionSerializer(many=True, read_only=True)
+    course = CourseNestedSerializer(read_only=True)
+    # sections = SectionWithCompletionSerializer(many=True, read_only=True)
     progress = serializers.SerializerMethodField()
     
     class Meta:
         model = Enrollment
         fields = [
             'course',
-            'sections',
+            # 'sections',
             'progress',
             'status',
             'last_accessed',

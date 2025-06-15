@@ -46,6 +46,8 @@ class Course(models.Model):
     
     title=models.CharField(max_length=200,unique=True)
     slug=models.SlugField(max_length=200,unique=True,null=True,blank=True)
+    keywords=models.CharField(max_length=200,blank=True,null=True,help_text="Separate Keywords with commas (e.g., Python, Django, Web Development) for recommendation")
+    
     description=models.TextField(null=True,blank=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)

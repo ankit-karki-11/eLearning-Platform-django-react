@@ -17,7 +17,8 @@ from rest_framework import viewsets, status, permissions, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-
+# from main.views import recommend_courses
+# from .serializers import *
 #custom permission class
 class CustomPermission(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -79,7 +80,7 @@ class CourseViewSet(ModelViewSet):
     queryset=Course.objects.all()
     serializer_class=CourseSerializer
     permission_classes=[CustomPermission]
-    search_fields=["title"]
+    search_fields=["title","keywords"]
     filterset_fields=["category","is_published","admin"]
     lookup_field="slug"
     filter_backends = [filters.SearchFilter]    # Allows searching by title
@@ -312,10 +313,10 @@ class EnrollmentViewSet(ModelViewSet):
         return EnrollmentSerializer
     
     def get_permissions(self):
-        if self.action in ['list', 'retrieve', 'mark_completed']:
+        if self.action in ['list', 'retrieve', 'mark_completed','section_progress']:
             return [permissions.IsAuthenticated()]
-        # Only admins can create or delete enrollments (optional, adjust as needed)
-        return [permissions.IsAdminUser()]
+        # Only admins can create or delete enrollments
+        return [permissions.IsStudentUser()]
 
     def get_queryset(self):
         user = self.request.user
@@ -332,19 +333,33 @@ class EnrollmentViewSet(ModelViewSet):
     @action(detail=True, methods=['get'], url_path='section/(?P<section_id>[^/.]+)')
     def section_progress(self, request, course__slug=None, section_id=None):
         enrollment = self.get_object()
-        progress = SectionProgress.objects.filter(enrollment=enrollment, section_id=section_id).first()
-        if not progress:
-            return Response({'detail': 'Progress not found'}, status=404)
-        serializer = SectionProgressSerializer(progress)
-        return Response(serializer.data)
+
+        try:
+            section = enrollment.course.sections.get(id=section_id)
+            
+        except Section.DoesNotExist:
+            return Response({'detail': 'Section not found in this course.'}, status=404)
+
+        is_completed = SectionProgress.objects.filter(
+            enrollment=enrollment, section=section, is_completed=True
+        ).exists()
+
+        data = {
+            'id': section.id,
+            'title': section.title,
+            # 'video': section.video,
+            'is_completed': is_completed,
+        }
+        return Response(data)
+
 
     def get_object(self):
         queryset = self.get_queryset()
         slug = self.kwargs.get('course__slug') or self.kwargs.get('slug')
         obj = get_object_or_404(queryset, course__slug=slug, student=self.request.user)
         return obj
+    
 #Sectionprogress viewset
-
 class SectionProgressViewSet(ModelViewSet):
     queryset = SectionProgress.objects.all()
     serializer_class = SectionProgressSerializer
@@ -360,7 +375,36 @@ class SectionProgressViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save()
     
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 #attachment viewset
 class AttachmentViewSet(ModelViewSet):
     queryset = Attachment.objects.all().select_related('section')
@@ -376,15 +420,12 @@ class AttachmentViewSet(ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         try:
-            # Validate section exists and user has permission
             section_id = request.data.get('section')
             if not section_id:
                 return Response(
                     {"detail": "section field is required"},
                     status=status.HTTP_400_BAD_REQUEST
                 )
-
-            # Additional validation can be added here
             return super().create(request, *args, **kwargs)
         except IntegrityError:
             return Response(
@@ -399,3 +440,102 @@ class AttachmentViewSet(ModelViewSet):
             
 #certificate viewset //will be done later
 
+
+#recommendation view set
+#content based recommendation system
+import pandas as pd #type: ignore
+from sklearn.feature_extraction.text import TfidfVectorizer #type: ignore
+from sklearn.metrics.pairwise import cosine_similarity #type: ignore
+from nltk.corpus import stopwords #type: ignore
+from main.models import Course
+
+
+def recommend_courses_with_scores(course_slug: str, top_n: int = 4):
+    try:
+        courses = Course.objects.filter(is_published=True).values(
+            'id', 'title', 'description', 'keywords', 'slug',
+            'category__title', 'price', 'level', 'language'
+        )
+        df = pd.DataFrame.from_records(courses)
+        if df.empty:
+            return []
+
+        df["combined_text"] = (
+            df["title"].fillna("") + " " +
+            df["keywords"].fillna("") + " " +
+            df["category__title"].fillna("") + " " +
+            df["description"].fillna("") + " " +
+            df["level"].fillna("") + " " +
+            df["language"].fillna("")
+        ).str.lower()
+
+        try:
+            stop_words = list(stopwords.words("english"))
+        except LookupError:
+            import nltk
+            nltk.download("stopwords")
+            stop_words = list(stopwords.words("english"))
+
+        vectorizer = TfidfVectorizer(stop_words=stop_words, max_features=5000)
+        tfidf_matrix = vectorizer.fit_transform(df["combined_text"])
+
+        try:
+            current_index = df[df["slug"] == course_slug].index[0]
+        except IndexError:
+            return []
+
+        similarity_scores = cosine_similarity(
+            tfidf_matrix[current_index:current_index + 1],
+            tfidf_matrix
+        ).flatten()
+
+        similar_indices = similarity_scores.argsort()[-(top_n + 1):-1][::-1]
+
+        results = []
+        for i in similar_indices:
+            course_id = df.iloc[i]["id"]
+            similarity = similarity_scores[i]
+            course = Course.objects.get(id=course_id)
+            results.append((course, similarity))
+
+        return results
+
+    except Exception as e:
+        print(f"Recommendation error: {str(e)}")
+        return []
+
+    
+from rest_framework.viewsets import ViewSet
+from rest_framework.response import Response
+from main.models import Course
+from main.serializers import CourseListSerializer
+from rest_framework.permissions import AllowAny
+#recommendation viewset
+class RecommendationViewSet(ViewSet):
+    serializer_class = CourseListSerializer
+    http_method_names = ['get']
+    permission_classes = [AllowAny]
+    """
+    ViewSet for recommending courses based on similarity.
+    """
+    
+    def get_serializer_context(self):
+        return {"request": self.request}
+    
+
+    def list(self, request):
+        slug = request.query_params.get("course")
+        if not slug:
+            return Response([])
+
+        # Get recommended courses with similarity scores
+        recommended_with_scores = recommend_courses_with_scores(slug)
+
+        # Serialize each course and include the similarity score
+        serialized_data = []
+        for course, score in recommended_with_scores:
+            data = CourseListSerializer(course).data
+            data["similarity_score"] = round(float(score), 3)  # Keep score readable
+            serialized_data.append(data)
+
+        return Response(serialized_data)
