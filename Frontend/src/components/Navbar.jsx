@@ -44,29 +44,31 @@ const Navbar = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(authApi.util.resetApiState()); 
+      dispatch(authApi.util.resetApiState());
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       toast.success(data?.message || "Logged out successfully");
-      navigate("/login");
+      navigate("/");
     }
   }, [isSuccess, dispatch, data, navigate]);
 
   return (
-    <div className='h-16 w-full dark:bg-gray-900/95 bg-white/95 border-b dark:border-gray-800 border-gray-200 backdrop-blur-lg fixed top-0 left-0 right-0 duration-300 z-50 shadow-sm'>
+    <div className='h-16 w-full dark:bg-gray-900/95 bg-white/95 backdrop-blur-lg fixed top-0 left-0 right-0 duration-300 z-50 shadow-sm'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-full'>
         {/* Logo/Brand */}
         <div className='flex items-center gap-2'>
           <Link to="/" className='flex items-center gap-2'>
             <img src="/logo.png" alt="Logo" className='h-8 w-auto' />
-            <span className='font-semibold text-lg text-gray-800 dark:text-gray-200 hidden sm:inline'>Padhai</span>
+           
           </Link>
         </div>
 
-        {/* Desktop Navigation Links - Center */}
+
         <div className='hidden md:flex items-center gap-6'>
-          <NavLink to="/course">Courses</NavLink>
-          <NavLink to="/my-learning">My Learning</NavLink>
+          {/* <NavLink to="/course">Courses</NavLink> */}
+          {user?.role === "student" && (
+            <NavLink to="/my-learning">My Learning</NavLink>
+          )}
           {user?.role === "instructor" && (
             <NavLink to="/instructor/dashboard">Instructor</NavLink>
           )}
@@ -77,7 +79,7 @@ const Navbar = () => {
           <div className='hidden md:block'>
             <DarkMode />
           </div>
-          
+
           {isLoading ? null : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -107,11 +109,13 @@ const Navbar = () => {
                       Profile
                     </Link>
                   </DropdownMenuItem>
+
                   <DropdownMenuItem asChild>
                     <Link to="/my-learning" className='w-full'>
                       My Learning
                     </Link>
                   </DropdownMenuItem>
+
                   {user.role === "instructor" && (
                     <DropdownMenuItem asChild>
                       <Link to="/instructor/dashboard" className='w-full'>
@@ -121,8 +125,8 @@ const Navbar = () => {
                   )}
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem 
-                  onClick={logoutHandler} 
+                <DropdownMenuItem
+                  onClick={logoutHandler}
                   className='cursor-pointer text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-900/20'
                 >
                   Log out
@@ -131,15 +135,20 @@ const Navbar = () => {
             </DropdownMenu>
           ) : (
             <div className='flex items-center gap-2'>
-              <Button variant="ghost" className='hidden sm:inline-flex' asChild>
-                <Link to="/login">Sign in</Link>
-              </Button>
-              <Button className='px-3 sm:px-4' asChild>
-                <Link to="/register">Get started</Link>
+
+              {/* <Button className='px-3 sm:px-4' asChild>
+                <Link to="/login">Login</Link>
+              </Button> */}
+
+                <Button className='px-3 sm:px-4' variant='outline' asChild>
+                <Link to="/login">Login</Link>
               </Button>
             </div>
+
+            
+
           )}
-          
+
           {/* Mobile menu button */}
           <div className='md:hidden'>
             <MobileNavbar logoutHandler={logoutHandler} user={user} />
@@ -152,8 +161,8 @@ const Navbar = () => {
 
 // Reusable NavLink component
 const NavLink = ({ to, children }) => (
-  <Link 
-    to={to} 
+  <Link
+    to={to}
     className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 transition-colors px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
   >
     {children}
@@ -165,9 +174,9 @@ const MobileNavbar = ({ logoutHandler, user }) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button 
-          size='icon' 
-          variant="ghost" 
+        <Button
+          size='icon'
+          variant="ghost"
           className="rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
           aria-label="Open menu"
         >
@@ -186,7 +195,7 @@ const MobileNavbar = ({ logoutHandler, user }) => {
           <SheetClose asChild>
             <NavLink to="/course">Courses</NavLink>
           </SheetClose>
-          
+
           {user && (
             <>
               <div className='flex items-center gap-3 mb-3 pt-2 border-t'>
@@ -199,34 +208,34 @@ const MobileNavbar = ({ logoutHandler, user }) => {
                   <p className='text-xs text-gray-500'>{user.email}</p>
                 </div>
               </div>
-              
+
               <SheetClose asChild>
                 <NavLink to="/my-learning">My Learning</NavLink>
               </SheetClose>
               <SheetClose asChild>
                 <NavLink to="/profile">Profile Settings</NavLink>
               </SheetClose>
-              
+
               {user.role === "instructor" && (
                 <SheetClose asChild>
                   <NavLink to="/instructor/dashboard">Instructor Dashboard</NavLink>
                 </SheetClose>
               )}
-              
-              <button 
-                onClick={logoutHandler} 
+
+              <button
+                onClick={logoutHandler}
                 className='w-full text-left px-3 py-2 rounded-md text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors'
               >
                 Logout
               </button>
             </>
           )}
-          
+
           {!user && (
             <>
-              <SheetClose asChild>
+              {/* <SheetClose asChild>
                 <NavLink to="/login">Sign in</NavLink>
-              </SheetClose>
+              </SheetClose> */}
               <SheetClose asChild>
                 <Button className='w-full mt-2' asChild>
                   <Link to="/register">Get started</Link>

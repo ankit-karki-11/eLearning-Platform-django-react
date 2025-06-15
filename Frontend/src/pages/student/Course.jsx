@@ -15,7 +15,7 @@ const Course = ({ course, isEnrolled = false, progress = 0 }) => {
 
   return (
     <div className="rounded-xl bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-all w-full flex flex-col border border-gray-200 dark:border-gray-800 overflow-hidden group">
-     
+
       <div className="relative aspect-video overflow-hidden">
         <img
           src={course.thumbnail || "/default.png"}
@@ -23,16 +23,13 @@ const Course = ({ course, isEnrolled = false, progress = 0 }) => {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
+
         <div className="absolute top-3 left-3 flex flex-col gap-2">
-          {course.isBestSeller && (
-            <span className="bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded-md flex items-center gap-1">
-              <Award className="h-3 w-3" />
-              Bestseller
-            </span>
-          )}
+          
           <span className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-xs font-medium px-2 py-1 rounded-md">
+            {/* {course.average_rating}/5 */}
             {course.level}
+
           </span>
         </div>
       </div>
@@ -43,7 +40,11 @@ const Course = ({ course, isEnrolled = false, progress = 0 }) => {
         <h3 className="font-semibold text-base line-clamp-2 dark:text-white">
           {course.title}
         </h3>
-
+        {course.similarity_score !== undefined && (
+          <p className="text-sm text-gray-500">
+            Similarity: {(course.similarity_score * 100).toFixed(1)}%
+          </p>
+        )}
         {/* Instructor and Rating - New addition but subtle */}
         {course.instructor && (
           <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -57,15 +58,15 @@ const Course = ({ course, isEnrolled = false, progress = 0 }) => {
             <Clock className="h-4 w-4" />
             <span>{course.course_duration} hrs</span>
           </div>
-          
-          {/* Rating display - subtle addition */}
-          {course.rating && (
+
+          {/* average_rating */}
+          {course.average_rating && (
             <div className="flex items-center gap-1">
               <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
-              <span>{course.rating.toFixed(1)}</span>
+              <span>{course.average_rating.toFixed(1)}/5</span>
             </div>
           )}
-          
+
           {!isEnrolled && (
             <span className="text-base font-semibold text-gray-900 dark:text-white">
               रु {course.price}

@@ -2,6 +2,7 @@ import { useLoadCourseQuery } from '@/features/api/courseApi'
 import Course from './Course'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
+import RecommendedCourses from './RecommendedCourses'
 
 const Courses = () => {
   const { data, error, isLoading } = useLoadCourseQuery()

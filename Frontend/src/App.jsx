@@ -31,10 +31,9 @@ const appRouter = createBrowserRouter([
         element: (
           <>
             <Hero />
-
             <Courses />
             <Categories />
-            <MyLearning />
+            {/* <MyLearning /> */}
 
           </>
 

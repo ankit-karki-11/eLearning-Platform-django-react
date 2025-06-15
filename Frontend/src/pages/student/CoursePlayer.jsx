@@ -24,7 +24,7 @@ const CoursePlayer = () => {
             <Skeleton className="h-4 w-16 rounded-md" />
           </div>
         </div>
-        
+
         <div className="flex flex-col lg:flex-row gap-6">
           <div className="flex-1">
             <Skeleton className="aspect-video w-full rounded-xl" />
@@ -92,11 +92,17 @@ const CoursePlayer = () => {
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="flex items-center gap-1.5 bg-gray-50">
               <Clock className="w-3.5 h-3.5" />
-              <span>Last accessed: Today</span>
+              <span>Course Bought at:
+                {new Date(course.created_at).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </span>
             </Badge>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-4">
           <Progress value={progress} className="h-2.5 w-full max-w-md" />
           <div className="flex items-center gap-1.5">
@@ -185,8 +191,8 @@ const CoursePlayer = () => {
                     <div className="flex items-start gap-3 p-4">
                       <div className={cn(
                         "flex items-center justify-center h-8 w-8 rounded-full mt-0.5 shrink-0 transition-colors",
-                        section.is_completed 
-                          ? "bg-green-100 text-green-600" 
+                        section.is_completed
+                          ? "bg-green-100 text-green-600"
                           : "bg-gray-100 text-gray-500",
                         selectedSectionId === section.id ? "ring-2 ring-blue-500 ring-offset-2" : ""
                       )}>
