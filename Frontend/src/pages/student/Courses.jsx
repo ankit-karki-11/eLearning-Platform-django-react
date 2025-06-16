@@ -3,6 +3,7 @@ import Course from './Course'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
 import RecommendedCourses from './RecommendedCourses'
+import { ArrowRight } from 'lucide-react'
 
 const Courses = () => {
   const { data, error, isLoading } = useLoadCourseQuery()
@@ -31,10 +32,11 @@ const Courses = () => {
         </div>
        <div className="flex justify-center mt-12">
           <Button onClick={() => window.location.href = '/course'}
-            className="px-8 py-4 text-lg font-medium border border-gray-300 hover:bg-gray-200 transition"
+            className="px-8 py-4 text-sm font-medium border-1 border-black cursor-pointer"
             variant="outline"
           >
             Browse All Courses
+            <ArrowRight className="h-4 w-4 ml-2" />
           </Button>
         </div>
      

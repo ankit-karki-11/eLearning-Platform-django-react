@@ -1,105 +1,49 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetEnrolledCourseDetailQuery, useMarkSectionAsCompletedMutation } from '@/features/api/enrollmentApi';
+import { useGetEnrolledCourseDetailQuery } from '@/features/api/enrollmentApi';
 import { Check, Play } from 'lucide-react';
 
 const CoursePlayer = () => {
   const { slug } = useParams();
   const { data, isLoading, isError } = useGetEnrolledCourseDetailQuery(slug);
-  const [markSectionAsCompleted] = useMarkSectionAsCompletedMutation();
   const [selectedSectionId, setSelectedSectionId] = useState(null);
-  const videoRef = useRef(null); // Reference to the video element
 
-  // Set initial section ID once data is available
-  useEffect(() => {
-    if (!selectedSectionId && data?.course?.sections?.length > 0) {
-      setSelectedSectionId(data.course.sections[0].id);
-    }
-  }, [selectedSectionId, data]);
-
-  const selectedSection = data?.course?.sections?.find(s => s.id === selectedSectionId);
-
-  // Handle video completion
-  useEffect(() => {
-    const videoElement = videoRef.current;
-    if (!videoElement || !selectedSection || selectedSection.is_completed) {
-      return;
-    }
-
-    const handleVideoEnded = () => {
-      // Video has ended, mark the section as completed
-      markSectionAsCompleted({
-        courseId: data?.course?.id,
-        courseSlug: data?.course?.slug,
-        sectionId: selectedSectionId,
-      })
-        .unwrap()
-        .then(() => {
-          console.log(`Section ${selectedSectionId} marked as completed`);
-        })
-        .catch(error => {
-          console.error("Failed to mark section as completed:", error);
-        });
-    };
-
-    // Add event listener for the 'ended' event
-    videoElement.addEventListener('ended', handleVideoEnded);
-
-    // Cleanup event listener on unmount or when selectedSectionId changes
-    return () => {
-      videoElement.removeEventListener('ended', handleVideoEnded);
-    };
-  }, [selectedSectionId, selectedSection, data?.course?.id, data?.course?.slug, markSectionAsCompleted]);
-
-  // Early return for loading state
-  if (isLoading) {
-    return (
-      <div className="max-w-4xl mx-auto p-6 animate-pulse">
-        <div className="h-8 bg-gray-100 rounded w-2/3 mb-6"></div>
-        <div className="h-4 bg-gray-100 rounded w-full mb-8"></div>
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="md:col-span-2 bg-gray-100 aspect-video rounded-lg"></div>
-          <div className="space-y-4">
-            {[...Array(5)].map((_, i) => (
-              <div key={i} className="h-16 bg-gray-100 rounded-lg"></div>
-            ))}
-          </div>
+  if (isLoading) return (
+    <div className="max-w-4xl mx-auto p-6 animate-pulse">
+      <div className="h-8 bg-gray-100 rounded w-2/3 mb-6"></div>
+      <div className="h-4 bg-gray-100 rounded w-full mb-8"></div>
+      <div className="grid md:grid-cols-3 gap-8">
+        <div className="md:col-span-2 bg-gray-100 aspect-video rounded-lg"></div>
+        <div className="space-y-4">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="h-16 bg-gray-100 rounded-lg"></div>
+          ))}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 
-  // Early return for error state
-  if (isError) {
-    return (
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="bg-red-50 border border-red-100 text-red-600 p-6 rounded-lg text-center">
-          <p className="font-medium">Failed to load course</p>
-          <p className="text-sm mt-2">Please refresh or try again later</p>
-        </div>
+  if (isError) return (
+    <div className="max-w-4xl mx-auto p-6">
+      <div className="bg-red-50 border border-red-100 text-red-600 p-6 rounded-lg text-center">
+        <p className="font-medium">Failed to load course</p>
+        <p className="text-sm mt-2">Please refresh or try again later</p>
       </div>
-    );
-  }
+    </div>
+  );
 
-  // Early return for no data state
-  if (!data?.course) {
-    return (
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="bg-gray-50 border border-gray-100 text-gray-600 p-6 rounded-lg text-center">
-          <p className="font-medium">Course content unavailable</p>
-          <p className="text-sm mt-2">This course doesn't have any sections yet</p>
-        </div>
+  if (!data?.course) return (
+    <div className="max-w-4xl mx-auto p-6">
+      <div className="bg-gray-50 border border-gray-100 text-gray-600 p-6 rounded-lg text-center">
+        <p className="font-medium">Course content unavailable</p>
+        <p className="text-sm mt-2">This course doesn't have any sections yet</p>
       </div>
-    );
-  }
+    </div>
+  );
 
-  const { course } = data;
-
+  const { course, progress } = data;
+  const selectedSection = course.sections.find(s => s.id === selectedSectionId) || course.sections[0];
   const completedCount = course.sections.filter(s => s.is_completed).length;
-  const isCourseCompleted = completedCount === course.sections.length;
-  const progressPercentage = (completedCount / course.sections.length) * 100;
-
-  if (!selectedSection) return null;
 
   return (
     <div className="max-w-4xl mx-auto p-6 mt-16">
@@ -109,17 +53,12 @@ const CoursePlayer = () => {
           <div className="w-full bg-gray-100 rounded-full h-2">
             <div 
               className="bg-blue-600 h-2 rounded-full" 
-              style={{ width: `${progressPercentage}%` }}
+              style={{ width: `${progress}%` }}
             ></div>
           </div>
           <span className="text-sm text-gray-600 whitespace-nowrap">
             {completedCount} of {course.sections.length} completed
           </span>
-          {isCourseCompleted && (
-            <span className="text-sm text-green-600 font-semibold">
-              Course Completed!
-            </span>
-          )}
         </div>
       </header>
 
@@ -129,7 +68,6 @@ const CoursePlayer = () => {
           <div className="bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
             {selectedSection?.video_url ? (
               <video
-                ref={videoRef} // Attach ref to video element
                 src={selectedSection.video_url}
                 controls
                 className="w-full aspect-video bg-black"
@@ -153,10 +91,10 @@ const CoursePlayer = () => {
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h2 className="font-semibold text-lg mb-3">About Course</h2>
             <p className="text-gray-600">
-              {course.description || 'No description provided for this section.'}
+              {course.description|| 'No description provided for this section.'}
             </p>
-            <p className="text-gray-600">
-              {course.syllabus || 'No syllabus provided for this section.'}
+               <p className="text-gray-600">
+              {course.syllabus|| 'No syllabus provided for this section.'}
             </p>
           </div>
         </main>

@@ -53,13 +53,13 @@ const Navbar = () => {
   }, [isSuccess, dispatch, data, navigate]);
 
   return (
-    <div className='h-16 w-full dark:bg-gray-900/95 bg-white/95 backdrop-blur-lg fixed top-0 left-0 right-0 duration-300 z-50 shadow-sm'>
+    <div className='h-16 w-full dark:bg-gray-900/95 bg-white/95 backdrop-blur-sm fixed top-0 left-0 right-0 duration-300 z-50'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-full'>
         {/* Logo/Brand */}
         <div className='flex items-center gap-2'>
           <Link to="/" className='flex items-center gap-2'>
-            <img src="/logo.png" alt="Logo" className='h-8 w-auto' />
-           
+            <img src="/logoblack.png" alt="Logo" className='h-8 w-auto' />
+          
           </Link>
         </div>
 
@@ -135,18 +135,10 @@ const Navbar = () => {
             </DropdownMenu>
           ) : (
             <div className='flex items-center gap-2'>
-
-              {/* <Button className='px-3 sm:px-4' asChild>
-                <Link to="/login">Login</Link>
-              </Button> */}
-
                 <Button className='px-3 sm:px-4' variant='outline' asChild>
                 <Link to="/login">Login</Link>
               </Button>
             </div>
-
-            
-
           )}
 
           {/* Mobile menu button */}
@@ -238,7 +230,7 @@ const MobileNavbar = ({ logoutHandler, user }) => {
               </SheetClose> */}
               <SheetClose asChild>
                 <Button className='w-full mt-2' asChild>
-                  <Link to="/register">Get started</Link>
+                  <Link to="/login">Get started</Link>
                 </Button>
               </SheetClose>
             </>

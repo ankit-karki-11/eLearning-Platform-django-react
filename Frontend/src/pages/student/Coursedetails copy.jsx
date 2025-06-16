@@ -291,6 +291,7 @@ const CourseDetails = () => {
                                                 className="w-60 py-4 text-lg items-center justify-center font-semibold bg-black hover:bg-gray-950 text-white"
                                             >
                                                 Buy Now
+                                                Buy Now
                                             </Button>
                                         )
                                     ) : (

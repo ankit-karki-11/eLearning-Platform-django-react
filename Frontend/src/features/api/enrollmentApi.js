@@ -39,10 +39,10 @@ export const enrollmentApi = createApi({
       }),
     }),
 
-    // (Optional) Mark a section as completed
+    // Mark a section as completed
     MarkSectionAsCompleted: builder.mutation({
       query: ({ courseSlug, sectionId }) => ({
-        url: `enrollments/${courseSlug}/section/${sectionId}/complete/`,
+        url: `enrollments/${courseSlug}/section/${sectionId}/completed/`,
         method: "POST",
       }),
     }),

@@ -111,8 +111,9 @@ const Course = ({ course, isEnrolled = false, progress = 0 }) => {
           </Button>
           <Button
             size="sm"
-            className="h-9 px-4 text-sm font-medium gap-1.5"
+            className="h-9 px-4 text-sm font-medium gap-1.5 bg-white border border-black text-black cursor-pointer"
             onClick={handleViewDetails}
+            variant={"outline"}
           >
             View Details
             <ArrowRight className="h-4 w-4" />
