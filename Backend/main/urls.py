@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import (
     CategoryViewSet, CourseViewSet, SectionViewSet,
     CartViewSet,AttachmentViewSet, 
-    EnrollmentViewSet,SectionProgressViewSet,RecommendationViewSet,
+    EnrollmentViewSet,SectionProgressViewSet,RecommendationViewSet,MarkSectionAsCompletedView
     # PaymentViewSet,
     #CertificateViewSet
 )
@@ -20,7 +20,11 @@ router.register(r"recommendations", RecommendationViewSet, basename="recommendat
 
 
 urlpatterns = [
-    
+  path(
+        'enrollments/<slug:course_slug>/section/<int:section_id>/completed/',
+        MarkSectionAsCompletedView.as_view(),
+        name='mark-section-completed'
+    ),  
 ]
 
 urlpatterns += router.urls

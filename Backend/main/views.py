@@ -359,6 +359,7 @@ class EnrollmentViewSet(ModelViewSet):
         obj = get_object_or_404(queryset, course__slug=slug, student=self.request.user)
         return obj
     
+    
 #Sectionprogress viewset
 class SectionProgressViewSet(ModelViewSet):
     queryset = SectionProgress.objects.all()
@@ -375,12 +376,91 @@ class SectionProgressViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save()
     
-    
-    
-    
-    
-    
-    
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+try:
+    from main.models import Enrollment, Section  # Adjust import path
+except ImportError as e:
+    print(f"Model import error: {str(e)}")  # Temporary print for import issues
+from django.db import transaction
+import logging
+import traceback
+
+logger = logging.getLogger(__name__)
+
+class MarkSectionAsCompletedView(APIView):
+    @transaction.atomic
+    def post(self, request, course_slug, section_id):
+        try:
+            logger.debug(f"Received request: course_slug={course_slug}, section_id={section_id}, user={request.user}")
+            
+            # Check authentication
+            if not request.user.is_authenticated:
+                logger.error("User not authenticated")
+                return Response(
+                    {"status": "error", "message": "Authentication required"},
+                    status=status.HTTP_401_UNAUTHORIZED
+                )
+
+            # Log request details
+            logger.info(f"Processing section {section_id} for course {course_slug}")
+
+            # Fetch enrollment
+            enrollment = Enrollment.objects.get(
+                student=request.user,
+                course__slug=course_slug
+            )
+            logger.info(f"Found enrollment ID {enrollment.id}")
+
+            # Fetch section
+            section = Section.objects.get(
+                id=section_id,
+                course__slug=course_slug
+            )
+            logger.info(f"Found section ID {section.id}")
+
+            # Update completed_sections
+            logger.info(f"Before update: Completed sections: {list(enrollment.completed_sections.values_list('id', flat=True))}")
+            enrollment.completed_sections.add(section)
+            enrollment.save()
+            enrollment.refresh_from_db()
+
+            # Verify update
+            completed_sections = list(enrollment.completed_sections.values_list('id', flat=True))
+            logger.info(f"After update: Completed sections: {completed_sections}")
+            if section_id in completed_sections:
+                logger.info(f"Section {section_id} successfully added")
+            else:
+                logger.error(f"Section {section_id} NOT added")
+
+            return Response(
+                {
+                    "status": "success",
+                    "message": "Section marked as completed",
+                    "completed_sections": completed_sections
+                },
+                status=status.HTTP_200_OK
+            )
+        except Enrollment.DoesNotExist:
+            logger.error(f"Enrollment not found for user {request.user}, course {course_slug}")
+            return Response(
+                {"status": "error", "message": "Enrollment not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        except Section.DoesNotExist:
+            logger.error(f"Section {section_id} not found for course {course_slug}")
+            return Response(
+                {"status": "error", "message": "Section not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        except Exception as e:
+            logger.error(f"Error marking section {section_id} for course {course_slug}: {str(e)}")
+            logger.debug(traceback.format_exc())
+            return Response(
+                {"status": "error", "message": f"Internal server error: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )  
     
     
     

@@ -208,7 +208,7 @@ class Enrollment(models.Model):
         choices=STATUS_CHOICES,
         default='in_progress'
     )
-    
+    completed_sections=models.ManyToManyField('Section')
     last_accessed = models.DateTimeField(null=True, blank=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
