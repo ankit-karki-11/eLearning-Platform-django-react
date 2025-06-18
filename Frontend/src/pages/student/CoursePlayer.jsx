@@ -5,53 +5,99 @@ import { Check, Play } from 'lucide-react';
 
 const CoursePlayer = () => {
   const { slug } = useParams();
-  const { data, isLoading, isError } = useGetEnrolledCourseDetailQuery(slug);
+  const { 
+    data, 
+    isLoading, 
+    isError, 
+    isFetching, 
+    isSuccess, 
+    refetch 
+  } = useGetEnrolledCourseDetailQuery(slug, { 
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 0 // Disable polling for now
+  });
   const [markSectionAsCompleted] = useMarkSectionAsCompletedMutation();
   const [selectedSectionId, setSelectedSectionId] = useState(null);
-  const videoRef = useRef(null); // Reference to the video element
+  const videoRef = useRef(null);
 
-  // Set initial section ID once data is available
+  // Log query status and data
+  useEffect(() => {
+    console.log('GetEnrolledCourseDetailQuery status:', { 
+      isLoading, 
+      isFetching, 
+      isError, 
+      isSuccess,
+      timestamp: new Date().toISOString()
+    });
+    if (data) {
+      console.log('Course data:', JSON.stringify(data, null, 2));
+      const section16 = data.course?.sections?.find(s => s.id === 16);
+      console.log('Section 16 status:', { 
+        id: 16, 
+        is_completed: section16?.is_completed 
+      });
+    }
+    if (isError) {
+      console.error('Query error:', isError);
+    }
+  }, [data, isLoading, isFetching, isError, isSuccess]);
+
+  // Set initial section ID
   useEffect(() => {
     if (!selectedSectionId && data?.course?.sections?.length > 0) {
-      setSelectedSectionId(data.course.sections[0].id);
+      const initialSectionId = data.course.sections[0].id;
+      setSelectedSectionId(initialSectionId);
+      console.log('Set initial section ID:', initialSectionId);
     }
-  }, [selectedSectionId, data]);
+  }, [data, selectedSectionId]);
 
   const selectedSection = data?.course?.sections?.find(s => s.id === selectedSectionId);
 
   // Handle video completion
   useEffect(() => {
     const videoElement = videoRef.current;
-    if (!videoElement || !selectedSection || selectedSection.is_completed) {
+    if (!videoElement || !selectedSection || selectedSection?.is_completed) {
+      console.log('Skipping event listener:', {
+        hasVideoElement: !!videoElement,
+        hasSelectedSection: !!selectedSection,
+        isCompleted: selectedSection?.is_completed,
+      });
       return;
     }
 
-    const handleVideoEnded = () => {
-      // Video has ended, mark the section as completed
-      markSectionAsCompleted({
-        courseId: data?.course?.id,
+    const handleVideoEnded = async () => {
+      console.log('Video ended for section:', selectedSectionId, 'with params:', {
         courseSlug: data?.course?.slug,
         sectionId: selectedSectionId,
-      })
-        .unwrap()
-        .then(() => {
-          console.log(`Section ${selectedSectionId} marked as completed`);
-        })
-        .catch(error => {
-          console.error("Failed to mark section as completed:", error);
-        });
+      });
+      try {
+        const mutationResult = await markSectionAsCompleted({
+          courseSlug: data?.course?.slug,
+          sectionId: selectedSectionId,
+        }).unwrap();
+        console.log(`Section ${selectedSectionId} marked as completed. Mutation result:`, mutationResult);
+        console.log('Triggering manual refetch');
+        await refetch();
+        console.log('Refetch completed');
+        // Auto-advance to next section
+        const currentIndex = data.course.sections.findIndex(s => s.id === selectedSectionId);
+        if (currentIndex < data.course.sections.length - 1) {
+          const nextSectionId = data.course.sections[currentIndex + 1].id;
+          console.log('Advancing to next section:', nextSectionId);
+          setSelectedSectionId(nextSectionId);
+        }
+      } catch (error) {
+        console.error('Failed to mark section as completed:', error);
+        alert('Failed to mark section as completed. Please try again.');
+      }
     };
 
-    // Add event listener for the 'ended' event
     videoElement.addEventListener('ended', handleVideoEnded);
-
-    // Cleanup event listener on unmount or when selectedSectionId changes
     return () => {
       videoElement.removeEventListener('ended', handleVideoEnded);
     };
-  }, [selectedSectionId, selectedSection, data?.course?.id, data?.course?.slug, markSectionAsCompleted]);
+  }, [selectedSectionId, selectedSection, data?.course?.slug, markSectionAsCompleted, refetch]);
 
-  // Early return for loading state
   if (isLoading) {
     return (
       <div className="max-w-4xl mx-auto p-6 animate-pulse">
@@ -69,7 +115,6 @@ const CoursePlayer = () => {
     );
   }
 
-  // Early return for error state
   if (isError) {
     return (
       <div className="max-w-4xl mx-auto p-6">
@@ -81,7 +126,6 @@ const CoursePlayer = () => {
     );
   }
 
-  // Early return for no data state
   if (!data?.course) {
     return (
       <div className="max-w-4xl mx-auto p-6">
@@ -94,7 +138,6 @@ const CoursePlayer = () => {
   }
 
   const { course } = data;
-
   const completedCount = course.sections.filter(s => s.is_completed).length;
   const isCourseCompleted = completedCount === course.sections.length;
   const progressPercentage = (completedCount / course.sections.length) * 100;
@@ -107,8 +150,8 @@ const CoursePlayer = () => {
         <h1 className="text-2xl font-bold text-gray-900 mb-2">{course.title}</h1>
         <div className="flex items-center gap-4">
           <div className="w-full bg-gray-100 rounded-full h-2">
-            <div 
-              className="bg-blue-600 h-2 rounded-full" 
+            <div
+              className="bg-blue-600 h-2 rounded-full"
               style={{ width: `${progressPercentage}%` }}
             ></div>
           </div>
@@ -124,25 +167,56 @@ const CoursePlayer = () => {
       </header>
 
       <div className="grid md:grid-cols-3 gap-8">
-        {/* Main content */}
         <main className="md:col-span-2 space-y-6">
           <div className="bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
             {selectedSection?.video_url ? (
               <video
-                ref={videoRef} // Attach ref to video element
+                ref={videoRef}
                 src={selectedSection.video_url}
                 controls
                 className="w-full aspect-video bg-black"
+                onError={(e) => console.error('Video failed to load:', selectedSection.video_url, e)}
               />
             ) : (
               <div className="aspect-video flex items-center justify-center text-gray-400">
                 <div className="text-center p-6">
                   <p className="font-medium">No video available</p>
                   <p className="text-sm mt-1">This section doesn't have content yet</p>
+                  <button
+                    onClick={async () => {
+                      try {
+                        const mutationResult = await markSectionAsCompleted({
+                          courseSlug: data?.course?.slug,
+                          sectionId: selectedSectionId,
+                        }).unwrap();
+                        console.log(`Manually marked section ${selectedSectionId} as completed. Mutation result:`, mutationResult);
+                        console.log('Triggering manual refetch');
+                        await refetch();
+                        console.log('Refetch completed');
+                      } catch (error) {
+                        console.error('Failed to mark section as completed:', error);
+                      }
+                    }}
+                    className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
+                  >
+                    Mark as Completed
+                  </button>
                 </div>
               </div>
             )}
           </div>
+
+          {/* Debug button to manually refetch data */}
+          <button
+            onClick={async () => {
+              console.log('Manual refetch triggered by button');
+              await refetch();
+              console.log('Manual refetch completed');
+            }}
+            className="bg-gray-500 text-white px-4 py-2 rounded"
+          >
+            Debug: Refetch Course Data
+          </button>
 
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h2 className="font-semibold text-lg mb-3">{selectedSection.title}</h2>
@@ -153,15 +227,14 @@ const CoursePlayer = () => {
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h2 className="font-semibold text-lg mb-3">About Course</h2>
             <p className="text-gray-600">
-              {course.description || 'No description provided for this section.'}
+              {course.description || 'No description provided for this course.'}
             </p>
             <p className="text-gray-600">
-              {course.syllabus || 'No syllabus provided for this section.'}
+              {course.syllabus || 'No syllabus provided for this course.'}
             </p>
           </div>
         </main>
 
-        {/* Sidebar */}
         <aside className="space-y-4">
           <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
             <div className="p-4 border-b border-gray-100">
@@ -171,34 +244,32 @@ const CoursePlayer = () => {
               {course.sections.map((section) => (
                 <button
                   key={section.id}
-                  onClick={() => setSelectedSectionId(section.id)}
+                  onClick={() => {
+                    setSelectedSectionId(section.id);
+                    console.log('Selected section:', section.id);
+                  }}
                   className={`w-full text-left p-4 transition-colors ${
-                    selectedSectionId === section.id 
-                      ? 'bg-blue-50' 
-                      : 'hover:bg-gray-50'
+                    selectedSectionId === section.id ? 'bg-blue-50' : 'hover:bg-gray-50'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${
-                      section.is_completed 
-                        ? 'bg-green-100 text-green-600' 
-                        : 'bg-gray-100 text-gray-500'
-                    }`}>
-                      {section.is_completed ? (
-                        <Check size={14} />
-                      ) : (
-                        <Play size={14} />
-                      )}
+                    <div
+                      className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${
+                        section.is_completed ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-500'
+                      }`}
+                    >
+                      {console.log(`Rendering section ${section.id}, is_completed:`, section.is_completed)}
+                      {section.is_completed ? <Check size={14} /> : <Play size={14} />}
                     </div>
                     <div className="min-w-0">
-                      <h3 className={`text-sm font-medium truncate ${
-                        selectedSectionId === section.id ? 'text-blue-600' : 'text-gray-700'
-                      }`}>
+                      <h3
+                        className={`text-sm font-medium truncate ${
+                          selectedSectionId === section.id ? 'text-blue-600' : 'text-gray-700'
+                        }`}
+                      >
                         {section.title}
                       </h3>
-                      <p className="text-xs text-gray-500 mt-1">
-                        Section {section.position}
-                      </p>
+                      <p className="text-xs text-gray-500 mt-1">Section {section.position}</p>
                     </div>
                   </div>
                 </button>

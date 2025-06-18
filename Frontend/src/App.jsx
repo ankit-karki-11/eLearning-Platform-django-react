@@ -20,6 +20,7 @@ import Categories from './pages/student/Categories'
 import CategoryDetails from './pages/student/CategoryDetails'
 import CoursePlayer from './pages/student/CoursePlayer'
 import AllCourse from './pages/student/AllCourse'
+import Interviewpage from './pages/student/Interviewpage'
 
 const appRouter = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const appRouter = createBrowserRouter([
             <Hero />
             <Courses />
             <Categories />
-            {/* <MyLearning /> */}
+            <Interviewpage />
 
           </>
 

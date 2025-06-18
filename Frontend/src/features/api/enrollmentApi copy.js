@@ -14,53 +14,37 @@ export const enrollmentApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Enrollment'],
   endpoints: (builder) => ({
+    // Load all enrollments of logged-in user
     LoadMyEnrollments: builder.query({
       query: () => ({
         url: "enrollments/",
         method: "GET",
       }),
-      providesTags: ['Enrollment'],
     }),
+
+    // Get detail of a specific enrolled course
     GetEnrolledCourseDetail: builder.query({
       query: (slug) => ({
         url: `enrollments/${slug}/`,
         method: "GET",
       }),
-      providesTags: ['Enrollment'],
-      onQueryStarted: async (arg, { queryFulfilled }) => {
-        console.log('GetEnrolledCourseDetail query started for slug:', arg);
-        try {
-          const { data } = await queryFulfilled;
-          console.log('GetEnrolledCourseDetail data:', data);
-        } catch (error) {
-          console.error('GetEnrolledCourseDetail error:', error);
-        }
-      },
     }),
+
+    // Get section-specific course progress
     GetCourseSectionProgress: builder.query({
       query: ({ courseSlug, sectionId }) => ({
         url: `enrollments/${courseSlug}/section/${sectionId}/`,
         method: "GET",
       }),
-      providesTags: ['Enrollment'],
     }),
+
+    // Mark a section as completed
     MarkSectionAsCompleted: builder.mutation({
       query: ({ courseSlug, sectionId }) => ({
         url: `enrollments/${courseSlug}/section/${sectionId}/completed/`,
         method: "POST",
       }),
-      invalidatesTags: ['Enrollment'],
-      onQueryStarted: async (arg, { queryFulfilled }) => {
-        console.log('MarkSectionAsCompleted mutation started:', arg);
-        try {
-          await queryFulfilled;
-          console.log('MarkSectionAsCompleted mutation succeeded');
-        } catch (error) {
-          console.error('MarkSectionAsCompleted error:', error);
-        }
-      },
     }),
   }),
 });
