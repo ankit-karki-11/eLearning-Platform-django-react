@@ -27,7 +27,16 @@ class CustomPermission(permissions.BasePermission):
             return request.user.role == "admin"
         return True
        
-
+class IsStudentUser(permissions.BasePermission):
+    """
+    Allows access only to student users.
+    """
+    def has_permission(self, request, view):
+        return bool(
+            request.user and 
+            request.user.is_authenticated and 
+            request.user.role == "student"
+        )
 #category viewset
 class CategoryViewSet(ModelViewSet):
     queryset=Category.objects.all()
@@ -74,7 +83,8 @@ class CategoryViewSet(ModelViewSet):
         serializer=self.get_serializer(category)
         return Response(serializer.data)
     
-    
+from django.db import IntegrityError
+  
 # course viewset
 class CourseViewSet(ModelViewSet):
     queryset=Course.objects.all()
@@ -86,24 +96,27 @@ class CourseViewSet(ModelViewSet):
     filter_backends = [filters.SearchFilter]    # Allows searching by title
     
     def create(self, request, *args, **kwargs):
-        try:
+       
           #check if user is admin
-          if not request.user.role=="admin":
-              return Response(
-                  status=status.HTTP_403_FORBIDDEN,
-                  data={"detail":"Only admin can create course"}
+        if not request.user.role=="admin":
+            return Response(
+                status=status.HTTP_403_FORBIDDEN,
+                data={"detail":"Only admin can create course"
+                 }
               )
-              return super().create(request, *args, **kwargs)
-        except Exception as e:
-              return Response(
-                status=status.HTTP_409_CONFLICT,data={"detail":"Duplicate course title"}
-               )
+        try:
+            return super().create(request, *args, **kwargs)
+        except IntegrityError:
+            return Response(
+                status=status.HTTP_409_CONFLICT,
+                data={"detail": "Course with this title or slug already exists"}
+                )
     
     def update(self, request, *args, **kwargs):
         if request.data.get("is_published") == False:
-            course=Course.objects.get(slug=kwargs["slug"])
+            course = self.get_object()
             # Check if there are any enrollments for the course
-            if Enrollment.objects.filter(course=course).exists():
+            if course.enrollments.exists():
                 return Response(
                     status=status.HTTP_400_BAD_REQUEST,
                     data={"detail":"Course cannot be unpublished as it has enrolled students"}
@@ -116,7 +129,7 @@ class CourseViewSet(ModelViewSet):
         
         Course=self.get_object()
         # Check if there are any enrollments for the course
-        if Enrollment.objects.filter(course=Course).exists():
+        if course.enrollments.exists():
             return Response(
                 status=status.HTTP_400_BAD_REQUEST,
                 data={"detail":"Course cannot be deleted as it has enrolled students"}
@@ -208,7 +221,8 @@ class SectionViewSet(ModelViewSet):
             return super().create(request, *args, **kwargs)
         except Exception as e:
             return Response(
-                status=status.HTTP_409_CONFLICT,data={"detail":"Duplicate section title"}
+                status=status.HTTP_409_CONFLICT,
+                data={"detail":"Section with this title already exists for this course"}
                )
             
     def update(self, request, *args, **kwargs):
@@ -296,69 +310,102 @@ class CartViewSet(ModelViewSet):
         })
 
 #enrollment viewset
+from rest_framework import viewsets, status, permissions
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from django.utils import timezone
+from django.shortcuts import get_object_or_404
+from rest_framework import filters
+from .models import Enrollment, Section, SectionProgress
+from .serializers import EnrollmentSerializer, EnrolledCourseDetailSerializer, SectionProgressSerializer
+# from .permissions import IsStudentUser
 
-class EnrollmentViewSet(ModelViewSet):
+class EnrollmentViewSet(viewsets.ModelViewSet):
     queryset = Enrollment.objects.all()
     serializer_class = EnrollmentSerializer
     filter_backends = [filters.OrderingFilter]
     ordering_fields = ['created_at', 'updated_at']
     ordering = ['-created_at']
-    lookup_field='course__slug'
-    
+    lookup_field = 'course__slug'
+
     def get_serializer_class(self):
         if self.action == 'retrieve':
-            # On retrieving one enrollment, return detailed course info
             return EnrolledCourseDetailSerializer
-        # For other actions (list, create, etc.) return your default EnrollmentSerializer
         return EnrollmentSerializer
-    
+
     def get_permissions(self):
-        if self.action in ['list', 'retrieve', 'mark_completed','section_progress']:
+        if self.action in ['list', 'retrieve', 'mark_completed', 'section_progress', 'mark_section_completed', 'update_last_accessed']:
             return [permissions.IsAuthenticated()]
-        # Only admins can create or delete enrollments
-        return [permissions.IsStudentUser()]
+        return [IsStudentUser()]
 
     def get_queryset(self):
         user = self.request.user
+        queryset = Enrollment.objects.select_related('course', 'student').prefetch_related('section_progresses', 'course__sections')
         if user.is_staff or user.role == 'admin':
-            return Enrollment.objects.all()
-        return Enrollment.objects.filter(student=user)
-
-    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
-    def mark_completed(self, request, pk=None):
-        enrollment = get_object_or_404(Enrollment, pk=pk, student=request.user)
-        enrollment.mark_completed()
-        return Response({'status': 'Enrollment marked as completed'}, status=status.HTTP_200_OK)
-
-    @action(detail=True, methods=['get'], url_path='section/(?P<section_id>[^/.]+)')
-    def section_progress(self, request, course__slug=None, section_id=None):
-        enrollment = self.get_object()
-
-        try:
-            section = enrollment.course.sections.get(id=section_id)
-            
-        except Section.DoesNotExist:
-            return Response({'detail': 'Section not found in this course.'}, status=404)
-
-        is_completed = SectionProgress.objects.filter(
-            enrollment=enrollment, section=section, is_completed=True
-        ).exists()
-
-        data = {
-            'id': section.id,
-            'title': section.title,
-            # 'video': section.video,
-            'is_completed': is_completed,
-        }
-        return Response(data)
-
+            return queryset
+        return queryset.filter(student=user)
 
     def get_object(self):
         queryset = self.get_queryset()
-        slug = self.kwargs.get('course__slug') or self.kwargs.get('slug')
+        slug = self.kwargs.get('course__slug')
         obj = get_object_or_404(queryset, course__slug=slug, student=self.request.user)
         return obj
-    
+
+    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
+    def mark_completed(self, request, course__slug=None):
+        enrollment = self.get_object()
+        enrollment.mark_completed()
+        return Response({'status': 'Enrollment marked as completed'}, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['get'], url_path=r'section/(?P<section_id>[^/.]+)')
+    def section_progress(self, request, course__slug=None, section_id=None):
+        enrollment = self.get_object()
+        try:
+            section = enrollment.course.sections.get(id=section_id)
+        except Section.DoesNotExist:
+            return Response({'detail': 'Section not found in this course.'}, status=status.HTTP_404_NOT_FOUND)
+        progress = SectionProgress.objects.filter(enrollment=enrollment, section=section).first()
+        serializer = SectionProgressSerializer(progress, context={'request': request})
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['post'], url_path=r'section/(?P<section_id>\d+)/completed')
+    def mark_section_completed(self, request, course__slug=None, section_id=None):
+        try:
+            enrollment = self.get_object()
+            section = Section.objects.get(id=section_id, course=enrollment.course)
+            section_progress, created = SectionProgress.objects.get_or_create(
+                enrollment=enrollment,
+                section=section,
+                defaults={
+                    'is_completed': True,
+                    'started_at': timezone.now(),
+                    'completed_at': timezone.now()
+                }
+            )
+            if not created and not section_progress.is_completed:
+                section_progress.is_completed = True
+                section_progress.started_at = section_progress.started_at or timezone.now()
+                section_progress.completed_at = timezone.now()
+                section_progress.save()
+            # Update enrollment progress
+            total_sections = enrollment.course.sections.count()
+            completed_sections = enrollment.section_progresses.filter(is_completed=True).count()
+            enrollment.progress = (completed_sections / total_sections * 100) if total_sections > 0 else 0
+            enrollment.status = 'completed' if enrollment.progress == 100 else 'in_progress'
+            enrollment.save()
+            return Response({'message': 'Section marked as completed'}, status=status.HTTP_200_OK)
+        except Section.DoesNotExist:
+            return Response({'detail': 'Section not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['patch'], url_path='update-last-accessed')
+    def update_last_accessed(self, request, course__slug=None):
+        enrollment = self.get_object()
+        enrollment.last_accessed = timezone.now()
+        enrollment.save()
+        serializer = self.get_serializer(enrollment)
+        return Response(serializer.data)
     
 #Sectionprogress viewset
 class SectionProgressViewSet(ModelViewSet):
@@ -374,96 +421,7 @@ class SectionProgressViewSet(ModelViewSet):
         return super().get_queryset()
 
     def perform_create(self, serializer):
-        serializer.save()
-    
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-try:
-    from main.models import Enrollment, Section  # Adjust import path
-except ImportError as e:
-    print(f"Model import error: {str(e)}")  # Temporary print for import issues
-from django.db import transaction
-import logging
-import traceback
-
-logger = logging.getLogger(__name__)
-
-class MarkSectionAsCompletedView(APIView):
-    @transaction.atomic
-    def post(self, request, course_slug, section_id):
-        try:
-            logger.debug(f"Received request: course_slug={course_slug}, section_id={section_id}, user={request.user}")
-            
-            # Check authentication
-            if not request.user.is_authenticated:
-                logger.error("User not authenticated")
-                return Response(
-                    {"status": "error", "message": "Authentication required"},
-                    status=status.HTTP_401_UNAUTHORIZED
-                )
-
-            # Log request details
-            logger.info(f"Processing section {section_id} for course {course_slug}")
-
-            # Fetch enrollment
-            enrollment = Enrollment.objects.get(
-                student=request.user,
-                course__slug=course_slug
-            )
-            logger.info(f"Found enrollment ID {enrollment.id}")
-
-            # Fetch section
-            section = Section.objects.get(
-                id=section_id,
-                course__slug=course_slug
-            )
-            logger.info(f"Found section ID {section.id}")
-
-            # Update completed_sections
-            logger.info(f"Before update: Completed sections: {list(enrollment.completed_sections.values_list('id', flat=True))}")
-            enrollment.completed_sections.add(section)
-            enrollment.save()
-            enrollment.refresh_from_db()
-
-            # Verify update
-            completed_sections = list(enrollment.completed_sections.values_list('id', flat=True))
-            logger.info(f"After update: Completed sections: {completed_sections}")
-            if section_id in completed_sections:
-                logger.info(f"Section {section_id} successfully added")
-            else:
-                logger.error(f"Section {section_id} NOT added")
-
-            return Response(
-                {
-                    "status": "success",
-                    "message": "Section marked as completed",
-                    "completed_sections": completed_sections
-                },
-                status=status.HTTP_200_OK
-            )
-        except Enrollment.DoesNotExist:
-            logger.error(f"Enrollment not found for user {request.user}, course {course_slug}")
-            return Response(
-                {"status": "error", "message": "Enrollment not found"},
-                status=status.HTTP_404_NOT_FOUND
-            )
-        except Section.DoesNotExist:
-            logger.error(f"Section {section_id} not found for course {course_slug}")
-            return Response(
-                {"status": "error", "message": "Section not found"},
-                status=status.HTTP_404_NOT_FOUND
-            )
-        except Exception as e:
-            logger.error(f"Error marking section {section_id} for course {course_slug}: {str(e)}")
-            logger.debug(traceback.format_exc())
-            return Response(
-                {"status": "error", "message": f"Internal server error: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )  
-    
-    
-    
+        serializer.save()    
     
     
     

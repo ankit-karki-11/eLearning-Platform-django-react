@@ -2,7 +2,8 @@ from rest_framework import serializers
 from main.models import *
 from users.models import UserAccount
 from users.serializers import UserAccountListSerializer
-
+from rest_framework.response import Response
+from rest_framework import status
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model=Category
@@ -48,13 +49,14 @@ class CourseSerializer(serializers.ModelSerializer):
     price=serializers.DecimalField(
         max_digits=8,
         decimal_places=2,
-        default=0.0,
+        min_value=0,
+        default=0,
         error_messages={
             "invalid": "Price must be a valid decimal number.",
             "required": "Price is required.",
         },
     )
-    
+
     class Meta:
         model=Course
         fields=[
@@ -197,50 +199,7 @@ class SectionListSerializer(serializers.ModelSerializer):
         ]
         
 
-class EnrollmentSerializer(serializers.ModelSerializer):
-    course=CourseListSerializer(read_only=True)
-    course_id=serializers.PrimaryKeyRelatedField(
-        queryset=Course.objects.all(),
-        source="course",
-        write_only=True,
-    )
-    student=UserAccountListSerializer(read_only=True)
-    student_id=serializers.PrimaryKeyRelatedField(
-        queryset=UserAccount.objects.filter(role="student"),
-        source="student",
-        write_only=True,
-    )
     
-    status= serializers.ChoiceField(
-        choices=Enrollment.STATUS_CHOICES,
-        read_only=True,
-    )
-    last_accessed = serializers.DateTimeField(read_only=True)
-    progress = serializers.SerializerMethodField()
-    
-    class Meta:
-        model=Enrollment
-        fields=[
-            "id",
-            "course", "course_id",
-            "student", "student_id",
-            "status",
-            "progress",
-            "last_accessed",
-            "created_at",
-            "updated_at",
-        ]
-        
-        read_only_fields = [
-                "id", 
-                "progress",
-                "created_at",
-                "updated_at"
-            ]
-        
-    def get_progress(self, obj):
-        return obj.progress
-        
 class SectionProgressSerializer(serializers.ModelSerializer):
     section_title = serializers.CharField(source='section.title', read_only=True)
     section_order = serializers.IntegerField(source='section.order', read_only=True)
@@ -249,22 +208,20 @@ class SectionProgressSerializer(serializers.ModelSerializer):
     class Meta:
         model = SectionProgress
         fields = [
-            'id',
-            'section',              
-            'section_title',        
-            'section_order',       
+           'id',
+            'section',
+            'section_title',
+            'section_order',
             'is_completed',
             'started_at',
             'completed_at',
-            'last_accessed',
-            'video_url',            # From related section
-            'time_spent'          
+            'video_url',
+            'time_spent'       
         ]
         read_only_fields = [
             'id', 
             'started_at', 
             'completed_at',
-            'last_accessed',
             'time_spent'
         ]
     
@@ -276,9 +233,12 @@ class SectionProgressSerializer(serializers.ModelSerializer):
     
     def validate(self, data):
         """Prevent marking as complete if section has no video"""
-        if data.get('is_completed') and not self.instance.section.video:
+        section = data.get('section')
+        if data.get('is_completed') and not section.video:
             raise serializers.ValidationError("Cannot complete a section with no video content")
         return data
+
+
 
 class SectionWithCompletionSerializer(serializers.ModelSerializer):
     is_completed = serializers.SerializerMethodField()
@@ -325,8 +285,8 @@ class SectionWithCompletionSerializer(serializers.ModelSerializer):
     def get_attachments(self, obj):
         attachments = obj.attachments.all()
         return AttachmentSerializer(attachments, many=True, context=self.context).data
-
-
+    
+   
 class CourseNestedSerializer(serializers.ModelSerializer):
     sections = SectionWithCompletionSerializer(many=True, read_only=True)
 
@@ -368,6 +328,57 @@ class EnrolledCourseDetailSerializer(serializers.ModelSerializer):
     def get_progress(self, obj):
         return obj.progress
 
+class EnrollmentSerializer(serializers.ModelSerializer):
+    course=CourseListSerializer(read_only=True)
+    course_id=serializers.PrimaryKeyRelatedField(
+        queryset=Course.objects.all(),
+        source="course",
+        write_only=True,
+    )
+    student=UserAccountListSerializer(read_only=True)
+    student_id=serializers.PrimaryKeyRelatedField(
+        queryset=UserAccount.objects.filter(role="student"),
+        source="student",
+        write_only=True,
+    )
+    
+    status= serializers.ChoiceField(
+        choices=Enrollment.STATUS_CHOICES,
+        read_only=True,
+    )
+    last_accessed = serializers.DateTimeField(read_only=True)
+    progress = serializers.SerializerMethodField()
+    section_progresses = SectionProgressSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model=Enrollment
+        fields=[
+            "id",
+            "course", "course_id",
+            "student", "student_id",
+            "status",
+            "progress",
+            "last_accessed",
+            "created_at",
+            "updated_at",
+            'section_progresses',
+        ]
+        
+        read_only_fields = [
+                "id", 
+                "progress",
+                "created_at",
+                "updated_at"
+            ]
+        
+    def get_progress(self, obj):
+        total_sections = obj.course.sections.count()
+        if total_sections == 0:
+            return 0
+        completed_sections = obj.section_progresses.filter(is_completed=True).count()
+        return (completed_sections / total_sections) * 100
+    
+    
 class AttachmentSerializer(serializers.ModelSerializer):
     section_id=serializers.PrimaryKeyRelatedField(
         queryset=Section.objects.all(),

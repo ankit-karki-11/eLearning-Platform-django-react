@@ -55,16 +55,16 @@ class Course(models.Model):
     price = models.DecimalField(
         max_digits=8, 
         decimal_places=2, 
-        default=0.0,
-        validators=[MinValueValidator(0.0)]
+        default=0,
+        validators=[MinValueValidator(0)]
     )
     
     course_duration = models.DecimalField(
         help_text="Duration in hours",
         max_digits=5,
         decimal_places=2,
-        default=0.0,
-        validators=[MinValueValidator(0.0)],
+        default=0,
+        validators=[MinValueValidator(0)],
         null=True,
         blank=True
     )
@@ -183,80 +183,66 @@ class Section(models.Model):
         ordering = ["order"]
         unique_together = ["course", "title"]
 
-#Enrollment model
 class Enrollment(models.Model):
-    STATUS_CHOICES=[
-        ('in_progress','In Progress'),
-        ('completed','Completed'),
-        ('certified','Certified'),
+    STATUS_CHOICES = [
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed'),
+        ('certified', 'Certified'),
     ]
-    student=models.ForeignKey(
-        UserAccount,
+    student = models.ForeignKey(
+        'users.UserAccount',
         on_delete=models.CASCADE,
         limit_choices_to={'role': 'student'},
         related_name='enrollments'
     )
-    
-    course=models.ForeignKey(
-        Course, 
-        on_delete=models.CASCADE, 
-        related_name='enrollments' 
+    course = models.ForeignKey(
+        'Course',
+        on_delete=models.CASCADE,
+        related_name='enrollments'
     )
-    
-    status=models.CharField(
+    status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICES,
         default='in_progress'
     )
-    completed_sections=models.ManyToManyField('Section')
+    progress = models.FloatField(default=0)  # Stored field
     last_accessed = models.DateTimeField(null=True, blank=True)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table="enrollment"
-        verbose_name_plural="Enrollments"
-        ordering=["-created_at"]
+        db_table = "enrollment"
+        verbose_name_plural = "Enrollments"
+        ordering = ["-created_at"]
         unique_together = ["student", "course"]
-    
-    
-     # This method defines how each enrollment will be shown as a string (e.g., in admin panel or logs)
-    def __str__(self):
-       return f"{self.student.full_name} -> {self.course.title} ({self.status})"
-   
-    # mark completed course
-    def mark_completed(self):
-        if self.status=='in_progress':
-            self.status='completed'
-        self.save()
-            
-    # issue certificate
-    def issue_certificate(self):
-        if self.status !='completed':
-            raise ValidationError("Course must be completed before certification")
-        self.status='certified'
-        self.save()
-    
 
-    @property
-    def progress(self):
-        total=self.course.sections.count()
-        if total == 0:
-            return 0
-        completed=self.section_progresses.filter(is_completed=True).count()
-        return round((completed / total) * 100,2)
-        
-    # check if course is completed
+    def __str__(self):
+        return f"{self.student.full_name} -> {self.course.title} ({self.status})"
+
+    def mark_completed(self):
+        if self.status == 'in_progress':
+            self.status = 'completed'
+            self.progress = 100
+        self.save()
+
+    def issue_certificate(self):
+        if self.status != 'completed':
+            raise ValidationError("Course must be completed before certification")
+        self.status = 'certified'
+        self.save()
+
+    def computed_progress(self):
+        total_sections = self.course.sections.count()
+        completed_sections = self.section_progresses.filter(is_completed=True).count()
+        return (completed_sections / total_sections * 100) if total_sections > 0 else 0
+
     @property
     def is_completed(self):
         return self.status == 'completed'
-    
-    # check if course is certified
+
     @property
     def is_certified(self):
         return self.status == 'certified'
-    
-
 #section-progress
 class SectionProgress(models.Model):
     enrollment = models.ForeignKey(
@@ -271,10 +257,11 @@ class SectionProgress(models.Model):
     )
     
     is_completed = models.BooleanField(default=False)
-    started_at = models.DateTimeField(auto_now=True)
-    
+    started_at = models.DateTimeField(auto_now_add=True)
+    completed_at=models.DateTimeField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    time_spent = models.FloatField(default=0)
     
     class Meta:
         unique_together = ('enrollment', 'section')
@@ -287,19 +274,35 @@ class SectionProgress(models.Model):
         return f"{self.enrollment.student.full_name} - {self.section.title} ({'Completed' if self.is_completed else 'In Progress'})"
    
     def save(self, *args, **kwargs):
-        """Auto-set completed_at timestamp when marking as complete"""
-        if self.is_completed and not self.completed_at:
-            self.completed_at = timezone.now()
-        elif not self.is_completed:
-            self.completed_at = None
+        if self.is_completed and self.started_at and self.completed_at:
+            if self.completed_at < self.started_at:
+                self.completed_at = self.started_at
+            time_diff = (self.completed_at - self.started_at).total_seconds()
+            self.time_spent = max(time_diff, 0)  # Assign to time_spent
         super().save(*args, **kwargs)
 
+    def clean(self):
+        # Check secion belong to enrollment's course
+        if self.section.course != self.enrollment.course:
+            raise ValidationError("Section must belong to the same course as the enrollment.")
+    
+    def get_progress_percentage(self):
+        #Calculate the progress percentage for this section
+        if self.is_completed:
+            return 100
+        elif self.started_at and self.completed_at:
+            return int((self.completed_at - self.started_at).total_seconds() / self.section.duration) * 100
+        return 0
     @property
     def time_spent(self):
         """Calculate total time spent on this section"""
         if self.is_completed and self.completed_at:
             return (self.completed_at - self.started_at).total_seconds()
-        return (timezone.now() - self.started_at).total_seconds()
+        return 0
+    
+    @time_spent.setter
+    def time_spent(self, value):
+        self._time_spent = value
 
  
 # cart model
