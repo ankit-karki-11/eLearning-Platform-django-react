@@ -24,7 +24,12 @@ const MyLearning = () => {
                             key={enrollment.course.slug}
                             course={enrollment.course}
                             isEnrolled={true}
-                            isCompleted={enrollment.status === 'completed' || enrollment.status === 'certified'}
+                            isCompleted={true}
+                            // isCompleted={
+                            //     enrollment.progress === 100 ||
+                            //     enrollment.status === 'completed' ||
+                            //     enrollment.section_progresses?.every((sp) => sp.is_completed)
+                            // }
                             progress={enrollment.progress || 0}
                         />
                     ))}

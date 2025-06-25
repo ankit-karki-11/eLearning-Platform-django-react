@@ -3,7 +3,7 @@ import { ArrowUpRight, Mail, Twitter, Github, Linkedin } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer className='relative pt-16 pb-8 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800'>
+    <footer className='relative pt-16 pb-8 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900  dark:border-gray-800'>
 
       {/* Links Section */}
       <div className="max-w-4xl mx-auto">

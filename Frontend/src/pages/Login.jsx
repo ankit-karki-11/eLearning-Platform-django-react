@@ -173,7 +173,7 @@ const Login = () => {
                             </div>
                         </CardContent>
                         <CardFooter>
-                            <Button disabled={registerIsLoading} onClick={() => handleRegistration("signup")} className="w-full">
+                            <Button disabled={registerIsLoading} onClick={() => handleRegistration("signup")} className="w-full cursor-pointer">
                                 {
                                     registerIsLoading ? (
                                         <>
@@ -222,7 +222,7 @@ const Login = () => {
                             </div>
                         </CardContent>
                         <CardFooter>
-                            <Button disabled={loginIsLoading} className="w-full" onClick={() => handleRegistration("login")}>
+                            <Button disabled={loginIsLoading} className="w-full cursor-pointer" onClick={() => handleRegistration("login")}>
                                 {
                                     loginIsLoading ? (
                                         <>

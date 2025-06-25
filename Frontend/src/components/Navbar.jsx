@@ -55,24 +55,27 @@ const Navbar = () => {
   return (
     <div className='h-16 w-full dark:bg-gray-900/95 bg-white/95 backdrop-blur-sm fixed top-0 left-0 right-0 duration-300 z-50'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-full'>
-        {/* Logo/Brand */}
-        <div className='flex items-center gap-2'>
+
+        <div className='flex items-center gap-8'>
           <Link to="/" className='flex items-center gap-2'>
             <img src="/logoblack.png" alt="Logo" className='h-8 w-auto' />
-          
           </Link>
+
+        
+          <nav className='hidden md:flex items-center gap-4 '>
+            <NavLink to="/course">Courses</NavLink>
+            {user?.role === "student" && (
+              <NavLink to="/my-learning">My Learning</NavLink>
+            )}
+            {user?.role === "student" && (
+              <NavLink to="/">Try Interview</NavLink>
+            )}
+            {user?.role === "instructor" && (
+              <NavLink to="/instructor/dashboard">Instructor</NavLink>
+            )}
+          </nav>
         </div>
 
-
-        <div className='hidden md:flex items-center gap-6'>
-          {/* <NavLink to="/course">Courses</NavLink> */}
-          {user?.role === "student" && (
-            <NavLink to="/my-learning">My Learning</NavLink>
-          )}
-          {user?.role === "instructor" && (
-            <NavLink to="/instructor/dashboard">Instructor</NavLink>
-          )}
-        </div>
 
         {/* User controls - Right side */}
         <div className='flex items-center gap-4'>
@@ -135,7 +138,7 @@ const Navbar = () => {
             </DropdownMenu>
           ) : (
             <div className='flex items-center gap-2'>
-                <Button className='px-3 sm:px-4' variant='outline' asChild>
+              <Button className='px-3 sm:px-4' variant='outline' asChild>
                 <Link to="/login">Login</Link>
               </Button>
             </div>
@@ -155,7 +158,7 @@ const Navbar = () => {
 const NavLink = ({ to, children }) => (
   <Link
     to={to}
-    className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 transition-colors px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+    className="text-sm font-base text-black hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
   >
     {children}
   </Link>

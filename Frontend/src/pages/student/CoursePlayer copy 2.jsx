@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   useGetEnrolledCourseDetailQuery,
   useMarkSectionAsCompletedMutation,
@@ -7,7 +7,6 @@ import {
 } from '@/features/api/enrollmentApi';
 import { Check, Play } from 'lucide-react';
 import { toast } from 'sonner';
-import { Button } from '@/components/ui/button';
 
 const CoursePlayer = () => {
   const { slug } = useParams();
@@ -27,7 +26,6 @@ const CoursePlayer = () => {
 
   const [markSectionAsCompleted, { isLoading: marking, error: markError }] =
     useMarkSectionAsCompletedMutation();
-  const navigate = useNavigate();
   const [updateLastAccessed] = useUpdateLastAccessedMutation();
 
   // Update last accessed when component mounts
@@ -74,13 +72,13 @@ const CoursePlayer = () => {
   // Handle manual section completion
   const handleMarkComplete = async () => {
     try {
-      const response = await markSectionAsCompleted({ courseSlug: slug, sectionId: selectedSectionId }).unwrap();
-      console.log('Mark section completed response:', response);
+      await markSectionAsCompleted({ courseSlug: slug, sectionId: selectedSectionId }).unwrap();
       await refetch();
-      toast.success('Section marked as completed!');
+      toast.success('Failed to mark section as completed. Please try again.');
+       
     } catch (error) {
       console.error('Failed to mark section:', error);
-      toast.error('Failed to mark section as completed. Check console for details.');
+      alert('Failed to mark section as completed. Please try again.');
     }
   };
 
@@ -98,10 +96,6 @@ const CoursePlayer = () => {
       setSelectedSectionId(data.course.sections[currentIndex - 1].id);
     }
   };
-
-  const handleCertificate = () => {
-    navigate(`/course/`);
-  }
 
   if (isLoading) {
     return (
@@ -155,9 +149,9 @@ const CoursePlayer = () => {
       <header className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">{course.title}</h1>
         <div className="flex items-center gap-4">
-          <div className="w-1/4 bg-gray-200 rounded-full h-2">
+          <div className="w-full bg-gray-200 rounded-full h-2.5">
             <div
-              className="bg-green-600 h-2 rounded-full transition-all duration-300"
+              className="bg-blue-600 h-2.5 rounded-full transition-all duration-300"
               style={{ width: `${progressPercentage}%` }}
             ></div>
           </div>
@@ -190,8 +184,9 @@ const CoursePlayer = () => {
                     <button
                       onClick={handleMarkComplete}
                       disabled={marking}
-                      className={`mt-4 px-4 py-2 rounded ${marking ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'
-                        }`}
+                      className={`mt-4 px-4 py-2 rounded ${
+                        marking ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'
+                      }`}
                     >
                       {marking ? 'Marking...' : 'Mark as Completed'}
                     </button>
@@ -210,22 +205,20 @@ const CoursePlayer = () => {
           </div>
           {/* Navigation Buttons */}
           <div className="flex justify-between">
-            <Button
+            <button
               onClick={handlePreviousSection}
               disabled={course.sections.findIndex((s) => s.id === selectedSectionId) === 0}
-              className='px-4 py-2 cursor-pointer'
-            //  variant='secondary'
+              className="px-4 py-2 rounded bg-gray-200 disabled:opacity-50 hover:bg-gray-300"
             >
               Previous
-            </Button>
-            <Button
+            </button>
+            <button
               onClick={handleNextSection}
               disabled={course.sections.findIndex((s) => s.id === selectedSectionId) === course.sections.length - 1}
-              className='px-4 py-2 cursor-pointer'
-            // variant='secondary'
+              className="px-4 py-2 rounded bg-gray-200 disabled:opacity-50 hover:bg-gray-300"
             >
               Next
-            </Button>
+            </button>
           </div>
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h2 className="font-semibold text-lg mb-3">{selectedSection.title}</h2>
@@ -251,20 +244,23 @@ const CoursePlayer = () => {
                 <button
                   key={section.id}
                   onClick={() => setSelectedSectionId(section.id)}
-                  className={`w-full text-left p-4 transition-colors ${selectedSectionId === section.id ? 'bg-blue-50' : 'hover:bg-gray-50'
-                    }`}
+                  className={`w-full text-left p-4 transition-colors ${
+                    selectedSectionId === section.id ? 'bg-blue-50' : 'hover:bg-gray-50'
+                  }`}
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${section.is_completed ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-500'
-                        }`}
+                      className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${
+                        section.is_completed ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-500'
+                      }`}
                     >
                       {section.is_completed ? <Check size={14} /> : <Play size={14} />}
                     </div>
                     <div className="min-w-0">
                       <h3
-                        className={`text-sm font-medium truncate ${selectedSectionId === section.id ? 'text-blue-600' : 'text-gray-700'
-                          }`}
+                        className={`text-sm font-medium truncate ${
+                          selectedSectionId === section.id ? 'text-blue-600' : 'text-gray-700'
+                        }`}
                       >
                         {section.title}
                       </h3>
@@ -274,29 +270,7 @@ const CoursePlayer = () => {
                 </button>
               ))}
             </div>
-
           </div>
-
-          {/* onlya ctive when course is completed */}
-
-          {/* Certificate Section - Visible to all but only active when completed */}
-          <div className="p-4 mt-4 border rounded-lg bg-gray-50">
-            {!isCourseCompleted ? (
-              <p className="text-sm text-gray-600 mb-3">
-                Complete all sections to unlock your certificate
-              </p>
-            ) : null}
-
-            <Button
-              onClick={isCourseCompleted ? handleCertificate : undefined}
-              variant={isCourseCompleted ? 'default' : 'outline'}
-              className={`w-full ${isCourseCompleted ? 'bg-green-600 hover:bg-green-700 text-white' : 'text-gray-500'}`}
-              disabled={!isCourseCompleted}
-            >
-              {isCourseCompleted ? 'Download Certificate' : 'Certificate Locked'}
-            </Button>
-          </div>
-
         </aside>
       </div>
     </div>

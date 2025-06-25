@@ -34,7 +34,7 @@ const appRouter = createBrowserRouter([
             <Hero />
             <Courses />
             <Categories />
-            <Interviewpage />
+            {/* <Interviewpage /> */}
 
           </>
 

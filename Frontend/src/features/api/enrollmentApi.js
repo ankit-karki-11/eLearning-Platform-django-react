@@ -62,6 +62,15 @@ export const enrollmentApi = createApi({
         }
       },
     }),
+
+    UpdateLastAccessed: builder.mutation({
+      query: ({ courseSlug }) => ({
+        url: `enrollments/${courseSlug}/update-last-accessed/`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ['Enrollment'],
+    }),
+
   }),
 });
 
@@ -70,4 +79,5 @@ export const {
   useGetEnrolledCourseDetailQuery,
   useGetCourseSectionProgressQuery,
   useMarkSectionAsCompletedMutation,
+  useUpdateLastAccessedMutation,
 } = enrollmentApi;

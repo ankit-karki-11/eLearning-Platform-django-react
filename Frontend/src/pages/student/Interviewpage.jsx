@@ -27,7 +27,7 @@ const Interviewpage = () => {
     return (
         <div className="min-h-screen bg-black dark:from-gray-950 dark:to-gray-900 rounded-4xl">
             {/* Hero Section */}
-            <div className="container mx-auto px-6 py-24 text-center">
+            <div className="container mx-auto px-24 py-24 text-center">
                 <div className="inline-block px-4 py-2 mb-6 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-sm font-medium">
                     New Feature
                 </div>

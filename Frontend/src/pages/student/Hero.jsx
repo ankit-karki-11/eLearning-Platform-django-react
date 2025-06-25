@@ -13,7 +13,6 @@ const Hero = () => {
 
   return (
     <div className='relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950 overflow-hidden'>
-      
       <div className='relative max-w-3xl mx-auto text-center'>
         <div className="inline-flex items-center px-3 py-1.5 mb-6 rounded-full bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-200 text-xs font-mono tracking-wider">
           <Sparkles className="mr-2 h-3 w-3 text-blue-500 dark:text-blue-400" />
