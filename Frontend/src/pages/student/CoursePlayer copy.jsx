@@ -1,87 +1,232 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useGetEnrolledCourseDetailQuery } from '@/features/api/enrollmentApi';
+import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  useGetEnrolledCourseDetailQuery,
+  useMarkSectionAsCompletedMutation,
+  useUpdateLastAccessedMutation,
+} from '@/features/api/enrollmentApi';
 import { Check, Play } from 'lucide-react';
+import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
 
 const CoursePlayer = () => {
   const { slug } = useParams();
-  const { data, isLoading, isError } = useGetEnrolledCourseDetailQuery(slug);
-  const [selectedSectionId, setSelectedSectionId] = useState(null);
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useGetEnrolledCourseDetailQuery(slug, {
+    refetchOnMountOrArgChange: true,
+  });
 
-  if (isLoading) return (
-    <div className="max-w-4xl mx-auto p-6 animate-pulse">
-      <div className="h-8 bg-gray-100 rounded w-2/3 mb-6"></div>
-      <div className="h-4 bg-gray-100 rounded w-full mb-8"></div>
-      <div className="grid md:grid-cols-3 gap-8">
-        <div className="md:col-span-2 bg-gray-100 aspect-video rounded-lg"></div>
-        <div className="space-y-4">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="h-16 bg-gray-100 rounded-lg"></div>
-          ))}
+  const [selectedSectionId, setSelectedSectionId] = useState(null);
+  const [videoError, setVideoError] = useState(null);
+  const videoRef = useRef(null);
+
+  const [markSectionAsCompleted, { isLoading: marking, error: markError }] =
+    useMarkSectionAsCompletedMutation();
+  const navigate = useNavigate();
+  const [updateLastAccessed] = useUpdateLastAccessedMutation();
+
+  // Update last accessed when component mounts
+  useEffect(() => {
+    if (slug) {
+      updateLastAccessed({ courseSlug: slug }).catch((err) =>
+        console.error('Failed to update last accessed:', err)
+      );
+    }
+  }, [slug, updateLastAccessed]);
+
+  // Set initial section ID
+  useEffect(() => {
+    if (!selectedSectionId && data?.course?.sections?.length > 0) {
+      setSelectedSectionId(data.course.sections[0].id);
+    }
+  }, [data, selectedSectionId]);
+
+  // Handle video completion
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement || !selectedSectionId || data?.course?.sections?.find((s) => s.id === selectedSectionId)?.is_completed) {
+      return;
+    }
+
+    const handleVideoEnded = async () => {
+      try {
+        await markSectionAsCompleted({ courseSlug: slug, sectionId: selectedSectionId }).unwrap();
+        await refetch();
+        const currentIndex = data.course.sections.findIndex((s) => s.id === selectedSectionId);
+        if (currentIndex < data.course.sections.length - 1) {
+          setSelectedSectionId(data.course.sections[currentIndex + 1].id);
+        }
+      } catch (error) {
+        // console.error('Failed to mark section as completed:', error);
+        toast.error('Failed to mark section as completed. Please try again.');
+      }
+    };
+
+    videoElement.addEventListener('ended', handleVideoEnded);
+    return () => videoElement.removeEventListener('ended', handleVideoEnded);
+  }, [selectedSectionId, data, slug, markSectionAsCompleted, refetch]);
+
+  // Handle manual section completion
+  const handleMarkComplete = async () => {
+    try {
+      const response = await markSectionAsCompleted({ courseSlug: slug, sectionId: selectedSectionId }).unwrap();
+      console.log('Mark section completed response:', response);
+      await refetch();
+      toast.success('Section marked as completed!');
+    } catch (error) {
+      console.error('Failed to mark section:', error);
+      toast.error('Failed to mark section as completed. Check console for details.');
+    }
+  };
+
+  // Handle next/previous section navigation
+  const handleNextSection = () => {
+    const currentIndex = data.course.sections.findIndex((s) => s.id === selectedSectionId);
+    if (currentIndex < data.course.sections.length - 1) {
+      setSelectedSectionId(data.course.sections[currentIndex + 1].id);
+    }
+  };
+
+  const handlePreviousSection = () => {
+    const currentIndex = data.course.sections.findIndex((s) => s.id === selectedSectionId);
+    if (currentIndex > 0) {
+      setSelectedSectionId(data.course.sections[currentIndex - 1].id);
+    }
+  };
+
+  const handleCertificate = () => {
+    navigate(`/course/`);
+  }
+
+  if (isLoading) {
+    return (
+      <div className="max-w-7xl mx-auto p-6 animate-pulse">
+        <div className="h-8 bg-gray-200 rounded w-2/3 mb-6"></div>
+        <div className="h-4 bg-gray-200 rounded w-full mb-8"></div>
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="md:col-span-2 bg-gray-200 aspect-video rounded-lg"></div>
+          <div className="space-y-4">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="h-16 bg-gray-200 rounded-lg"></div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 
-  if (isError) return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="bg-red-50 border border-red-100 text-red-600 p-6 rounded-lg text-center">
-        <p className="font-medium">Failed to load course</p>
-        <p className="text-sm mt-2">Please refresh or try again later</p>
+  if (isError) {
+    return (
+      <div className="max-w-7xl mx-auto p-6">
+        <div className="bg-red-50 border border-red-200 text-red-600 p-6 rounded-lg text-center">
+          <p className="font-medium">Failed to load course</p>
+          <p className="text-sm mt-2">{error?.data?.detail || 'Please refresh or try again later'}</p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 
-  if (!data?.course) return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="bg-gray-50 border border-gray-100 text-gray-600 p-6 rounded-lg text-center">
-        <p className="font-medium">Course content unavailable</p>
-        <p className="text-sm mt-2">This course doesn't have any sections yet</p>
+  if (!data?.course || !data.course.sections?.length) {
+    return (
+      <div className="max-w-7xl mx-auto p-6">
+        <div className="bg-gray-50 border border-gray-200 text-gray-600 p-6 rounded-lg text-center">
+          <p className="font-medium">Course content unavailable</p>
+          <p className="text-sm mt-2">This course doesn't have any sections yet</p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 
-  const { course, progress } = data;
-  const selectedSection = course.sections.find(s => s.id === selectedSectionId) || course.sections[0];
-  const completedCount = course.sections.filter(s => s.is_completed).length;
+  const { course } = data;
+  const selectedSection = course.sections.find((s) => s.id === selectedSectionId);
+  const completedCount = course.sections.filter((s) => s.is_completed).length;
+  const isCourseCompleted = completedCount === course.sections.length;
+  const progressPercentage = data.progress || (completedCount / course.sections.length) * 100;
+
+  if (!selectedSection) return null;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 mt-16">
+    <div className="max-w-7xl mx-auto p-6 mt-16">
       <header className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">{course.title}</h1>
         <div className="flex items-center gap-4">
-          <div className="w-full bg-gray-100 rounded-full h-2">
-            <div 
-              className="bg-blue-600 h-2 rounded-full" 
-              style={{ width: `${progress}%` }}
+          <div className="w-1/4 bg-gray-200 rounded-full h-2">
+            <div
+              className="bg-green-600 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${progressPercentage}%` }}
             ></div>
           </div>
           <span className="text-sm text-gray-600 whitespace-nowrap">
             {completedCount} of {course.sections.length} completed
           </span>
+          {isCourseCompleted && (
+            <span className="text-sm text-green-600 font-semibold">Course Completed!</span>
+          )}
         </div>
       </header>
 
       <div className="grid md:grid-cols-3 gap-8">
-        {/* Main content */}
         <main className="md:col-span-2 space-y-6">
           <div className="bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
-            {selectedSection?.video_url ? (
+            {selectedSection.video_url ? (
               <video
+                ref={videoRef}
                 src={selectedSection.video_url}
                 controls
                 className="w-full aspect-video bg-black"
+                onError={() => setVideoError('Failed to load video. Please try again.')}
               />
             ) : (
-              <div className="aspect-video flex items-center justify-center text-gray-400">
+              <div className="aspect-video flex items-center justify-center text-gray-400 bg-gray-100">
                 <div className="text-center p-6">
                   <p className="font-medium">No video available</p>
                   <p className="text-sm mt-1">This section doesn't have content yet</p>
+                  {!selectedSection.is_completed && (
+                    <button
+                      onClick={handleMarkComplete}
+                      disabled={marking}
+                      className={`mt-4 px-4 py-2 rounded ${marking ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'
+                        }`}
+                    >
+                      {marking ? 'Marking...' : 'Mark as Completed'}
+                    </button>
+                  )}
                 </div>
               </div>
             )}
+            {videoError && (
+              <div className="text-red-600 text-sm mt-2 text-center">{videoError}</div>
+            )}
+            {markError && (
+              <div className="text-red-600 text-sm mt-2 text-center">
+                {markError?.data?.detail || 'Failed to mark section as completed'}
+              </div>
+            )}
           </div>
-
+          {/* Navigation Buttons */}
+          <div className="flex justify-between">
+            <Button
+              onClick={handlePreviousSection}
+              disabled={course.sections.findIndex((s) => s.id === selectedSectionId) === 0}
+              className='px-4 py-2 cursor-pointer'
+            //  variant='secondary'
+            >
+              Previous
+            </Button>
+            <Button
+              onClick={handleNextSection}
+              disabled={course.sections.findIndex((s) => s.id === selectedSectionId) === course.sections.length - 1}
+              className='px-4 py-2 cursor-pointer'
+            // variant='secondary'
+            >
+              Next
+            </Button>
+          </div>
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h2 className="font-semibold text-lg mb-3">{selectedSection.title}</h2>
             <p className="text-gray-600">
@@ -91,15 +236,11 @@ const CoursePlayer = () => {
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h2 className="font-semibold text-lg mb-3">About Course</h2>
             <p className="text-gray-600">
-              {course.description|| 'No description provided for this section.'}
-            </p>
-               <p className="text-gray-600">
-              {course.syllabus|| 'No syllabus provided for this section.'}
+              {course.description || 'No description provided for this course.'}
             </p>
           </div>
         </main>
 
-        {/* Sidebar */}
         <aside className="space-y-4">
           <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
             <div className="p-4 border-b border-gray-100">
@@ -110,39 +251,52 @@ const CoursePlayer = () => {
                 <button
                   key={section.id}
                   onClick={() => setSelectedSectionId(section.id)}
-                  className={`w-full text-left p-4 transition-colors ${
-                    selectedSectionId === section.id 
-                      ? 'bg-blue-50' 
-                      : 'hover:bg-gray-50'
-                  }`}
+                  className={`w-full text-left p-4 transition-colors ${selectedSectionId === section.id ? 'bg-blue-50' : 'hover:bg-gray-50'
+                    }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${
-                      section.is_completed 
-                        ? 'bg-green-100 text-green-600' 
-                        : 'bg-gray-100 text-gray-500'
-                    }`}>
-                      {section.is_completed ? (
-                        <Check size={14} />
-                      ) : (
-                        <Play size={14} />
-                      )}
+                    <div
+                      className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${section.is_completed ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-500'
+                        }`}
+                    >
+                      {section.is_completed ? <Check size={14} /> : <Play size={14} />}
                     </div>
                     <div className="min-w-0">
-                      <h3 className={`text-sm font-medium truncate ${
-                        selectedSectionId === section.id ? 'text-blue-600' : 'text-gray-700'
-                      }`}>
+                      <h3
+                        className={`text-sm font-medium truncate ${selectedSectionId === section.id ? 'text-blue-600' : 'text-gray-700'
+                          }`}
+                      >
                         {section.title}
                       </h3>
-                      <p className="text-xs text-gray-500 mt-1">
-                        Section {section.position}
-                      </p>
+                      <p className="text-xs text-gray-500 mt-1">Section {section.order}</p>
                     </div>
                   </div>
                 </button>
               ))}
             </div>
+
           </div>
+
+          {/* onlya ctive when course is completed */}
+
+          {/* Certificate Section - Visible to all but only active when completed */}
+          <div className="p-4 mt-4 border rounded-lg bg-gray-50">
+            {!isCourseCompleted ? (
+              <p className="text-sm text-gray-600 mb-3">
+                Complete all sections to unlock your certificate
+              </p>
+            ) : null}
+
+            <Button
+              onClick={isCourseCompleted ? handleCertificate : undefined}
+              variant={isCourseCompleted ? 'default' : 'outline'}
+              className={`w-full ${isCourseCompleted ? 'bg-green-600 hover:bg-green-700 text-white' : 'text-gray-500'}`}
+              disabled={!isCourseCompleted}
+            >
+              {isCourseCompleted ? 'Download Certificate' : 'Certificate Locked'}
+            </Button>
+          </div>
+
         </aside>
       </div>
     </div>
