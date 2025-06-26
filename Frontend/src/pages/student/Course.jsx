@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { ArrowRight, Clock, ShoppingCart, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -94,20 +95,14 @@ const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 
           <>
             <div className="text-sm text-gray-600 dark:text-gray-400">
               Progress: {progress}%
-              <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded mt-1">
-                <div
-                  className="h-full bg-green-500 rounded"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
+              <Progress value={progress} className="mt-2" />
             </div>
             <Button
               size="sm"
-              className={`w-full h-9 text-sm font-medium gap-1.5 cursor-pointer ${
-                isCompleted ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 hover:bg-gray-700'
-              }`}
+              className={`w-full h-9 text-sm font-medium gap-1.5 cursor-pointer ${isCompleted ? 'bg-black hover:bg-black-700' : 'bg-white hover:bg-gray-200 text-black border-1 border-gray-900'
+                }`}
               onClick={handleContinueLearning}
-              // disabled={isCompleted} // Uncomment to disable for completed courses
+            // disabled={isCompleted} // Uncomment to disable for completed courses
             >
               {isCompleted ? 'Completed Course' : 'Continue Learning'}
               <ArrowRight className="h-4 w-4" />

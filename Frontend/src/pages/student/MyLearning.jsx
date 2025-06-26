@@ -25,7 +25,15 @@ const MyLearning = () => {
                             course={enrollment.course}
                             isEnrolled={true}
                             isCompleted={enrollment.status === 'completed' || enrollment.status === 'certified'}
-                            progress={enrollment.progress || 0}
+                            // progress={enrollment.progress || 0}
+                            progress={
+                                enrollment.progress % 1 === 0
+                                    ? `${enrollment.progress.toFixed(0)}`
+                                    : `${enrollment.progress.toFixed(2)}`
+                            }
+
+                        //  Similarity: {(course.similarity_score * 100).toFixed(1)}%
+
                         />
                     ))}
                 </div>

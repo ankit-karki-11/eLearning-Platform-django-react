@@ -5,7 +5,7 @@ import {
   useMarkSectionAsCompletedMutation,
   useUpdateLastAccessedMutation,
 } from '@/features/api/enrollmentApi';
-import { Check, Play } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Play } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 
@@ -100,7 +100,7 @@ const CoursePlayer = () => {
   };
 
   const handleCertificate = () => {
-    navigate(`/course/`);
+    navigate(`/course/${slug}/certificate`);
   }
 
   if (isLoading) {
@@ -159,6 +159,7 @@ const CoursePlayer = () => {
             <div
               className="bg-green-600 h-2 rounded-full transition-all duration-300"
               style={{ width: `${progressPercentage}%` }}
+
             ></div>
           </div>
           <span className="text-sm text-gray-600 whitespace-nowrap">
@@ -213,9 +214,10 @@ const CoursePlayer = () => {
             <Button
               onClick={handlePreviousSection}
               disabled={course.sections.findIndex((s) => s.id === selectedSectionId) === 0}
-              className='px-4 py-2 cursor-pointer'
+              className='cursor-pointer'
             //  variant='secondary'
             >
+                <ArrowLeft className="h-4 w-4" />
               Previous
             </Button>
             <Button
@@ -224,7 +226,9 @@ const CoursePlayer = () => {
               className='px-4 py-2 cursor-pointer'
             // variant='secondary'
             >
+              
               Next
+                <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
           <div className="bg-white rounded-lg border border-gray-200 p-6">
@@ -293,7 +297,7 @@ const CoursePlayer = () => {
               className={`w-full ${isCourseCompleted ? 'bg-green-600 hover:bg-green-700 text-white' : 'text-gray-500'}`}
               disabled={!isCourseCompleted}
             >
-              {isCourseCompleted ? 'Download Certificate' : 'Certificate Locked'}
+              {isCourseCompleted ? 'Get your Certificate' : 'Certificate Locked'}
             </Button>
           </div>
 

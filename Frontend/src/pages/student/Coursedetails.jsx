@@ -130,9 +130,9 @@ const CourseDetails = () => {
                                     {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
                                 </span>
                                 <span className="text-sm text-gray-300 flex items-center">
-                                    <Calendar className="h-4 w-4 mr-1" />
-                                    <span>
-                                        {new Date(course.created_at).toLocaleDateString('en-US', {
+                                    <Calendar className="h-4 w-4 mr-1" /> 
+                                    <span> Last Updated on: 
+                                        {new Date(course.updated_at).toLocaleDateString('en-US', {
                                             year: 'numeric',
                                             month: 'long',
                                             day: 'numeric',
@@ -145,9 +145,9 @@ const CourseDetails = () => {
                                 {course.title}
                             </h1>
 
-                            {/* <p className="text-lg text-gray-300 max-w-3xl">
+                            <p className="text-lg text-gray-300 max-w-3xl">
                                 {course.short_description || course.description.substring(0, 150) + '...'}
-                            </p> */}
+                            </p>
 
                             <div className="flex flex-wrap gap-4">
                                 <div className="flex items-center bg-gray-800/50 px-3 py-2 rounded-lg">
@@ -194,8 +194,8 @@ const CourseDetails = () => {
                         {/* Description Card */}
                         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
                             <h2 className="text-2xl font-bold mb-6 flex items-center">
-                                <Award className="h-6 w-6 mr-3 text-blue-600" />
-                                Course Description
+                                {/* <Award className="h-6 w-6 mr-3 text-blue-600" /> */}
+                                Description
                             </h2>
                             <div className="prose max-w-none text-gray-700">
                                 <p className="text-base leading-relaxed">{course.description}</p>
@@ -222,7 +222,7 @@ const CourseDetails = () => {
                                     {course.requirements?.split('\n').filter(Boolean).map((req, index) => (
                                         <li key={index} className="flex items-start">
                                             <Check className="h-5 w-5 text-blue-500 mt-0.5 mr-3 flex-shrink-0" />
-                                            <span className="text-gray-700">{req.trim()}</span>
+                                            <span className="text-gray-800">{req.trim()}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -230,16 +230,29 @@ const CourseDetails = () => {
                         </div>
 
                         {/* Syllabus */}
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+                        {/* <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
                             <h2 className="text-2xl font-bold mb-6">Course Curriculum</h2>
                             <div className="space-y-4">
                                 {course.syllabus?.split('\n').filter(Boolean).map((line, index) => (
                                     <div key={index} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
-                                        <h3 className="text-lg font-semibold text-gray-800">{line.trim()}</h3>
+                                        <h3 className="text-lg  text-gray-800">{line.trim()}</h3>
                                     </div>
                                 ))}
                             </div>
+                        </div> */}
+
+                        {/* Syllabus */}
+                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+                            <h2 className="text-2xl font-bold mb-6">Course Curriculum</h2>
+                            <ol className="list-decimal list-inside space-y-2">
+                                {course.syllabus?.split('\n').filter(Boolean).map((line, index) => (
+                                    <li key={index} className="text-lg  text-gray-800">
+                                        {line.trim()}
+                                    </li>
+                                ))}
+                            </ol>
                         </div>
+
                     </div>
 
                     {/* Right Sidebar */}

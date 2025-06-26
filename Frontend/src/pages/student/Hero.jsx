@@ -21,7 +21,7 @@ const Hero = () => {
 
         <h1 className='text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-gray-900 dark:text-white mb-6 leading-tight'>
           Learn smarter with <br className="sm:hidden" />
-          <span className="text-gray-600">AI-driven</span> precision
+          <span className="text-gray-600 ">AI-driven</span> precision
         </h1>
 
         <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">

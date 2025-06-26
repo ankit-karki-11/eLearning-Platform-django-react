@@ -21,6 +21,7 @@ import CategoryDetails from './pages/student/CategoryDetails'
 import CoursePlayer from './pages/student/CoursePlayer'
 import AllCourse from './pages/student/AllCourse'
 import Interviewpage from './pages/student/Interviewpage'
+import Certificate from './pages/student/Certificate'
 
 const appRouter = createBrowserRouter([
   {
@@ -81,6 +82,11 @@ const appRouter = createBrowserRouter([
       {
         path: "course/:slug/progress",
         element: <CoursePlayer />
+      },
+
+       {
+        path: "course/:slug/certificate",
+        element: <Certificate />
       },
 
 

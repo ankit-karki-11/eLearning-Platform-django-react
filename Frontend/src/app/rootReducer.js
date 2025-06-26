@@ -6,6 +6,7 @@ import { paymentApi } from '@/features/api/paymentApi';
 import { categoryApi } from '@/features/api/categoryApi';
 import { enrollmentApi } from '@/features/api/enrollmentApi';
 import { recommendationApi } from '@/features/api/recommendationApi';
+import { certificateApi } from '@/features/api/certificateApi';
 
 const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     [categoryApi.reducerPath]: categoryApi.reducer,
     [enrollmentApi.reducerPath]: enrollmentApi.reducer,
     [recommendationApi.reducerPath]: recommendationApi.reducer,
+    [certificateApi.reducerPath]: certificateApi.reducer,
     auth: authReducer,
 
 });
