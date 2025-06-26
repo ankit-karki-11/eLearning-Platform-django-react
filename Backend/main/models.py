@@ -225,12 +225,6 @@ class Enrollment(models.Model):
             self.progress = 100
         self.save()
 
-    def issue_certificate(self):
-        if self.status != 'completed':
-            raise ValidationError("Course must be completed before certification")
-        self.status = 'certified'
-        self.save()
-
     def computed_progress(self):
         total_sections = self.course.sections.count()
         completed_sections = self.section_progresses.filter(is_completed=True).count()
@@ -243,6 +237,8 @@ class Enrollment(models.Model):
     @property
     def is_certified(self):
         return self.status == 'certified'
+
+
 #section-progress
 class SectionProgress(models.Model):
     enrollment = models.ForeignKey(
@@ -334,7 +330,7 @@ class Attachment(models.Model):
         related_name="attachments"
     )
     name=models.CharField(max_length=200)
-    file=models.FileField(upload_to="attachments/")
+    file=models.FileField(upload_to="attachments/%Y/%m/%d/")
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     
@@ -346,38 +342,91 @@ class Attachment(models.Model):
         verbose_name_plural="Attachments"
         ordering=["-created_at"]
 
-#certificate model
+from django.core.files import File
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.utils import timezone
+import os
+from main.utils import generate_certificate
+
+# class Certificate(models.Model):
+#     student = models.ForeignKey(
+#         'users.UserAccount',
+#         on_delete=models.CASCADE,
+#         limit_choices_to={'role': 'student'},
+#         related_name="certificates"
+#     )
+#     course = models.ForeignKey(
+#         'main.Course',
+#         on_delete=models.CASCADE,
+#         related_name="certificates"
+#     )
+#     enrollment = models.ForeignKey(
+#         'main.Enrollment',
+#         on_delete=models.CASCADE,
+#         related_name="certificates"
+#     )
+#     certificate_file = models.FileField(upload_to="certificates/%Y/%m/%d/")
+#     issued_at = models.DateTimeField(auto_now_add=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return f"{self.student.full_name} - {self.course.title}"
+
+#     def generate_certificate_file(self):
+#         try:
+#             issued_at = self.issued_at or timezone.now()
+#             relative_path = generate_certificate(
+#                 student_name=self.student.full_name,
+#                 course_name=self.course.title,
+#                 issued_at=issued_at
+#             )
+#             file_path = os.path.join(settings.MEDIA_ROOT, relative_path)
+#             with open(file_path, 'rb') as f:
+#                 self.certificate_file.save(os.path.basename(relative_path), File(f), save=False)
+#         except Exception as e:
+#             raise ValidationError(f"Failed to generate certificate: {str(e)}")
+
+#     def save(self, *args, **kwargs):
+#         if not self.pk and not self.certificate_file:
+#             self.issued_at = self.issued_at or timezone.now()
+#             self.generate_certificate_file()
+#             self.enrollment.issue_certificate()
+#         super().save(*args, **kwargs)
+
+#     class Meta:
+#         db_table = "certificate"
+#         ordering = ["-issued_at"]
+#         unique_together = ["student", "course"]
+
+from django.db import models
+from django.utils import timezone
+import uuid
 
 class Certificate(models.Model):
-    student=models.ForeignKey(
-        UserAccount,
+    enrollment = models.OneToOneField(
+        Enrollment,
         on_delete=models.CASCADE,
-        limit_choices_to={'role':'student'},
-        related_name="certificates"
+        related_name="certificate",
+        limit_choices_to={"status": "completed"},
     )
-    course=models.ForeignKey(
-        Course,
-        on_delete=models.CASCADE,
-        related_name="certificates"
-    )
-    enrollment=models.ForeignKey(
-        'main.Enrollment',
-        on_delete=models.CASCADE,
-        related_name="certificates"
-    )
-    certificate_file=models.FileField(upload_to="certificates/")
-    issued_at=models.DateTimeField(auto_now_add=True)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now=True)
-    
-    def __str__(self):
-        return f"{self.student.full_name} - {self.course.title} - {self.issued_at}"
-    
+    certificate_id = models.CharField(max_length=12, unique=True, blank=True)  # Shorter ID
+    certificate_file = models.FileField(upload_to="certificates/%Y/%m/%d/")
+    issued_at = models.DateTimeField(auto_now_add=True)
+
     class Meta:
-        db_table="certificate"
-        verbose_name_plural="Certificates"
-        ordering=["-issued_at"]
-        unique_together = ["student", "course"]
-        
-  
+        db_table = "certificate"
+        ordering = ["-issued_at"]
+
+    def __str__(self):
+        return self.certificate_id
+
+    def save(self, *args, **kwargs):
+        if not self.certificate_id:
+            # Format: YYMMDD-XXX (e.g., 240615-A7F)
+            date_str = timezone.now().strftime("%y%m%d")  # 2-digit year + month + day
+            random_chars = uuid.uuid4().hex[:3].upper()   # 3-character random code
+            self.certificate_id = f"{date_str}-{random_chars}"
+        super().save(*args, **kwargs)
+
 #review model ,discussion model , progress model, reply of the comment model will be fo fututre features,   

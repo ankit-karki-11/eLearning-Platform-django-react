@@ -476,9 +476,129 @@ class AttachmentViewSet(ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
             
-#certificate viewset //will be done later
+#certificate viewset 
 
 
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.decorators import action
+from django.shortcuts import get_object_or_404
+from .models import Certificate, Enrollment, Course
+from .serializers import CertificateSerializer
+from .utils import generate_certificate
+from django.utils import timezone
+
+class CertificateViewSet(ModelViewSet):
+    queryset = Certificate.objects.all()
+    serializer_class = CertificateSerializer
+    lookup_field = 'certificate_id'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Add filters
+        enrollment_id = self.request.query_params.get('enrollment_id')
+        student_id = self.request.query_params.get('student_id')
+        course_slug = self.request.query_params.get('course_slug')
+        
+        if enrollment_id:
+            queryset = queryset.filter(enrollment_id=enrollment_id)
+        if student_id:
+            queryset = queryset.filter(enrollment__student_id=student_id)
+        if course_slug:
+            queryset = queryset.filter(enrollment__course__slug=course_slug)
+        return queryset
+
+    def create(self, request, *args, **kwargs):
+        """Create certificate using enrollment_id"""
+        enrollment_id = request.data.get('enrollment_id')
+        try:
+            enrollment = Enrollment.objects.get(id=enrollment_id)
+            return self._generate_certificate(enrollment)
+        except Enrollment.DoesNotExist:
+            return Response({"error": "Enrollment not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    @action(detail=False, methods=['post'], url_path='generate/(?P<course_slug>[^/.]+)')
+    def generate_with_slug(self, request, course_slug=None):
+        """Create certificate using course_slug"""
+        student = request.user
+        course = get_object_or_404(Course, slug=course_slug)
+        enrollment = get_object_or_404(
+            Enrollment,
+            course=course,
+            student=student,
+            status='completed'
+        )
+        return self._generate_certificate(enrollment)
+
+    def _generate_certificate(self, enrollment):
+        """Shared certificate generation logic"""
+        if hasattr(enrollment, 'certificate'):
+            return Response(
+                {"error": "Certificate already exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        try:
+            # First create the certificate to generate the ID
+            certificate = Certificate.objects.create(enrollment=enrollment)
+            
+            # Generate certificate image using the auto-generated ID
+            file_path = generate_certificate(
+                student_name=enrollment.student.full_name,
+                course_name=enrollment.course.title,
+                issued_at=certificate.issued_at,
+                certificate_id=certificate.certificate_id
+            )
+            
+            # Update with the generated file path
+            certificate.certificate_file = file_path
+            certificate.save()
+            
+            serializer = self.get_serializer(certificate)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            
+        except Exception as e:
+            return Response(
+                {"error": f"Certificate generation failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+        
+    def list(self, request, *args, **kwargs):
+        """Enhanced list with download URLs"""
+        response = super().list(request, *args, **kwargs)
+        
+        # Add download URLs for both list and paginated responses
+        if 'results' in response.data:  # Paginated case
+            for cert_data in response.data['results']:
+                cert_data['download_url'] = request.build_absolute_uri(cert_data['certificate_file'])
+        else:  # Non-paginated case
+            for cert_data in response.data:
+                cert_data['download_url'] = request.build_absolute_uri(cert_data['certificate_file'])
+                
+        return response
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+        
+        
 #recommendation view set
 #content based recommendation system
 import pandas as pd #type: ignore

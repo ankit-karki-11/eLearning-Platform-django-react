@@ -4,8 +4,7 @@ from .views import (
     CategoryViewSet, CourseViewSet, SectionViewSet,
     CartViewSet,AttachmentViewSet, 
     EnrollmentViewSet,SectionProgressViewSet,RecommendationViewSet,
-    # PaymentViewSet,
-    #CertificateViewSet
+   CertificateViewSet
 )
 router= DefaultRouter()
 router.register(r"category", CategoryViewSet, basename="category")
@@ -17,6 +16,7 @@ router.register(r"enrollments", EnrollmentViewSet, basename="enrollments")
 router.register(r"section-progress", SectionProgressViewSet, basename="section-progress")
 
 router.register(r"recommendations", RecommendationViewSet, basename="recommendation")
+router.register(r'certificates', CertificateViewSet, basename='certificate')
 
 
 urlpatterns = [

@@ -434,52 +434,61 @@ class CartSerializer(serializers.ModelSerializer):
             "updated_at",
         ]
 
+from rest_framework import serializers
+from .models import Certificate
+from .utils import generate_certificate
+from django.utils import timezone
+
+class CertificateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Certificate
+        fields = ['certificate_id', 'certificate_file', 'issued_at']
+        read_only_fields = ['certificate_id', 'issued_at']
+
+    def create(self, validated_data):
+        enrollment = validated_data['enrollment']
+        student_name = enrollment.student.full_name
+        course_title = enrollment.course.title
+        # certificate_id =certificate.certificate_id
+        
+        # First create the certificate to generate the ID automatically
+        certificate = Certificate.objects.create(enrollment=enrollment)
+        
+        
+        # Generate certificate image
+        certificate_path = generate_certificate(
+            student_name=student_name,
+            course_name=course_title,  # Now correctly using course.title
+            issued_at=timezone.now(),
+            certificate_id=certificate.certificate_id
+        )
+        
+        #  3. Update with file path
+        certificate.certificate_file = certificate_path
+        certificate.save()
+        
+        return certificate
+    
+    
+# from rest_framework import serializers
+# from .models import Certificate
+# from users.models import UserAccount
 # class CertificateSerializer(serializers.ModelSerializer):
-#     course=CourseListSerializer(read_only=True)
-#     course_id=serializers.PrimaryKeyRelatedField(
-#         queryset=Course.objects.all(),
-#         source="course",
-#         write_only=True,
-#         error_messages={
-#             "does_not_exist": "Course does not exist.",
-#             "required": "Course is required.",
-#         },
-#     )
-#     student=UserAccountListSerializer(read_only=True)
-#     student_id=serializers.PrimaryKeyRelatedField(
-#         queryset=UserAccount.objects.filter(role="student"),
-#         source="student",
-#         write_only=True,
-#         error_messages={
-#             "does_not_exist": "Student does not exist.",
-#             "required": "Student is required.",
-#         },
-#     )
-    
-    # def save(self, **kwargs):
-    #     certification=super(CertificateSerializer,self).save(**kwargs)
-    #     #get details of the student and course
-    #     student_name=certification.student.full_name
-    #     course_title=certification.course.title
-    #     admin_name=certification.course.admin.full_name
-        
-    #     # Generate certificate file and assign it to the model
-    #     certificate_file_path=certificate(student_name,course_title,admin_name)
-    #     certificate_file=certificate_file.path
-    #     # Save the certificate file path to the model
-    #     certification.save()
-    #     return certification
-        
-    
-    # class Meta:
-    #     model=Certificate
-    #     fields=[
-    #         "id",
-    #         "course",
-    #         "course_id",
-    #         "student",
-    #         "student_id",
-    #         "certificate_file",
-    #         "created_at",
-    #         "updated_at",
-    #     ]
+#     course = CourseListSerializer(read_only=True)
+#     student = UserAccountListSerializer(read_only=True)
+#     certificate_url = serializers.SerializerMethodField()
+
+#     def get_certificate_url(self, obj):
+#         return self.context['request'].build_absolute_uri(obj.certificate_file.url) if obj.certificate_file else None
+
+#     def validate(self, attrs):
+#         enrollment = attrs.get('enrollment')
+#         if enrollment.status != 'completed':
+#             raise serializers.ValidationError("Course must be completed")
+#         return attrs
+
+#     class Meta:
+#         model = Certificate
+#         fields = ["id", "course", "student", "enrollment", "certificate_url", "issued_at"]
+#         read_only_fields = ["certificate_url", "issued_at"]
+#         extra_kwargs = {"enrollment": {"required": True}}
