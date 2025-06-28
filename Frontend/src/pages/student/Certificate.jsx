@@ -1,99 +1,137 @@
-import { Button } from '@/components/ui/button';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import {
   useGetMyCertificatesQuery,
-  useLazyDownloadCertificateQuery,
-} from '@/features/api/certificateApi';
-import { Download, ArrowLeft } from 'lucide-react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'sonner';
+  useGenerateCertificateMutation,
+} from "@/features/api/certificateApi";
+import { Button } from "@/components/ui/button";
+import Confetti from "react-confetti";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const Certificate = () => {
   const { slug } = useParams();
-  const navigate = useNavigate();
+  const [certificate, setCertificate] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const { width, height } = useWindowSize();
 
-  // Fetch certificate data with refetching
-  const { data: certificates, isLoading, isError, error } = useGetMyCertificatesQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  });
-  const [downloadCertificate, { isLoading: isDownloading }] = useLazyDownloadCertificateQuery();
+  const {
+    data: certificates,
+    isLoading: loadingCertificates,
+    isError: errorFetchingCertificates,
+    refetch: refetchCertificates,
+  } = useGetMyCertificatesQuery();
 
-  // Debugging logs
-  console.log('Certificates:', certificates);
-  console.log('Slug:', slug);
-  const certificate = certificates?.find((c) => c.course.slug.toLowerCase() === slug.toLowerCase());
-  console.log('Certificate:', certificate);
+  const [
+    generateCertificate,
+    {
+      isLoading: generating,
+      isError: errorGenerating,
+      error: generateError,
+    },
+  ] = useGenerateCertificateMutation();
 
-  const handleDownload = async () => {
-    if (!certificate?.id) {
-      toast.error('No certificate available to download.');
-      return;
+  useEffect(() => {
+    if (certificates) {
+      const certForCourse = certificates.find((cert) => cert.course_slug === slug);
+      if (certForCourse) {
+        setCertificate(certForCourse);
+        setShowConfetti(true);
+      } else {
+        generateCertificate(slug)
+          .unwrap()
+          .then((res) => {
+            setCertificate(res);
+            setShowConfetti(true);
+          })
+          .catch((err) => {
+            if (err?.data?.error === "Certificate already exists") {
+              refetchCertificates().then(({ data }) => {
+                const cert = data?.find((c) => c.course_slug === slug);
+                cert ? setCertificate(cert) : setErrorMessage("Certificate not found");
+              });
+            } else {
+              setErrorMessage(err?.data?.error || "Failed to generate certificate");
+            }
+          });
+      }
     }
-    try {
-      const { data: blob } = await downloadCertificate(certificate.id);
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `Certificate_${certificate.course.title.replace(/\s+/g, '_')}.png`;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.URL.revokeObjectURL(url); // Clean up
-      toast.success('Certificate downloaded successfully!');
-    } catch (error) {
-      console.error('Download failed:', error);
-      toast.error('Failed to download certificate. Please try again.');
-    }
-  };
+  }, [certificates, slug, generateCertificate, refetchCertificates]);
 
-  if (isLoading) {
-    return <div className="flex justify-center p-24">Loading...</div>;
+  if (loadingCertificates || generating) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
+        <div className="w-16 h-16 border-8 border-gray-300 border-t-green-500 rounded-full animate-spin" />
+        <span className="text-lg font-medium text-gray-600">
+          {loadingCertificates ? "Loading..." : "Generating..."}
+        </span>
+      </div>
+    );
   }
 
-  if (isError) {
+  if (errorFetchingCertificates || errorGenerating) {
     return (
-      <div className="text-center p-24">
-        <h1 className="text-2xl font-bold mb-4">Error Loading Certificate</h1>
-        <p className="mb-6">{error?.data?.detail || 'Failed to load certificate data.'}</p>
-        <Button onClick={() => navigate(`/course/${slug}`)}>
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Course
+      <div className="max-w-md mt-12 p-6 mx-auto my-10 text-center bg-red-50 rounded-lg">
+        <h3 className="mb-2 text-xl font-semibold text-red-600">
+          {errorFetchingCertificates ? "Error fetching certificates" : "Certificate Error"}
+        </h3>
+        <p className="mb-4">{errorMessage || "Please try again later."}</p>
+        <Button 
+          variant="outline" 
+          onClick={errorFetchingCertificates ? refetchCertificates : () => generateCertificate(slug)}
+        >
+          Retry
         </Button>
       </div>
     );
   }
 
-  if (!certificates || !certificate) {
+  if (!certificate) {
     return (
-      <div className="text-center p-24">
-        <h1 className="text-2xl font-bold mb-4">Certificate Not Available</h1>
-        <p className="mb-6">Please complete the course to generate your certificate.</p>
-        <Button onClick={() => navigate(`/course/${slug}/progress`)}>
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Course
+      <div className="max-w-md p-6 mx-auto my-10 text-center bg-yellow-50 rounded-lg">
+        <h3 className="mb-4 text-xl font-semibold text-yellow-700">
+          No certificate found for this course
+        </h3>
+        <Button onClick={() => generateCertificate(slug)}>
+          Generate Certificate
         </Button>
       </div>
     );
   }
 
   return (
-    <div className="text-center p-24">
-      <h1 className="text-2xl font-bold mb-8">Certificate of Completion</h1>
+    <div className="relative mt-4 max-w-6xl px-4 mx-auto py-12">
+      {showConfetti && (
+        <Confetti 
+          width={width} 
+          height={height} 
+          numberOfPieces={200}
+          recycle={false}
+          onConfettiComplete={() => setShowConfetti(false)}
+        />
+      )}
 
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8 mb-8">
-        <h2 className="text-xl font-semibold mb-2">{certificate.course.title}</h2>
-        <p className="mb-4">Awarded to: {certificate.student.full_name}</p>
-        <p className="text-gray-600">
-          Completed on: {new Date(certificate.issued_at).toLocaleDateString()}
-        </p>
-      </div>
+      <div className="flex flex-col items-center space-y-8">
+        <div className="p-4">
+          <img
+            src={certificate.certificate_file}
+            alt="Certificate"
+            className="w-full max-w-4xl"
+            loading="lazy"
+          />
+        </div>
 
-      <div className="flex justify-center gap-4">
-        <Button onClick={handleDownload} disabled={isDownloading}>
-          <Download className="mr-2 h-4 w-4" />
-          {isDownloading ? 'Preparing...' : 'Download Certificate'}
-        </Button>
-        <Button variant="outline" onClick={() => navigate(`/course/${slug}`)}>
-          Back to Course
+        <Button
+          asChild
+          className="px-8 py-4 text-sm"
+          variant={"outline"}
+        >
+          <a
+            href={certificate.certificate_file}
+            download={`certificate_${certificate.certificate_id}.png`}
+          >
+            Download Certificate
+          </a>
         </Button>
       </div>
     </div>

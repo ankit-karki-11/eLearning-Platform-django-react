@@ -20,10 +20,8 @@ const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 
   if (!course) return <div className="text-red-600 p-4">Error: Invalid course data</div>;
 
   return (
-    
     <div 
-    
-      onClick={!isEnrolled ? handleViewDetails : handleContinueLearning}
+      onClick={handleViewDetails}
       className="rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 overflow-hidden w-full cursor-pointer
       transition-all duration-300 hover:shadow-md hover:border-gray-300 dark:hover:border-gray-600 group"
     >
@@ -52,7 +50,7 @@ const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 
         <div className="flex items-center justify-between text-xs">
           <div className="flex items-center gap-1.5 px-2 py-1 rounded-full font-medium">
             <Clock className="h-3 w-3 text-gray-600 dark:text-gray-400" />
-            <span className="text-gray-900 dark:text-gray-300">{course.course_duration || 0}hrs</span>
+            <span className="text-gray-900 dark:text-gray-300">{course.course_duration || 0}h</span>
           </div>
           
           {course.average_rating && (
@@ -64,7 +62,7 @@ const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 
           
           {!isEnrolled && (
             <div className=" px-2 py-1 rounded-full font-medium">
-              <span className="text-gray-900 font-bold dark:text-blue-400">रु {course.price || 0}</span>
+              <span className="text-gray-900 dark:text-blue-400">रु {course.price || 0}</span>
             </div>
           )}
         </div>
@@ -75,8 +73,8 @@ const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 
             <Progress value={progress} className="h-2" />
             <Button
               size="sm"
-              className={`w-full mt-2 h-8 text-xs font-medium cursor-pointer ${
-                isCompleted ? 'bg-black hover:bg-gray-950 text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
+              className={`w-full mt-2 h-8 text-xs font-medium ${
+                isCompleted ? 'bg-green-600 hover:bg-green-700 text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
               }`}
               onClick={handleContinueLearning}
             >

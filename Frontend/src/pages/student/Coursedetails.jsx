@@ -8,74 +8,22 @@ import { toast } from 'sonner'
 import { Progress } from '@/components/ui/progress'
 import ReactPlayer from 'react-player/youtube'
 import RecommendedCourses from './RecommendedCourses'
+import { useLoadMyEnrollmentsQuery } from '@/features/api/enrollmentApi';
 
 const CourseDetails = () => {
     const { slug } = useParams()
     const { data, isLoading, error } = useLoadCourseQuery()
     const { data: user, isLoading: isLoadingUser, refetch } = useLoadUserQuery();
+    const { data: enrollments, } = useLoadMyEnrollmentsQuery();
+    const isEnrolled = enrollments?.is_enrolled;
+
     const navigate = useNavigate();
 
     // Loading state
-    // Loading state
     if (isLoading) return (
-        <div className="min-h-screen bg-gray-50 p-4">
-            {/* Hero Section */}
-            <div className="bg-gray-200 h-64 rounded-lg mb-8 animate-pulse"></div>
-
-            {/* Main Content */}
-            <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
-                {/* Left Content - 2/3 width on larger screens */}
-                <div className="md:col-span-2 space-y-6">
-                    {/* Text Block */}
-                    <div className="bg-white p-6 rounded-lg shadow-sm space-y-4">
-                        <div className="h-6 w-1/3 bg-gray-200 rounded"></div>
-                        <div className="space-y-2">
-                            <div className="h-4 bg-gray-200 rounded"></div>
-                            <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-                            <div className="h-4 bg-gray-200 rounded w-2/3"></div>
-                        </div>
-                    </div>
-
-                    {/* List Items */}
-                    <div className="bg-white p-6 rounded-lg shadow-sm space-y-4">
-                        <div className="h-6 w-1/3 bg-gray-200 rounded"></div>
-                        <div className="space-y-3">
-                            {[...Array(4)].map((_, i) => (
-                                <div key={i} className="flex items-center">
-                                    <div className="h-4 w-4 bg-gray-200 rounded-full mr-3"></div>
-                                    <div className="h-3 w-3/4 bg-gray-200 rounded"></div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Right Sidebar - 1/3 width on larger screens */}
-                <div className="md:col-span-1 space-y-6">
-                    <div className="bg-white p-6 rounded-lg shadow-sm space-y-4">
-                        <div className="h-8 w-1/2 bg-gray-200 rounded mx-auto"></div>
-                        <div className="h-10 bg-gray-200 rounded"></div>
-                        <div className="h-4 w-3/4 bg-gray-200 rounded mx-auto"></div>
-                        <div className="h-10 bg-gray-200 rounded"></div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Cards Section */}
-            <div className="max-w-6xl mx-auto mt-12 space-y-4">
-                <div className="h-6 w-1/4 bg-gray-200 rounded mx-auto"></div>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {[...Array(3)].map((_, i) => (
-                        <div key={i} className="bg-white p-4 rounded-lg shadow-sm space-y-3">
-                            <div className="h-32 bg-gray-200 rounded-lg"></div>
-                            <div className="h-5 w-3/4 bg-gray-200 rounded"></div>
-                            <div className="h-4 w-1/2 bg-gray-200 rounded"></div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
+        <LoadingSkeleton />
     )
+
 
     // Error state
     if (error) return (
@@ -94,6 +42,7 @@ const CourseDetails = () => {
     )
 
     const course = data?.find(c => c.slug === slug)
+    // const isEnrolled = enrollments?.is_enrolled ?? false;
 
     // Course not found state
     if (!course) return (
@@ -108,6 +57,16 @@ const CourseDetails = () => {
             </div>
         </div>
     )
+
+
+    const handleIsEnrolled = () => {
+        if (user) {
+            navigate(`/course/${course.slug}/progress`);
+        } else {
+            navigate(`/login?redirect=/checkout/${course.slug}`)
+        }
+    }
+    // )
 
     const handlePayWithKhalti = () => {
         if (user) {
@@ -130,8 +89,8 @@ const CourseDetails = () => {
                                     {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
                                 </span>
                                 <span className="text-sm text-gray-300 flex items-center">
-                                    <Calendar className="h-4 w-4 mr-1" /> 
-                                    <span> Last Updated on: 
+                                    <Calendar className="h-4 w-4 mr-1" />
+                                    <span> Last Updated on:
                                         {new Date(course.updated_at).toLocaleDateString('en-US', {
                                             year: 'numeric',
                                             month: 'long',
@@ -145,9 +104,9 @@ const CourseDetails = () => {
                                 {course.title}
                             </h1>
 
-                            <p className="text-lg text-gray-300 max-w-3xl">
+                            {/* <p className="text-lg text-gray-300 max-w-3xl">
                                 {course.short_description || course.description.substring(0, 150) + '...'}
-                            </p>
+                            </p> */}
 
                             <div className="flex flex-wrap gap-4">
                                 <div className="flex items-center bg-gray-800/50 px-3 py-2 rounded-lg">
@@ -167,7 +126,7 @@ const CourseDetails = () => {
                                 <img
                                     src={course.thumbnail || "/course1.png"}
                                     alt={course.title}
-                                    className="w-full h-52 object-fit"
+                                    className="w-full h-50 object-fit"
                                 />
                                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                                     <button
@@ -182,6 +141,28 @@ const CourseDetails = () => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Mobile Pricing - Fixed at top after scroll */}
+            <div className="lg:hidden sticky top-0 z-10 bg-white border-b py-3 shadow-sm">
+                <div className="container mx-auto px-4">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <div className="text-lg font-bold">रू{course.price}</div>
+                            {course.original_price && (
+                                <div className="text-xs text-gray-500 line-through">
+                                    रू{course.original_price}
+                                </div>
+                            )}
+                        </div>
+                        <Button
+                            onClick={handlePayWithKhalti}
+                            className="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-sm"
+                        >
+                            Enroll Now
+                        </Button>
                     </div>
                 </div>
             </div>
@@ -206,7 +187,7 @@ const CourseDetails = () => {
                         <div className="space-y-6">
                             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
                                 <h2 className="text-2xl font-bold mb-6">What you'll learn</h2>
-                                <div className="grid md:grid-cols-2 gap-4">
+                                <div className="grid md:grid-cols-1 gap-4">
                                     {course.learning_outcomes?.split('\n').filter(Boolean).map((outcome, index) => (
                                         <div key={index} className="flex items-start">
                                             <Check className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
@@ -230,7 +211,7 @@ const CourseDetails = () => {
                         </div>
 
                         {/* Syllabus */}
-                        {/* <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
                             <h2 className="text-2xl font-bold mb-6">Course Curriculum</h2>
                             <div className="space-y-4">
                                 {course.syllabus?.split('\n').filter(Boolean).map((line, index) => (
@@ -239,10 +220,10 @@ const CourseDetails = () => {
                                     </div>
                                 ))}
                             </div>
-                        </div> */}
+                        </div>
 
                         {/* Syllabus */}
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+                        {/* <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
                             <h2 className="text-2xl font-bold mb-6">Course Curriculum</h2>
                             <ol className="list-decimal list-inside space-y-2">
                                 {course.syllabus?.split('\n').filter(Boolean).map((line, index) => (
@@ -251,7 +232,7 @@ const CourseDetails = () => {
                                     </li>
                                 ))}
                             </ol>
-                        </div>
+                        </div> */}
 
                     </div>
 
@@ -281,10 +262,10 @@ const CourseDetails = () => {
                                 <div className="p-6 space-y-4">
                                     {!isLoadingUser ? (
                                         <Button
-                                            onClick={handlePayWithKhalti}
+                                            onClick={isEnrolled ? handleIsEnrolled : handlePayWithKhalti}
                                             className="w-full py-6 text-lg font-semibold bg-gray-900 hover:bg-gray-800 text-white shadow-lg"
                                         >
-                                            Enroll Now
+                                            {isEnrolled ? 'Continue Course' : 'Enroll Now'}
                                         </Button>
                                     ) : (
                                         <Button disabled className="w-full py-3">
@@ -311,7 +292,7 @@ const CourseDetails = () => {
                                 <div className="space-y-3">
                                     <div className="flex items-center">
                                         <Clock className="h-5 w-5 text-gray-600 mr-3" />
-                                        <span className="text-gray-700">{course.course_duration} hours on-demand video</span>
+                                        <span className="text-gray-700">{course.course_duration} hours video</span>
                                     </div>
                                     <div className="flex items-center">
                                         <BookOpen className="h-5 w-5 text-gray-600 mr-3" />
@@ -341,5 +322,68 @@ const CourseDetails = () => {
         </div>
     )
 }
+// Combined Skeleton Loader
+const LoadingSkeleton = () => (
+    <div className="min-h-screen bg-gray-50 p-4">
+        {/* Hero Section Skeleton */}
+        <div className="bg-gray-200 h-64 rounded-lg mb-8 animate-pulse"></div>
+
+        {/* Main Content Skeleton */}
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+            {/* Left Content - 2/3 width */}
+            <div className="md:col-span-2 space-y-6">
+                {/* Text Block */}
+                <div className="bg-white p-6 rounded-lg shadow-sm space-y-4">
+                    <div className="h-6 w-1/3 bg-gray-200 rounded"></div>
+                    <div className="space-y-2">
+                        <div className="h-4 bg-gray-200 rounded"></div>
+                        <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                        <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                    </div>
+                </div>
+
+                {/* List Items */}
+                <div className="bg-white p-6 rounded-lg shadow-sm space-y-4">
+                    <div className="h-6 w-1/3 bg-gray-200 rounded"></div>
+                    <div className="space-y-3">
+                        {[...Array(4)].map((_, i) => (
+                            <div key={i} className="flex items-center">
+                                <div className="h-4 w-4 bg-gray-200 rounded-full mr-3"></div>
+                                <div className="h-3 w-3/4 bg-gray-200 rounded"></div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Right Sidebar - 1/3 width */}
+            <div className="md:col-span-1 space-y-6">
+                <div className="bg-white p-6 rounded-lg shadow-sm space-y-4">
+                    <div className="h-8 w-1/2 bg-gray-200 rounded mx-auto"></div>
+                    <div className="h-10 bg-gray-200 rounded"></div>
+                    <div className="h-4 w-3/4 bg-gray-200 rounded mx-auto"></div>
+                    <div className="h-10 bg-gray-200 rounded"></div>
+                </div>
+            </div>
+        </div>
+
+        {/* Recommended Courses Skeleton */}
+        <div className="max-w-6xl mx-auto mt-12 space-y-4">
+            <div className="h-6 w-1/4 bg-gray-200 rounded mx-auto"></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[...Array(3)].map((_, i) => (
+                    <div key={i} className="bg-white p-4 rounded-lg shadow-sm space-y-3">
+                        <div className="h-32 bg-gray-200 rounded-lg"></div>
+                        <div className="h-5 w-3/4 bg-gray-200 rounded"></div>
+                        <div className="h-4 w-1/2 bg-gray-200 rounded"></div>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+
+    </div>
+);
+
 
 export default CourseDetails

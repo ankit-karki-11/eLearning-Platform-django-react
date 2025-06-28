@@ -83,13 +83,10 @@ const appRouter = createBrowserRouter([
         path: "course/:slug/progress",
         element: <CoursePlayer />
       },
-
        {
-        path: "course/:slug/certificate",
+        path: "certificate/:slug/",
         element: <Certificate />
       },
-
-
     ],
   },
 

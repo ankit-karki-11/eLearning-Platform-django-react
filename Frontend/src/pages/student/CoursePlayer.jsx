@@ -100,7 +100,7 @@ const CoursePlayer = () => {
   };
 
   const handleCertificate = () => {
-    navigate(`/course/${slug}/certificate`);
+    navigate(`/certificate/${slug}/`);
   }
 
   if (isLoading) {
@@ -294,7 +294,8 @@ const CoursePlayer = () => {
             <Button
               onClick={isCourseCompleted ? handleCertificate : undefined}
               variant={isCourseCompleted ? 'default' : 'outline'}
-              className={`w-full ${isCourseCompleted ? 'bg-green-600 hover:bg-green-700 text-white' : 'text-gray-500'}`}
+              // className={`w-full ${isCourseCompleted ? 'bg-green-600 hover:bg-green-700 text-white' : 'text-gray-500'}`}
+              className={`w-full cursor-pointer`}
               disabled={!isCourseCompleted}
             >
               {isCourseCompleted ? 'Get your Certificate' : 'Certificate Locked'}

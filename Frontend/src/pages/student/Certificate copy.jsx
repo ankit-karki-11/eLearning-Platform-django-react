@@ -1,163 +1,131 @@
-import { Button } from '@/components/ui/button'
-import { 
-  useGetMyCertificatesQuery, 
-  useLazyDownloadCertificateQuery,
-  useGenerateCertificateMutation 
-} from '@/features/api/certificateApi'
-import { Loader2, AlertCircle, CheckCircle } from 'lucide-react'
-import React, { useState } from 'react'
-import { toast } from 'sonner'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import {
+  useGetMyCertificatesQuery,
+  useGenerateCertificateMutation,
+} from "@/features/api/certificateApi";
+import { Button } from "@/components/ui/button";
 
 const Certificate = () => {
-  const { slug } = useParams()
-  const navigate = useNavigate()
-  const [error, setError] = useState(null)
-  
-  // Fetch certificates for current user
-  const { 
-    data: certificates, 
-    isLoading, 
-    refetch 
-  } = useGetMyCertificatesQuery()
-  
-  // Certificate download and generation
-  const [downloadCertificate, { isLoading: isDownloading }] = useLazyDownloadCertificateQuery()
-  const [generateCertificate, { isLoading: isGenerating }] = useGenerateCertificateMutation()
+  const { slug } = useParams();
+  const [certificate, setCertificate] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  // Find certificate for this specific course
-  const courseCertificate = certificates?.find(cert => cert.course.slug === slug)
+  const {
+    data: certificates,
+    isLoading: loadingCertificates,
+    isError: errorFetchingCertificates,
+    refetch: refetchCertificates,
+  } = useGetMyCertificatesQuery();
 
-  const handleGenerate = async () => {
-    try {
-      await generateCertificate(slug).unwrap()
-      toast.success('Certificate generated successfully!')
-      refetch()
-    } catch (err) {
-      setError(err.data?.error || 'Failed to generate certificate')
-      toast.error('Certificate generation failed')
+  const [
+    generateCertificate,
+    {
+      isLoading: generating,
+      isError: errorGenerating,
+      error: generateError,
+      data: generatedData,
+    },
+  ] = useGenerateCertificateMutation();
+
+  useEffect(() => {
+    if (certificates) {
+      const certForCourse = certificates.find((cert) => cert.course_slug === slug);
+      if (certForCourse) {
+        setCertificate(certForCourse);
+        setErrorMessage(null);
+      } else {
+        generateCertificate(slug)
+          .unwrap()
+          .then((res) => {
+            setCertificate(res);
+            setErrorMessage(null);
+          })
+          .catch((err) => {
+            if (err?.data?.error === "Certificate already exists") {
+              // try to find the correct one from refreshed list
+              refetchCertificates().then(({ data }) => {
+                const cert = data?.find((c) => c.course_slug === slug);
+                if (cert) setCertificate(cert);
+                else setErrorMessage("Certificate exists but not found.");
+              });
+            } else {
+              setErrorMessage(err?.data?.error || "Failed to generate certificate");
+            }
+          });
+      }
     }
-  }
+  }, [certificates, slug, generateCertificate, refetchCertificates]);
 
-  const handleDownload = async () => {
-    if (!courseCertificate?.id) return
-    
-    try {
-      const { data: blob } = await downloadCertificate(courseCertificate.id)
-      const url = window.URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = `Certificate_${courseCertificate.course.title.replace(/\s+/g, '_')}.png`
-      document.body.appendChild(link)
-      link.click()
-      link.remove()
-    } catch (err) {
-      setError('Failed to download certificate')
-      toast.error('Download failed. Please try again.')
-    }
-  }
-
-  const handleBackToCourse = () => {
-    navigate(`/course/${slug}/progress`)
-  }
-
-  if (isLoading) {
+  if (loadingCertificates)
     return (
-      <div className="flex justify-center items-center h-64">
-        <Loader2 className="h-8 w-8 animate-spin" />
+      <div className="flex justify-center items-center min-h-[50vh]">
+        <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-300 h-16 w-16"></div>
+        <span className="ml-4 text-gray-600 text-lg">Loading your certificates...</span>
       </div>
-    )
-  }
+    );
 
-  if (!courseCertificate) {
+  if (errorFetchingCertificates)
     return (
-      <div className='mt-4 p-24 text-center'>
-        <div className="flex justify-center mb-4">
-          <AlertCircle className="h-12 w-12 text-blue-500" />
-        </div>
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance">
-          Certificate Not Generated Yet
-        </h1>
-        <p className="mt-4 text-lg mb-6">Click below to create your certificate</p>
-        
-        <Button 
-          onClick={handleGenerate}
-          disabled={isGenerating}
-          className='mt-6'
-        >
-          {isGenerating ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Generating...
-            </>
-          ) : (
-            'Generate Certificate'
-          )}
-        </Button>
-        
-        {error && (
-          <p className="mt-4 text-red-500">{error}</p>
-        )}
-        
-        <Button 
-          onClick={handleBackToCourse}
-          variant="outline" 
-          className='mt-6 ml-4'
-        >
-          Back to Course
-        </Button>
+      <div className="max-w-md mx-auto p-6 text-center bg-red-100 border border-red-400 rounded-md text-red-700">
+        Error fetching certificates. Please try again later.
       </div>
-    )
-  }
+    );
+
+  if (generating)
+    return (
+      <div className="flex justify-center items-center min-h-[50vh]">
+        <div className="loader ease-linear rounded-full border-8 border-t-8 border-blue-500 h-16 w-16"></div>
+        <span className="ml-4 text-blue-600 text-lg">Generating your certificate...</span>
+      </div>
+    );
+
+  if (errorGenerating && !certificate)
+    return (
+      <div className="max-w-md mx-auto p-6 text-center bg-red-100 border border-red-400 rounded-md text-red-700">
+        {errorMessage || "Error generating certificate."}
+      </div>
+    );
+
+  if (!certificate)
+    return (
+      <div className="max-w-md mx-auto p-6 bg-yellow-50 border border-yellow-300 rounded-md text-yellow-700 text-center">
+        <p className="mb-4 text-lg font-semibold">No certificate found for this course.</p>
+        <button
+          onClick={() => generateCertificate(slug)}
+          disabled={generating}
+          className={`px-6 py-2 rounded font-semibold transition ${generating
+              ? "bg-yellow-300 cursor-not-allowed"
+              : "bg-yellow-500 hover:bg-yellow-600 text-white"
+            }`}
+        >
+          Generate Certificate
+        </button>
+      </div>
+    );
 
   return (
-    <div className='mt-4 p-24 text-center'>
-      <div className="flex justify-center mb-8">
-        <CheckCircle className="h-16 w-16 text-green-500" />
+    <div className="max-w-4xl mx-auto p-6 bg-white mt-24">
+      <h2 className="text-3xl font-bold mb-6 text-center text-green-700">🎉 Congratulations!</h2>
+      <p className="text-center text-gray-700 mb-1">
+        <strong>Certificate ID:</strong> {certificate.certificate_id}
+      </p>
+      <div className="border rounded-md overflow-hidden shadow-md">
+        <img
+          src={certificate.certificate_file}
+          alt="Certificate"
+          className="w-full object-contain"
+          loading="lazy"
+        />
       </div>
-      
-      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance mb-8">
-        Certificate of Completion
-      </h1>
-      
-      <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8 mb-8">
-        <h2 className="text-2xl font-bold mb-2">{courseCertificate.course.title}</h2>
-        <p className="text-lg mb-6">Awarded to: {courseCertificate.student.full_name}</p>
-        <p className="text-gray-600">
-          Completed on: {new Date(courseCertificate.issued_at).toLocaleDateString()}
-        </p>
-      </div>
-      
-      <div className="flex justify-center gap-4">
-        <Button 
-          onClick={handleDownload}
-          disabled={isDownloading}
-          className='mt-6'
-        >
-          {isDownloading ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Preparing Download...
-            </>
-          ) : (
-            'Download Certificate'
-          )}
-        </Button>
-        
-        <Button 
-          onClick={handleBackToCourse}
-          variant="outline" 
-          className='mt-6'
-        >
-          Back to Course
-        </Button>
-      </div>
-      
-      {error && (
-        <p className="mt-4 text-red-500">{error}</p>
-      )}
+      <p className="mt-6 text-center text-gray-500 text-sm">
+       <Button className="mt-6 text-center text-gray-500 text-sm">
+        Download
+       </Button>
+      </p>
     </div>
-  )
-}
+  );
+};
 
-export default Certificate
+export default Certificate;
+
