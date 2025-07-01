@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from users.models import UserAccount
+# from .serializers import UserAccountListSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 # Custom JWT token serializer
@@ -10,6 +11,15 @@ class MyTokenObtainSerializer(TokenObtainPairSerializer):
         token["role"]=user.role
         token["verified"]=user.is_verified
         return token
+    
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        
+        user_serializer= UserAccountListSerializer(self.user)
+        
+        data["user"]= user_serializer.data
+        data["message"]="Login Successful!"
+        return data
     
 class UserAccountSerializer(serializers.ModelSerializer):
     password=serializers.CharField(write_only=True)
@@ -54,6 +64,7 @@ class UserAccountListSerializer(serializers.ModelSerializer):
             "full_name",
             "profile_image",
             "phone_number",
+            "role",
         ]
         
     

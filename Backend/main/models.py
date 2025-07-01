@@ -205,7 +205,7 @@ class Enrollment(models.Model):
         choices=STATUS_CHOICES,
         default='in_progress'
     )
-    progress = models.FloatField(default=0)  # Stored field
+    progress = models.FloatField(default=0)
     last_accessed = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -349,55 +349,6 @@ from django.utils import timezone
 import os
 from main.utils import generate_certificate
 
-# class Certificate(models.Model):
-#     student = models.ForeignKey(
-#         'users.UserAccount',
-#         on_delete=models.CASCADE,
-#         limit_choices_to={'role': 'student'},
-#         related_name="certificates"
-#     )
-#     course = models.ForeignKey(
-#         'main.Course',
-#         on_delete=models.CASCADE,
-#         related_name="certificates"
-#     )
-#     enrollment = models.ForeignKey(
-#         'main.Enrollment',
-#         on_delete=models.CASCADE,
-#         related_name="certificates"
-#     )
-#     certificate_file = models.FileField(upload_to="certificates/%Y/%m/%d/")
-#     issued_at = models.DateTimeField(auto_now_add=True)
-#     created_at = models.DateTimeField(auto_now_add=True)
-
-#     def __str__(self):
-#         return f"{self.student.full_name} - {self.course.title}"
-
-#     def generate_certificate_file(self):
-#         try:
-#             issued_at = self.issued_at or timezone.now()
-#             relative_path = generate_certificate(
-#                 student_name=self.student.full_name,
-#                 course_name=self.course.title,
-#                 issued_at=issued_at
-#             )
-#             file_path = os.path.join(settings.MEDIA_ROOT, relative_path)
-#             with open(file_path, 'rb') as f:
-#                 self.certificate_file.save(os.path.basename(relative_path), File(f), save=False)
-#         except Exception as e:
-#             raise ValidationError(f"Failed to generate certificate: {str(e)}")
-
-#     def save(self, *args, **kwargs):
-#         if not self.pk and not self.certificate_file:
-#             self.issued_at = self.issued_at or timezone.now()
-#             self.generate_certificate_file()
-#             self.enrollment.issue_certificate()
-#         super().save(*args, **kwargs)
-
-#     class Meta:
-#         db_table = "certificate"
-#         ordering = ["-issued_at"]
-#         unique_together = ["student", "course"]
 
 from django.db import models
 from django.utils import timezone
@@ -429,4 +380,4 @@ class Certificate(models.Model):
             self.certificate_id = f"{date_str}-{random_chars}"
         super().save(*args, **kwargs)
 
-#review model ,discussion model , progress model, reply of the comment model will be fo fututre features,   
+#review model ,discussion model , reply of the comment model will be fo fututre features,   

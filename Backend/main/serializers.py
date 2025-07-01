@@ -84,11 +84,15 @@ class CourseSerializer(serializers.ModelSerializer):
             "requirements",
             "learning_outcomes",
             "syllabus",
+            'total_enrolled',
         ]
         
     def get_sections(self, obj):
         sections=obj.sections.all()
         return SectionSerializer(sections,many=True).data
+    
+    def get_total_enrolled(self,obj):
+        return obj.total_enrolled
     
 class CourseListSerializer(serializers.ModelSerializer):
     admin=UserAccountListSerializer(read_only=True)
@@ -119,6 +123,7 @@ class CourseListSerializer(serializers.ModelSerializer):
             "requirements",
             "learning_outcomes",
             "syllabus",
+            'total_enrolled',
    
         ]     
     
@@ -127,6 +132,9 @@ class CourseListSerializer(serializers.ModelSerializer):
             if obj.thumbnail and request:
                 return request.build_absolute_uri(obj.thumbnail.url)
             return None
+    
+    def get_total_enrolled(self,obj):
+        return obj.total_enrolled
 
 
 class SectionSerializer(serializers.ModelSerializer):
@@ -440,36 +448,39 @@ from .utils import generate_certificate
 from django.utils import timezone
 
 class CertificateSerializer(serializers.ModelSerializer):
+    course_slug = serializers.CharField(source='enrollment.course.slug', read_only=True)
+
+
     class Meta:
         model = Certificate
-        fields = ['certificate_id', 'certificate_file', 'issued_at']
-        read_only_fields = ['certificate_id', 'issued_at']
+        fields = ['certificate_id', 'certificate_file', 'issued_at', 'course_slug']
+        read_only_fields = ['certificate_id', 'issued_at', 'course_slug']
+
+    def get_course_slug(self, obj):
+        return obj.enrollment.course.slug
 
     def create(self, validated_data):
         enrollment = validated_data['enrollment']
         student_name = enrollment.student.full_name
         course_title = enrollment.course.title
-        # certificate_id =certificate.certificate_id
-        
-        # First create the certificate to generate the ID automatically
+
+        # Create the certificate instance to generate its ID
         certificate = Certificate.objects.create(enrollment=enrollment)
-        
-        
-        # Generate certificate image
+
+        # Generate the certificate image
         certificate_path = generate_certificate(
             student_name=student_name,
-            course_name=course_title,  # Now correctly using course.title
+            course_name=course_title,
             issued_at=timezone.now(),
             certificate_id=certificate.certificate_id
         )
-        
-        #  3. Update with file path
+
+        # Save the generated file path
         certificate.certificate_file = certificate_path
         certificate.save()
-        
+
         return certificate
-    
-    
+
 # from rest_framework import serializers
 # from .models import Certificate
 # from users.models import UserAccount

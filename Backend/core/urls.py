@@ -8,7 +8,7 @@ from rest_framework_simplejwt.views import ( #type: ignore
     TokenVerifyView,
     TokenBlacklistView
 ) 
-from users.views import UserAccountViewSet
+from users.views import UserAccountViewSet,MyTokenObtainView
 
 urlpatterns = [
       path('admin/', admin.site.urls),
@@ -23,7 +23,7 @@ urlpatterns = [
         # Auth routes
         path('auth/',include([
             path('register/', UserAccountViewSet.as_view({'post': 'create'}), name='register'),
-            path('login/', TokenObtainPairView.as_view(), name='login'),
+            path('login/', MyTokenObtainView.as_view(), name='login'),
             path('logout/', TokenBlacklistView.as_view()),
         ])),
         

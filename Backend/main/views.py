@@ -478,7 +478,6 @@ class AttachmentViewSet(ModelViewSet):
             
 #certificate viewset 
 
-
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
@@ -495,90 +494,108 @@ class CertificateViewSet(ModelViewSet):
     lookup_field = 'certificate_id'
 
     def get_queryset(self):
+        """Restrict access to certificates based on user"""
         queryset = super().get_queryset()
-        # Add filters
+        user = self.request.user
+
+        # If not admin, only allow certificates belonging to the user
+        if not user.is_staff:
+            queryset = queryset.filter(enrollment__student=user)
+
+        # Optional filters
         enrollment_id = self.request.query_params.get('enrollment_id')
-        student_id = self.request.query_params.get('student_id')
         course_slug = self.request.query_params.get('course_slug')
-        
+
         if enrollment_id:
             queryset = queryset.filter(enrollment_id=enrollment_id)
-        if student_id:
-            queryset = queryset.filter(enrollment__student_id=student_id)
         if course_slug:
             queryset = queryset.filter(enrollment__course__slug=course_slug)
+
         return queryset
 
     def create(self, request, *args, **kwargs):
-        """Create certificate using enrollment_id"""
+        """Create certificate using enrollment_id — only for logged-in student"""
         enrollment_id = request.data.get('enrollment_id')
         try:
             enrollment = Enrollment.objects.get(id=enrollment_id)
+
+            # Check student ownership
+            if enrollment.student != request.user:
+                return Response({"error": "Unauthorized"}, status=status.HTTP_403_FORBIDDEN)
+
             return self._generate_certificate(enrollment)
+
         except Enrollment.DoesNotExist:
             return Response({"error": "Enrollment not found"}, status=status.HTTP_404_NOT_FOUND)
 
     @action(detail=False, methods=['post'], url_path='generate/(?P<course_slug>[^/.]+)')
     def generate_with_slug(self, request, course_slug=None):
-        """Create certificate using course_slug"""
+        """Generate certificate by course_slug — only for completed course by student"""
         student = request.user
+        print(f"[DEBUG] Generating certificate for user: {student}, course_slug: {course_slug}")
+
         course = get_object_or_404(Course, slug=course_slug)
+
         enrollment = get_object_or_404(
             Enrollment,
             course=course,
             student=student,
             status='completed'
         )
+
         return self._generate_certificate(enrollment)
 
     def _generate_certificate(self, enrollment):
-        """Shared certificate generation logic"""
-        if hasattr(enrollment, 'certificate'):
+        """Generate and return certificate for a given enrollment"""
+        # Strict security check
+        if self.request.user != enrollment.student:
             return Response(
-                {"error": "Certificate already exists"},
-                status=status.HTTP_400_BAD_REQUEST
+                {"error": "Unauthorized access to this enrollment"},
+                status=status.HTTP_403_FORBIDDEN
             )
-        
+
+        # Return existing certificate if already generated
+        if hasattr(enrollment, 'certificate'):
+            serializer = self.get_serializer(enrollment.certificate)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
         try:
-            # First create the certificate to generate the ID
+            # Create certificate record
             certificate = Certificate.objects.create(enrollment=enrollment)
-            
-            # Generate certificate image using the auto-generated ID
+
+            # Generate the certificate image
             file_path = generate_certificate(
                 student_name=enrollment.student.full_name,
                 course_name=enrollment.course.title,
                 issued_at=certificate.issued_at,
                 certificate_id=certificate.certificate_id
             )
-            
-            # Update with the generated file path
+
+            # Save file path to model
             certificate.certificate_file = file_path
             certificate.save()
-            
+
             serializer = self.get_serializer(certificate)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-            
+
         except Exception as e:
             return Response(
                 {"error": f"Certificate generation failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        
+
     def list(self, request, *args, **kwargs):
-        """Enhanced list with download URLs"""
+        """List certificates — limited to the logged-in user's certificates"""
         response = super().list(request, *args, **kwargs)
-        
-        # Add download URLs for both list and paginated responses
-        if 'results' in response.data:  # Paginated case
+
+        if 'results' in response.data:  # Paginated response
             for cert_data in response.data['results']:
                 cert_data['download_url'] = request.build_absolute_uri(cert_data['certificate_file'])
-        else:  # Non-paginated case
+        else:  # Non-paginated
             for cert_data in response.data:
                 cert_data['download_url'] = request.build_absolute_uri(cert_data['certificate_file'])
-                
+
         return response
-
-
 
 
 

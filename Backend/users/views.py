@@ -1,5 +1,7 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
+from rest_framework_simplejwt.views import TokenObtainPairView
+from users.serializers import MyTokenObtainSerializer
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,6 +14,10 @@ from django.db.models import Sum
 import cloudinary.uploader
 # from users.models
 
+
+class MyTokenObtainView(TokenObtainPairView):
+    serializer_class = MyTokenObtainSerializer
+    
 class UserAccountViewSet(ModelViewSet):
     #handle all use acc with tole based access
     queryset = UserAccount.objects.all()
