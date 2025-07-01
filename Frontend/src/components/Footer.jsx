@@ -3,7 +3,7 @@ import { ArrowUpRight, Mail, Twitter, Github, Linkedin } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer className='relative pt-16 pb-8 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900  dark:border-gray-800'>
+    <footer className='relative pt-16 pb-8 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900  dark:border-gray-800'>
 
       {/* Links Section */}
       <div className="max-w-4xl mx-auto">
@@ -53,6 +53,7 @@ const Footer = () => {
         <div className="pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-4">
             <p className="text-xs text-gray-500 dark:text-gray-400 font-mono tracking-wider">
+              Epadhai
             </p>
           </div>
           

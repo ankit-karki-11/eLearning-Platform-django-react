@@ -39,7 +39,14 @@ const Navbar = () => {
       toast.error("No refresh token found");
       return;
     }
-    await logoutUser({ refresh });
+    try {
+      await logoutUser({ refresh }).unwrap();
+      localStorage.clear();
+      toast.success("Logged out successfully");
+      navigate("/login");
+    } catch {
+      toast.error("Logout failed");
+    }
   };
 
   useEffect(() => {
@@ -61,15 +68,18 @@ const Navbar = () => {
             <img src="/logoblack.png" alt="Logo" className='h-8 w-auto' />
           </Link>
 
-        
-          <nav className='hidden md:flex items-center gap-4 '>
+
+          <nav className='hidden md:flex items-center gap-4 text-black hover:text-red-700 dark:hover:text-gray-200'>
+            <NavLink to="/">Home</NavLink>
             <NavLink to="/course">Courses</NavLink>
+          
             {user?.role === "student" && (
-              <NavLink to="/my-learning">My Learning</NavLink>
+              <NavLink to="/course/my-learning">My Learning</NavLink>
             )}
-            {user?.role === "student" && (
-              <NavLink to="/">Try Interview</NavLink>
-            )}
+              <NavLink to="/mock-ai-interview">AI Interview</NavLink>
+            {/* {user?.role === "student" && (
+              <NavLink to="/try-interview">Mock Interview</NavLink>
+            )} */}
             {user?.role === "instructor" && (
               <NavLink to="/instructor/dashboard">Instructor</NavLink>
             )}

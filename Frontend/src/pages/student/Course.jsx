@@ -20,7 +20,6 @@ const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 
   if (!course) return <div className="text-red-600 p-4">Error: Invalid course data</div>;
 
   return (
-    
     <div 
     
       onClick={!isEnrolled ? handleViewDetails : handleContinueLearning}
@@ -50,13 +49,13 @@ const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 
         )}
         
         <div className="flex items-center justify-between text-xs">
-          <div className="flex items-center gap-1.5 px-2 py-1 rounded-full font-medium">
-            <Clock className="h-3 w-3 text-gray-600 dark:text-gray-400" />
+          <div className="flex items-center gap-1 px-2 py-1 rounded-full font-medium">
+            <Clock className="h-3 w-3 text-gray-900 dark:text-gray-400" />
             <span className="text-gray-900 dark:text-gray-300">{course.course_duration || 0}hrs</span>
           </div>
           
           {course.average_rating && (
-            <div className="flex items-center gap-1.5 px-2 py-1 rounded-full font-medium">
+            <div className="flex items-center gap-1 px-2 py-1 rounded-full font-medium">
               <Star className="h-3 w-3 text-amber-500 fill-amber-500" />
               <span className="text-gray-900 dark:text-gray-300">{course.average_rating.toFixed(1)}</span>
             </div>
@@ -64,7 +63,7 @@ const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 
           
           {!isEnrolled && (
             <div className=" px-2 py-1 rounded-full font-medium">
-              <span className="text-gray-900 font-bold dark:text-blue-400">रु {course.price || 0}</span>
+              <span className="text-gray-900 font-small dark:text-blue-400">Rs {course.price || 0}</span>
             </div>
           )}
         </div>
@@ -90,3 +89,4 @@ const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 
 };
 
 export default Course;
+

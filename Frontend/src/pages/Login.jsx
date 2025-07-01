@@ -31,8 +31,9 @@ const Login = () => {
     // for redirecting to the page after login
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search)
-    const redirect = searchParams.get("redirect") || "/"
-    
+    // const redirect = searchParams.get("redirect") || "/"
+    const redirect = searchParams.get("redirect") || location.state?.from?.pathname || "/";
+
     const [loginInput, setLoginInput] = useState({
         email: "",
         password: "",
@@ -98,14 +99,18 @@ const Login = () => {
             toast.error(registerError.data?.message || "Signup Failed")
         }
         if (loginIsSuccess && loginData) {
+            console.log("loginData:", loginData);// Debug: Log loginData
             toast.success(loginData.message || "Login Successful.")
+
+            // Store user object (including role)
+            localStorage.setItem("user", JSON.stringify(loginData.user));
 
             // Store accessToken and refreshToken
             localStorage.setItem("accessToken", loginData.access);
             localStorage.setItem("refreshToken", loginData.refresh);
 
             // Invalidate user cache or refetch user info
-            dispatch(authApi.util.invalidateTags(["User"])); 
+            dispatch(authApi.util.invalidateTags(["User"]));
             dispatch(authApi.endpoints.loadUser.initiate());
 
 

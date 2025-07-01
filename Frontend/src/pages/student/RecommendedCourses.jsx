@@ -5,7 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 const RecommendedCourses = ({ courseSlug }) => {
   const { data: courses, isLoading, error } = useGetRecommendedCoursesQuery(courseSlug);
-  console.log("Recommended courses:", courses);
+  // console.log("Recommended courses:", courses);
 
   if (isLoading) {
     return (
@@ -19,7 +19,7 @@ const RecommendedCourses = ({ courseSlug }) => {
   }
 
 
-
+ 
   if (error || !courses || courses.length === 0) {
     console.log("No similar courses found")
     return <p>No similar courses found</p>;

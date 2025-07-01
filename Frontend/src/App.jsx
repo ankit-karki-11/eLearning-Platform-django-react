@@ -1,27 +1,28 @@
 import { useState } from 'react'
-
-import { Button } from './components/ui/button'
-import Login from './pages/Login'
-import Navbar from './components/Navbar'
-import Hero from './pages/student/Hero'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import ProtectedRoutes from './components/ProtectedRoutes'
+
 import MainLayout from './layout/MainLayout'
+import Login from './pages/Login'
+import Hero from './pages/student/Hero'
 import Courses from './pages/student/Courses'
-import MyLearning from './pages/student/MyLearning'
-import Profile from './pages/student/Profile'
-
-import Course from './pages/student/Course'
+import Categories from './pages/student/Categories'
 import Coursedetails from './pages/student/Coursedetails'
+import AllCourse from './pages/student/AllCourse'
+import Course from './pages/student/Course'
+import Interviewpage from './pages/student/Interviewpage'
+import CategoryDetails from './pages/student/CategoryDetails'
+import NotFound from './pages/NotFound'
 
+import Unauthorized from './pages/Unauthorized'
+// student role protected routes
+import MyLearning from './pages/student/MyLearning'
+import Certificate from './pages/student/Certificate'
+import CoursePlayer from './pages/student/CoursePlayer'
 import Checkout from './pages/student/Checkout'
 import PaymentSuccess from './pages/student/PaymentSuccess'
-
-import Categories from './pages/student/Categories'
-import CategoryDetails from './pages/student/CategoryDetails'
-import CoursePlayer from './pages/student/CoursePlayer'
-import AllCourse from './pages/student/AllCourse'
-import Interviewpage from './pages/student/Interviewpage'
-import Certificate from './pages/student/Certificate'
+import Profile from './pages/student/Profile'
+// import UsersLoving from './pages/student/UsersLoving'
 
 const appRouter = createBrowserRouter([
   {
@@ -35,37 +36,30 @@ const appRouter = createBrowserRouter([
             <Hero />
             <Courses />
             <Categories />
-            {/* <Interviewpage /> */}
 
           </>
 
         ),
 
       },
+
       {
         path: "login",
         element: <Login />,
       },
       {
-        path: "my-learning",
-        element: <MyLearning />,
+        path: "authorized",
+        element: <Unauthorized />,
       },
       {
-        path: "profile",
-        element: <Profile />,
+        path:"*",
+        element:<NotFound />,
       },
       {
         path: "category/:slug",
         element: <CategoryDetails />,
       },
-      {
-        path: "course/course-detail/:slug",
-        element: <Coursedetails />,
-      },
-      {
-        path: "checkout/:slug",
-        element: <Checkout />
-      },
+     
       {
         path: "course/:slug",
         element: <Course />
@@ -74,23 +68,56 @@ const appRouter = createBrowserRouter([
         path: "course/",
         element: <AllCourse />
       },
+      {
+        path: "mock-ai-interview",
+        element: <Interviewpage />
+      },
+      
 
+      //protected routrs for student role
       {
-        path: "payment-success",
-        element: <PaymentSuccess />
+        element: <ProtectedRoutes allowedRoles={['student']} />,
+        children: [
+          {
+            path: "course/my-learning",
+            element: <MyLearning />,
+          },
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+
+          {
+            path: "checkout/:slug",
+            element: <Checkout />
+          },
+
+
+          {
+            path: "payment-success",
+            element: <PaymentSuccess />
+          },
+          {
+            path: "course/:slug/progress",
+            element: <CoursePlayer />
+          },
+          {
+            path: "certificate/:slug/",
+            element: <Certificate />
+          },
+        ]
       },
+
+      // protected admin routes
       {
-        path: "course/:slug/progress",
-        element: <CoursePlayer />
-      },
-       {
-        path: "certificate/:slug/",
-        element: <Certificate />
+        element: <ProtectedRoutes allowedRoles={['admin']} />,
+        children: [
+          // { path: 'admin/dashboard', element: <AdminDashboard /> },
+        ],
       },
     ],
   },
-
-])
+]);
 function App() {
 
   return (
