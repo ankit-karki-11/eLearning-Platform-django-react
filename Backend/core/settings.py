@@ -15,7 +15,7 @@ cloudinary.config(secure=True)
 env = environ.Env()
 KHALTI_SECRET_KEY = env("KHALTI_SECRET_KEY")
 KHALTI_PUBLIC_KEY = env("KHALTI_PUBLIC_KEY")
-
+GEMINI_API_KEY= env("GEMINI_API_KEY")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
     "payments",
+    "smarttest",
 ]
 
 MIDDLEWARE = [

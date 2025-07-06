@@ -93,7 +93,7 @@ class CourseViewSet(ModelViewSet):
     search_fields=["title","keywords"]
     filterset_fields=["category","is_published","admin"]
     lookup_field="slug"
-    filter_backends = [filters.SearchFilter]    # Allows searching by title
+    filter_backends = [filters.SearchFilter] 
     
     def create(self, request, *args, **kwargs):
        
@@ -202,6 +202,57 @@ class CourseViewSet(ModelViewSet):
                 data={"detail": "Course not found."}
             )
     
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
+from django.contrib.postgres.search import TrigramSimilarity
+from django.db.models import F,Q,ExpressionWrapper,FloatField
+class CourseSearchView(APIView):
+    permission_classes = [AllowAny]  
+      
+    
+    def get (self,request):
+        query=request.GET.get('q','')
+        sort=request.GET.get('sort','')
+        
+        if query:
+            if len(query)<3:
+                courses= Course.objects.filter(
+                    Q(title__icontains=query)|Q(keywords__icontains=query)
+                    
+                )
+            else:
+                courses= Course.objects.annotate(
+                    similarity_title=TrigramSimilarity('title',query),
+                    similarity_keywords=TrigramSimilarity('keywords',query),
+                    
+                ).annotate(
+                    total_similarity=ExpressionWrapper(
+                        F('similarity_title') * 0.7 + F('similarity_keywords') * 0.3,
+                        output_field=FloatField()
+                    )
+                ).filter(
+                    Q(total_similarity__gt=0.1) |
+                    Q(title__icontains=query) |
+                    Q(keywords__icontains=query)
+                ).order_by('-total_similarity')
+        
+        else:
+            courses= Course.objects.all()
+            # Apply sorting
+            
+            if sort == 'price_asc':
+                courses= courses.order_by('price')
+            elif sort == 'price_desc':
+                courses= courses.order_by('-price')
+            elif query:
+                courses=courses.order_by('-total_similarity') #sort by relevence by searching
+            else:   
+                courses= courses.order_by('-created_at')
+        
+        # serializer=CourseListSerializer(courses,many=True)
+        serializer = CourseListSerializer(courses, many=True, context={'request': request})
+        return Response(serializer.data)
+        
 # section viewset
 class SectionViewSet(ModelViewSet):
     queryset=Section.objects.all()

@@ -4,7 +4,7 @@ from .views import (
     CategoryViewSet, CourseViewSet, SectionViewSet,
     CartViewSet,AttachmentViewSet, 
     EnrollmentViewSet,SectionProgressViewSet,RecommendationViewSet,
-   CertificateViewSet
+   CertificateViewSet,CourseSearchView
 )
 router= DefaultRouter()
 router.register(r"category", CategoryViewSet, basename="category")
@@ -20,7 +20,7 @@ router.register(r'certificates', CertificateViewSet, basename='certificate')
 
 
 urlpatterns = [
-    
+    path('courses/search/', CourseSearchView.as_view(), name='course-search'),
 ]
 
 urlpatterns += router.urls

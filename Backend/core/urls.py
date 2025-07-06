@@ -19,6 +19,7 @@ urlpatterns = [
         path('main/', include('main.urls')),
         path('team/', include('team.urls')),
         path('payments/', include('payments.urls')), 
+        path('smarttest/', include('smarttest.urls')), 
 
         # Auth routes
         path('auth/',include([

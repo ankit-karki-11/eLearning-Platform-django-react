@@ -5,7 +5,7 @@ from django.utils.text import slugify
 from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError  
 from django.utils import timezone
-
+from django.contrib.postgres.indexes import GinIndex
 
 #course
 class Category(models.Model):
@@ -144,6 +144,10 @@ class Course(models.Model):
         db_table="course"
         verbose_name_plural="Courses"
         ordering=["-created_at"]
+        indexes=[
+            GinIndex(fields=["title"],name='title_trgm',opclasses=['gin_trgm_ops']),
+            GinIndex(fields=["keywords"],name='keywords_trgm',opclasses=['gin_trgm_ops']),
+        ]
 
     
 #Section Model
