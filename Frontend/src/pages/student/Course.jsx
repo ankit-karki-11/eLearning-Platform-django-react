@@ -14,14 +14,13 @@ const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 
 
   const handleViewDetails = () => {
     if (!course?.slug) return;
-    navigate(`/course/course-detail/${course.slug}`);
+    navigate(`/courses/course-detail/${course.slug}`);
   };
 
   if (!course) return <div className="text-red-600 p-4">Error: Invalid course data</div>;
 
   return (
     <div 
-    
       onClick={!isEnrolled ? handleViewDetails : handleContinueLearning}
       className="rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 overflow-hidden w-full cursor-pointer
       transition-all duration-300 hover:shadow-md hover:border-gray-300 dark:hover:border-gray-600 group"
@@ -33,10 +32,9 @@ const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute top-2 left-2 bg-white dark:bg-gray-800 text-xs px-2 py-1 rounded font-small">
-          {course.level || 'All Levels'}
+          {course.level || ''}
         </div>
-        {/* <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" /> */}
-      </div>
+         </div>
       
       <div className="p-3 space-y-2">
         <h3 className="font-medium text-sm line-clamp-2 dark:text-white">

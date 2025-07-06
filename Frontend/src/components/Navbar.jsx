@@ -71,10 +71,10 @@ const Navbar = () => {
 
           <nav className='hidden md:flex items-center gap-4 text-black hover:text-red-700 dark:hover:text-gray-200'>
             <NavLink to="/">Home</NavLink>
-            <NavLink to="/course">Courses</NavLink>
+            <NavLink to="/courses">Courses</NavLink>
           
             {user?.role === "student" && (
-              <NavLink to="/course/my-learning">My Learning</NavLink>
+              <NavLink to="/courses/my-learning">My Learning</NavLink>
             )}
               <NavLink to="/mock-ai-interview">AI Interview</NavLink>
             {/* {user?.role === "student" && (
@@ -83,6 +83,8 @@ const Navbar = () => {
             {user?.role === "instructor" && (
               <NavLink to="/instructor/dashboard">Instructor</NavLink>
             )}
+
+            
           </nav>
         </div>
 

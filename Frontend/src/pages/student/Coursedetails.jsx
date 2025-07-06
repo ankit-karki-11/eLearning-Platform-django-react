@@ -114,7 +114,7 @@ const CourseDetails = () => {
                             </p>
 
                             <div className="flex flex-wrap gap-4">
-                                <div className="flex items-center bg-gray-800/50 px-3 py-2 rounded-2xl text-xs">
+                                <div className="flex items-center bg-gray-800/50 px-3 py-2 rounded-lg text-xs">
                                     <Clock className="h-4 w-4 mr-2" />
                                     <span>{course.course_duration} hours</span>
                                 </div>
@@ -206,7 +206,7 @@ const CourseDetails = () => {
                                 </div>
                             </div>
 
-                            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-4">
+                              <div className="bg-white border-1 border-gray-300 rounded p-4 md:p-4">
                                 <h2 className="text-xl font-bold mb-4">Requirements</h2>
                                 <div className="grid md:grid-cols-1 gap-2 text-sm">
                                     {course.requirements?.split('\n').filter(Boolean).map((req, index) => (

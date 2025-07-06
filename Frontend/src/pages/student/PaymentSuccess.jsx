@@ -83,7 +83,7 @@ const PaymentSuccess = () => {
                 <p className="mb-6">Your payment for the course has been completed successfully. You can now access the course materials and start learning.</p>
 
                 <div className="flex flex-col gap-3">
-                    <Button onClick={() => navigate("/my-learning")}>
+                    <Button onClick={() => navigate("/courses/my-learning")}>
                         Go to My Learning
                     </Button>
                     <Button variant="outline" onClick={() => navigate("/")}>

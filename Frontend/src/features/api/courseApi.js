@@ -9,7 +9,14 @@ export const courseApi = createApi({
     reducerPath: "courseApi",
     baseQuery: fetchBaseQuery({
         baseUrl: COURSE_API,
-        credentials: 'include'
+        // credentials: "include",
+        // prepareHeaders: (headers) => {
+        //     const token = localStorage.getItem("accessToken");
+        //     if (token) {
+        //         headers.set("Authorization", `Bearer ${token}`);
+        //     }
+        //     return headers;
+        // },
     }),
     // create endpoints:
     endpoints: (builder) => ({
@@ -55,14 +62,32 @@ export const courseApi = createApi({
                 method: "GET",
             }),
         }),
-    })
 
-})
+        // search courses
 
-export const {
-    useCreateCourseMutation,
-    useLoadCourseQuery,
-    useUpdateCourseMutation,
-    useDeleteCourseMutation,
-    useGetSectionsByCourseQuery
-} = courseApi;
+        searchCourses: builder.query({
+            query: ({ q, field = "both", sort = "" }) => {
+                const params = new URLSearchParams();
+                if (q.trim()) params.append("q", q.trim());
+                if (field !== "both") params.append("field", field);
+                if (sort) params.append("sort", sort);
+
+                return {
+                    url: `courses/search/?${params.toString()}`,
+                    method: "GET",
+                    // <<< override credentials only for this call
+                    credentials: "omit",
+                };
+            },
+        }),
+        }),
+        })
+
+        export const {
+            useCreateCourseMutation,
+            useLoadCourseQuery,
+            useUpdateCourseMutation,
+            useDeleteCourseMutation,
+            useGetSectionsByCourseQuery,
+            useSearchCoursesQuery,
+        } = courseApi;

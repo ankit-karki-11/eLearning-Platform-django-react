@@ -9,7 +9,6 @@ const AllCourse = () => {
 
   const handleSearchResults = (results) => {
     setSearchResults(results);
-
   };
 
   return (

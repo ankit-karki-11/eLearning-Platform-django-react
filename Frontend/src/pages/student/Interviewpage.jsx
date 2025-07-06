@@ -26,7 +26,7 @@ const Interviewpage = () => {
     ]
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white mt-16">
             {/* Hero Section */}
             <div className="max-w-4xl mx-auto px-6 py-16 text-center">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-full bg-gray-50 border text-gray-600 text-xs font-medium">

@@ -22,6 +22,7 @@ import CoursePlayer from './pages/student/CoursePlayer'
 import Checkout from './pages/student/Checkout'
 import PaymentSuccess from './pages/student/PaymentSuccess'
 import Profile from './pages/student/Profile'
+import CourseSearch from './pages/student/CourseSearch'
 // import UsersLoving from './pages/student/UsersLoving'
 
 const appRouter = createBrowserRouter([
@@ -59,19 +60,28 @@ const appRouter = createBrowserRouter([
         path: "category/:slug",
         element: <CategoryDetails />,
       },
+      {
+        path: "courses/course-detail/:slug",
+        element: <Coursedetails />,
+      },
      
       {
         path: "course/:slug",
         element: <Course />
       },
       {
-        path: "course/",
+        path: "courses/",
         element: <AllCourse />
       },
       {
         path: "mock-ai-interview",
         element: <Interviewpage />
       },
+       {
+        path: "courses/search",
+        element: <CourseSearch />
+      },
+      // <Route path="/courses/search" element={<CourseSearch />} />
       
 
       //protected routrs for student role
@@ -79,7 +89,7 @@ const appRouter = createBrowserRouter([
         element: <ProtectedRoutes allowedRoles={['student']} />,
         children: [
           {
-            path: "course/my-learning",
+            path: "courses/my-learning",
             element: <MyLearning />,
           },
           {
@@ -122,7 +132,7 @@ function App() {
 
   return (
     <main>
-      <RouterProvider router={appRouter} />
+      <RouterProvider router={appRouter} /> 
     </main>
   )
 }

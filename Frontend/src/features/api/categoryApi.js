@@ -5,7 +5,7 @@ export const categoryApi = createApi({
     reducerPath: "categoryApi",
     baseQuery: fetchBaseQuery({
         baseUrl: CATEGORY_API,
-        credentials: 'include'
+        // credentials: 'include'
     }),
     // create endpoints:
     endpoints: (builder) => ({

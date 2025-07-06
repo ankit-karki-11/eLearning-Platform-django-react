@@ -32,7 +32,7 @@ const Courses = () => {
           ))}
         </div>
        <div className="flex justify-center mt-12">
-          <Button onClick={() => window.location.href = '/course'}
+          <Button onClick={() => window.location.href = '/courses'}
             className="px-8 py-4 text-sm font-medium border-1 border-black cursor-pointer"
             variant="outline"
           >
