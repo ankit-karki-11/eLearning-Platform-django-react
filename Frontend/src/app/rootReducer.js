@@ -7,6 +7,7 @@ import { categoryApi } from '@/features/api/categoryApi';
 import { enrollmentApi } from '@/features/api/enrollmentApi';
 import { recommendationApi } from '@/features/api/recommendationApi';
 import { certificateApi } from '@/features/api/certificateApi';
+import { smarttestApi } from '@/features/api/smarttestApi';
 
 const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     [enrollmentApi.reducerPath]: enrollmentApi.reducer,
     [recommendationApi.reducerPath]: recommendationApi.reducer,
     [certificateApi.reducerPath]: certificateApi.reducer,
+    [smarttestApi.reducerPath]: smarttestApi.reducer,
     auth: authReducer,
 
 });

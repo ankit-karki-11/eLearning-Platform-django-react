@@ -23,6 +23,10 @@ import Checkout from './pages/student/Checkout'
 import PaymentSuccess from './pages/student/PaymentSuccess'
 import Profile from './pages/student/Profile'
 import CourseSearch from './pages/student/CourseSearch'
+import CreateTest from './pages/student/smarttest/CreateTest'
+import TestAttemptPage from './pages/student/smarttest/TestAttemptPage'
+import MyTest from './pages/student/smarttest/MyTest'
+import TestFeedbackPage from './pages/student/smarttest/TestFeedbackPage'
 // import UsersLoving from './pages/student/UsersLoving'
 
 const appRouter = createBrowserRouter([
@@ -53,8 +57,8 @@ const appRouter = createBrowserRouter([
         element: <Unauthorized />,
       },
       {
-        path:"*",
-        element:<NotFound />,
+        path: "*",
+        element: <NotFound />,
       },
       {
         path: "category/:slug",
@@ -64,7 +68,7 @@ const appRouter = createBrowserRouter([
         path: "courses/course-detail/:slug",
         element: <Coursedetails />,
       },
-     
+
       {
         path: "course/:slug",
         element: <Course />
@@ -77,12 +81,12 @@ const appRouter = createBrowserRouter([
         path: "mock-ai-interview",
         element: <Interviewpage />
       },
-       {
+      {
         path: "courses/search",
         element: <CourseSearch />
       },
-      // <Route path="/courses/search" element={<CourseSearch />} />
-      
+
+
 
       //protected routrs for student role
       {
@@ -115,6 +119,22 @@ const appRouter = createBrowserRouter([
             path: "certificate/:slug/",
             element: <Certificate />
           },
+          {
+            path: "/smart-test/test",
+            element: <CreateTest />
+          },
+          {
+            path:"/test-attempts/test/:testId/attempt/:attemptId/start",
+            element:<TestAttemptPage />
+          },
+          {
+            path: "/test-attempts/test/:testId/attempt/:attemptId/submit",
+            element: <TestFeedbackPage />,
+          },
+          {
+            path: "courses/search",
+            element: <MyTest />
+          },
         ]
       },
 
@@ -132,7 +152,7 @@ function App() {
 
   return (
     <main>
-      <RouterProvider router={appRouter} /> 
+      <RouterProvider router={appRouter} />
     </main>
   )
 }

@@ -72,23 +72,21 @@ const Navbar = () => {
           <nav className='hidden md:flex items-center gap-4 text-black hover:text-red-700 dark:hover:text-gray-200'>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/courses">Courses</NavLink>
-          
+
             {user?.role === "student" && (
               <NavLink to="/courses/my-learning">My Learning</NavLink>
             )}
-              <NavLink to="/mock-ai-interview">AI Interview</NavLink>
-            {/* {user?.role === "student" && (
-              <NavLink to="/try-interview">Mock Interview</NavLink>
-            )} */}
+
+            {user?.role === "student" && (
+              <NavLink to="/smart-test/test">Smart-Test</NavLink>
+            )}
             {user?.role === "instructor" && (
               <NavLink to="/instructor/dashboard">Instructor</NavLink>
             )}
 
-            
+
           </nav>
         </div>
-
-
         {/* User controls - Right side */}
         <div className='flex items-center gap-4'>
           <div className='hidden md:block'>
@@ -126,7 +124,7 @@ const Navbar = () => {
                   </DropdownMenuItem>
 
                   <DropdownMenuItem asChild>
-                    <Link to="/my-learning" className='w-full'>
+                    <Link to="courses/my-learning" className='w-full'>
                       My Learning
                     </Link>
                   </DropdownMenuItem>
