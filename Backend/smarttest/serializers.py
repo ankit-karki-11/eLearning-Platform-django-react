@@ -19,12 +19,13 @@ class TestSerializer(serializers.ModelSerializer):
     topic_id = serializers.PrimaryKeyRelatedField(
         queryset=Topic.objects.all(), source='topic', write_only=True
     )
+    topic_title = serializers.CharField(source='topic.title', read_only=True)
     questions = QuestionSerializer(many=True, read_only=True)
 
     class Meta:
         model = Test
         fields = [
-            'id', 'title', 'topic', 'topic_id',
+            'id', 'title', 'topic', 'topic_id','topic_title',
             'level', 'time_limit', 'created_by', 'created_at', 'updated_at', 'questions'
         ]
         read_only_fields = ['created_by']
@@ -40,6 +41,10 @@ class TestAttemptSerializer(serializers.ModelSerializer):
     test = TestSerializer(read_only=True)
     test_id = serializers.PrimaryKeyRelatedField(
         queryset=Test.objects.all(), source='test', write_only=True
+    )
+    student = serializers.PrimaryKeyRelatedField(
+        read_only=True,
+        default=serializers.CurrentUserDefault()
     )
 
     class Meta:

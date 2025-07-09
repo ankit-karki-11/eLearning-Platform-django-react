@@ -14,7 +14,6 @@ from django.db.models import Sum
 from django.db import IntegrityError
 from payments.models import Payment
 from rest_framework import viewsets, status, permissions, filters
-from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 # from main.views import recommend_courses

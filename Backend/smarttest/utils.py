@@ -28,48 +28,73 @@ def generate_questions_via_api(topic_title,level,num_questions=5):
         return ['Error: API request failed.']
 
 def generate_feedback(test_title, answers_with_scores):
-    prompt = f"Student has completed the test '{test_title}'. Evaluate their performance based on the answers and provide constructive feedback.\n\n"
+    prompt = f"""You are an experienced educator evaluating a student's test performance.
+    
+Test: {test_title}
+Total Score: {sum(a['score'] for a in answers_with_scores)}/{sum(a['total'] for a in answers_with_scores)}
+
+Provide detailed feedback covering:
+1. Overall performance summary
+2. Key strengths demonstrated
+3. Main areas needing improvement
+4. Specific suggestions for each weak area
+5. Encouraging closing remarks
+
+Structure your response with clear sections. Be constructive and supportive.
+
+Question-by-question analysis:
+"""
+    
     for idx, item in enumerate(answers_with_scores, 1):
-        prompt += (
-            f"Question {idx}: {item['question']}\n"
-            f"Answer: {item['response']}\n"
-            f"Marks: {item['score']} out of {item['total']}\n\n"
-        )
-    prompt += "Provide a brief, helpful feedback in 2-4 sentences."
+        prompt += f"""
+Question {idx}: {item['question']}
+- Student's Answer: {item['response']}
+- Score: {item['score']}/{item['total']}
+"""
+    
+    try:
+        response = model.generate_content(prompt)
+        return response.text
+    except Exception as e:
+        print("Feedback generation error:", e)
+        return "Could not generate detailed feedback. Please consult your instructor."
 
-    response = model.generate_text(prompt=prompt, temperature=0.7, max_output_tokens=512)
-    return response.text
-
-
-# def generate_ai_comment(question, response_text):
-#     prompt = (
-#         f"Here is a student's answer to the following question:\n"
-#         f"Q: {question}\n"
-#         f"A: {response_text}\n"
-#         f"Provide constructive feedback on the answer. Be concise and helpful."
-#     )
-#     response = model.generate_text(prompt=prompt, temperature=0.7, max_output_tokens=256)
-#     return response.text
 
 def generate_ai_score_and_comment(question, response_text):
-    prompt = (
-        f"Question: {question}\n"
-        f"Student's answer: {response_text}\n"
-        "Score this answer from 0 to 2, where 0=incorrect, 1=partially correct, and 2=fully correct. "
-        "You can use decimal scores like 0.5 or 1.5 to reflect partial credit. "
-        "Provide only the numeric score followed by a short constructive comment explaining the score."
-    )
+    prompt = f"""Evaluate this test answer according to the rubric below:
 
-    response = model.generate_text(prompt=prompt, temperature=0.5, max_output_tokens=64)
-    text = response.text.strip()
+    Question: {question}
+    Student's Answer: {response_text}
 
-    # Parse the score from AI's response, assume format: "2\nGood answer..."
+    Scoring Rubric:
+    2.0 - Complete, accurate, and demonstrates deep understanding
+    1.5 - Mostly correct with minor inaccuracies
+    1.0 - Partially correct but missing key elements
+    0.5 - Shows some relevant knowledge but largely incorrect
+    0.0 - Completely incorrect or irrelevant
+
+    Provide:
+    1. Exact score (0.0-2.0 in 0.5 increments) on first line
+    2. Specific feedback explaining the score on subsequent lines:
+    - What was done well
+    - What needs improvement
+    - How to improve for full marks
+
+    Example:
+    1.5
+    Your answer covered the main concepts but missed one key detail about...
+    """
+
     try:
-        lines = text.split('\n')
-        score = float(lines[0].strip())
-        comment = "\n".join(lines[1:]).strip()
-    except Exception:
-        score = 0.0
-        comment = "Could not evaluate answer."
-
-    return score, comment
+        response = model.generate_content(prompt)
+        text = response.text.strip()
+        
+        # Improved parsing
+        first_line = text.split('\n')[0]
+        score = min(2.0, max(0.0, float(first_line)))  # Clamp score between 0-2
+        comment = '\n'.join(text.split('\n')[1:]).strip()
+        
+        return score, comment
+    except Exception as e:
+        print("Scoring error:", e)
+        return 0.0, "Could not evaluate this answer automatically."

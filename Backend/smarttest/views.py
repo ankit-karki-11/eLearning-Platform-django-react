@@ -8,6 +8,7 @@ from .serializers import *
 from django.conf import settings
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.utils import timezone
+from rest_framework.decorators import action
 
 from rest_framework.permissions import BasePermission
 
@@ -24,9 +25,14 @@ class IsAdminUser(BasePermission):
     
 
 class TopicViewSet(viewsets.ModelViewSet):
-    queryset = Question.objects.all()
+    queryset = Topic.objects.all()
     serializer_class = TopicSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticated]
+    
+    def get_permissions(self):
+        if self.action in ['create', 'update', 'destroy']:
+            return [IsAdminUser()]
+        return [IsAuthenticated()]
 
 class TestViewSet(viewsets.ModelViewSet):
     queryset = Test.objects.all()
@@ -37,12 +43,18 @@ class TestViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
         
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.created_by != request.user:
+            raise PermissionError("You don't have permission to access this test")
+        return super().retrieve(request, *args, **kwargs)
+        
     def create(self,request,*args,**kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         test = serializer.save(created_by=self.request.user)
         
-        topic_title=test.topic.title
+        topic_title=test.topic.title    
         level=test.level
         
         #Generate AI questions
@@ -57,6 +69,13 @@ class TestViewSet(viewsets.ModelViewSet):
         headers= self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
+        @action(detail=False, methods=['get'])
+        def my_tests(self, request):
+            tests = Test.objects.filter(created_by=request.user)
+            serializer = self.get_serializer(tests, many=True)
+            return Response(serializer.data)
+        
+from rest_framework import permissions
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
@@ -66,7 +85,6 @@ from django.utils import timezone
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
-
 class TestAttemptViewSet(viewsets.ModelViewSet):
     queryset = TestAttempt.objects.all()
     serializer_class = TestAttemptSerializer
@@ -74,59 +92,91 @@ class TestAttemptViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        if user.role == 'admin':
+        if user.role == 'admin':    
             return TestAttempt.objects.all()
         return TestAttempt.objects.filter(student=user)
+
+    def perform_create(self, serializer):
+        serializer.save(student=self.request.user)
 
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
     def submit(self, request, pk=None):
         test_attempt = self.get_object()
-        answers = Answer.objects.filter(attempt=test_attempt)
-
-        # Check if all questions are answered
-        total_questions = test_attempt.test.questions.count()
-        if answers.count() < total_questions:
+        
+        if test_attempt.status == 'submitted':
             return Response(
-                {"detail": "Please answer all questions before submitting."},
+                {"detail": "This test has already been submitted."},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        # Prepare answer data
-        answer_data = [
-            {
-                "question": answer.question.question_text,
-                "response": answer.response,
-                "score": answer.scored_marks,
-                "total": answer.question.marks,
-            }
-            for answer in answers
-        ]
+            
+        answers = test_attempt.answers.all()
+        total_questions = test_attempt.test.questions.count()
+        answered_count = answers.count()
 
-        # Generate AI feedback
-        feedback_text = generate_feedback(test_attempt.test.title, answer_data)
+        # Get list of unanswered questions (keeping your original query)
+        unanswered_questions = test_attempt.test.questions.exclude(
+            id__in=answers.values_list('question_id', flat=True)
+        ).values_list('question_text', flat=True)
 
-        # Save feedback and completion time
+        # Prepare data for your existing generate_feedback function
+        answers_with_scores = [{
+            "question": answer.question.question_text,
+            "response": answer.response,
+            "score": answer.scored_marks or 0,
+            "total": answer.question.marks
+        } for answer in answers]
+
+        # Generate feedback using your current function
+        feedback_text = generate_feedback(
+            test_title=test_attempt.test.title,
+            answers_with_scores=answers_with_scores
+        )
+
+        # Enhance feedback with unanswered questions info
+        if unanswered_questions:
+            unanswered_section = "\n\nUnanswered Questions:\n" + "\n".join(
+                f"- {q}" for q in unanswered_questions[:5]  # Show first 5 unanswered
+            )
+            feedback_text += unanswered_section
+
+        # Update attempt
         test_attempt.feedback = feedback_text
         test_attempt.completed_at = timezone.now()
+        test_attempt.status = 'submitted'
+        test_attempt.total_score = sum(a.scored_marks or 0 for a in answers)
         test_attempt.save()
 
         return Response({
             "message": "Test submitted successfully.",
-            "feedback": feedback_text
+            "feedback": feedback_text,
+            "score": test_attempt.total_score,
+            "total_possible": sum(q.marks for q in test_attempt.test.questions.all()),
+            "answered": f"{answered_count}/{total_questions}",
+            "unanswered_questions": list(unanswered_questions)  # Return in response
         }, status=status.HTTP_200_OK)
-
 
 class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = [IsAuthenticated, IsStudent]
 
+    def perform_create(self, serializer):
+        attempt = serializer.validated_data['attempt']
+        if attempt.status == 'submitted':
+            raise ValidationError("Cannot add answers to a submitted test")
+        serializer.save()
+
+    def perform_update(self, serializer):
+        attempt = serializer.instance.attempt
+        if attempt.status == 'submitted':
+            raise ValidationError("Cannot modify answers in a submitted test")
+        serializer.save()
+
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
+        answer = Answer.objects.get(id=response.data['id'])
 
-        answer_id = response.data.get('id')
-        answer = Answer.objects.get(id=answer_id)
-
-        # Generate AI comment for this single answer
+        # Generate AI evaluation
         score, comment = generate_ai_score_and_comment(
             question=answer.question.question_text,
             response=answer.response
@@ -134,20 +184,5 @@ class AnswerViewSet(viewsets.ModelViewSet):
         answer.scored_marks = score
         answer.ai_comment = comment
         answer.save()
-
-        # After saving comment, check if test is fully answered
-        attempt = answer.attempt
-        total_questions = attempt.test.questions.count()
-        answered_count = attempt.answers.count()
-
-        if answered_count == total_questions:
-            total_score = attempt.answers.aggregate(models.Sum('scored_marks'))['scored_marks__sum'] or 0
-            attempt.total_score = total_score
-
-            # You can call a feedback generator here too if needed
-            feedback = f"Test completed. You scored {total_score} out of {total_questions * 2}."
-            attempt.feedback = feedback
-            attempt.completed_at = timezone.now()
-            attempt.save()
 
         return response

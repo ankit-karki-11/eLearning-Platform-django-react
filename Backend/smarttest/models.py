@@ -39,6 +39,11 @@ class Question(models.Model):
         return f"{self.test.title} - Q{self.id}"
     
 class TestAttempt(models.Model):
+    STATUS_CHOICES = [
+        ('in_progress', 'In Progress'),
+        ('submitted', 'Submitted'),
+    ]
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='in_progress')
     student = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name='test_attempts', limit_choices_to={'role': 'student'})
     test=models.ForeignKey(Test, on_delete=models.CASCADE, related_name='attempts')
     started_at = models.DateTimeField(auto_now_add=True)
@@ -49,6 +54,7 @@ class TestAttempt(models.Model):
     def __str__(self):
         return f"{self.student.full_name} - {self.test.title}"
     
+from django.core.exceptions import ValidationError
 class Answer(models.Model):
     attempt=models.ForeignKey(TestAttempt, on_delete=models.CASCADE, related_name='answers')
     question=models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -58,5 +64,12 @@ class Answer(models.Model):
      
     def __str__(self):
         return f"Answer by {self.attempt.student.full_name} - Q: {self.question.id}"
+    def clean(self):
+        if self.attempt.is_submitted():
+            raise ValidationError("Cannot modify answers after test submission")
     
+    def save(self, *args, **kwargs):
+        self.clean()  # Call validation before saving
+        super().save(*args, **kwargs)
+        
     # option AI recommendation model
