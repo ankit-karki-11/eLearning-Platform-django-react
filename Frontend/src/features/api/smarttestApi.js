@@ -42,7 +42,6 @@ export const smarttestApi = createApi({
             invalidatesTags: ['Test'],
         }),
 
-        // Test Attempt Flow
         startAttempt: builder.mutation({
             query: (testId) => ({
                 url: "test-attempts/",
@@ -81,9 +80,15 @@ export const smarttestApi = createApi({
             }),
             invalidatesTags: ['Attempt'],
         }),
+        getAttempt: builder.query({
+            query: (attemptId) => `test-attempts/${attemptId}`,
+            providesTags: ['Attempt']
+        }),
 
         getAttemptResults: builder.query({
-            query: (attemptId) => `test-attempts/${attemptId}/results/`,
+            query: ({ attemptId }) => ({
+                url: `test-attempts/${attemptId}/results/`,
+            }),
             providesTags: ['Attempt'],
         }),
 
@@ -114,6 +119,7 @@ export const {
     useSubmitAnswerMutation,
     useSubmitAttemptMutation,
     useGetAttemptResultsQuery,
+    useGetAttemptQuery,
     useGetTopicsQuery,
     useCreateTopicMutation,
 } = smarttestApi;

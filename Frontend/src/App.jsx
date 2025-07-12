@@ -25,8 +25,9 @@ import Profile from './pages/student/Profile'
 import CourseSearch from './pages/student/CourseSearch'
 import CreateTest from './pages/student/smarttest/CreateTest'
 import TestAttemptPage from './pages/student/smarttest/TestAttemptPage'
-import MyTest from './pages/student/smarttest/MyTest'
-import TestFeedbackPage from './pages/student/smarttest/TestFeedbackPage'
+import MyTestPage from './pages/student/smarttest/MyTestPage'
+import TestResultPage from './pages/student/smarttest/TestResultPage'
+// import TestSubmittedPage from './pages/student/smarttest/TestSubmittedPage'
 // import UsersLoving from './pages/student/UsersLoving'
 
 const appRouter = createBrowserRouter([
@@ -127,13 +128,17 @@ const appRouter = createBrowserRouter([
             path:"/test-attempts/test/:testId/attempt/:attemptId/start",
             element:<TestAttemptPage />
           },
+          //  {
+          //   path: "/test-attempts/:attemptId/submit",
+          //   element:<TestSubmittedPage />
+          // },
           {
-            path: "/test-attempts/test/:testId/attempt/:attemptId/submit",
-            element: <TestFeedbackPage />,
+            path: "/test-attempts/:attemptId/results",
+            element: <TestResultPage />,
           },
           {
-            path: "courses/search",
-            element: <MyTest />
+            path: "test-attempts/history",
+            element: <MyTestPage />
           },
         ]
       },
