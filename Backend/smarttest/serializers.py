@@ -31,10 +31,11 @@ class TestSerializer(serializers.ModelSerializer):
         read_only_fields = ['created_by']
 
 class AnswerSerializer(serializers.ModelSerializer):
+    question_text = serializers.CharField(source='question.question_text', read_only=True)
     class Meta:
         model = Answer
-        fields = ['id', 'question', 'response',' ai_comment', 'scored_marks']
-
+        fields = ['id', 'attempt', 'question', 'question_text','response','ai_comment', 'scored_marks']
+        read_only_fields = ['ai_comment', 'scored_marks']
 
 class TestAttemptSerializer(serializers.ModelSerializer):
     answers = AnswerSerializer(many=True, read_only=True)
@@ -42,15 +43,15 @@ class TestAttemptSerializer(serializers.ModelSerializer):
     test_id = serializers.PrimaryKeyRelatedField(
         queryset=Test.objects.all(), source='test', write_only=True
     )
-    student = serializers.PrimaryKeyRelatedField(
-        read_only=True,
-        default=serializers.CurrentUserDefault()
-    )
+    # student = serializers.PrimaryKeyRelatedField(
+    #     read_only=True,
+    #     default=serializers.CurrentUserDefault()
+    # )
 
     class Meta:
         model = TestAttempt
         fields = [
-            'id', 'student', 'test', 'test_id',
-            'started_at', 'completed_at', 'total_score', 'feedback', 'answers'
+            'id', 'test', 'test_id','feedback_generated',
+            'started_at','status', 'completed_at', 'total_score', 'feedback', 'answers'
         ]
-        read_only_fields = ['student', 'started_at', 'total_score', 'feedback']
+        read_only_fields = ['student','status', 'started_at', 'total_score', 'feedback']

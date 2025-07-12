@@ -18,7 +18,12 @@ router.register(r'topics', TopicViewSet, basename='topic')
 urlpatterns = [
     path('test-attempts/<int:pk>/submit/',
         TestAttemptViewSet.as_view({'post': 'submit'}),
-        name='testattempt-submit'
+        # name='testattempt-submit'
+    ),
+    
+     path('test-attempts/<int:pk>/results/',
+        TestAttemptViewSet.as_view({'get': 'results'}),
+        # name='testattempt-submit'
     ),
 ]
 

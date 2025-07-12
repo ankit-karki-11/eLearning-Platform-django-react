@@ -31,6 +31,7 @@ class Test(models.Model):
 class Question(models.Model):
     test = models.ForeignKey(Test, on_delete=models.CASCADE, related_name='questions')
     question_text = models.TextField()
+    correct_answer= models.TextField(blank=True,null=True, help_text="Correct answer for the question")
     marks=models.PositiveIntegerField(default=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -50,10 +51,18 @@ class TestAttempt(models.Model):
     completed_at = models.DateTimeField(null=True, blank=True)
     total_score = models.FloatField(default=0.0)
     feedback = models.TextField(blank=True) #feedback for full test attempt
+    feedback_generated= models.BooleanField(default=False)
  
     def __str__(self):
         return f"{self.student.full_name} - {self.test.title}"
+    def is_submitted(self):
+        return self.status == 'submitted'
     
+    def get_unanswered_questions(self):
+        return self.test.questions.exclude(
+            id__in=self.answers.values_list('question_id', flat=True)
+        ).values_list('text', flat=True)
+        
 from django.core.exceptions import ValidationError
 class Answer(models.Model):
     attempt=models.ForeignKey(TestAttempt, on_delete=models.CASCADE, related_name='answers')
@@ -72,4 +81,3 @@ class Answer(models.Model):
         self.clean()  # Call validation before saving
         super().save(*args, **kwargs)
         
-    # option AI recommendation model
