@@ -7,7 +7,7 @@ import { ArrowRight } from 'lucide-react'
 
 
 const Courses = () => {
-  const { data, error, isLoading } = useLoadCourseQuery()
+  const { data, error, isLoading } = useLoadCourseQuery({ is_published: true });
 
   if (isLoading) {
     return (

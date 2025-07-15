@@ -45,29 +45,42 @@ const CreateTest = () => {
 
   return (
     <div className="min-h-screen animate-fadeIn">
-      <div className="fixed inset-0 -z-10 px-12 py-8 mt-8">
-        <img 
-          src="/14.png" 
+      <div className="fixed inset-0 -z-10 px-8 py-8 mt-8">
+        <img
+          src="/16.png"
           alt="background"
           className="w-full h-full object-cover rounded-2xl"
         />
+        <div className="absolute top-10 left-22">
+          <Button
+            onClick={() => navigate('#')}
+            variant="primary"
+            className="text-xs font-medium text-white transition-all duration-200 hover:border border-white/20 hover:rounded-lg px-3 py-1.5 backdrop-blur-sm cursor-pointer"
+          >
+            <span >my tests</span>
+          </Button>
+        </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 mt-24 relative">
-        <div className=" p-8 md:p-12">
+      <div className="max-w-2xl mx-auto px-4 mt-24 relative">
+        <div className="p-8 md:p-12 rounded-xl">
           <div className="mb-8 text-center">
-            <h2 className="text-3xl font-bold text-black mb-2">Create AI-Powered Assessment</h2>
-            <p className="text-black/80">Generate a customized test in seconds</p>
+            <h2 className="text-4xl font-small text-white mb-4 playfair-display italic">
+              Generate Smart AI Tests
+            </h2>
+            <p className="text-sm text-gray-200">
+              Get personalized AI tests based on your selected topic and level.
+            </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
-                <label className="block text-sm font-medium text-black mb-1">Topic*</label>
+                <label className="block text-xs font-medium text-white mb-1">Topic*</label>
                 <select
                   value={topicId}
                   onChange={(e) => setTopicId(e.target.value)}
-                  className="w-full p-3 text-sm bg-black/5 border border-black/20 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black appearance-none transition-all hover:border-black/40"
+                  className="w-full p-3 text-xs bg-gray-50 border border-black/20 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black appearance-none transition-all hover:border-black/40"
                   placeholder="Select topic"
                   required
                   disabled={isCreating || isSuccess}
@@ -80,11 +93,11 @@ const CreateTest = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-black mb-1">Level*</label>
+                <label className="block text-xs font-medium text-white mb-1">Level*</label>
                 <select
                   value={level}
                   onChange={(e) => setLevel(e.target.value)}
-                  className="w-full p-3 text-sm bg-black/5 border border-black/20 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black appearance-none transition-all hover:border-black/40"
+                  className="w-full p-3 text-xs bg-gray-50 border border-black/20 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black appearance-none transition-all hover:border-black/40"
                   disabled={isCreating || isSuccess}
                 >
                   <option value="basic">Basic</option>
@@ -95,13 +108,13 @@ const CreateTest = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-black mb-1">Test Title*</label>
+              <label className="block text-xs font-medium text-white mb-1">Test Title*</label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Enter test title"
-                className="w-full p-3 text-sm bg-black/5 border border-black/20 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-black/50 transition-all hover:border-black/40"
+                className="w-full p-3 text-xs bg-white border border-black/20 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-black/50 transition-all hover:border-black/40"
                 required
                 disabled={isCreating || isSuccess}
               />
@@ -113,29 +126,24 @@ const CreateTest = () => {
                 <Button
                   type="submit"
                   disabled={!title || !topicId || isCreating}
-                  className="w-full py-6 bg-black hover:bg-gray-950 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-blue-500/20 cursor-pointer"
+                  className="w-full py-6 bg-black text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:bg-gray-950 cursor-pointer"
                 >
-                  <Zap className="w-4 h-4 mr-2" />
+                  <Zap className="w-4 h-4" />
                   {isCreating ? 'Generating questions...' : 'Generate Test'}
                 </Button>
               ) : (
                 <>
                   <Button
                     onClick={handleStartTest}
-                    className="w-full py-4 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-green-500/20"
+                    className="w-full py-6 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:bg-gray-950 cursor-pointer"
                   >
-                    <Zap className="w-4 h-4 mr-2 fill-current" />
+                    <Zap className="w-4 h-4 fill-current" />
                     Start Test Now
                   </Button>
-                  <div className="mt-4 animate-bounce text-center text-green-400">
-                    <CheckCircle className="w-6 h-6 mx-auto" />
-                    <p className="mt-2">Test created successfully!</p>
-                  </div>
                 </>
               )}
             </div>
 
-          
             {isCreating && (
               <div className="mt-4 flex justify-center">
                 <div className="animate-pulse flex space-x-2">

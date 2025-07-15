@@ -27,6 +27,13 @@ import CreateTest from './pages/student/smarttest/CreateTest'
 import TestAttemptPage from './pages/student/smarttest/TestAttemptPage'
 import MyTestPage from './pages/student/smarttest/MyTestPage'
 import TestResultPage from './pages/student/smarttest/TestResultPage'
+
+import Sidebar from './pages/admin/Sidebar'
+import AddCourse from './pages/admin/course/AddCourse'
+import AddSection from './pages/admin/section/AddSection'
+import Dashboard from './pages/admin/Dashboard'
+import AdminLayout from './layout/AdminLayout'
+import CourseTable from './pages/admin/course/CourseTable'
 // import TestSubmittedPage from './pages/student/smarttest/TestSubmittedPage'
 // import UsersLoving from './pages/student/UsersLoving'
 
@@ -86,9 +93,6 @@ const appRouter = createBrowserRouter([
         path: "courses/search",
         element: <CourseSearch />
       },
-
-
-
       //protected routrs for student role
       {
         element: <ProtectedRoutes allowedRoles={['student']} />,
@@ -125,13 +129,9 @@ const appRouter = createBrowserRouter([
             element: <CreateTest />
           },
           {
-            path:"/test-attempts/test/:testId/attempt/:attemptId/start",
-            element:<TestAttemptPage />
+            path: "/test-attempts/test/:testId/attempt/:attemptId/start",
+            element: <TestAttemptPage />
           },
-          //  {
-          //   path: "/test-attempts/:attemptId/submit",
-          //   element:<TestSubmittedPage />
-          // },
           {
             path: "/test-attempts/:attemptId/results",
             element: <TestResultPage />,
@@ -146,9 +146,38 @@ const appRouter = createBrowserRouter([
       // protected admin routes
       {
         element: <ProtectedRoutes allowedRoles={['admin']} />,
+
         children: [
-          // { path: 'admin/dashboard', element: <AdminDashboard /> },
+          {
+            path: "admin",
+            element: <AdminLayout />,
+            children: [
+              // {
+              //   path: '',
+              //   element: <Sidebar />
+              // },
+              {
+                path: '',
+                element: <Dashboard />
+              },
+           
+              {
+                path: 'courses/section',
+                element: <AddSection />
+              },
+                {
+                path: 'courses',
+                element: <CourseTable />
+              },
+                {
+                path: 'courses/add',
+                element: <AddCourse />
+              },
+              
+            ],
+          },
         ],
+
       },
     ],
   },

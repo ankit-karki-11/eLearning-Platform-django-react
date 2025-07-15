@@ -65,13 +65,14 @@ const Navbar = () => {
 
         <div className='flex items-center gap-8'>
           <Link to="/" className='flex items-center gap-2'>
-            <img src="/logoblack.png" alt="Logo" className='h-8 w-auto' />
+            <img src="/logo.png" alt="Logo" className='h-6 w-auto' />
           </Link>
 
 
           <nav className='hidden md:flex items-center gap-4 text-black hover:text-red-700 dark:hover:text-gray-200'>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/courses">Courses</NavLink>
+            {/* <NavLink to="/smart-test/test">SmartTest</NavLink> */}
 
             {user?.role === "student" && (
               <NavLink to="/courses/my-learning">My Learning</NavLink>
@@ -80,8 +81,8 @@ const Navbar = () => {
             {user?.role === "student" && (
               <NavLink to="/smart-test/test">Smart-Test</NavLink>
             )}
-            {user?.role === "instructor" && (
-              <NavLink to="/instructor/dashboard">Instructor</NavLink>
+            {user?.role === "admin" && (
+              <NavLink to="/admin">Dashboard</NavLink>
             )}
 
 
@@ -129,10 +130,10 @@ const Navbar = () => {
                     </Link>
                   </DropdownMenuItem>
 
-                  {user.role === "instructor" && (
+                  {user.role === "admin" && (
                     <DropdownMenuItem asChild>
-                      <Link to="/instructor/dashboard" className='w-full'>
-                        Instructor Dashboard
+                      <Link to="/admin" className='w-full'>
+                        Admin Dashboard
                       </Link>
                     </DropdownMenuItem>
                   )}
@@ -221,9 +222,9 @@ const MobileNavbar = ({ logoutHandler, user }) => {
                 <NavLink to="/profile">Profile Settings</NavLink>
               </SheetClose>
 
-              {user.role === "instructor" && (
+              {user.role === "admin" && (
                 <SheetClose asChild>
-                  <NavLink to="/instructor/dashboard">Instructor Dashboard</NavLink>
+                  <NavLink to="/admin">Admin Dashboard</NavLink>
                 </SheetClose>
               )}
 

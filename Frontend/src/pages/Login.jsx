@@ -114,7 +114,12 @@ const Login = () => {
             dispatch(authApi.endpoints.loadUser.initiate());
 
 
+            const role = loginData.user?.role;
+            if (role === "admin") {
+                navigate("/admin");
+            } else {
             navigate(redirect);
+            }
 
         }
         if (loginError) {

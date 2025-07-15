@@ -9,36 +9,52 @@ export const courseApi = createApi({
     reducerPath: "courseApi",
     baseQuery: fetchBaseQuery({
         baseUrl: COURSE_API,
-        // credentials: "include",
-        // prepareHeaders: (headers) => {
-        //     const token = localStorage.getItem("accessToken");
-        //     if (token) {
-        //         headers.set("Authorization", `Bearer ${token}`);
-        //     }
-        //     return headers;
-        // },
+        credentials: "include",
+        prepareHeaders: (headers) => {
+            const token = localStorage.getItem("accessToken");
+            if (token) {
+                headers.set("Authorization", `Bearer ${token}`);
+            }
+            return headers;
+        },
     }),
     // create endpoints:
     endpoints: (builder) => ({
-
-        //loadcourse
-        // LoadCourse: builder.query({
-        //     query: () => ({
-        //         url: "course/",
-        //         method: "GET",
-
-        //     }),
-        // }),
-        LoadCourse: builder.query({
-            query: (params) => {
-                const queryParams = new URLSearchParams(params).toString();
-                return {
-                    url: `course/?${queryParams}`,
-                    method: "GET",
-                };
-            },
+        // add course
+        createCourse: builder.mutation({
+            query: (title, category) => ({
+                url: "course/",
+                method: "POST",
+                body: { title, category }
+            }),
         }),
+        //loadcourse
+        LoadCourse: builder.query({
+            query: () => ({
+                url: "course/",
+                method: "GET",
 
+            }),
+        }),
+        // updatecourse
+        UpdateCourse: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `course/${id}/`,
+                method: "POST",
+                body: data,
+
+            }),
+
+        }),
+        DeleteCourse: builder.mutation({
+            query: (id) => ({
+                url: `course/${id}/`,
+                method: "DELETE",
+
+
+            })
+
+        }),
         //  Get sections by course slug
         GetSectionsByCourse: builder.query({
             query: (courseSlug) => ({
@@ -64,13 +80,14 @@ export const courseApi = createApi({
                 };
             },
         }),
-    }),
-})
+        }),
+        })
 
-export const {
-
-    useLoadCourseQuery,
-
-    useGetSectionsByCourseQuery,
-    useSearchCoursesQuery,
-} = courseApi;
+        export const {
+            useCreateCourseMutation,
+            useLoadCourseQuery,
+            useUpdateCourseMutation,
+            useDeleteCourseMutation,
+            useGetSectionsByCourseQuery,
+            useSearchCoursesQuery,
+        } = courseApi;

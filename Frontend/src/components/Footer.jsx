@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-gray-300 w-full mt-24">
+    <footer className="bg-black text-gray-300 w-full mt-24 rounded-2xl">
       <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Column 1: Logo and description */}
           <div>
             <Link to="/" className="flex items-center gap-3 mb-6">
               <img 
-                src="/logoblack.png" 
+                src="/logo.png" 
                 alt="Epadhai Logo" 
-                className="h-10 w-auto invert"
+                className="h-6 w-auto invert"
               />
               <span className="text-white font-bold text-xl">Epadhai</span>
             </Link>
