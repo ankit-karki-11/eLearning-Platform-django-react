@@ -94,6 +94,16 @@ class CourseViewSet(ModelViewSet):
     lookup_field="slug"
     filter_backends = [filters.SearchFilter] 
     
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Course.objects.all()
+
+        # If user is not admin, only return published courses
+        if not user.is_authenticated or user.role != 'admin':
+            queryset = queryset.filter(is_published=True)
+
+        return queryset
+    
     def create(self, request, *args, **kwargs):
        
           #check if user is admin
@@ -110,6 +120,8 @@ class CourseViewSet(ModelViewSet):
                 status=status.HTTP_409_CONFLICT,
                 data={"detail": "Course with this title or slug already exists"}
                 )
+        
+        
     
     def update(self, request, *args, **kwargs):
         if request.data.get("is_published") == False:
