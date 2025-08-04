@@ -55,3 +55,9 @@ class PaymentSerializer(serializers.ModelSerializer):
            
         ]
     
+class KhaltiInitiatePaymentSerializer(serializers.Serializer):
+    amount = serializers.IntegerField(min_value=1, help_text="Amount in paisa (e.g., 1 Rs = 100 paisa)")
+    course_id = serializers.PrimaryKeyRelatedField(queryset=Course.objects.all())
+    purchase_order_id = serializers.CharField()
+    purchase_order_name = serializers.CharField()
+    return_url = serializers.URLField()

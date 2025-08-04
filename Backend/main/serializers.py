@@ -5,11 +5,13 @@ from users.serializers import UserAccountListSerializer
 from rest_framework.response import Response
 from rest_framework import status
 class CategorySerializer(serializers.ModelSerializer):
+    
     class Meta:
         model=Category
         fields=[
             "id",
             "title",
+            "slug",
             "created_at",
             "updated_at",
         ]
@@ -20,20 +22,23 @@ class CategoryListSerializer(serializers.ModelSerializer):
         fields=[
             "id",
             "title",
+            "slug",
         ]
 
 class CourseSerializer(serializers.ModelSerializer):
-    admin=UserAccountListSerializer(read_only=True)
-    admin_id=serializers.PrimaryKeyRelatedField(
-        queryset=UserAccount.objects.filter(role="admin"),
-        source="admin",
-        write_only=True,
-        error_messages={
-            "does_not_exist": "admin does not exist.",
-            "required": "admin is required.",
-        },
+    recommended_hours_per_week = serializers.IntegerField(default=5, required=False)
+    requirements = serializers.CharField(
+        default="No specific requirements", required=False, allow_blank=True)
+    learning_outcomes  = serializers.CharField(
+        default="Students will learn the skills and knowledge related to this course", 
+        required=False,
+        allow_blank=True
+        
     )
-    
+    syllabus  = serializers.CharField(
+        default="Syllabus will be provided in the course", required=False, allow_blank=True)
+
+    admin=UserAccountListSerializer(read_only=True)
     category=CategoryListSerializer(read_only=True)
     category_id=serializers.PrimaryKeyRelatedField(
         queryset=Category.objects.all(),
@@ -56,7 +61,7 @@ class CourseSerializer(serializers.ModelSerializer):
             "required": "Price is required.",
         },
     )
-
+    total_enrolled = serializers.SerializerMethodField()
     class Meta:
         model=Course
         fields=[
@@ -71,7 +76,7 @@ class CourseSerializer(serializers.ModelSerializer):
             "updated_at",
             "sections",
             "admin",
-            "admin_id",
+            # "admin_id",
             "price",
             "is_published",
             "slug",
@@ -84,7 +89,8 @@ class CourseSerializer(serializers.ModelSerializer):
             "requirements",
             "learning_outcomes",
             "syllabus",
-            'total_enrolled',
+            'total_enrolled'
+            # 'student_count',
         ]
         
     def get_sections(self, obj):
@@ -92,8 +98,8 @@ class CourseSerializer(serializers.ModelSerializer):
         return SectionSerializer(sections,many=True).data
     
     def get_total_enrolled(self,obj):
-        return obj.total_enrolled
-    
+        return obj.get_total_students()
+
 class CourseListSerializer(serializers.ModelSerializer):
     admin=UserAccountListSerializer(read_only=True)
     category=CategoryListSerializer(read_only=True)
@@ -123,10 +129,8 @@ class CourseListSerializer(serializers.ModelSerializer):
             "requirements",
             "learning_outcomes",
             "syllabus",
-            'total_enrolled',
-   
-        ]     
-    
+        ]
+
     def get_thumbnail(self, obj):
             request = self.context.get("request")
             if obj.thumbnail and request:
@@ -134,7 +138,7 @@ class CourseListSerializer(serializers.ModelSerializer):
             return None
     
     def get_total_enrolled(self,obj):
-        return obj.total_enrolled
+        return obj.get_total_students()
 
 
 class SectionSerializer(serializers.ModelSerializer):
@@ -179,7 +183,12 @@ class SectionSerializer(serializers.ModelSerializer):
         attachments=obj.attachments.all()
         return AttachmentSerializer(attachments,many=True).data
 
-    
+    def get_course(self, obj):
+        return {
+            "id": obj.course.id,
+            "title": obj.course.title,
+        }
+        
 class SectionListSerializer(serializers.ModelSerializer):
     course=serializers.PrimaryKeyRelatedField(
         queryset=Course.objects.all(),

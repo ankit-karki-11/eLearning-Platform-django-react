@@ -18,8 +18,8 @@ class Category(models.Model):
         return self.title
     
     def save(self,*args,**kwargs):
-        if not self.slug:
-            self.slug=slugify(self.title)
+        # if not self.slug:
+        self.slug=slugify(self.title) #always slugify the title
         super().save(*args, **kwargs)
             
     class Meta:
@@ -88,7 +88,8 @@ class Course(models.Model):
     )
      # Stats
     average_rating = models.FloatField(default=0)
-    total_students = models.PositiveIntegerField(default=0)
+    total_students = models.PositiveIntegerField(default=0) # Total number of students enrolled in the course
+   
     
     # course conrent/features
     requirements=models.TextField(
@@ -123,10 +124,11 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+    # def inside class is called methods
     def enrolled_students(self):
         return[enrollment.student for enrollment in self.enrollments.all()]
     
-    def total_enrolled(self):
+    def get_total_students(self):
         return self.enrollments.count()
 
     def completed_students(self):
@@ -149,7 +151,7 @@ class Course(models.Model):
             GinIndex(fields=["keywords"],name='keywords_trgm',opclasses=['gin_trgm_ops']),
         ]
 
-    
+from django.core.validators import FileExtensionValidator
 #Section Model
 class Section(models.Model):
     title=models.CharField(max_length=150)
@@ -162,7 +164,11 @@ class Section(models.Model):
         upload_to="section_videos/%Y/%m/%d/", 
         null=True, 
         blank=True,
-        help_text="Upload section video file"
+        validators=[
+            FileExtensionValidator(
+                allowed_extensions=['mp4']),    
+        ],
+        help_text="Only MP4 video files are allowed"
     )
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
@@ -385,3 +391,50 @@ class Certificate(models.Model):
         super().save(*args, **kwargs)
 
 #review model ,discussion model , reply of the comment model will be fo fututre features,   
+class Review(models.Model):
+    RATING_CHOICES = [
+        (1, '⭐'),
+        (2, '⭐⭐'),
+        (3, '⭐⭐⭐'),
+        (4, '⭐⭐⭐⭐'),
+        (5, '⭐⭐⭐⭐⭐'),
+    ]
+
+    student = models.ForeignKey(
+        'users.UserAccount',
+        on_delete=models.CASCADE,
+        limit_choices_to={'role': 'student'},
+        related_name='reviews'
+    )
+    course = models.ForeignKey(
+        'Course',
+        on_delete=models.CASCADE,
+        related_name='reviews'
+    )
+    rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
+    comment = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "review"
+        verbose_name_plural = "Reviews"
+        ordering = ["-created_at"]
+        unique_together = ['student', 'course']  # One review per student per course
+
+    def __str__(self):
+        return f"{self.student.full_name} - {self.course.title}: {self.rating} stars"
+
+    def clean(self):
+        # Ensure only enrolled students can review
+        if not Enrollment.objects.filter(student=self.student, course=self.course).exists():
+            raise ValidationError("Only enrolled students can leave a review.")
+
+    def save(self, *args, **kwargs):
+        self.clean()  # Validate before saving
+        super().save(*args, **kwargs)
+        # Update course average rating
+        self.course.average_rating = self.course.reviews.aggregate(
+            avg_rating=models.Avg('rating')
+        )['avg_rating'] or 0.0
+        self.course.save(update_fields=['average_rating'])

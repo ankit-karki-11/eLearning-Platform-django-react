@@ -33,6 +33,19 @@ class UserAccountSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["is_verified", "is_active", "created_at", "updated_at"]
 
+    def validate_full_name(self, value):
+        """Validates the full name of the user.
+
+        full_name must be at least 3 characters long and contain only letters, spaces, and hyphens.
+        """
+        if not value.strip():
+            raise serializers.ValidationError("Full name cannot be empty.")
+        if not value.replace(" ", "").replace("-", "").isalpha():
+            raise serializers.ValidationError("Full name can only contain letters, spaces, and hyphens.")
+        if len(value) < 3:
+            raise serializers.ValidationError("Full name must be at least 3 characters long.")
+        return value.strip()
+    
     def create(self, validated_data):
         # Creates a new user using the custom manager's create_user method
         user=UserAccount.objects.create_user(**validated_data)

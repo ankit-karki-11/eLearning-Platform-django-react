@@ -16,14 +16,21 @@ from payments.models import Payment
 from rest_framework import viewsets, status, permissions, filters
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from django.utils.text import slugify 
+from rest_framework.permissions import AllowAny
 # from main.views import recommend_courses
 # from .serializers import *
 #custom permission class
 class CustomPermission(permissions.BasePermission):
     def has_permission(self, request, view):
-        # allow only cretain users of admin role
+        # For create, update, destroy, only allow authenticated admin users
         if view.action in ["create", "update", "destroy"]:
+            # Check user is authenticated before accessing role
+            if not request.user or not request.user.is_authenticated:
+                return False
             return request.user.role == "admin"
+
+        # For other actions (like list, retrieve), allow all (even anonymous)
         return True
        
 class IsStudentUser(permissions.BasePermission):
@@ -43,30 +50,53 @@ class CategoryViewSet(ModelViewSet):
     permission_classes=[CustomPermission]
     search_fields=["title"]
     # filterset_fields=["category","is_published","admin"]
-    lookup_field="slug"
+    # lookup_field="slug"
     filter_backends = [filters.SearchFilter] 
     
     def create(self, request, *args, **kwargs):
-        try:
-          #check if user is admin
-          if not request.user.role=="admin":
-              return Response(
-                  status=status.HTTP_403_FORBIDDEN,
-                  data={"detail":"Only admin can create course"}
-              )
-              return super().create(request, *args, **kwargs)
-        except Exception as e:
-              return Response(
-                status=status.HTTP_409_CONFLICT,data={"detail":"Duplicate Category title"}
-               )
-            
-    def update(self, request, *args, **kwargs):
-        try:
-            return super().update(request, *args, **kwargs)
-        except Exception as e:
+        if not request.user or not request.user.is_authenticated or request.user.role != "admin":
             return Response(
-                status=status.HTTP_409_CONFLICT,data={"detail":"Duplicate category name"}
-               )
+                status=status.HTTP_403_FORBIDDEN,
+                data={"detail": "Only admin can create category"}
+            )
+
+        try:
+            return super().create(request, *args, **kwargs)
+        except Exception as e:
+            # log the exception (optional)
+            print(f"Category creation failed: {str(e)}")
+            return Response(
+                status=status.HTTP_400_BAD_REQUEST,
+                data={"error": str(e)}
+            )
+    
+    # def update(self, request, *args, **kwargs):
+    #     try:
+    #         return super().update(request, *args, **kwargs)
+    #     except IntegrityError:
+    #         return Response(
+    #             status=status.HTTP_409_CONFLICT,
+    #             data={"detail": "Duplicate category name"}
+    #         )
+    #     except Exception as e:
+    #         return Response(
+    #             status=status.HTTP_400_BAD_REQUEST,
+    #             data={"detail": str(e)}
+    #         )
+
+  
+    @action(detail=True, methods=["POST"], permission_classes=[IsAuthenticated], url_path="update")
+    def update_category(self, request, pk=None):
+        category = self.get_object()
+        title = request.data.get("title")
+        
+        if title:
+            category.title = title
+            # category.slug = slugify(title)
+
+        category.save()
+        return Response(self.get_serializer(category).data, status=status.HTTP_200_OK)
+
     def destroy(self, request, *args, **kwargs):
         try:
             return super().destroy(request, *args, **kwargs)
@@ -82,6 +112,18 @@ class CategoryViewSet(ModelViewSet):
         serializer=self.get_serializer(category)
         return Response(serializer.data)
     
+    # Optional: Add archive functionality instead of delete
+    @action(detail=True, methods=['post'], permission_classes=[CustomPermission])
+    def archive(self, request, slug=None):
+        """Archive category instead of deleting"""
+        category = self.get_object()
+        category.is_active = False
+        category.save()
+        return Response(
+            {"detail": "Category archived successfully"},
+            status=status.HTTP_200_OK
+        )
+        
 from django.db import IntegrityError
   
 # course viewset
@@ -105,7 +147,6 @@ class CourseViewSet(ModelViewSet):
         return queryset
     
     def create(self, request, *args, **kwargs):
-       
           #check if user is admin
         if not request.user.role=="admin":
             return Response(
@@ -113,6 +154,10 @@ class CourseViewSet(ModelViewSet):
                 data={"detail":"Only admin can create course"
                  }
               )
+            
+        # force course to 
+        request.data["is_published"] = False
+        
         try:
             return super().create(request, *args, **kwargs)
         except IntegrityError:
@@ -120,9 +165,7 @@ class CourseViewSet(ModelViewSet):
                 status=status.HTTP_409_CONFLICT,
                 data={"detail": "Course with this title or slug already exists"}
                 )
-        
-        
-    
+
     def update(self, request, *args, **kwargs):
         if request.data.get("is_published") == False:
             course = self.get_object()
@@ -132,8 +175,14 @@ class CourseViewSet(ModelViewSet):
                     status=status.HTTP_400_BAD_REQUEST,
                     data={"detail":"Course cannot be unpublished as it has enrolled students"}
                 )
-            
-    
+                
+            # prevent publishing if there are no sections
+        if request.data.get("is_Published")== True:
+            if not course.sections.exists():
+                return Response(
+                    status=status.HTTP_400_BAD_REQUEST,
+                    data={"detail":"Course cannot be published as it has no sections"}
+                )
         return super().update(request, *args, **kwargs)
           
     def destroy(self, request, *args, **kwargs):
@@ -154,6 +203,7 @@ class CourseViewSet(ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
     
+    # get all course of admin
     @action(detail=False, methods=["get"], permission_classes=[IsAuthenticated])
     def get_my_courses(self, request):
         if request.user.role == "student":
@@ -171,7 +221,18 @@ class CourseViewSet(ModelViewSet):
         serializer=self.get_serializer(course)
         return Response(serializer.data)
     
-    # get course by category
+    #get stats for public and students
+    @action(detail=False,  methods=["GET"], permission_classes=[AllowAny])
+    def get_stats_public(self,request):
+        total_courses = Course.objects.filter(is_published=True).count()
+        total_enrollments=Enrollment.objects.count()
+        
+        return Response({
+            "total_courses": total_courses,
+            "total_enrollments": total_enrollments
+        })
+        
+    # get course by stats for admin
     @action(detail=False, methods=["GET"], permission_classes=[IsAuthenticated])
     def get_stats(self, request):
         if request.user.role != "admin":
@@ -184,7 +245,7 @@ class CourseViewSet(ModelViewSet):
         published_count = Course.objects.filter(admin=request.user, is_published=True).count()
         student_count = Enrollment.objects.filter(course__admin=request.user).exclude(user=request.user).count()
         
-        # total earnins
+        # total earnings
         total_earning = Payment.objects.filter(course__admin=request.user).aggregate(total=Sum("amount"))
         total_income= total_earning["total"] if total_earning["total"] else 0.0
         
@@ -212,58 +273,14 @@ class CourseViewSet(ModelViewSet):
                 status=status.HTTP_404_NOT_FOUND,
                 data={"detail": "Course not found."}
             )
-    
-from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
-from django.contrib.postgres.search import TrigramSimilarity
-from django.db.models import F,Q,ExpressionWrapper,FloatField
-class CourseSearchView(APIView):
-    permission_classes = [AllowAny]  
-      
-    
-    def get (self,request):
-        query=request.GET.get('q','')
-        sort=request.GET.get('sort','')
-        
-        if query:
-            if len(query)<3:
-                courses= Course.objects.filter(
-                    Q(title__icontains=query)|Q(keywords__icontains=query)
-                    
-                )
-            else:
-                courses= Course.objects.annotate(
-                    similarity_title=TrigramSimilarity('title',query),
-                    similarity_keywords=TrigramSimilarity('keywords',query),
-                    
-                ).annotate(
-                    total_similarity=ExpressionWrapper(
-                        F('similarity_title') * 0.7 + F('similarity_keywords') * 0.3,
-                        output_field=FloatField()
-                    )
-                ).filter(
-                    Q(total_similarity__gt=0.1) |
-                    Q(title__icontains=query) |
-                    Q(keywords__icontains=query)
-                ).order_by('-total_similarity')
-        
-        else:
-            courses= Course.objects.all()
-            # Apply sorting
-            
-            if sort == 'price_asc':
-                courses= courses.order_by('price')
-            elif sort == 'price_desc':
-                courses= courses.order_by('-price')
-            elif query:
-                courses=courses.order_by('-total_similarity') #sort by relevence by searching
-            else:   
-                courses= courses.order_by('-created_at')
-        
-        # serializer=CourseListSerializer(courses,many=True)
-        serializer = CourseListSerializer(courses, many=True, context={'request': request})
-        return Response(serializer.data)
-        
+
+    @action(detail=True, methods=['post'])
+    def publish(self, request, slug=None):
+        course = self.get_object()
+        course.is_published = True
+        course.save()
+        return Response({'status': 'course published'})
+     
 # section viewset
 class SectionViewSet(ModelViewSet):
     queryset=Section.objects.all()
@@ -301,9 +318,85 @@ class SectionViewSet(ModelViewSet):
         except Exception as e:
             return Response(
                 status=status.HTTP_409_CONFLICT,data={"detail":"Section cannot be deleted"}
-               )
+            )
 
-#cart viewset
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
+from django.contrib.postgres.search import TrigramSimilarity
+from django.db.models import F,Q,ExpressionWrapper,FloatField,Case, When, IntegerField
+
+class CourseSearchView(APIView):
+   permission_classes = [AllowAny] 
+
+   def get(self, request):
+        query = request.GET.get('q', '')
+        sort = request.GET.get('sort', '')
+        user = request.user
+
+        if query:
+            if len(query) < 1:
+                courses = Course.objects.filter(
+                    Q(title__icontains=query) | Q(keywords__icontains=query)
+                )
+            else:
+                threshold = 0.05 if len(query) < 6 else 0.15
+                courses = Course.objects.annotate(
+                    similarity_title=TrigramSimilarity('title', query),
+                    similarity_keywords=TrigramSimilarity('keywords', query),
+                     
+                    exact_title_match=Case(
+                        When(title__iexact=query, then=1),
+                        default=0,
+                        output_field=IntegerField()
+                    ),
+                    exact_keyword_match=Case(
+                        When(keywords__icontains=query, then=1),
+                        default=0,
+                        output_field=IntegerField()
+                    )
+    
+                ).annotate(
+                    total_similarity=ExpressionWrapper(
+                        (F('similarity_title') * 0.7 + F('similarity_keywords') * 0.3) +
+                        (F('exact_title_match') * 0.5) +     
+                        (F('exact_keyword_match') * 0.2),    
+                        output_field=FloatField()
+                    )
+                ).filter(
+                    Q(total_similarity__gt=threshold) |
+                    Q(title__icontains=query) |
+                    Q(keywords__icontains=query)
+                ).order_by('-total_similarity')
+
+                for course in courses:
+                    print(f"{course.title} - Total Similarity: {getattr(course, 'total_similarity', 'N/A')}")
+
+            
+            if not user.is_authenticated or user.role != 'admin':
+                courses = courses.filter(is_published=True)
+
+        else:
+            courses = Course.objects.all()
+            
+            
+            if not user.is_authenticated or user.role != 'admin':
+                courses = courses.filter(is_published=True)
+
+           
+            if sort == 'price_asc':
+                courses = courses.order_by('price')
+            elif sort == 'price_desc':
+                courses = courses.order_by('-price')
+            else:
+                courses = courses.order_by('-created_at')
+
+        serializer = CourseListSerializer(courses, many=True, context={'request': request})
+        return Response(serializer.data)
+   
+# cart viewset
+
+      
+
 class CartViewSet(ModelViewSet):
     queryset = Cart.objects.all().select_related("course", "student")
     serializer_class = CartSerializer
@@ -726,20 +819,33 @@ def recommend_courses_with_scores(course_slug: str, top_n: int = 4):
             tfidf_matrix
         ).flatten()
 
-        similar_indices = similarity_scores.argsort()[-(top_n + 1):-1][::-1]
+    
+        threshold = 0.60
+        # Filter indices where similarity is above threshold and exclude the course itself
+        filtered_indices = [
+            i for i, score in enumerate(similarity_scores)
+            if score >= threshold and i != current_index
+        ]
+
+        # Sort the filtered indices by similarity descending
+        filtered_indices = sorted(filtered_indices, key=lambda i: similarity_scores[i], reverse=True)
+
+        # Limit to top_n results
+        top_indices = filtered_indices[:top_n]
 
         results = []
-        for i in similar_indices:
+        for i in top_indices:
             course_id = df.iloc[i]["id"]
             similarity = similarity_scores[i]
             course = Course.objects.get(id=course_id)
             results.append((course, similarity))
 
         return results
-
+    
     except Exception as e:
         print(f"Recommendation error: {str(e)}")
         return []
+        
 
     
 from rest_framework.viewsets import ViewSet
