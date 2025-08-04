@@ -116,7 +116,7 @@ const CourseDetails = () => {
                             <div className="flex flex-wrap gap-4">
                                 <div className="flex items-center bg-gray-800/50 px-3 py-2 rounded-lg text-xs">
                                     <Clock className="h-4 w-4 mr-2" />
-                                    <span>{course.course_duration} hours</span>
+                                    <span>{course.course_duration} hours ({course.sections.length} video/s)</span>
                                 </div>
                                 <div className="flex items-center bg-gray-800/50 px-3 py-2 rounded-lg text-xs">
                                     <Languages className="h-4 w-4 mr-2" />
@@ -124,6 +124,7 @@ const CourseDetails = () => {
                                 </div>
                                 <div className="flex items-center bg-gray-800/50 px-3 py-2 rounded-lg text-xs">
                                     <User2 className="h-4 w-4 mr-2" />
+                                    {/* <span>Students Enrolled: {course.total_students}</span> */}
                                     <span>Students Enrolled: {course.total_enrolled}</span>
                                 </div>
                             </div>
@@ -140,9 +141,9 @@ const CourseDetails = () => {
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <button
                                         onClick={() => window.open('https://youtu.be/TjCRfuIsOEE?si=zmZ0DbKROE5gg8Yh', '_blank')}
-                                        className="bg-blue-700 rounded-full p-4 hover:scale-110 transition-transform shadow-lg"
+                                        className="bg-gray-200 rounded-full p-4 hover:scale-110 transition-transform shadow-lg"
                                     >
-                                        <Play className="h-6 w-6 text-gray-200 fill-current cursor-pointer" />
+                                        <Play className="h-6 w-6 text-gray-900 fill-current cursor-pointer" />
                                     </button>
                                 </div>
                                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
@@ -166,6 +167,8 @@ const CourseDetails = () => {
                                 </div>
                             )}
                         </div>
+                    {/* {is_enrolled ? ()
+                    } */}
                         <Button
                             onClick={handlePayWithKhalti}
                             className="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-sm"
@@ -189,6 +192,11 @@ const CourseDetails = () => {
                             </h2>
                             <div className="prose max-w-none text-shadow-black ">
                                 <p className="text-sm leading-relaxed">{course.description}</p>
+                                {/* <p className="text-sm leading-relaxed">{course.keywords}</p> */}
+                            </div>
+                             <div className="prose max-w-none bg-gray-300 text-shadow-black ">
+                                {/* <p className="text-sm leading-relaxed">{course.description}</p> */}
+                                <p className="text-sm leading-relaxed">{course.keywords}</p>
                             </div>
                         </div>
 
@@ -303,7 +311,7 @@ const CourseDetails = () => {
                                 <div className="space-y-3 ">
                                     <div className="flex items-center text-sm text-shadow-black">
                                         <Clock className="h-4 w-4 text-gray-900 mr-3" />
-                                        <span>{course.course_duration} hours video</span>
+                                        <span>{course.sections.length} lectures video</span>
                                     </div>
                                     <div className="flex items-center text-sm text-shadow-black">
                                         <BookOpen className="h-4 w-4 text-gray-900 mr-3" />

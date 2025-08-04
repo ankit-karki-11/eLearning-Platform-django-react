@@ -2,11 +2,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const COURSE_API = "http://localhost:8000/api/v1/main/";
 
-import React from 'react'
-
 // create API slice
-export const courseApi = createApi({
-    reducerPath: "courseApi",
+export const adminCourseApi = createApi({
+    reducerPath: "adminCourseApi",
     baseQuery: fetchBaseQuery({
         baseUrl: COURSE_API,
         credentials: "include",
@@ -22,10 +20,11 @@ export const courseApi = createApi({
     endpoints: (builder) => ({
         // add course
         createCourse: builder.mutation({
-            query: (title, category) => ({
+            query: (courseData) => ({
                 url: "course/",
                 method: "POST",
-                body: { title, category }
+                body: courseData,
+               
             }),
         }),
         //loadcourse
@@ -36,11 +35,18 @@ export const courseApi = createApi({
 
             }),
         }),
+        getCourseBySlug: builder.query({
+            query: (slug) => ({
+                url: `course/${slug}/`,
+                method: "GET",
+            }),
+        }),
+        
         // updatecourse
         UpdateCourse: builder.mutation({
-            query: ({ id, data }) => ({
-                url: `course/${id}/`,
-                method: "POST",
+            query: ({ slug, data }) => ({
+                url: `course/${slug}/`,
+                method: "PUT",
                 body: data,
 
             }),
@@ -63,8 +69,51 @@ export const courseApi = createApi({
             }),
         }),
 
-        // search courses
+        //loadcourse
+        LoadSection: builder.query({
+            query: () => ({
+                url: "section/",
+                method: "GET",
 
+            }),
+        }),
+
+        // create Section
+        CreateSection: builder.mutation({
+            query: (sectionData) => ({
+                url: "section/",
+                method: "POST",
+                body: sectionData,
+
+            }),
+        }),
+
+
+        UpdateSection: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `section/${id}/`,
+                method: "POST",
+                body: data,
+
+            }),
+
+        }),
+        DeleteSection: builder.mutation({
+            query: (id) => ({
+                url: `section/${id}/`,
+                method: "DELETE",
+
+
+            })
+
+        }),
+        publishCourse: builder.mutation({
+            query: (slug) => ({  // Changed from courseSlug to slug
+                url: `course/${slug}/publish/`,
+                method: 'POST',
+            }),
+        }),
+        // search courses
         searchCourses: builder.query({
             query: ({ q, field = "both", sort = "" }) => {
                 const params = new URLSearchParams();
@@ -80,14 +129,21 @@ export const courseApi = createApi({
                 };
             },
         }),
-        }),
-        })
+    }),
+})
 
-        export const {
-            useCreateCourseMutation,
-            useLoadCourseQuery,
-            useUpdateCourseMutation,
-            useDeleteCourseMutation,
-            useGetSectionsByCourseQuery,
-            useSearchCoursesQuery,
-        } = courseApi;
+export const {
+    useCreateCourseMutation,
+    useLoadCourseQuery,
+    useUpdateCourseMutation,
+    useDeleteCourseMutation,
+    useGetSectionsByCourseQuery,
+    useSearchCoursesQuery,
+    useLoadSectionQuery,
+    useCreateSectionMutation,
+    useUpdateSectionMutation,
+    useDeleteSectionMutation,
+    usePublishCourseMutation,
+    useGetCourseByIdQuery,
+    useGetCourseBySlugQuery,
+} = adminCourseApi;

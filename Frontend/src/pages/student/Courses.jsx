@@ -2,7 +2,7 @@ import { useLoadCourseQuery } from '@/features/api/courseApi'
 import Course from './Course'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
-import RecommendedCourses from './RecommendedCourses'
+// import RecommendedCourses from './RecommendedCourses'
 import { ArrowRight } from 'lucide-react'
 
 
@@ -12,7 +12,7 @@ const Courses = () => {
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {Array.from({ length: 8 }).map((_, index) => (
+        {Array.from({ length: 4 }).map((_, index) => (
           <CourseSkeleton key={index} />
         ))}
       </div>

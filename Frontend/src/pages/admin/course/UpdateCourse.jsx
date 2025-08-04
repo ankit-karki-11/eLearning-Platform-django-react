@@ -1,6 +1,6 @@
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Select,
   SelectContent,
@@ -10,105 +10,177 @@ import {
 } from "@/components/ui/select"
 
 import { Button } from '@/components/ui/button'
-import { useNavigate } from 'react-router-dom'
-import { Loader2, BookOpen, List, FileText, Upload, PlusCircle, CheckCircle2, Pencil } from 'lucide-react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Loader2, BookOpen, List, FileText, Upload, CheckCircle2, Pencil, AlertTriangle, RefreshCw } from 'lucide-react'
 import { toast } from 'sonner'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 // API imports
-import { useCreateCourseMutation } from '@/features/api/adminCourseApi'
-import { useLoadCategoryQuery } from '@/features/api/adminCategoryApi';
+import { useUpdateCourseMutation, useGetCourseBySlugQuery } from '@/features/api/adminCourseApi'
+import { useLoadCategoryQuery } from '@/features/api/adminCategoryApi'
 
-import { Checkbox } from '@/components/ui/checkbox';
-// import Course from '@/pages/student/Course copy';
+const CourseErrorBoundary = ({ error, slug, onRetry }) => {
+  const navigate = useNavigate()
 
+  return (
+    <div className="flex flex-col items-center justify-center h-screen space-y-4">
+      <AlertTriangle className="h-12 w-12 text-red-500" />
+      <h2 className="text-xl font-semibold">Course Not Found</h2>
+      <p className="text-gray-600">
+        No course found with slug: <code className="bg-gray-100 p-1 rounded">{slug}</code>
+      </p>
+      <div className="flex gap-4">
+        <Button variant="outline" onClick={onRetry}>
+          <RefreshCw className="mr-2 h-4 w-4" />
+          Retry
+        </Button>
+        <Button onClick={() => navigate('/admin/courses')}>
+          Back to Courses List
+        </Button>
+      </div>
+    </div>
+  )
+}
 
-const AddCourse = () => {
-  const navigate = useNavigate();
-  const [createCourse, { isLoading }] = useCreateCourseMutation();
+const UpdateCourse = () => {
+  const { slug } = useParams()
+  const navigate = useNavigate()
+  const [updateCourse, { isLoading: isUpdating }] = useUpdateCourseMutation()
 
-  const [activeTab, setActiveTab] = useState('basic');
-  // Form state
-  const [CourseId, setCourseId] = useState('');
-  const [CourseTitle, setCourseTitle] = useState('');
-  const [CourseCategory, setCourseCategory] = useState('');
-  const [CourseKeywords, setCourseKeywords] = useState('');
-  const [CourseDescription, setCourseDescription] = useState('');
-  const [CoursePrice, setCoursePrice] = useState(0);
-  const [CourseDuration, setCourseDuration] = useState(0);
-  const [CourseLevel, setCourseLevel] = useState('');
-  const [CourseRequirements, setCourseRequirements] = useState('');
-  const [CourseLearningOutcomes, setCourseLearningOutcomes] = useState('');
-  const [CourseSyllabus, setCourseSyllabus] = useState('');
-  const [CourseThumbnail, setCourseThumbnail] = useState(null);
-  const [isPublished, setIsPublished] = useState(false);
+  // Fetch course by slug
+  const { data: course, isLoading: isCourseLoading, error, refetch } = useGetCourseBySlugQuery(slug, {
+    skip: !slug, // Skip if no slug
+    refetchOnMountOrArgChange: true // Ensure fresh data
+  });
 
-  // Load external data
-  const { data: categories = [] } = useLoadCategoryQuery();
+  const [formData, setFormData] = useState({
+    title: '',
+    category_id: '',
+    keywords: '',
+    description: '',
+    price: 0,
+    course_duration: 0,
+    level: '',
+    requirements: '',
+    learningOutcomes: '',
+    syllabus: '',
+    is_published: false
+  })
+  const [CourseThumbnail, setCourseThumbnail] = useState(null)
+  const [thumbnailPreview, setThumbnailPreview] = useState('')
+
+  // Load categories
+  const { data: categories = [] } = useLoadCategoryQuery()
   const LEVEL_CHOICES = [
     { value: 'beginner', label: 'Beginner' },
     { value: 'intermediate', label: 'Intermediate' },
     { value: 'advanced', label: 'Advanced' },
-  ];
+  ]
 
-  // Form submission handler
-  const createCourseHandler = async () => {
-    if (!CourseCategory || !CourseLevel) {
-      toast.error('Category and Level are required.');
-      return;
+  // Populate form when course data loads
+  useEffect(() => {
+    if (course) {
+      setFormData({
+        title: course?.title || '',
+        category_id: course?.category_id || '',
+        keywords: course?.keywords || '',
+        description: course?.description || '',
+        price: course?.price || 0,
+        course_duration: course?.course_duration || 0,
+        level: course?.level || '',
+        requirements: course?.requirements || 'No specific requirements', // Default from serializer
+        learningOutcomes: course?.learning_outcomes || 'Students will learn the skills and knowledge related to this course', // Default from serializer
+        syllabus: course?.syllabus || 'Syllabus will be provided in the course', // Default from serializer
+        is_published: course?.is_published || false
+      });
+
+      if (course?.thumbnail) {
+        setThumbnailPreview(course.thumbnail);
+      }
+    }
+  }, [course]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleNumberInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: Number(value) }))
+  }
+
+  const handleUpdateCourse = async () => {
+    if (!formData.category_id || !formData.level) {
+      toast.error('Category and Level are required.')
+      return
     }
 
-    const formData = new FormData();
-    formData.append('course_id', CourseId);
-    formData.append('title', CourseTitle);
-    formData.append('category_id', CourseCategory);
-    formData.append('keywords', CourseKeywords);
-    formData.append('description', CourseDescription);
-    formData.append('price', CoursePrice);
-    formData.append('course_duration', CourseDuration);
-    formData.append('level', CourseLevel);
+    const submitData = new FormData()
+    submitData.append('title', formData.title)
+    submitData.append('category_id', formData.category_id)
+    submitData.append('keywords', formData.keywords)
+    submitData.append('description', formData.description)
+    submitData.append('price', formData.price)
+    submitData.append('course_duration', formData.course_duration)
+    submitData.append('level', formData.level)
 
     // Convert multiline strings to arrays
-    formData.append('requirements', JSON.stringify(CourseRequirements.split('\n')));
-    formData.append('learningOutcomes', JSON.stringify(CourseLearningOutcomes.split('\n')));
-    formData.append('syllabus', JSON.stringify(CourseSyllabus.split('\n')));
+    submitData.append('requirements', JSON.stringify(formData.requirements.split('\n')))
+    submitData.append('learningOutcomes', JSON.stringify(formData.learningOutcomes.split('\n')))
+    submitData.append('syllabus', JSON.stringify(formData.syllabus.split('\n')))
 
-    if (CourseThumbnail) {  
-      formData.append('thumbnail', CourseThumbnail);
+    if (CourseThumbnail) {
+      submitData.append('thumbnail', CourseThumbnail)
     }
 
-    formData.append('is_published', isPublished);
+    submitData.append('is_published', formData.is_published)
 
     try {
-      const response = await createCourse(formData).unwrap();
-      toast.success('Course created and saved successfully!');
-      console.log("Created course:", response);
-      console.log("Course Id is :", response.id);
-
-      setCourseId(response.id || response.id);
-
+      await updateCourse({ slug, data: submitData }).unwrap()
+      toast.success('Course updated successfully!')
+      refetch() // Refresh the course data
     } catch (error) {
-      toast.error(error.data?.message || 'Failed to create course. Please try again.');
+      toast.error(error.data?.message || 'Failed to update course. Please try again.')
     }
-  };
+  }
 
+  if (isCourseLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    )
+  }
+
+  if (error) {
+    return <CourseErrorBoundary error={error} slug={slug} onRetry={refetch} />
+  }
+  // if (isLoading) {
+  //   return <div className="flex justify-center items-center h-screen">
+  //     <Loader2 className="h-8 w-8 animate-spin" />
+  //   </div>;
+  // }
+
+  if (!course) {
+    return <CourseErrorBoundary error={{ status: 404 }} slug={slug} onRetry={refetch} />
+  }
 
   return (
     <div className='max-w-6xl mx-auto p-4 md:p-2 space-y-6 md:space-y-8'>
       {/* Header */}
       <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mt-6 md:mt-12'>
-        <h1 className='text-lg md:text-xl font-bold text-gray-900'>Create New Course</h1>
+        <h1 className='text-lg md:text-xl font-bold text-gray-900'>Update Course</h1>
         <div className='flex gap-2 w-full md:w-auto'>
           <Button
-            variant={isPublished ? "default" : "outline"}
+            variant={formData.is_published ? "default" : "outline"}
             size="sm"
-            className={`h-8 px-3 text-xs flex items-center gap-2 w-full md:w-auto ${isPublished ? "bg-green-600 hover:bg-green-700" : "border-gray-300 hover:bg-gray-50"
-              }`}
-            onClick={() => setIsPublished(!isPublished)}
+            className={`h-8 px-3 text-xs flex items-center gap-2 w-full md:w-auto ${formData.is_published ? "bg-green-600 hover:bg-green-700" : "border-gray-300 hover:bg-gray-50"}`}
+            onClick={() => setFormData(prev => ({ ...prev, is_published: !prev.is_published }))}
           >
-            {isPublished ? (
+            {formData.is_published ? (
               <>
                 <CheckCircle2 className="h-4 w-4" />
                 <span>Published</span>
@@ -122,21 +194,21 @@ const AddCourse = () => {
           </Button>
 
           <Button
-            onClick={createCourseHandler}
-            disabled={isLoading}
+            onClick={handleUpdateCourse}
+            disabled={isUpdating}
             size="sm"
             className="h-8 px-3 text-xs cursor-pointer w-full md:w-auto"
           >
-            {isLoading ? (
+            {isUpdating ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                Creating...
+                Updating...
               </>
             ) : (
               <>
-                <PlusCircle className="h-4 w-4 inline-block" />
-                <span className="hidden sm:inline">Create Course</span>
-                <span className="sm:hidden">Create</span>
+                <CheckCircle2 className="h-4 w-4 inline-block" />
+                <span className="hidden sm:inline">Update Course</span>
+                <span className="sm:hidden">Update</span>
               </>
             )}
           </Button>
@@ -171,8 +243,9 @@ const AddCourse = () => {
                   <div className="space-y-1">
                     <Label>Course Title</Label>
                     <Input
-                      value={CourseTitle}
-                      onChange={(e) => setCourseTitle(e.target.value)}
+                      name="title"
+                      value={formData.title}
+                      onChange={handleInputChange}
                       placeholder="Web Development Bootcamp"
                       className="placeholder:text-xs md:placeholder:text-sm"
                     />
@@ -181,8 +254,9 @@ const AddCourse = () => {
                   <div className="space-y-1">
                     <Label>Keywords</Label>
                     <Input
-                      value={CourseKeywords}
-                      onChange={(e) => setCourseKeywords(e.target.value)}
+                      name="keywords"
+                      value={formData.keywords}
+                      onChange={handleInputChange}
                       placeholder="html, css, javascript"
                       className="placeholder:text-xs md:placeholder:text-sm"
                     />
@@ -193,7 +267,10 @@ const AddCourse = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <Label>Category *</Label>
-                    <Select value={CourseCategory} onValueChange={setCourseCategory}>
+                    <Select
+                      value={formData.category_id}
+                      onValueChange={(value) => setFormData(prev => ({ ...prev, category_id: value }))}
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
@@ -209,7 +286,10 @@ const AddCourse = () => {
 
                   <div className="space-y-1">
                     <Label>Difficulty Level</Label>
-                    <Select value={CourseLevel} onValueChange={setCourseLevel}>
+                    <Select
+                      value={formData.level}
+                      onValueChange={(value) => setFormData(prev => ({ ...prev, level: value }))}
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="Select level" />
                       </SelectTrigger>
@@ -228,8 +308,9 @@ const AddCourse = () => {
                 <div className="space-y-1">
                   <Label>Description *</Label>
                   <Textarea
-                    value={CourseDescription}
-                    onChange={(e) => setCourseDescription(e.target.value)}
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
                     placeholder="Describe what students will learn..."
                     className="min-h-[100px]"
                   />
@@ -260,6 +341,14 @@ const AddCourse = () => {
                             className="w-full h-32 object-cover"
                           />
                         </div>
+                      ) : thumbnailPreview ? (
+                        <div className="relative">
+                          <img
+                            src={thumbnailPreview}
+                            alt="Course thumbnail"
+                            className="w-full h-32 object-cover"
+                          />
+                        </div>
                       ) : (
                         <div className="bg-gray-50 border-2 border-dashed rounded-lg w-full h-32 flex flex-col items-center justify-center gap-2 text-gray-400">
                           <Upload className="h-6 w-6" />
@@ -284,16 +373,19 @@ const AddCourse = () => {
                             onChange={(e) => setCourseThumbnail(e.target.files[0])}
                             className="hidden"
                           />
-                          {CourseThumbnail ? "Change" : "Upload"}
+                          {CourseThumbnail || thumbnailPreview ? "Change" : "Upload"}
                         </Label>
                       </Button>
 
-                      {CourseThumbnail && (
+                      {(CourseThumbnail || thumbnailPreview) && (
                         <Button
                           variant="destructive"
                           className="flex-1 cursor-pointer"
                           size={"sm"}
-                          onClick={() => setCourseThumbnail(null)}
+                          onClick={() => {
+                            setCourseThumbnail(null)
+                            setThumbnailPreview('')
+                          }}
                         >
                           Remove
                         </Button>
@@ -312,8 +404,9 @@ const AddCourse = () => {
                     <Label className="text-sm font-medium text-gray-700">Price (Rs)</Label>
                     <Input
                       type="number"
-                      value={CoursePrice}
-                      onChange={(e) => setCoursePrice(e.target.value)}
+                      name="price"
+                      value={formData.price}
+                      onChange={handleNumberInputChange}
                       min="0"
                       placeholder="0 for free"
                       className="mt-1"
@@ -324,8 +417,9 @@ const AddCourse = () => {
                     <Label className="text-sm font-medium text-gray-700">Duration (hrs)</Label>
                     <Input
                       type="number"
-                      value={CourseDuration}
-                      onChange={(e) => setCourseDuration(e.target.value)}
+                      name="course_duration"
+                      value={formData.course_duration}
+                      onChange={handleNumberInputChange}
                       min="0"
                       placeholder="Total hours"
                       className="mt-1"
@@ -355,8 +449,9 @@ const AddCourse = () => {
                   Prerequisites
                 </Label>
                 <Textarea
-                  value={CourseRequirements}
-                  onChange={(e) => setCourseRequirements(e.target.value)}
+                  name="requirements"
+                  value={formData.requirements}
+                  onChange={handleInputChange}
                   placeholder="What students should know before taking this course..."
                   className="min-h-[100px]"
                 />
@@ -370,8 +465,9 @@ const AddCourse = () => {
                   Learning Outcomes
                 </Label>
                 <Textarea
-                  value={CourseLearningOutcomes}
-                  onChange={(e) => setCourseLearningOutcomes(e.target.value)}
+                  name="learningOutcomes"
+                  value={formData.learningOutcomes}
+                  onChange={handleInputChange}
                   placeholder="What students will be able to do after completing this course..."
                   className="min-h-[100px]"
                 />
@@ -385,8 +481,9 @@ const AddCourse = () => {
                   Course Syllabus
                 </Label>
                 <Textarea
-                  value={CourseSyllabus}
-                  onChange={(e) => setCourseSyllabus(e.target.value)}
+                  name="syllabus"
+                  value={formData.syllabus}
+                  onChange={handleInputChange}
                   placeholder="Outline the course structure..."
                   className="min-h-[120px]"
                 />
@@ -399,7 +496,7 @@ const AddCourse = () => {
         </TabsContent>
       </Tabs>
     </div>
-  );
-};
+  )
+}
 
-export default AddCourse;
+export default UpdateCourse

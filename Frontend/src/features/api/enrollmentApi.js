@@ -23,6 +23,7 @@ export const enrollmentApi = createApi({
       }),
       providesTags: ['Enrollment'],
     }),
+
     GetEnrolledCourseDetail: builder.query({
       query: (slug) => ({
         url: `enrollments/${slug}/`,
@@ -39,6 +40,7 @@ export const enrollmentApi = createApi({
         }
       },
     }),
+
     GetCourseSectionProgress: builder.query({
       query: ({ courseSlug, sectionId }) => ({
         url: `enrollments/${courseSlug}/section/${sectionId}/`,
@@ -46,6 +48,7 @@ export const enrollmentApi = createApi({
       }),
       providesTags: ['Enrollment'],
     }),
+    
     MarkSectionAsCompleted: builder.mutation({
       query: ({ courseSlug, sectionId }) => ({
         url: `enrollments/${courseSlug}/section/${sectionId}/completed/`,

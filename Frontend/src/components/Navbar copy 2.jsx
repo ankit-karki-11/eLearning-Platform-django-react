@@ -19,23 +19,6 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from './ui/button';
 import DarkMode from '@/DarkMode';
@@ -89,21 +72,18 @@ const Navbar = () => {
 
           <nav className='hidden md:flex items-center gap-4 text-black hover:text-red-700 dark:hover:text-gray-200'>
             <NavLink to="/">Home</NavLink>
-           <NavLink to="/courses">Courses</NavLink>
-              {/* <NavigationMenu>
+            <NavLink to="/courses">Courses</NavLink>
+
+              <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger> <NavLink to="/courses">Categories</NavLink></NavigationMenuTrigger>
+                    <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <NavigationMenuLink>Python Programming</NavigationMenuLink>
-                      <NavigationMenuLink>Web Development</NavigationMenuLink>
-                      <NavigationMenuLink>Data Science</NavigationMenuLink>
-                      <NavigationMenuLink>Machine Learning</NavigationMenuLink>
-                      <NavigationMenuLink>Mobile Development</NavigationMenuLink>
+                      <NavigationMenuLink>Link</NavigationMenuLink>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
                 </NavigationMenuList>
-              </NavigationMenu> */}
+              </NavigationMenu>
 
 
               {user?.role === "student" && (

@@ -28,7 +28,8 @@ const Categories = () => {
           <p className="text-center text-gray-600">No categories found.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {data?.map((category) => (
+            {/* {data?.slice(0,8).map((category) => ( */}
+            {data?.slice(0,8).map((category) => (
               <Category key={category.id} category={category} />
             ))}
           </div>

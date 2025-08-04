@@ -1,0 +1,90 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+const COURSE_API = "http://localhost:8000/api/v1/main/";
+
+// create API slice
+export const adminSectionApi = createApi({
+    reducerPath: "adminSectionApi",
+    baseQuery: fetchBaseQuery({
+        baseUrl: COURSE_API,
+        credentials: "include",
+        prepareHeaders: (headers) => {
+            const token = localStorage.getItem("accessToken");
+            if (token) {
+                headers.set("Authorization", `Bearer ${token}`);
+            }
+            return headers;
+        },
+    }),
+    
+    // create endpoints:
+    endpoints: (builder) => ({
+        // add course
+        createSection: builder.mutation({
+            query: (sectionData) => ({
+                url: "section/",
+                method: "POST",
+                body: sectionData,
+               
+            }),
+        }),
+        //loadcourse
+        // LoadCourse: builder.query({
+        //     query: () => ({
+        //         url: "course/",
+        //         method: "GET",
+
+        //     }),
+        // }),
+        // updatecourse
+        updateSection: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `section/${id}/`,
+                method: "POST",
+                body: data,
+
+            }),
+
+        }),
+        deleteSection: builder.mutation({
+            query: (id) => ({
+                url: `section/${id}/`,
+                method: "DELETE",
+
+
+            })
+
+        }),
+        //  Get sections by course slug
+        // GetSectionsByCourse: builder.query({
+        //     query: (courseSlug) => ({
+        //         url: `course/${courseSlug}/sections/`,
+        //         method: "GET",
+        //     }),
+        // }),
+
+        // search courses
+        // searchCourses: builder.query({
+        //     query: ({ q, field = "both", sort = "" }) => {
+        //         const params = new URLSearchParams();
+        //         if (q.trim()) params.append("q", q.trim());
+        //         if (field !== "both") params.append("field", field);
+        //         if (sort) params.append("sort", sort);
+
+        //         return {
+        //             url: `courses/search/?${params.toString()}`,
+        //             method: "GET",
+        //             // <<< override credentials only for this call
+        //             credentials: "omit",
+        //         };
+        //     },
+        // }),
+    }),
+})
+
+export const {
+  useGetSectionsByCourseIdQuery,
+  useCreateSectionMutation,
+  useUpdateSectionMutation,
+  useDeleteSectionMutation,
+} = adminSectionApi;

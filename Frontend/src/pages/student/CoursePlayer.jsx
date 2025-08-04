@@ -5,7 +5,7 @@ import {
   useMarkSectionAsCompletedMutation,
   useUpdateLastAccessedMutation,
 } from '@/features/api/enrollmentApi';
-import { ArrowLeft, ArrowRight, Check, Play } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, CheckCircle, CheckCircle2, Download, Play } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 
@@ -153,9 +153,9 @@ const CoursePlayer = () => {
   return (
     <div className="max-w-7xl mx-auto p-6 mt-16">
       <header className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">{course.title}</h1>
+        <h1 className="text-xl font-bold text-gray-900 mb-2">{course.title}</h1>
         <div className="flex items-center gap-4">
-          <div className="w-1/4 bg-gray-200 rounded-full h-2">
+          <div className="w-1/5 bg-gray-200 rounded-full h-2">
             <div
               className="bg-green-600 h-2 rounded-full transition-all duration-300"
               style={{ width: `${progressPercentage}%` }}
@@ -166,12 +166,12 @@ const CoursePlayer = () => {
             {completedCount} of {course.sections.length} completed
           </span>
           {isCourseCompleted && (
-            <span className="text-sm text-green-600 font-semibold">Course Completed!</span>
+            <span className="text-xs text-green-600 bg-blufont-semibold">Completed</span>
           )}
         </div>
       </header>
 
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-4">
         <main className="md:col-span-2 space-y-6">
           <div className="bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
             {selectedSection.video_url ? (
@@ -179,7 +179,7 @@ const CoursePlayer = () => {
                 ref={videoRef}
                 src={selectedSection.video_url}
                 controls
-                className="w-full aspect-video bg-black"
+                className="w-full bg-black"
                 onError={() => setVideoError('Failed to load video. Please try again.')}
               />
             ) : (
@@ -214,8 +214,9 @@ const CoursePlayer = () => {
             <Button
               onClick={handlePreviousSection}
               disabled={course.sections.findIndex((s) => s.id === selectedSectionId) === 0}
-              className='cursor-pointer'
-            //  variant='secondary'
+               className='px-4 py-2 text-sm cursor-pointer'
+             variant='outline'
+             
             >
                 <ArrowLeft className="h-4 w-4" />
               Previous
@@ -223,7 +224,7 @@ const CoursePlayer = () => {
             <Button
               onClick={handleNextSection}
               disabled={course.sections.findIndex((s) => s.id === selectedSectionId) === course.sections.length - 1}
-              className='px-4 py-2 cursor-pointer'
+              className='px-4 py-2 cursor-pointer '
             // variant='secondary'
             >
               
@@ -246,28 +247,28 @@ const CoursePlayer = () => {
         </main>
 
         <aside className="space-y-4">
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <div className="p-4 border-b border-gray-100">
+          <div className="bg-white   overflow-hidden">
+            <div className="p-4 border-b border-gray-100 ">
               <h2 className="font-semibold">Course Sections</h2>
             </div>
-            <div className="divide-y divide-gray-100">
+            <div className="divide-y">
               {course.sections.map((section) => (
                 <button
                   key={section.id}
                   onClick={() => setSelectedSectionId(section.id)}
-                  className={`w-full text-left p-4 transition-colors ${selectedSectionId === section.id ? 'bg-blue-50' : 'hover:bg-gray-50'
+                  className={`w-full text-left p-4 transition-colors ${selectedSectionId === section.id ? 'rounded-2xl' : 'hover:bg-gray-50'
                     }`}
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${section.is_completed ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-500'
+                      className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${section.is_completed ? ' text-green-600' : ' text-gray-500'
                         }`}
                     >
-                      {section.is_completed ? <Check size={14} /> : <Play size={14} />}
+                      {section.is_completed ? <CheckCircle size={16} /> : <Play size={16} />}
                     </div>
                     <div className="min-w-0">
                       <h3
-                        className={`text-sm font-medium truncate ${selectedSectionId === section.id ? 'text-blue-600' : 'text-gray-700'
+                        className={`text-sm font-small truncate ${selectedSectionId === section.id ? 'text-blue-600' : 'text-gray-700'
                           }`}
                       >
                         {section.title}
@@ -282,7 +283,6 @@ const CoursePlayer = () => {
           </div>
 
           {/* onlya ctive when course is completed */}
-
           {/* Certificate Section - Visible to all but only active when completed */}
           <div className="p-4 mt-4 border rounded-lg bg-gray-50">
             {!isCourseCompleted ? (
@@ -298,9 +298,33 @@ const CoursePlayer = () => {
               className={`w-full cursor-pointer`}
               disabled={!isCourseCompleted}
             >
+              <Download className="mr-1" />
               {isCourseCompleted ? 'Get your Certificate' : 'Certificate Locked'}
             </Button>
           </div>
+             {/* Reviews & Ratings - Only shown when course is completed */}
+          {/* {isCourseCompleted && (
+            <div className="bg-white rounded-lg border border-gray-200 p-4">
+              <h3 className="font-medium mb-3">Reviews & Ratings</h3>
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Average Rating:</span>
+                  <div className="flex items-center">
+                    <span className="font-medium mr-1">4.0</span>
+                    <span className="text-gray-400">/5</span>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Total Ratings:</span>
+                  <span className="font-medium">120</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Total Students:</span>
+                  <span className="font-medium">12</span>
+                </div>
+              </div>
+            </div>
+          )} */}
 
         </aside>
       </div>

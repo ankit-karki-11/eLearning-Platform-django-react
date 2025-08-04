@@ -5,18 +5,24 @@ export const categoryApi = createApi({
     reducerPath: "categoryApi",
     baseQuery: fetchBaseQuery({
         baseUrl: CATEGORY_API,
-        // credentials: 'include'
+        //    prepareHeaders: (headers) => {
+        //     const token = localStorage.getItem("accessToken");
+        //     if (token) {
+        //         headers.set("Authorization", `Bearer ${token}`);
+        //     }
+        //     return headers;
+        // },
     }),
     // create endpoints:
     endpoints: (builder) => ({
         // add category
-        createCategory: builder.mutation({
-            query: (title) => ({
-                url: "category/",
-                method: "POST",
-                body: { title }
-            }),
-        }),
+        // createCategory: builder.mutation({
+        //     query: (title) => ({
+        //         url: "category/",
+        //         method: "POST",
+        //         body: { title }
+        //     }),
+        // }),
         //loadcategory
         LoadCategory: builder.query({
             query: () => ({
@@ -26,24 +32,24 @@ export const categoryApi = createApi({
             }),
         }),
         // updatecategory
-        UpdateCategory:builder.mutation({
-             query: ({id,data}) => ({
-                url: `category/${id}/`, 
-                method: "POST",
-                body:data,
-                // credentials:"include"
-            }),
-        }),
+        // UpdateCategory:builder.mutation({
+        //      query: ({id,data}) => ({
+        //         url: `category/${id}/`, 
+        //         method: "POST",
+        //         body:data,
+        //         // credentials:"include"
+        //     }),
+        // }),
         // delete category
-        DeleteCateory:builder.mutation({
-            query: (id) => ({
-                url: `category/${id}/`,
-                method: "DELETE",
-                // credentials:"include"
+        // DeleteCateory:builder.mutation({
+        //     query: (id) => ({
+        //         url: `category/${id}/`,
+        //         method: "DELETE",
+        //         // credentials:"include"
 
-        })
+        // })
 
-    })
+    // })
 
 })
 });

@@ -8,6 +8,9 @@ import { enrollmentApi } from '@/features/api/enrollmentApi';
 import { recommendationApi } from '@/features/api/recommendationApi';
 import { certificateApi } from '@/features/api/certificateApi';
 import { smarttestApi } from '@/features/api/smarttestApi';
+import { adminCourseApi } from '@/features/api/adminCourseApi';
+import { adminSectionApi } from '@/features/api/adminSectionApi';
+import { adminCategoryApi } from '@/features/api/adminCategoryApi';
 
 const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
@@ -18,6 +21,9 @@ const rootReducer = combineReducers({
     [recommendationApi.reducerPath]: recommendationApi.reducer,
     [certificateApi.reducerPath]: certificateApi.reducer,
     [smarttestApi.reducerPath]: smarttestApi.reducer,
+    [adminCourseApi.reducerPath]: adminCourseApi.reducer,
+    [adminSectionApi.reducerPath]: adminSectionApi.reducer,
+    [adminCategoryApi.reducerPath]: adminCategoryApi.reducer,
     auth: authReducer,
 
 });

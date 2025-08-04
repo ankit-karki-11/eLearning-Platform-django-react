@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { ArrowRightCircle, Expand, Fingerprint, Sparkles } from 'lucide-react'
+import { ArrowRightCircle, Sparkles } from 'lucide-react'
 import { useGetCourseStatsQuery } from '@/features/api/courseApi'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
@@ -67,13 +67,12 @@ const Hero = () => {
           AI-POWERED EDUCATION PLATFORM
         </div>
 
-        <h1 className={`text-3xl sm:text-4xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-6 transition-opacity duration-500 delay-100 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <h1 className={`text-3xl sm:text-4xl md:text-4xl font-medium tracking-tight text-gray-900 dark:text-white mb-6 transition-opacity duration-500 delay-100 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           Learn smarter with <br className="sm:hidden" />
-          <span className="text-black">AI</span>
+          <span className="text-gray-600">AI</span>
         </h1>
 
-        <p className={`text-sm text-gray-600 mb-4 max-w-lg mx-auto leading-relaxed transition-opacity duration-500 delay-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          Adaptive learning technology that evolves with your pace.
+        <p className={`text-sm text-gray-600 mb-8 max-w-lg mx-auto leading-relaxed transition-opacity duration-500 delay-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           Adaptive learning technology that evolves with your pace.
         </p>
 
@@ -82,14 +81,13 @@ const Hero = () => {
             onClick={handleExploreCourses}
             className="group px-5 py-4 text-sm font-sm rounded-lg bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-white transition-all cursor-pointer hover:scale-105"
           >
-            <Fingerprint className="mr-2 h-4 w-4" />
             <span>Explore courses</span>
             <ArrowRightCircle className="ml-2 h-4 w-4 transition-all group-hover:translate-x-0.5" />
           </Button>
           <Button
             onClick={handletrysmarttest}
             variant="outline"
-            className="group px-5 py-4 text-sm font-sm rounded-lg border-black dark:border-gray-200 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900/50 cursor-pointer hover:scale-105"
+            className="group px-5 py-4 text-sm font-sm rounded-lg border-gray-900 dark:border-gray-200 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900/50 cursor-pointer hover:scale-105"
           >
             <span>Try Smart Test</span>
             <ArrowRightCircle className="ml-2 h-4 w-4 transition-all group-hover:translate-x-0.5" />
@@ -104,7 +102,7 @@ const Hero = () => {
             <div className="text-3xl font-medium">
               {isLoading ? '0' : counters.enrollments.toLocaleString()}+
             </div>
-            <div className="text-xs text-gray-900 dark:text-gray-400 mt-1">Students Enrolled</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Students Enrolled</div>
           </div>
           <div
             onClick={handleExploreCourses}
@@ -113,13 +111,13 @@ const Hero = () => {
             <div className="text-3xl font-medium">
               {isLoading ? '0' : counters.courses.toLocaleString()}
             </div>
-            <div className="text-xs text-gray-900 dark:text-gray-400 mt-1">COURSES</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">COURSES</div>
           </div>
           <div className="p-3 hover:scale-105 transition-transform">
             <div className="text-3xl font-medium">
               {isLoading ? '0' : `${counters.success}%`}
             </div>
-            <div className="text-xs text-gray-900 dark:text-gray-400 mt-1">SUCCESS RATE</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">SUCCESS RATE</div>
           </div>
         </div>
       </div>

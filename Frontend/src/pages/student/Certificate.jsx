@@ -100,7 +100,7 @@ const Certificate = () => {
   }
 
   return (
-    <div className="relative mt-4 max-w-6xl px-4 mx-auto py-12">
+    <div className="relative mt-4 max-w-6xl px-4 mx-auto py-12 bg-gray-100">
       {showConfetti && (
         <Confetti 
           width={width} 
@@ -116,8 +116,8 @@ const Certificate = () => {
           <img
             src={certificate.certificate_file}
             alt="Certificate"
-            className="w-full max-w-4xl"
-            loading="lazy"
+            className="w-full max-w-2xl"
+            // loading="lazy"
           />
         </div>
 

@@ -147,9 +147,9 @@ const CreateTest = () => {
             {isCreating && (
               <div className="mt-4 flex justify-center">
                 <div className="animate-pulse flex space-x-2">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
                 </div>
               </div>
             )}

@@ -2,65 +2,124 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSearchCoursesQuery } from '@/features/api/courseApi';
 import Course from './Course';
+import { Search } from 'lucide-react';
+
+const DEBOUNCE_DELAY = 500; // ms
 
 const CourseSearch = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const queryParam = searchParams.get('q') || '';
-  const [query, setQuery] = useState(queryParam);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const queryParam = searchParams.get('q') || '';
+    const [query, setQuery] = useState(queryParam);
+    const [debouncedQuery, setDebouncedQuery] = useState(queryParam);
 
-  const { data: results = [], isFetching, isError } = useSearchCoursesQuery(
-    { q: queryParam },
-    { skip: !queryParam }
-  );
+    // Update debouncedQuery only after user stops typing for DEBOUNCE_DELAY ms
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedQuery(query.trim());
+        }, DEBOUNCE_DELAY);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (query.trim()) {
-      // Update URL query parameter — this triggers the component to re-render and refetch
-      setSearchParams({ q: query.trim() });
-    } else {
-      // Clear query param if input empty
-      setSearchParams({});
-    }
-  };
+        return () => clearTimeout(handler);
+    }, [query]);
 
-  // Keep input value synced if user navigates or reloads with query param
-  useEffect(() => {
-    setQuery(queryParam);
-  }, [queryParam]);
+    // Update URL params when debouncedQuery changes
+    useEffect(() => {
+        if (debouncedQuery) {
+            setSearchParams({ q: debouncedQuery });
+        } else {
+            setSearchParams({});
+        }
+    }, [debouncedQuery, setSearchParams]);
 
-  return (
-    <div className="max-w-6xl mx-auto p-6 mt-12">
-      <form onSubmit={handleSearch} className="flex gap-2 mb-6">
-        <input
-          type="text"
-          placeholder="Search courses by title or keywords..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="border border-gray-300 rounded px-4 py-2 w-full"
-        />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-6 py-2 rounded"
-        >
-          Search
-        </button>
-      </form>
+    const { data: results = [], isFetching, isError } = useSearchCoursesQuery(
+        { q: debouncedQuery },
+        { skip: !debouncedQuery }
+    );
 
-      {isFetching && <p className="text-gray-600">Searching...</p>}
-      <p className="text-gray-500">results found for “{queryParam}”</p>
-      {isError && <p className="text-red-600">Something went wrong. Try again.</p>}
-      {!isFetching && results.length === 0 && queryParam && (
-        <p className="text-gray-500">No results found for “{queryParam}”</p>
-      )}
+    useEffect(() => {
+        setQuery(queryParam);
+    }, [queryParam]);
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {results.map((course) => (
-          <Course key={course.id} course={course} />
-        ))}
-      </div>
-    </div>
-  );
+    return (
+        <div className="max-w-6xl mx-auto px-1 py-2 mt-8">
+            {/* Search Section */}
+            <div className="mb-12">
+                <div className="max-w-2xl mx-px">
+                    <div className="relative mb-6">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-900 w-4 h-4" />
+                        <input
+                            type="text"
+                            placeholder="Search course by title or keywords..."
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value.trimStart())}
+                            className="w-full pl-10 pr-8 py-2 text-sm bg-white border border-gray-900 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-950 focus:border-gray-950"
+                            autoComplete="on"
+                            aria-label="Search courses by title or keywords"
+                        />
+                        {query && (
+                            <button
+                                aria-label="Clear search"
+                                onClick={() => setQuery('')}
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                            >
+                                ×
+                            </button>
+                        )}
+                    </div>
+                </div>
+
+            </div>
+
+            {/* Status Messages */}
+            <div className="mb-8">
+                {isFetching && (
+                    <div className="text-center">
+                        <div className="inline-flex items-center gap-2 text-gray-500">
+
+                            Searching...
+                        </div>
+                    </div>
+                )}
+
+
+                {!isFetching && results.length > 0 && debouncedQuery && (
+                    <div className="text-center text-gray-600 text-sm">
+                        {results.length} course{results.length > 1 ? 's' : ''} found
+                    </div>
+                )}
+
+                {/* {isError && (
+                    <div className="text-center text-red-500 text-sm">
+                        Something went wrong. Please try again.
+                    </div>
+                )} */}
+
+                {!isFetching && results.length === 0 && debouncedQuery && (
+                    <div className="text-center text-gray-500 text-sm">
+                        No courses found for "{debouncedQuery}".Explore All Courses below.
+                    </div>
+                )}
+            </div>
+
+
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+                {results.map((course) => (
+                    <Course key={course.id} course={course} />
+                ))}
+            </div> */}
+            <div
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4"
+                aria-live="polite"
+                aria-atomic="true"
+            >
+                {results.map((course) => (
+                    <Course key={course.id} course={course}
+                     />
+                    
+                ))}
+            </div>
+
+        </div>
+    );
 };
 
 export default CourseSearch;

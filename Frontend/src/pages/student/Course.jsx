@@ -1,83 +1,89 @@
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Clock, Star } from "lucide-react";
+import { Clock, Star, Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 }) => {
   const navigate = useNavigate();
 
   const handleContinueLearning = (e) => {
     e.stopPropagation();
-    if (!course?.slug) return;
     navigate(`/course/${course.slug}/progress`);
   };
 
   const handleViewDetails = () => {
-    if (!course?.slug) return;
     navigate(`/courses/course-detail/${course.slug}`);
   };
 
-  if (!course) return <div className="text-red-600 p-4">Error: Invalid course data</div>;
+  if (!course) return <div className="text-red-500 text-sm p-3">Invalid course data</div>;
 
   return (
-    <div 
+    <div
       onClick={!isEnrolled ? handleViewDetails : handleContinueLearning}
-      className="rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 overflow-hidden w-full cursor-pointer
-      transition-all duration-300 hover:shadow-md hover:border-gray-300 dark:hover:border-gray-600 group"
+      className="rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 overflow-hidden w-full cursor-pointer
+      transition-all duration-200 hover:shadow-sm hover:border-gray-300 dark:hover:border-gray-600 group"
     >
-      <div className="aspect-video relative overflow-hidden">
+      <div className="aspect-video relative">
         <img
           src={course.thumbnail || "/default.png"}
-          alt={course.title || 'Course'}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          alt={course.title}
+          className="w-full h-full object-cover"
         />
-        <div className="absolute top-2 left-2 bg-white dark:bg-gray-800 text-xs px-2 py-1 rounded font-small">
-          {course.level || ''}
+        <div className="absolute top-2 left-2 bg-white/90 dark:bg-gray-800/90 text-xs px-2 py-1 rounded font-medium">
+          {course.level || 'All Levels'}
         </div>
-         </div>
-      
-      <div className="p-3 space-y-2">
-        <h3 className="font-medium text-sm line-clamp-2 dark:text-white">
-          {course.title || 'Untitled Course'}
-        </h3>
-          {course.similarity_score !== undefined && (
+      </div>
+
+      <div className="p-3 space-y-2.5">
+        <div className="flex justify-between items-start gap-2">
+          <h3 className="font-medium text-sm line-clamp-2 dark:text-gray-100 flex-1">
+            {course.title || 'Untitled Course'}
+          </h3>
+          
+        </div>
+        {course.similarity_score !== undefined && (
           <p className="text-sm text-gray-500">
             Similarity: {(course.similarity_score * 100).toFixed(1)}%
           </p>
         )}
-        
-        <div className="flex items-center justify-between text-xs">
-          <div className="flex items-center gap-1 px-2 py-1 rounded-full font-medium">
-            <Clock className="h-3 w-3 text-gray-900 dark:text-gray-400" />
-            <span className="text-gray-900 dark:text-gray-300">{course.course_duration || 0}hrs</span>
+        <div className="flex items-center gap-3 text-xs text-gray-600 dark:text-gray-400">
+          <div className="flex items-center gap-1">
+            <Clock className="h-3 w-3" />
+            <span>{course.course_duration || 0} hrs</span>
           </div>
           
           {course.average_rating && (
-            <div className="flex items-center gap-1 px-2 py-1 rounded-full font-medium">
+            <div className="flex items-center gap-1">
               <Star className="h-3 w-3 text-amber-500 fill-amber-500" />
-              <span className="text-gray-900 dark:text-gray-300">{course.average_rating.toFixed(1)}</span>
+              <span>{course.average_rating.toFixed(1)}</span>
             </div>
-          )}
-          
-          {!isEnrolled && (
-            <div className=" px-2 py-1 rounded-full font-medium">
-              <span className="text-gray-900 font-small dark:text-blue-400">Rs {course.price || 0}</span>
-            </div>
+          )} 
+
+            {!isEnrolled && (
+            <span className="text-xs font-bold text-black dark:text-blue-400 whitespace-nowrap">
+              Rs {course.price || 0}
+            </span>
           )}
         </div>
-        
+
         {isEnrolled && (
-          <div className="pt-1">
-            <div className="text-xs mb-1 font-medium">Progress: {progress}%</div>
-            <Progress value={progress} className="h-2" />
+          <div className="pt-1 space-y-1.5">
+            <div className="flex justify-between text-xs">
+              <span className="font-medium">Progress</span>
+              <span className="text-gray-500 dark:text-gray-400">{progress}%</span>
+            </div>
+            <Progress value={progress} className="h-1.5" />
             <Button
               size="sm"
-              className={`w-full mt-2 h-8 text-xs font-medium cursor-pointer ${
-                isCompleted ? 'bg-black hover:bg-gray-950 text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
+              className={`w-full h-7 text-xs font-medium ${isCompleted ? 
+                'bg-gray-900 hover:bg-gray-950 text-white' : 
+                'bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-800 dark:hover:bg-gray-700'
               }`}
               onClick={handleContinueLearning}
             >
-              {isCompleted ? 'Completed' : 'Continue Learning'}
+              {/* <Play className="h-3 w-3 mr-1.5" /> */}
+              {isCompleted ? 'Completed' : 'Continue'}
             </Button>
           </div>
         )}
@@ -87,4 +93,3 @@ const Course = ({ course, isEnrolled = false, isCompleted = false, progress = 0 
 };
 
 export default Course;
-

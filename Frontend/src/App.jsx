@@ -30,10 +30,16 @@ import TestResultPage from './pages/student/smarttest/TestResultPage'
 
 import Sidebar from './pages/admin/Sidebar'
 import AddCourse from './pages/admin/course/AddCourse'
-import AddSection from './pages/admin/section/AddSection'
+// import AddSection from './pages/admin/section/AddSection'
 import Dashboard from './pages/admin/Dashboard'
 import AdminLayout from './layout/AdminLayout'
 import CourseTable from './pages/admin/course/CourseTable'
+import CategoryTable from './pages/admin/course/CategoryTable'
+import AddCategory from './pages/admin/course/AddCategory'
+
+import SectionTable from './pages/admin/section/SectionTable'
+import AddSection from './pages/admin/section/AddSection'
+import UpdateCourse from './pages/admin/course/UpdateCourse'
 // import TestSubmittedPage from './pages/student/smarttest/TestSubmittedPage'
 // import UsersLoving from './pages/student/UsersLoving'
 
@@ -47,8 +53,9 @@ const appRouter = createBrowserRouter([
         element: (
           <>
             <Hero />
-            <Courses />
             <Categories />
+            <Courses />
+            
 
           </>
 
@@ -165,15 +172,49 @@ const appRouter = createBrowserRouter([
                 path: 'courses/section',
                 element: <AddSection />
               },
-                {
+              {
                 path: 'courses',
                 element: <CourseTable />
               },
-                {
+              {
                 path: 'courses/add',
                 element: <AddCourse />
               },
+               {
+                path: 'courses/:slug',
+                element: <UpdateCourse />
+              },
+               {
+                path: 'courses/categories',
+                element: <CategoryTable />
+              },
+              {
+                path: 'courses/categories/add',
+                element:<AddCategory />
+              },
+               {
+                path: 'sections',
+                element: <SectionTable />
+              },
+              {
+                // AddSection
+                // path: 'sections/add',
+                path: 'sections/add',
+                element: <AddSection />
+              },
+              //  {
               
+              //   path: 'courses/${courseId}/sections/add',
+              //   element: <AddSectionByCourse />
+              // },
+              // /admin/courses/${courseId}/sections/add
+
+              // /admin/courses/${courseId}/sections
+
+              // /admin/sections/edit/${sectionId}
+              
+
+
             ],
           },
         ],

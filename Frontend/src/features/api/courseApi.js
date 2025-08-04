@@ -20,15 +20,6 @@ export const courseApi = createApi({
     }),
     // create endpoints:
     endpoints: (builder) => ({
-
-        //loadcourse
-        // LoadCourse: builder.query({
-        //     query: () => ({
-        //         url: "course/",
-        //         method: "GET",
-
-        //     }),
-        // }),
         LoadCourse: builder.query({
             query: (params) => {
                 const queryParams = new URLSearchParams(params).toString();
@@ -43,6 +34,12 @@ export const courseApi = createApi({
         GetSectionsByCourse: builder.query({
             query: (courseSlug) => ({
                 url: `course/${courseSlug}/sections/`,
+                method: "GET",
+            }),
+        }),
+        getCourseStats: builder.query({
+            query: () => ({
+                url: `course/get_stats_public/`,
                 method: "GET",
             }),
         }),
@@ -70,7 +67,7 @@ export const courseApi = createApi({
 export const {
 
     useLoadCourseQuery,
-
+    useGetCourseStatsQuery,
     useGetSectionsByCourseQuery,
     useSearchCoursesQuery,
 } = courseApi;

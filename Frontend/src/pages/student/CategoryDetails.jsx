@@ -66,9 +66,12 @@ const CategoryDetails = () => {
                     <div className="grid lg:grid-cols-3 gap-8">
                         {/* Course Info - 2 columns */}
                         <div className="lg:col-span-2">
-                            <h1 className="text-3xl md:text-4xl font-bold mb-4">
+                            <h1 className="text-4xl md:text-4xl font-bold mb-4">
                                 {category.title}
                             </h1>
+                            {/* <h1 className="text-3xl md:text-4xl font-bold mb-4">
+                                {category.slug}
+                            </h1> */}
 
                         </div>
                   
