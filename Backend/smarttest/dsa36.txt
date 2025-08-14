@@ -1,0 +1,1922 @@
+  [
+    {
+    "topic": "44",
+    "question_text": "Which data structure follows the LIFO principle?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Queue", "is_correct": false},
+      {"option_text": "Stack", "is_correct": true},
+      {"option_text": "Linked List", "is_correct": false},
+      {"option_text": "Tree", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of accessing an element in an array by index?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which algorithm uses divide and conquer approach?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Bubble Sort", "is_correct": false},
+      {"option_text": "Merge Sort", "is_correct": true},
+      {"option_text": "Insertion Sort", "is_correct": false},
+      {"option_text": "Selection Sort", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the worst-case time complexity of linear search?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which data structure is used for implementing recursion?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Queue", "is_correct": false},
+      {"option_text": "Stack", "is_correct": true},
+      {"option_text": "Array", "is_correct": false},
+      {"option_text": "Tree", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the space complexity of Bubble Sort?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is a linear data structure?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Binary Tree", "is_correct": false},
+      {"option_text": "Graph", "is_correct": false},
+      {"option_text": "Linked List", "is_correct": true},
+      {"option_text": "Heap", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of inserting at the end of a dynamic array?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1) amortized", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(1) worst case", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which traversal gives nodes in non-decreasing order in a BST?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Pre-order", "is_correct": false},
+      {"option_text": "In-order", "is_correct": true},
+      {"option_text": "Post-order", "is_correct": false},
+      {"option_text": "Level-order", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the maximum number of children in a binary tree node?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "1", "is_correct": false},
+      {"option_text": "2", "is_correct": true},
+      {"option_text": "Any number", "is_correct": false},
+      {"option_text": "3", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which sorting algorithm has the worst-case time complexity of O(n²)?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Merge Sort", "is_correct": false},
+      {"option_text": "Quick Sort", "is_correct": true},
+      {"option_text": "Heap Sort", "is_correct": false},
+      {"option_text": "Counting Sort", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of binary search on a sorted array?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which data structure uses FIFO principle?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Stack", "is_correct": false},
+      {"option_text": "Queue", "is_correct": true},
+      {"option_text": "Tree", "is_correct": false},
+      {"option_text": "Graph", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the height of a complete binary tree with n nodes?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a linear data structure?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Array", "is_correct": false},
+      {"option_text": "Linked List", "is_correct": false},
+      {"option_text": "Queue", "is_correct": false},
+      {"option_text": "Binary Tree", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of inserting at the beginning of a linked list?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which algorithm is used to find the shortest path in an unweighted graph?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Dijkstra's", "is_correct": false},
+      {"option_text": "BFS", "is_correct": true},
+      {"option_text": "DFS", "is_correct": false},
+      {"option_text": "Prim's", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the worst-case time complexity of insertion in a hash table?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which data structure is typically used for implementing a priority queue?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Stack", "is_correct": false},
+      {"option_text": "Queue", "is_correct": false},
+      {"option_text": "Heap", "is_correct": true},
+      {"option_text": "Linked List", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of deleting from the front of a queue implemented with a linked list?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is a stable sorting algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Quick Sort", "is_correct": false},
+      {"option_text": "Heap Sort", "is_correct": false},
+      {"option_text": "Merge Sort", "is_correct": true},
+      {"option_text": "Selection Sort", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the space complexity of recursive Fibonacci without memoization?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(2^n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which data structure is used in breadth-first search?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Stack", "is_correct": false},
+      {"option_text": "Queue", "is_correct": true},
+      {"option_text": "Heap", "is_correct": false},
+      {"option_text": "Tree", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of building a heap from an unsorted array?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a searching algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Binary Search", "is_correct": false},
+      {"option_text": "Linear Search", "is_correct": false},
+      {"option_text": "Bubble Sort", "is_correct": true},
+      {"option_text": "Interpolation Search", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the minimum number of comparisons needed to find the minimum and maximum of n elements?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "n-1", "is_correct": false},
+      {"option_text": "2n-2", "is_correct": false},
+      {"option_text": "3n/2 - 2", "is_correct": true},
+      {"option_text": "n²", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which data structure is used for implementing LRU cache?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Stack", "is_correct": false},
+      {"option_text": "Queue", "is_correct": false},
+      {"option_text": "Hash Map + Doubly Linked List", "is_correct": true},
+      {"option_text": "Binary Tree", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of deleting a node from a doubly linked list given its reference?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a type of linked list?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Singly linked list", "is_correct": false},
+      {"option_text": "Doubly linked list", "is_correct": false},
+      {"option_text": "Circular linked list", "is_correct": false},
+      {"option_text": "Binary linked list", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the greedy algorithm for the activity selection problem?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a collision resolution technique in hashing?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Chaining", "is_correct": false},
+      {"option_text": "Linear Probing", "is_correct": false},
+      {"option_text": "Quadratic Probing", "is_correct": false},
+      {"option_text": "Binary Probing", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of inserting an element in a max heap?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which algorithm is used to find the minimum spanning tree of a graph?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Dijkstra's", "is_correct": false},
+      {"option_text": "Kruskal's", "is_correct": true},
+      {"option_text": "Floyd-Warshall", "is_correct": false},
+      {"option_text": "Bellman-Ford", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Sieve of Eratosthenes algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log log n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a graph representation?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Adjacency Matrix", "is_correct": false},
+      {"option_text": "Adjacency List", "is_correct": false},
+      {"option_text": "Incidence Matrix", "is_correct": false},
+      {"option_text": "Priority List", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of matrix multiplication using the standard algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(n³)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a tree traversal method?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "In-order", "is_correct": false},
+      {"option_text": "Pre-order", "is_correct": false},
+      {"option_text": "Post-order", "is_correct": false},
+      {"option_text": "Level-wise", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the naive string matching algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n + m)", "is_correct": false},
+      {"option_text": "O(nm)", "is_correct": true},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which data structure is used for implementing a dictionary?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Stack", "is_correct": false},
+      {"option_text": "Queue", "is_correct": false},
+      {"option_text": "Hash Table", "is_correct": true},
+      {"option_text": "Heap", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of deleting an element from a binary search tree?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a dynamic programming problem?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Fibonacci Numbers", "is_correct": false},
+      {"option_text": "Knapsack Problem", "is_correct": false},
+      {"option_text": "Tower of Hanoi", "is_correct": false},
+      {"option_text": "Bubble Sort", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Boyer-Moore voting algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a hashing algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "MD5", "is_correct": false},
+      {"option_text": "SHA-1", "is_correct": false},
+      {"option_text": "RSA", "is_correct": true},
+      {"option_text": "SHA-256", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the union operation in Union-Find with path compression?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(α(n))", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a balanced binary search tree?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "AVL Tree", "is_correct": false},
+      {"option_text": "Red-Black Tree", "is_correct": false},
+      {"option_text": "B-Tree", "is_correct": false},
+      {"option_text": "Binary Heap", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Kadane's algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a graph traversal algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "BFS", "is_correct": false},
+      {"option_text": "DFS", "is_correct": false},
+      {"option_text": "Dijkstra's", "is_correct": true},
+      {"option_text": "A*", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Floyd's cycle detection algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a string matching algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "KMP", "is_correct": false},
+      {"option_text": "Rabin-Karp", "is_correct": false},
+      {"option_text": "Boyer-Moore", "is_correct": false},
+      {"option_text": "Dijkstra", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Bellman-Ford algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(V)", "is_correct": false},
+      {"option_text": "O(V log V)", "is_correct": false},
+      {"option_text": "O(VE)", "is_correct": true},
+      {"option_text": "O(V²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a sorting algorithm?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Quick Sort", "is_correct": false},
+      {"option_text": "Merge Sort", "is_correct": false},
+      {"option_text": "Heap Sort", "is_correct": false},
+      {"option_text": "Tree Sort", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Euclidean algorithm for GCD?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(log min(a,b))", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a type of queue?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "Priority Queue", "is_correct": false},
+      {"option_text": "Circular Queue", "is_correct": false},
+      {"option_text": "Double-ended Queue", "is_correct": false},
+      {"option_text": "Binary Queue", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Tower of Hanoi problem?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(2^n)", "is_correct": true},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of Dijkstra's algorithm with a binary heap?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(V²)", "is_correct": false},
+      {"option_text": "O(E log V)", "is_correct": true},
+      {"option_text": "O(V log E)", "is_correct": false},
+      {"option_text": "O(E + V)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these problems cannot be solved using greedy approach?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Fractional Knapsack", "is_correct": false},
+      {"option_text": "Huffman Coding", "is_correct": false},
+      {"option_text": "0/1 Knapsack", "is_correct": true},
+      {"option_text": "Dijkstra's Algorithm", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the space complexity of recursive Fibonacci implementation without memoization?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(2^n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which data structure is most efficient for priority queue operations?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Linked List", "is_correct": false},
+      {"option_text": "Binary Search Tree", "is_correct": false},
+      {"option_text": "Heap", "is_correct": true},
+      {"option_text": "Hash Table", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity to find all strongly connected components in a graph?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(V²)", "is_correct": false},
+      {"option_text": "O(V + E)", "is_correct": true},
+      {"option_text": "O(V log E)", "is_correct": false},
+      {"option_text": "O(E log V)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which algorithm is used to detect cycles in a directed graph?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Kruskal's", "is_correct": false},
+      {"option_text": "Prim's", "is_correct": false},
+      {"option_text": "DFS", "is_correct": true},
+      {"option_text": "BFS", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the worst-case time complexity of QuickSort?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": true},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a stable sorting algorithm?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Merge Sort", "is_correct": false},
+      {"option_text": "Bubble Sort", "is_correct": false},
+      {"option_text": "QuickSort", "is_correct": true},
+      {"option_text": "Insertion Sort", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of searching in a balanced BST?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which hashing technique handles collisions by storing multiple items in the same slot?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Open Addressing", "is_correct": false},
+      {"option_text": "Linear Probing", "is_correct": false},
+      {"option_text": "Chaining", "is_correct": true},
+      {"option_text": "Double Hashing", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the topological sort algorithm?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(V)", "is_correct": false},
+      {"option_text": "O(V + E)", "is_correct": true},
+      {"option_text": "O(V log E)", "is_correct": false},
+      {"option_text": "O(E log V)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a dynamic programming optimization?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Memoization", "is_correct": false},
+      {"option_text": "Tabulation", "is_correct": false},
+      {"option_text": "State Compression", "is_correct": false},
+      {"option_text": "Greedy Choice", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the KMP string matching algorithm?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n + m)", "is_correct": true},
+      {"option_text": "O(nm)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of these is NOT a property of a red-black tree?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Every node is either red or black", "is_correct": false},
+      {"option_text": "The root is always black", "is_correct": false},
+      {"option_text": "Every leaf (NIL) is black", "is_correct": false},
+      {"option_text": "No two consecutive red nodes", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Rabin-Karp algorithm in the average case?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(n + m)", "is_correct": true},
+      {"option_text": "O(nm)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(m log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about dynamic programming?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "It always uses recursion", "is_correct": false},
+      {"option_text": "It solves problems by combining solutions of overlapping subproblems", "is_correct": true},
+      {"option_text": "It is faster than greedy algorithms in all cases", "is_correct": false},
+      {"option_text": "It does not require optimal substructure", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the worst-case time complexity of searching in a hash table with chaining?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which algorithm uses a 'greedy choice' at each step?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Merge Sort", "is_correct": false},
+      {"option_text": "Dynamic Programming", "is_correct": false},
+      {"option_text": "Prim's Algorithm", "is_correct": true},
+      {"option_text": "Quick Sort", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the maximum number of edges in a directed acyclic graph (DAG) with n vertices?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "n", "is_correct": false},
+      {"option_text": "n(n-1)/2", "is_correct": true},
+      {"option_text": "n²", "is_correct": false},
+      {"option_text": "n-1", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid topological ordering of a DAG?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Order where all edges go forward", "is_correct": false},
+      {"option_text": "Order where some edges go backward", "is_correct": true},
+      {"option_text": "Order based on DFS finish times in reverse", "is_correct": false},
+      {"option_text": "Order respecting dependencies", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of finding the diameter of a tree using two BFS calls?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about AVL trees?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "They are always complete binary trees", "is_correct": false},
+      {"option_text": "The height difference between left and right subtrees is at most 1", "is_correct": true},
+      {"option_text": "They allow duplicate keys only at leaves", "is_correct": false},
+      {"option_text": "They are used for hashing", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the minimum number of nodes in an AVL tree of height 3?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "4", "is_correct": false},
+      {"option_text": "5", "is_correct": true},
+      {"option_text": "6", "is_correct": false},
+      {"option_text": "7", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid use case for a trie?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Autocomplete", "is_correct": false},
+      {"option_text": "Spell checker", "is_correct": false},
+      {"option_text": "IP routing", "is_correct": false},
+      {"option_text": "Matrix multiplication", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "In Union-Find, what is the purpose of path compression?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "To reduce space complexity", "is_correct": false},
+      {"option_text": "To flatten the tree for faster future queries", "is_correct": true},
+      {"option_text": "To increase union time", "is_correct": false},
+      {"option_text": "To detect cycles only", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of Kruskal's algorithm with Union-Find?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(E)", "is_correct": false},
+      {"option_text": "O(E log V)", "is_correct": true},
+      {"option_text": "O(V log E)", "is_correct": false},
+      {"option_text": "O(V²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about B-trees?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "They are binary trees", "is_correct": false},
+      {"option_text": "They are used in databases and file systems", "is_correct": true},
+      {"option_text": "They are always unbalanced", "is_correct": false},
+      {"option_text": "They have height O(log n) base 2", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of finding the longest common subsequence using DP?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(nm)", "is_correct": true},
+      {"option_text": "O(2^n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which algorithm is used to find articulation points in a graph?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Kruskal's", "is_correct": false},
+      {"option_text": "Tarjan's", "is_correct": true},
+      {"option_text": "Prim's", "is_correct": false},
+      {"option_text": "Floyd-Warshall", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Floyd-Warshall algorithm?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(V)", "is_correct": false},
+      {"option_text": "O(V²)", "is_correct": false},
+      {"option_text": "O(V³)", "is_correct": true},
+      {"option_text": "O(E log V)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a backtracking algorithm?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "N-Queens", "is_correct": false},
+      {"option_text": "Sudoku Solver", "is_correct": false},
+      {"option_text": "Graph Coloring", "is_correct": false},
+      {"option_text": "Dijkstra's", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the naive matrix chain multiplication using recursion?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(2^n)", "is_correct": true},
+      {"option_text": "O(n³)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about memoization?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "It is a top-down approach", "is_correct": true},
+      {"option_text": "It is a bottom-up approach", "is_correct": false},
+      {"option_text": "It uses iteration only", "is_correct": false},
+      {"option_text": "It avoids recursion", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the space complexity of iterative DFS using a stack?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(V)", "is_correct": true},
+      {"option_text": "O(E)", "is_correct": false},
+      {"option_text": "O(V + E)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid reason for choosing BFS over DFS?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Finding shortest path in unweighted graph", "is_correct": false},
+      {"option_text": "Avoiding deep recursion stack overflow", "is_correct": false},
+      {"option_text": "Finding connected components", "is_correct": false},
+      {"option_text": "Minimizing space complexity", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the edit distance problem using dynamic programming?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(2^n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about the heapify operation?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "It takes O(n log n) time for building a heap", "is_correct": false},
+      {"option_text": "It takes O(n) time when applied to all non-leaf nodes", "is_correct": true},
+      {"option_text": "It is used only in BSTs", "is_correct": false},
+      {"option_text": "It guarantees O(1) insertion", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of finding the kth smallest element in a BST?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(k)", "is_correct": false},
+      {"option_text": "O(h)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid advantage of a doubly linked list over a singly linked list?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Can traverse backward", "is_correct": false},
+      {"option_text": "Can delete node given pointer in O(1)", "is_correct": true},
+      {"option_text": "Easier to reverse", "is_correct": false},
+      {"option_text": "Supports bidirectional iteration", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the A* search algorithm in the worst case?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(b^d)", "is_correct": true},
+      {"option_text": "O(d)", "is_correct": false},
+      {"option_text": "O(log d)", "is_correct": false},
+      {"option_text": "O(b)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid application of a suffix array?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Pattern searching", "is_correct": false},
+      {"option_text": "Finding longest repeated substring", "is_correct": false},
+      {"option_text": "Data compression", "is_correct": false},
+      {"option_text": "Matrix exponentiation", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of finding the maximum subarray sum using divide and conquer?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about the Master Theorem?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "It applies to all recurrence relations", "is_correct": false},
+      {"option_text": "It applies to divide-and-conquer recurrences of form T(n) = aT(n/b) + f(n)", "is_correct": true},
+      {"option_text": "It gives exact values, not asymptotic bounds", "is_correct": false},
+      {"option_text": "It cannot handle polynomial differences", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Z-algorithm for pattern matching?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n + m)", "is_correct": false},
+      {"option_text": "O(nm)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid property of a min-heap?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Root is the minimum element", "is_correct": false},
+      {"option_text": "Left child >= parent", "is_correct": true},
+      {"option_text": "Complete binary tree", "is_correct": false},
+      {"option_text": "Used in Dijkstra's algorithm", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of finding the number of islands in a grid using DFS?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(m)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(mn)", "is_correct": true},
+      {"option_text": "O(m + n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid use of a segment tree?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Range minimum query", "is_correct": false},
+      {"option_text": "Range sum query", "is_correct": false},
+      {"option_text": "Point updates", "is_correct": false},
+      {"option_text": "Sorting arrays", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Boyer-Moore majority vote algorithm?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid graph representation for dense graphs?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "Adjacency Matrix", "is_correct": false},
+      {"option_text": "Adjacency List", "is_correct": true},
+      {"option_text": "Incidence Matrix", "is_correct": false},
+      {"option_text": "Edge List", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Union-Find algorithm with union by rank and path compression?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(α(n))", "is_correct": true},
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about Huffman coding?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "It uses fixed-length codes", "is_correct": false},
+      {"option_text": "It is a lossy compression technique", "is_correct": false},
+      {"option_text": "It uses a greedy algorithm", "is_correct": true},
+      {"option_text": "It is used for encryption", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of finding the longest increasing subsequence using binary search optimization?",
+    "level": "medium",
+    "marks": 2,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(2^n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Fast Fourier Transform (FFT) algorithm?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which algorithm is used to find the maximum flow in a network?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Dijkstra's", "is_correct": false},
+      {"option_text": "Floyd-Warshall", "is_correct": false},
+      {"option_text": "Ford-Fulkerson", "is_correct": true},
+      {"option_text": "Prim's", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the space complexity of the recursive solution to the Tower of Hanoi?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(2^n)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid optimization in dynamic programming?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Knuth's Optimization", "is_correct": false},
+      {"option_text": "Convex Hull Trick", "is_correct": false},
+      {"option_text": "Matrix Exponentiation", "is_correct": false},
+      {"option_text": "Greedy Swapping", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Hopcroft-Karp algorithm for maximum bipartite matching?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(V²)", "is_correct": false},
+      {"option_text": "O(E√V)", "is_correct": true},
+      {"option_text": "O(VE)", "is_correct": false},
+      {"option_text": "O(V log E)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following problems is NP-complete?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Shortest Path", "is_correct": false},
+      {"option_text": "Minimum Spanning Tree", "is_correct": false},
+      {"option_text": "0/1 Knapsack", "is_correct": true},
+      {"option_text": "Matrix Chain Multiplication", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Sieve of Atkin for finding primes up to n?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log log n)", "is_correct": false},
+      {"option_text": "O(n / log log n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which data structure supports O(1) amortized time for insert and find-min, and O(log n) for delete-min?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Binary Heap", "is_correct": false},
+      {"option_text": "Fibonacci Heap", "is_correct": true},
+      {"option_text": "AVL Tree", "is_correct": false},
+      {"option_text": "Red-Black Tree", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the minimum number of comparisons required to sort 5 elements?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "6", "is_correct": false},
+      {"option_text": "7", "is_correct": true},
+      {"option_text": "8", "is_correct": false},
+      {"option_text": "9", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about persistent data structures?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "They do not allow modifications", "is_correct": false},
+      {"option_text": "They preserve previous versions after modification", "is_correct": true},
+      {"option_text": "They are always slower than mutable ones", "is_correct": false},
+      {"option_text": "They use less space than regular structures", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the offline 2D range minimum query using Mo's algorithm?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n√n)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following algorithms uses centroid decomposition?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Finding diameter of a tree", "is_correct": false},
+      {"option_text": "Counting paths with sum k in a tree", "is_correct": true},
+      {"option_text": "Topological sorting", "is_correct": false},
+      {"option_text": "Union-Find", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Karatsuba algorithm for multiplying two n-digit numbers?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(n^1.585)", "is_correct": true},
+      {"option_text": "O(n log² n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid application of a suffix automaton?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Finding longest common substring", "is_correct": false},
+      {"option_text": "Counting distinct substrings", "is_correct": false},
+      {"option_text": "Pattern matching in linear time", "is_correct": false},
+      {"option_text": "Matrix inversion", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Dinic's algorithm for max flow in a unit capacity graph?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(E√V)", "is_correct": true},
+      {"option_text": "O(VE)", "is_correct": false},
+      {"option_text": "O(V²E)", "is_correct": false},
+      {"option_text": "O(E log V)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about Mo's algorithm?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "It works online", "is_correct": false},
+      {"option_text": "It requires queries to be processed offline", "is_correct": true},
+      {"option_text": "It supports point updates efficiently", "is_correct": false},
+      {"option_text": "It runs in O(n) time", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the SMAWK algorithm for totally monotone matrices?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(n√n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid use of heavy-light decomposition?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Path queries in trees", "is_correct": false},
+      {"option_text": "Subtree updates", "is_correct": true},
+      {"option_text": "Dynamic tree path sum", "is_correct": false},
+      {"option_text": "LCA optimization", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Blossom algorithm for maximum matching in general graphs?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(V³)", "is_correct": true},
+      {"option_text": "O(V²)", "is_correct": false},
+      {"option_text": "O(VE)", "is_correct": false},
+      {"option_text": "O(E√V)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about the Z-function in string algorithms?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "It finds all palindromes", "is_correct": false},
+      {"option_text": "It computes longest prefix which is also a suffix", "is_correct": true},
+      {"option_text": "It is used for encryption", "is_correct": false},
+      {"option_text": "It runs in O(log n) time", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the minimum number of states in a DFA that accepts binary strings divisible by 3?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "2", "is_correct": false},
+      {"option_text": "3", "is_correct": true},
+      {"option_text": "4", "is_correct": false},
+      {"option_text": "5", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid property of a van Emde Boas tree?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Supports min/max in O(1)", "is_correct": false},
+      {"option_text": "Insert/Delete in O(log log u)", "is_correct": false},
+      {"option_text": "Works only for integer keys", "is_correct": false},
+      {"option_text": "Uses O(n) space", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Aho-Corasick algorithm for multiple pattern matching?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n + m)", "is_correct": false},
+      {"option_text": "O(n + m + z)", "is_correct": true},
+      {"option_text": "O(nm)", "is_correct": false},
+      {"option_text": "O(m log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about Li Chao Tree?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "It is used for geometric range queries", "is_correct": false},
+      {"option_text": "It maintains dynamic set of lines for maximum at a point", "is_correct": true},
+      {"option_text": "It supports 2D point updates", "is_correct": false},
+      {"option_text": "It is a type of B-tree", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Miller-Rabin primality test for a number n?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(k log³ n)", "is_correct": true},
+      {"option_text": "O(√n)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid use of a link/cut tree?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Dynamic tree connectivity", "is_correct": false},
+      {"option_text": "Path aggregation in forests", "is_correct": false},
+      {"option_text": "LCA in static trees", "is_correct": true},
+      {"option_text": "Dynamic MST", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Schönhage–Strassen algorithm for large integer multiplication?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": true},
+      {"option_text": "O(n log n log log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about the Four Russians algorithm?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "It speeds up matrix multiplication", "is_correct": false},
+      {"option_text": "It optimizes Boolean matrix multiplication", "is_correct": true},
+      {"option_text": "It is used for sorting", "is_correct": false},
+      {"option_text": "It runs in O(1) time", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the offline dynamic connectivity problem using divide and conquer?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(q log² n)", "is_correct": true},
+      {"option_text": "O(q log n)", "is_correct": false},
+      {"option_text": "O(q n)", "is_correct": false},
+      {"option_text": "O(q + n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid application of Euler Tour Technique (ETT)?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Subtree sum queries", "is_correct": false},
+      {"option_text": "Dynamic tree path queries", "is_correct": false},
+      {"option_text": "LCA using RMQ", "is_correct": false},
+      {"option_text": "Shortest path in DAG", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the fully persistent array with O(1) access?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(1)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(log log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about the Cuckoo hashing?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "It uses chaining", "is_correct": false},
+      {"option_text": "It guarantees O(1) lookup in worst case", "is_correct": false},
+      {"option_text": "It uses multiple hash functions and tables", "is_correct": true},
+      {"option_text": "It is slower than linear probing", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the online construction of a suffix tree using Ukkonen's algorithm?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(n log² n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid property of a pairing heap?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Mergeable heap", "is_correct": false},
+      {"option_text": "O(1) amortized merge", "is_correct": false},
+      {"option_text": "Proven O(log n) delete-min", "is_correct": true},
+      {"option_text": "Simple to implement", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the Bentley-Ottmann algorithm for line segment intersection?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n + k)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(k log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about the SMAWK algorithm?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "It solves convex matrix search problems", "is_correct": true},
+      {"option_text": "It is used for string matching", "is_correct": false},
+      {"option_text": "It runs in O(n²) time", "is_correct": false},
+      {"option_text": "It requires sorting", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the quantum-inspired classical algorithm for solving linear systems?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(n^1.5)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid use of a kinetic heap?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Tracking moving particles", "is_correct": false},
+      {"option_text": "Event scheduling in sweep line", "is_correct": false},
+      {"option_text": "Static priority queues", "is_correct": true},
+      {"option_text": "Maintaining minimum distance", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the best-known algorithm for matrix multiplication (as of 2023)?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(n^2.37188)", "is_correct": true},
+      {"option_text": "O(n^2.376)", "is_correct": false},
+      {"option_text": "O(n³)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about the parallel BFS algorithm?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "It always runs in O(log n) time", "is_correct": false},
+      {"option_text": "It can be implemented using PRAM model", "is_correct": true},
+      {"option_text": "It requires no synchronization", "is_correct": false},
+      {"option_text": "It is slower than sequential BFS", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the fully dynamic connectivity algorithm using Euler Tour Trees?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(log n)", "is_correct": false},
+      {"option_text": "O(log² n)", "is_correct": true},
+      {"option_text": "O(log n log log n)", "is_correct": false},
+      {"option_text": "O(n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid application of a wavelet matrix?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Rank/Select queries on arrays", "is_correct": false},
+      {"option_text": "Compressed data structures", "is_correct": false},
+      {"option_text": "2D range queries", "is_correct": true},
+      {"option_text": "Integer encoding", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the offline LCA algorithm using DSU and DFS?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n + q)", "is_correct": true},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(q log n)", "is_correct": false},
+      {"option_text": "O(n²)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about the Chazelle's soft heap?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "It allows controlled corruption of keys", "is_correct": true},
+      {"option_text": "It guarantees exact minimum", "is_correct": false},
+      {"option_text": "It runs in O(1) time for all operations", "is_correct": false},
+      {"option_text": "It is used in cryptography", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the best-known algorithm for the closest pair of points in 2D?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(n log² n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid property of a y-fast trie?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(log log u) search time", "is_correct": false},
+      {"option_text": "Uses O(n) space", "is_correct": false},
+      {"option_text": "Supports predecessor queries", "is_correct": false},
+      {"option_text": "Supports O(1) insertion", "is_correct": true}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the incremental convex hull algorithm in 2D?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(log n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about the Burrows-Wheeler Transform?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "It is used for lossless compression", "is_correct": true},
+      {"option_text": "It encrypts data", "is_correct": false},
+      {"option_text": "It sorts arrays", "is_correct": false},
+      {"option_text": "It finds substrings", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the online construction of a suffix array?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": true},
+      {"option_text": "O(n²)", "is_correct": false},
+      {"option_text": "O(n log² n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid use of a kinetic data structure?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Tracking moving points", "is_correct": false},
+      {"option_text": "Maintaining closest pair dynamically", "is_correct": false},
+      {"option_text": "Static sorting", "is_correct": true},
+      {"option_text": "Event-driven simulation", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the parallel merge sort on a PRAM model?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(log n)", "is_correct": true},
+      {"option_text": "O(n)", "is_correct": false},
+      {"option_text": "O(n log n)", "is_correct": false},
+      {"option_text": "O(log² n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is true about the Level Ancestor problem?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "It can be solved in O(1) per query with O(n) preprocessing", "is_correct": true},
+      {"option_text": "It requires O(n²) preprocessing", "is_correct": false},
+      {"option_text": "It is unsolvable", "is_correct": false},
+      {"option_text": "It is same as LCA", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "What is the time complexity of the best-known algorithm for the Traveling Salesman Problem using dynamic programming?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "O(n!)", "is_correct": false},
+      {"option_text": "O(n²2^n)", "is_correct": true},
+      {"option_text": "O(n³)", "is_correct": false},
+      {"option_text": "O(2^n)", "is_correct": false}
+    ]
+  },
+  {
+    "topic": "44",
+    "question_text": "Which of the following is NOT a valid application of a Bloom filter?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      {"option_text": "Spell checkers", "is_correct": false},
+      {"option_text": "Caching systems", "is_correct": false},
+      {"option_text": "Exact membership queries", "is_correct": true},
+      {"option_text": "Web crawlers", "is_correct": false}
+    ]
+  }
+]

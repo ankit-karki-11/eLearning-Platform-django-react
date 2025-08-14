@@ -2,13 +2,6 @@ from django.db import models
 from users.models import UserAccount
 from django.utils import timezone
 import random
-# import logging
-# logger = logging.getLogger(__name__)
-
-RECENTLY_USED_QUESTIONS = []
-# last 30 qsns on cooldown(means last 30 qsn wont be shown)
-MAX_COOLDOWN = 30
-
 # Create your models here.
 class Topic(models.Model):
     title= models.CharField(max_length=255)
@@ -75,7 +68,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from users.models import UserAccount
-from .models import Topic, Question
+from .models import Topic, Test, Question
 import random
 
 class TestAttempt(models.Model):
@@ -150,104 +143,7 @@ class TestAttempt(models.Model):
     #         questions[i], questions[j] = questions[j], questions[i]
 
     #     return questions[:10]
-    
-    def get_shuffled_questions(self):
-        """
-        Returns 10 shuffled questions for the test/practice.
 
-        Practice mode (is_practice=True):
-        - Avoid questions this student has already seen for the same topic and level.
-        - Prioritize unseen questions first, then fill with previously seen if needed.
-        - Also update RECENTLY_USED_QUESTIONS globally to reduce reuse across all students.
-
-        Formal test mode (is_practice=False):
-        - Avoid recently used questions globally using a cooldown list (RECENTLY_USED_QUESTIONS).
-        - Uses Fisher-Yates shuffle to randomize question order.
-        - Maintains a cooldown to reduce question repeats across all students.
-        """
-
-        if self.is_practice:
-            # --- PRACTICE MODE ---
-            all_questions = list(Question.objects.filter(
-                topic=self.topic,
-                level=self.level
-            ).prefetch_related('options'))
-
-            if len(all_questions) < 1:
-                raise ValidationError("No questions available for this topic and level.")
-
-            previous_attempts = TestAttempt.objects.filter(
-                student=self.student,
-                is_practice=True,
-                topic=self.topic,
-                level=self.level
-            ).exclude(id=self.id)
-
-            used_question_ids = set()
-            for attempt in previous_attempts:
-                used_question_ids.update(attempt.selected_questions.values_list('id', flat=True))
-
-            new_questions = [q for q in all_questions if q.id not in used_question_ids]
-            used_questions = [q for q in all_questions if q.id in used_question_ids]
-
-            if len(all_questions) >= 10:
-                if len(new_questions) >= 10:
-                    questions = new_questions
-                else:
-                    questions = new_questions + used_questions[:10 - len(new_questions)]
-            else:
-                questions = all_questions
-
-            random.shuffle(questions)
-
-            selected_ids = [q.id for q in questions[:10]]
-
-            # Update global cooldown even in practice mode to reduce reuse across students
-            RECENTLY_USED_QUESTIONS.extend(selected_ids)
-            if len(RECENTLY_USED_QUESTIONS) > MAX_COOLDOWN:
-                del RECENTLY_USED_QUESTIONS[:-MAX_COOLDOWN]
-
-            print(f"Practice TestAttempt {self.id}: Selected IDs: {selected_ids}")
-            print(f"RECENTLY_USED_QUESTIONS updated in practice mode: {RECENTLY_USED_QUESTIONS}")
-
-            return questions[:10]
-
-        else:
-            # --- FORMAL TEST MODE ---
-            all_questions = list(Question.objects.filter(
-                topic=self.test.topic,
-                level=self.test.level
-            ).prefetch_related('options'))
-
-            if len(all_questions) < 10:
-                raise ValidationError("Not enough questions available for this topic and level.")
-
-            available_questions = [q for q in all_questions if q.id not in RECENTLY_USED_QUESTIONS]
-
-            if len(available_questions) < 10:
-                available_questions = all_questions
-
-            # Fisher-Yates shuffle algorithm to shuffle the questions
-            for i in range(len(available_questions) - 1, 0, -1):
-                j = random.randint(0, i)
-                available_questions[i], available_questions[j] = available_questions[j], available_questions[i]
-
-            questions = available_questions[:10]
-
-            selected_ids = [q.id for q in questions]
-            RECENTLY_USED_QUESTIONS.extend(selected_ids)
-
-            if len(RECENTLY_USED_QUESTIONS) > MAX_COOLDOWN:
-                del RECENTLY_USED_QUESTIONS[:-MAX_COOLDOWN]
-
-            random.shuffle(questions)
-
-            print(f"✅ Formal TestAttempt {self.id}: Selected IDs: {selected_ids}")
-            print(f"🔄 RECENTLY_USED_QUESTIONS updated in formal mode: {RECENTLY_USED_QUESTIONS}")
-
-            return questions[:10]
-
-    
     def start_attempt(self):
         """Initialize test attempt and assign randomized questions"""
         if not self.selected_questions.exists():

@@ -1,0 +1,1827 @@
+[
+  {
+    "topic": 45,
+    "question_text": "Which of the following is a JavaScript runtime environment?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "Node.js", "is_correct": true },
+      { "option_text": "React", "is_correct": false },
+      { "option_text": "Express", "is_correct": false },
+      { "option_text": "MongoDB", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which database is commonly used in MERN Stack?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "MongoDB", "is_correct": true },
+      { "option_text": "MySQL", "is_correct": false },
+      { "option_text": "PostgreSQL", "is_correct": false },
+      { "option_text": "SQLite", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which library is used for building user interfaces in the MERN stack?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "React", "is_correct": true },
+      { "option_text": "Express", "is_correct": false },
+      { "option_text": "Node.js", "is_correct": false },
+      { "option_text": "Angular", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "What does the 'E' in MERN stack stand for?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "Express", "is_correct": true },
+      { "option_text": "Element", "is_correct": false },
+      { "option_text": "Engine", "is_correct": false },
+      { "option_text": "Embed", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of the following is a backend framework in the MERN stack?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "Express.js", "is_correct": true },
+      { "option_text": "React.js", "is_correct": false },
+      { "option_text": "Vue.js", "is_correct": false },
+      { "option_text": "Bootstrap", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of the following is a NoSQL database?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "MongoDB", "is_correct": true },
+      { "option_text": "MySQL", "is_correct": false },
+      { "option_text": "PostgreSQL", "is_correct": false },
+      { "option_text": "Oracle", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which command is used to initialize a new Node.js project?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "npm init", "is_correct": true },
+      { "option_text": "node init", "is_correct": false },
+      { "option_text": "npm start", "is_correct": false },
+      { "option_text": "node create", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which React hook is used for managing state in a functional component?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "useState", "is_correct": true },
+      { "option_text": "useEffect", "is_correct": false },
+      { "option_text": "useContext", "is_correct": false },
+      { "option_text": "useReducer", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which command starts a Node.js application defined in package.json?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "npm start", "is_correct": true },
+      { "option_text": "node run", "is_correct": false },
+      { "option_text": "npm execute", "is_correct": false },
+      { "option_text": "node start", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which method is used to insert a document into MongoDB?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "insertOne()", "is_correct": true },
+      { "option_text": "addOne()", "is_correct": false },
+      { "option_text": "pushOne()", "is_correct": false },
+      { "option_text": "createOne()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which HTTP method is used to retrieve data from a server?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "GET", "is_correct": true },
+      { "option_text": "POST", "is_correct": false },
+      { "option_text": "PUT", "is_correct": false },
+      { "option_text": "DELETE", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "In MongoDB, which command lists all databases?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "show dbs", "is_correct": true },
+      { "option_text": "list databases", "is_correct": false },
+      { "option_text": "db list", "is_correct": false },
+      { "option_text": "db.show()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which React method is used to render elements to the DOM?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "ReactDOM.render()", "is_correct": true },
+      { "option_text": "React.render()", "is_correct": false },
+      { "option_text": "renderReact()", "is_correct": false },
+      { "option_text": "DOM.render()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which package is commonly used to create REST APIs in Node.js?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "Express.js", "is_correct": true },
+      { "option_text": "Next.js", "is_correct": false },
+      { "option_text": "React.js", "is_correct": false },
+      { "option_text": "Bootstrap", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "What does JSX stand for in React?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "JavaScript XML", "is_correct": true },
+      { "option_text": "Java Syntax Extension", "is_correct": false },
+      { "option_text": "JSON XML", "is_correct": false },
+      { "option_text": "JavaScript Extension", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of these is a feature of Node.js?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "Event-driven architecture", "is_correct": true },
+      { "option_text": "Client-side rendering only", "is_correct": false },
+      { "option_text": "Compiled directly to machine code", "is_correct": false },
+      { "option_text": "Only supports synchronous code", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "In Express.js, which method handles HTTP POST requests?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "app.post()", "is_correct": true },
+      { "option_text": "app.get()", "is_correct": false },
+      { "option_text": "app.put()", "is_correct": false },
+      { "option_text": "app.route()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which hook in React is used to perform side effects?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "useEffect", "is_correct": true },
+      { "option_text": "useState", "is_correct": false },
+      { "option_text": "useReducer", "is_correct": false },
+      { "option_text": "useMemo", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which command installs a package and adds it to package.json?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "npm install package-name --save", "is_correct": true },
+      { "option_text": "npm get package-name", "is_correct": false },
+      { "option_text": "node install package-name", "is_correct": false },
+      { "option_text": "npm save package-name", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "In MongoDB, which method finds all documents in a collection?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "find()", "is_correct": true },
+      { "option_text": "getAll()", "is_correct": false },
+      { "option_text": "list()", "is_correct": false },
+      { "option_text": "fetch()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which company developed React?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "Facebook", "is_correct": true },
+      { "option_text": "Google", "is_correct": false },
+      { "option_text": "Microsoft", "is_correct": false },
+      { "option_text": "Amazon", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of the following is used to define a schema in MongoDB?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "Mongoose", "is_correct": true },
+      { "option_text": "Sequelize", "is_correct": false },
+      { "option_text": "TypeORM", "is_correct": false },
+      { "option_text": "Doctrine", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "What does npm stand for?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "Node Package Manager", "is_correct": true },
+      { "option_text": "New Project Manager", "is_correct": false },
+      { "option_text": "Node Program Module", "is_correct": false },
+      { "option_text": "Network Package Manager", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which method in Express.js serves static files?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "express.static()", "is_correct": true },
+      { "option_text": "express.files()", "is_correct": false },
+      { "option_text": "app.files()", "is_correct": false },
+      { "option_text": "express.serve()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which command creates a new React application?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "npx create-react-app app-name", "is_correct": true },
+      { "option_text": "npm create react-app", "is_correct": false },
+      { "option_text": "node create-react-app", "is_correct": false },
+      { "option_text": "create react-app", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "In MongoDB, which type of data format is used to store documents?",
+    "level": "basic", "marks": 1,
+    "options": [
+      { "option_text": "BSON", "is_correct": true },
+      { "option_text": "JSON", "is_correct": false },
+      { "option_text": "XML", "is_correct": false },
+      { "option_text": "CSV", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "What is the default port number for a Node.js server?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "3000", "is_correct": true },
+      { "option_text": "80", "is_correct": false },
+      { "option_text": "443", "is_correct": false },
+      { "option_text": "8080", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of the following is used to style React components?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "CSS", "is_correct": true },
+      { "option_text": "HTML", "is_correct": false },
+      { "option_text": "JSON", "is_correct": false },
+      { "option_text": "BSON", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "What is the purpose of `package-lock.json`?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "Locks dependency versions for consistent installs", "is_correct": true },
+      { "option_text": "Replaces package.json", "is_correct": false },
+      { "option_text": "Stores environment variables", "is_correct": false },
+      { "option_text": "Secures passwords", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which method is used to update a document in MongoDB?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "updateOne()", "is_correct": true },
+      { "option_text": "editOne()", "is_correct": false },
+      { "option_text": "changeOne()", "is_correct": false },
+      { "option_text": "modifyOne()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of the following is NOT part of the MERN stack?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "MySQL", "is_correct": true },
+      { "option_text": "MongoDB", "is_correct": false },
+      { "option_text": "Express", "is_correct": false },
+      { "option_text": "Node.js", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "What is the correct way to import React in a modern React app?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "import React from 'react'", "is_correct": true },
+      { "option_text": "require('react')", "is_correct": false },
+      { "option_text": "include React", "is_correct": false },
+      { "option_text": "load 'react'", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which folder is typically used to store static assets like images in a React app?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "public", "is_correct": true },
+      { "option_text": "src", "is_correct": false },
+      { "option_text": "assets", "is_correct": false },
+      { "option_text": "static", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which command installs Express.js in a Node.js project?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "npm install express", "is_correct": true },
+      { "option_text": "npm add express", "is_correct": false },
+      { "option_text": "node install express", "is_correct": false },
+      { "option_text": "express init", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "What is the main purpose of `render()` in a React class component?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "To return JSX to be displayed", "is_correct": true },
+      { "option_text": "To define state", "is_correct": false },
+      { "option_text": "To handle events", "is_correct": false },
+      { "option_text": "To import modules", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of the following is used to send a response in Express?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "res.send()", "is_correct": true },
+      { "option_text": "req.send()", "is_correct": false },
+      { "option_text": "response()", "is_correct": false },
+      { "option_text": "res.json()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which file is the entry point for a Node.js application by default?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "index.js or server.js", "is_correct": true },
+      { "option_text": "app.js", "is_correct": false },
+      { "option_text": "main.js", "is_correct": false },
+      { "option_text": "start.js", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of the following is true about MongoDB?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "It is schema-less", "is_correct": true },
+      { "option_text": "It uses tables", "is_correct": false },
+      { "option_text": "It requires SQL", "is_correct": false },
+      { "option_text": "It is a relational database", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "What does REST stand for?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "Representational State Transfer", "is_correct": true },
+      { "option_text": "Real-time State Transfer", "is_correct": false },
+      { "option_text": "Remote System Transfer", "is_correct": false },
+      { "option_text": "Resource State Technique", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of the following is a valid HTTP status code for 'Not Found'?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "404", "is_correct": true },
+      { "option_text": "200", "is_correct": false },
+      { "option_text": "500", "is_correct": false },
+      { "option_text": "401", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "How do you define a route parameter in Express?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "Use colon, e.g., /user/:id", "is_correct": true },
+      { "option_text": "Use brackets, e.g., /user{id}", "is_correct": false },
+      { "option_text": "Use double slashes, e.g., //id", "is_correct": false },
+      { "option_text": "Use query string only", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of the following is used to make API calls from React?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "fetch()", "is_correct": true },
+      { "option_text": "query()", "is_correct": false },
+      { "option_text": "request()", "is_correct": false },
+      { "option_text": "callAPI()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "What is the purpose of `useEffect` with an empty dependency array?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "Run once after initial render (like componentDidMount)", "is_correct": true },
+      { "option_text": "Run on every render", "is_correct": false },
+      { "option_text": "Never run", "is_correct": false },
+      { "option_text": "Run only on state change", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of the following is a React development tool?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "React Developer Tools", "is_correct": true },
+      { "option_text": "Node Inspector", "is_correct": false },
+      { "option_text": "MongoDB Compass", "is_correct": false },
+      { "option_text": "Express Generator", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "What is the correct way to write a comment in JSX?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "{/* comment */}", "is_correct": true },
+      { "option_text": "// comment", "is_correct": false },
+      { "option_text": "/* comment */", "is_correct": false },
+      { "option_text": "<!-- comment -->", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which command removes a package from a Node.js project?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "npm uninstall package-name", "is_correct": true },
+      { "option_text": "npm remove package-name", "is_correct": false },
+      { "option_text": "npm delete package-name", "is_correct": false },
+      { "option_text": "npm erase package-name", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of the following is used to handle form input changes in React?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "onChange event", "is_correct": true },
+      { "option_text": "onInput event", "is_correct": false },
+      { "option_text": "onBlur event", "is_correct": false },
+      { "option_text": "onSubmit event", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which method is used to delete a document in MongoDB?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "deleteOne()", "is_correct": true },
+      { "option_text": "removeOne()", "is_correct": false },
+      { "option_text": "eraseOne()", "is_correct": false },
+      { "option_text": "dropOne()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "What is the correct way to set a response status and send data in Express?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "res.status(200).json(data)", "is_correct": true },
+      { "option_text": "res.send(200, data)", "is_correct": false },
+      { "option_text": "res.json(200, data)", "is_correct": false },
+      { "option_text": "res.set(200).send(data)", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 45,
+    "question_text": "Which of the following is a valid way to export a module in Node.js?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "module.exports = myFunction", "is_correct": true },
+      { "option_text": "export default myFunction", "is_correct": false },
+      { "option_text": "exports(myFunction)", "is_correct": false },
+      { "option_text": "module.export(myFunction)", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the purpose of `useEffect` in React?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To manage state", "is_correct": false },
+      { "option_text": "To perform side effects like data fetching", "is_correct": true },
+      { "option_text": "To define props", "is_correct": false },
+      { "option_text": "To create components", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which method is used to connect Node.js with MongoDB using Mongoose?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "mongoose.connect()", "is_correct": true },
+      { "option_text": "mongodb.connect()", "is_correct": false },
+      { "option_text": "db.open()", "is_correct": false },
+      { "option_text": "mongoose.init()", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What does CORS stand for, and why is it important in MERN?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Cross-Origin Resource Sharing; prevents unauthorized API access", "is_correct": true },
+      { "option_text": "Client-Origin Request System; enables routing", "is_correct": false },
+      { "option_text": "Cross-Object Reference Syntax; manages state", "is_correct": false },
+      { "option_text": "Custom-Origin Response Service; improves performance", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "How do you protect a route in Express using middleware?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Pass middleware function as second argument", "is_correct": true },
+      { "option_text": "Use `protected: true` in route definition", "is_correct": false },
+      { "option_text": "Add `auth=true` query param", "is_correct": false },
+      { "option_text": "Name route with `/secure` prefix", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is true about JWT in authentication?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "It stores user data and is signed for verification", "is_correct": true },
+      { "option_text": "It requires server-side session storage", "is_correct": false },
+      { "option_text": "It cannot be expired", "is_correct": false },
+      { "option_text": "It is less secure than cookies", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the role of `package.json` in a MERN project?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Stores project metadata and dependencies", "is_correct": true },
+      { "option_text": "Contains only backend code", "is_correct": false },
+      { "option_text": "Defines CSS styles", "is_correct": false },
+      { "option_text": "Manages database schema", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which React hook is used to memoize expensive calculations?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "useMemo", "is_correct": true },
+      { "option_text": "useCallback", "is_correct": false },
+      { "option_text": "useEffect", "is_correct": false },
+      { "option_text": "useRef", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "In Mongoose, what is a 'Schema'?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "A blueprint for document structure in a collection", "is_correct": true },
+      { "option_text": "An index in MongoDB", "is_correct": false },
+      { "option_text": "A REST endpoint", "is_correct": false },
+      { "option_text": "A React component model", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the correct way to conditionally apply a class in React?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "className={condition ? 'active' : ''}", "is_correct": true },
+      { "option_text": "class={if(condition) 'active'}", "is_correct": false },
+      { "option_text": "cssClass='active'", "is_correct": false },
+      { "option_text": "styleClass={condition}", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is used to make HTTP requests from React?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "fetch() or axios", "is_correct": true },
+      { "option_text": "http.request()", "is_correct": false },
+      { "option_text": "express.get()", "is_correct": false },
+      { "option_text": "mongo.request()", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the purpose of `redux-thunk`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To handle asynchronous actions in Redux", "is_correct": true },
+      { "option_text": "To reduce component size", "is_correct": false },
+      { "option_text": "To validate forms", "is_correct": false },
+      { "option_text": "To encrypt data", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which command starts a React development server?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "npm start", "is_correct": true },
+      { "option_text": "node run dev", "is_correct": false },
+      { "option_text": "react serve", "is_correct": false },
+      { "option_text": "npm run build", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is middleware in Express.js?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Function that accesses req/res and passes control", "is_correct": true },
+      { "option_text": "A database query optimizer", "is_correct": false },
+      { "option_text": "A React lifecycle method", "is_correct": false },
+      { "option_text": "A CSS preprocessor", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which lifecycle method is replaced by `useEffect` in functional components?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "componentDidMount, componentDidUpdate", "is_correct": true },
+      { "option_text": "shouldComponentUpdate", "is_correct": false },
+      { "option_text": "getSnapshotBeforeUpdate", "is_correct": false },
+      { "option_text": "render", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "How do you avoid 'can't perform a React state update on an unmounted component' warning?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Use a cleanup function with useEffect", "is_correct": true },
+      { "option_text": "Use setState directly", "is_correct": false },
+      { "option_text": "Disable StrictMode", "is_correct": false },
+      { "option_text": "Use class components only", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the default port for MongoDB?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "27017", "is_correct": true },
+      { "option_text": "3000", "is_correct": false },
+      { "option_text": "5432", "is_correct": false },
+      { "option_text": "8080", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is NOT a valid HTTP method in REST APIs?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "FETCH", "is_correct": true },
+      { "option_text": "POST", "is_correct": false },
+      { "option_text": "PUT", "is_correct": false },
+      { "option_text": "DELETE", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the purpose of `useContext` in React?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To pass data through the component tree without props", "is_correct": true },
+      { "option_text": "To fetch API data", "is_correct": false },
+      { "option_text": "To define routes", "is_correct": false },
+      { "option_text": "To memoize functions", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which tool is commonly used to bundle React applications?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Webpack", "is_correct": true },
+      { "option_text": "Express", "is_correct": false },
+      { "option_text": "Mongoose", "is_correct": false },
+      { "option_text": "Nodemon", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the correct way to update state based on previous state in React?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "setState(prev => prev + 1)", "is_correct": true },
+      { "option_text": "setState(state + 1)", "is_correct": false },
+      { "option_text": "this.state++", "is_correct": false },
+      { "option_text": "state = state + 1", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the significance of `_id` in MongoDB documents?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "It is the default primary key", "is_correct": true },
+      { "option_text": "It is optional", "is_correct": false },
+      { "option_text": "It must be a string", "is_correct": false },
+      { "option_text": "It is used for indexing only", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is true about `async/await` in Express routes?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "You must handle errors with try-catch", "is_correct": true },
+      { "option_text": "It automatically handles all errors", "is_correct": false },
+      { "option_text": "It blocks the event loop", "is_correct": false },
+      { "option_text": "It cannot be used with middleware", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the purpose of `dotenv` in Node.js?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To load environment variables from .env file", "is_correct": true },
+      { "option_text": "To encrypt passwords", "is_correct": false },
+      { "option_text": "To minify code", "is_correct": false },
+      { "option_text": "To debug React components", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "How do you prevent XSS attacks in a MERN app?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Sanitize user input and escape output", "is_correct": true },
+      { "option_text": "Use only POST requests", "is_correct": false },
+      { "option_text": "Disable JavaScript", "is_correct": false },
+      { "option_text": "Store data in cookies", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which React method is used for server-side rendering?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "ReactDOMServer.renderToString()", "is_correct": true },
+      { "option_text": "ReactDOM.render()", "is_correct": false },
+      { "option_text": "React.hydrate()", "is_correct": false },
+      { "option_text": "React.renderSSR()", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the role of `index.js` in a Node.js project?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Entry point of the application", "is_correct": true },
+      { "option_text": "CSS file", "is_correct": false },
+      { "option_text": "Database schema", "is_correct": false },
+      { "option_text": "HTML template", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is a valid way to define a virtual in Mongoose?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "schema.virtual('fullName').get(() => this.first + this.last)", "is_correct": true },
+      { "option_text": "schema.method('fullName')", "is_correct": false },
+      { "option_text": "schema.getter('fullName')", "is_correct": false },
+      { "option_text": "schema.defineVirtual('fullName')", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the purpose of `React.memo()`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To memoize functional components and prevent re-renders", "is_correct": true },
+      { "option_text": "To store state", "is_correct": false },
+      { "option_text": "To fetch data", "is_correct": false },
+      { "option_text": "To create refs", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which status code indicates 'Created' in REST APIs?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "201", "is_correct": true },
+      { "option_text": "200", "is_correct": false },
+      { "option_text": "404", "is_correct": false },
+      { "option_text": "500", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "How do you set headers in Express?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "res.set('Content-Type', 'application/json')", "is_correct": false },
+      { "option_text": "res.setHeader()", "is_correct": false },
+      { "option_text": "Both A and B", "is_correct": true },
+      { "option_text": "req.header()", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the main advantage of using MongoDB over SQL?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Schema flexibility and scalability", "is_correct": true },
+      { "option_text": "Strict data integrity", "is_correct": false },
+      { "option_text": "JOIN operations", "is_correct": false },
+      { "option_text": "ACID compliance only", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is used for client-side routing in React?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "React Router", "is_correct": true },
+      { "option_text": "Express Router", "is_correct": false },
+      { "option_text": "Node Router", "is_correct": false },
+      { "option_text": "Mongo Router", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the purpose of `normalize.css` in a React project?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To make styles consistent across browsers", "is_correct": true },
+      { "option_text": "To minify CSS", "is_correct": false },
+      { "option_text": "To enable animations", "is_correct": false },
+      { "option_text": "To create grids", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is true about `useCallback`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "It memoizes functions to prevent unnecessary re-renders", "is_correct": true },
+      { "option_text": "It stores state", "is_correct": false },
+      { "option_text": "It runs only once", "is_correct": false },
+      { "option_text": "It replaces useEffect", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the correct way to handle file uploads in Express?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Using multer middleware", "is_correct": true },
+      { "option_text": "Using body-parser", "is_correct": false },
+      { "option_text": "Using express-file", "is_correct": false },
+      { "option_text": "Using fs.upload()", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the purpose of `concurrently` in package.json?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To run multiple scripts (e.g., client and server) simultaneously", "is_correct": true },
+      { "option_text": "To compress files", "is_correct": false },
+      { "option_text": "To lint code", "is_correct": false },
+      { "option_text": "To test performance", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is NOT a React design pattern?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "MVC", "is_correct": true },
+      { "option_text": "Render Props", "is_correct": false },
+      { "option_text": "Higher-Order Components", "is_correct": false },
+      { "option_text": "Compound Components", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "How do you validate a Mongoose schema?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Using built-in validators like required, min, max", "is_correct": true },
+      { "option_text": "Using try-catch", "is_correct": false },
+      { "option_text": "Using React hooks", "is_correct": false },
+      { "option_text": "Using Express middleware only", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the purpose of `res.status(404).json()` in Express?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To send a 404 error response in JSON", "is_correct": true },
+      { "option_text": "To redirect", "is_correct": false },
+      { "option_text": "To log error", "is_correct": false },
+      { "option_text": "To retry request", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is used for global state management in React?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Redux or Context API", "is_correct": true },
+      { "option_text": "useState only", "is_correct": false },
+      { "option_text": "useEffect", "is_correct": false },
+      { "option_text": "props drilling", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the role of `bcrypt` in Node.js?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To hash passwords securely", "is_correct": true },
+      { "option_text": "To encrypt data", "is_correct": false },
+      { "option_text": "To compress files", "is_correct": false },
+      { "option_text": "To minify code", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which command installs a package as a development dependency?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "npm install package-name --save-dev", "is_correct": true },
+      { "option_text": "npm install package-name --global", "is_correct": false },
+      { "option_text": "npm add package-name", "is_correct": false },
+      { "option_text": "npm install package-name --prod", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the purpose of `webpack-dev-server`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To serve and hot-reload React apps during development", "is_correct": true },
+      { "option_text": "To deploy to production", "is_correct": false },
+      { "option_text": "To connect to MongoDB", "is_correct": false },
+      { "option_text": "To lint code", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is true about `useRef`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "It persists values across renders without triggering re-renders", "is_correct": true },
+      { "option_text": "It is used for state", "is_correct": false },
+      { "option_text": "It replaces useState", "is_correct": false },
+      { "option_text": "It cannot hold DOM references", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the correct way to define a route parameter in Express?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "app.get('/user/:id')", "is_correct": true },
+      { "option_text": "app.get('/user{id}')", "is_correct": false },
+      { "option_text": "app.get('/user/id')", "is_correct": false },
+      { "option_text": "app.param('id')", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is NOT a valid React lifecycle phase?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Mounting, Updating, Unmounting, Error Handling", "is_correct": true },
+      { "option_text": "Initialization", "is_correct": false },
+      { "option_text": "Rendering", "is_correct": false },
+      { "option_text": "Destruction", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the purpose of `body-parser` in Express (pre-v4.16)?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To parse JSON and URL-encoded data", "is_correct": true },
+      { "option_text": "To validate forms", "is_correct": false },
+      { "option_text": "To encrypt body", "is_correct": false },
+      { "option_text": "To compress response", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "How do you deploy a MERN app to production?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Build React app and serve statically via Express", "is_correct": true },
+      { "option_text": "Deploy only frontend", "is_correct": false },
+      { "option_text": "Use separate domains for each file", "is_correct": false },
+      { "option_text": "Run npm start on client and server separately", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the role of `process.env.NODE_ENV`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To distinguish between development and production", "is_correct": true },
+      { "option_text": "To set database name", "is_correct": false },
+      { "option_text": "To enable debugging", "is_correct": false },
+      { "option_text": "To change port", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is true about `Mongoose middleware`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Can run before or after save, remove, etc.", "is_correct": true },
+      { "option_text": "Only works on client", "is_correct": false },
+      { "option_text": "Replaces React hooks", "is_correct": false },
+      { "option_text": "Cannot be async", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "What is the purpose of `res.json()` in Express?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To send JSON response with proper headers", "is_correct": true },
+      { "option_text": "To parse JSON", "is_correct": false },
+      { "option_text": "To stringify JSON", "is_correct": false },
+      { "option_text": "To validate JSON", "is_correct": false }
+    ]
+  },
+  {
+      "topic": "45",
+    "question_text": "Which of the following is a key feature of Redux?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Single source of truth", "is_correct": true },
+      { "option_text": "Multiple stores", "is_correct": false },
+      { "option_text": "Mutable state", "is_correct": false },
+      { "option_text": "No actions", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is the main benefit of using `React Server Components` (RSC)?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Reduce client-side bundle size by rendering components on server", "is_correct": true },
+      { "option_text": "Replace Redux for state management", "is_correct": false },
+      { "option_text": "Enable multithreading in React", "is_correct": false },
+      { "option_text": "Improve CSS loading performance", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is true about `Streaming SSR` in React 18?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It allows sending HTML in chunks for faster perceived load", "is_correct": true },
+      { "option_text": "It blocks rendering until all data is fetched", "is_correct": false },
+      { "option_text": "It only works with class components", "is_correct": false },
+      { "option_text": "It increases bundle size", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "How does `Concurrent Mode` in React improve user experience?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Allows React to interrupt rendering to handle urgent updates", "is_correct": true },
+      { "option_text": "Enables multi-threading in JavaScript", "is_correct": false },
+      { "option_text": "Replaces useState with global variables", "is_correct": false },
+      { "option_text": "Speeds up MongoDB queries", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is the recommended way to store JWTs securely in MERN apps?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "HttpOnly cookies with SameSite and Secure flags", "is_correct": true },
+      { "option_text": "localStorage with encryption", "is_correct": false },
+      { "option_text": "sessionStorage", "is_correct": false },
+      { "option_text": "In Redux store", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "How can you prevent `NoSQL injection` in Mongoose queries?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Use Mongoose methods instead of raw $where queries", "is_correct": true },
+      { "option_text": "Disable MongoDB authentication", "is_correct": false },
+      { "option_text": "Use only GET requests", "is_correct": false },
+      { "option_text": "Store queries in environment variables", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is the role of `connection pooling` in MongoDB with Node.js?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Reuses database connections to improve performance", "is_correct": true },
+      { "option_text": "Encrypts data in transit", "is_correct": false },
+      { "option_text": "Limits number of users", "is_correct": false },
+      { "option_text": "Backs up data automatically", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is true about `index optimization` in MongoDB?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Too many indexes can slow down writes", "is_correct": true },
+      { "option_text": "Indexes improve write performance", "is_correct": false },
+      { "option_text": "Only one index per collection is allowed", "is_correct": false },
+      { "option_text": "Indexes are automatically created for all fields", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `sharding` in MongoDB used for?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Distribute data across multiple servers for scalability", "is_correct": true },
+      { "option_text": "Encrypt database", "is_correct": false },
+      { "option_text": "Backup data", "is_correct": false },
+      { "option_text": "Improve client-side rendering", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "How does `React.memo` with a custom comparator work?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It skips re-render if the comparator returns true for prev and next props", "is_correct": true },
+      { "option_text": "It forces re-render", "is_correct": false },
+      { "option_text": "It replaces useEffect", "is_correct": false },
+      { "option_text": "It only works with Redux", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is the purpose of `Suspense` in React for data fetching?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "To display fallback UI while waiting for async operations", "is_correct": true },
+      { "option_text": "To throw errors", "is_correct": false },
+      { "option_text": "To validate forms", "is_correct": false },
+      { "option_text": "To compress images", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is true about `Redux Toolkit`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It simplifies Redux with `createSlice` and `configureStore`", "is_correct": true },
+      { "option_text": "It requires manual immutable updates", "is_correct": false },
+      { "option_text": "It is slower than vanilla Redux", "is_correct": false },
+      { "option_text": "It doesn't support TypeScript", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `code-splitting` in React, and how is it achieved?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Splitting code into chunks loaded on demand using `React.lazy()` and `Suspense`", "is_correct": true },
+      { "option_text": "Combining all files into one bundle", "is_correct": false },
+      { "option_text": "Using multiple entry points in package.json", "is_correct": false },
+      { "option_text": "Inlining all CSS", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is NOT a valid way to optimize MongoDB queries?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Use projection to fetch only needed fields", "is_correct": false },
+      { "option_text": "Add indexes on frequently queried fields", "is_correct": false },
+      { "option_text": "Use `.limit()` and `.sort()` together without index", "is_correct": true },
+      { "option_text": "Avoid using `$where` and `$regex` unnecessarily", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is the purpose of `WebSocket` in MERN apps?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Enable real-time bidirectional communication between client and server", "is_correct": true },
+      { "option_text": "Replace HTTP", "is_correct": false },
+      { "option_text": "Speed up MongoDB", "is_correct": false },
+      { "option_text": "Improve SEO", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is true about `event loop` in Node.js?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It handles async callbacks using phases like timers, poll, check", "is_correct": true },
+      { "option_text": "It runs on multiple threads by default", "is_correct": false },
+      { "option_text": "It blocks execution during I/O", "is_correct": false },
+      { "option_text": "It is part of React rendering", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `cluster mode` in Node.js used for?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Utilize multiple CPU cores by forking worker processes", "is_correct": true },
+      { "option_text": "Connect to MongoDB clusters only", "is_correct": false },
+      { "option_text": "Improve React rendering speed", "is_correct": false },
+      { "option_text": "Enable microservices", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "How can you detect and fix memory leaks in Node.js?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Use Chrome DevTools or heap dumps to analyze retained objects", "is_correct": true },
+      { "option_text": "Restart the server every minute", "is_correct": false },
+      { "option_text": "Use `setInterval` more often", "is_correct": false },
+      { "option_text": "Avoid using `const`", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `helmet.js` used for in Express?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Set secure HTTP headers to prevent common vulnerabilities", "is_correct": true },
+      { "option_text": "Encrypt passwords", "is_correct": false },
+      { "option_text": "Validate user input", "is_correct": false },
+      { "option_text": "Log requests", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is true about `CQRS` pattern in MERN?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Separates read and write operations for performance and scalability", "is_correct": true },
+      { "option_text": "Combines all queries into one endpoint", "is_correct": false },
+      { "option_text": "Reduces number of API routes", "is_correct": false },
+      { "option_text": "Only works with SQL", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `event sourcing` in backend architecture?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Storing state changes as events rather than final state", "is_correct": true },
+      { "option_text": "Using events for frontend only", "is_correct": false },
+      { "option_text": "A React pattern", "is_correct": false },
+      { "option_text": "A way to reduce HTTP requests", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "How does `Redis` improve performance in a MERN app?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Caches frequent database queries and sessions", "is_correct": true },
+      { "option_text": "Replaces MongoDB", "is_correct": false },
+      { "option_text": "Improves React rendering", "is_correct": false },
+      { "option_text": "Minifies JavaScript", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is the purpose of `Service Workers` in React apps?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Enable offline support and background sync", "is_correct": true },
+      { "option_text": "Replace Express.js", "is_correct": false },
+      { "option_text": "Speed up MongoDB", "is_correct": false },
+      { "option_text": "Handle authentication", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is true about `React Server Components` and data fetching?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "They can directly query databases without API endpoints", "is_correct": true },
+      { "option_text": "They must use fetch() like client components", "is_correct": false },
+      { "option_text": "They cannot access backend data", "is_correct": false },
+      { "option_text": "They require Redux for data", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `isomorphic` or `universal` JavaScript?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Code that runs on both client and server", "is_correct": true },
+      { "option_text": "JavaScript that only runs in browsers", "is_correct": false },
+      { "option_text": "A type of encryption", "is_correct": false },
+      { "option_text": "A React hook", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "How can you implement `rate limiting` in Express?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Using `express-rate-limit` middleware", "is_correct": true },
+      { "option_text": "By disabling routes", "is_correct": false },
+      { "option_text": "Using React.memo", "is_correct": false },
+      { "option_text": "With JWT expiration", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is the purpose of `__typename` in Apollo Client?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Helps cache normalize data by type", "is_correct": true },
+      { "option_text": "Defines component name", "is_correct": false },
+      { "option_text": "Used for authentication", "is_correct": false },
+      { "option_text": "Specifies database table", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is true about `WebSockets` vs `HTTP polling`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "WebSockets maintain persistent connection; polling creates repeated requests", "is_correct": true },
+      { "option_text": "Polling is more efficient", "is_correct": false },
+      { "option_text": "WebSockets cannot send data from server", "is_correct": false },
+      { "option_text": "HTTP polling uses less bandwidth", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `long polling` in real-time communication?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Client holds request until server has data, then reconnects", "is_correct": true },
+      { "option_text": "A way to compress JSON", "is_correct": false },
+      { "option_text": "Disables server responses", "is_correct": false },
+      { "option_text": "A MongoDB query technique", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "How do you handle `file upload validation` securely in Express?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Validate file type, size, and sanitize filename on server", "is_correct": true },
+      { "option_text": "Rely on client-side validation only", "is_correct": false },
+      { "option_text": "Allow all file types", "is_correct": false },
+      { "option_text": "Use only base64 encoding", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `dependency injection` in Node.js applications?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Passing dependencies to functions/modules instead of hardcoding", "is_correct": true },
+      { "option_text": "Auto-installing npm packages", "is_correct": false },
+      { "option_text": "A React rendering optimization", "is_correct": false },
+      { "option_text": "A MongoDB indexing strategy", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is true about `JWT refresh tokens`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "They are long-lived and used to get new access tokens", "is_correct": true },
+      { "option_text": "They are sent with every request", "is_correct": false },
+      { "option_text": "They are stored in localStorage for security", "is_correct": false },
+      { "option_text": "They cannot be revoked", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is the purpose of `Content Security Policy (CSP)`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Prevent XSS and injection attacks by restricting resource loading", "is_correct": true },
+      { "option_text": "Speed up React apps", "is_correct": false },
+      { "option_text": "Compress JSON responses", "is_correct": false },
+      { "option_text": "Improve database indexing", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "How can you achieve `zero-downtime deployment` in Node.js?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Use PM2 in cluster mode with reload", "is_correct": true },
+      { "option_text": "Stop server, deploy, restart", "is_correct": false },
+      { "option_text": "Use only one instance", "is_correct": false },
+      { "option_text": "Disable logging", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `tree shaking` in Webpack?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Removing unused code from bundles during build", "is_correct": true },
+      { "option_text": "Shaking the computer for performance", "is_correct": false },
+      { "option_text": "A way to organize files", "is_correct": false },
+      { "option_text": "Reducing image size", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is true about `React Strict Mode`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Detects side effects and warns about legacy APIs", "is_correct": true },
+      { "option_text": "Disables all console logs", "is_correct": false },
+      { "option_text": "Improves runtime performance", "is_correct": false },
+      { "option_text": "Blocks API calls", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `denormalization` in MongoDB?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Embedding related data to reduce joins", "is_correct": true },
+      { "option_text": "Splitting data into multiple collections", "is_correct": false },
+      { "option_text": "Creating more indexes", "is_correct": false },
+      { "option_text": "A React optimization", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "How does `GraphQL` differ from REST in MERN?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Clients can request exactly the data they need in one query", "is_correct": true },
+      { "option_text": "It uses fixed endpoints with fixed responses", "is_correct": false },
+      { "option_text": "It is slower than REST", "is_correct": false },
+      { "option_text": "It requires more round trips", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `Apollo Client` used for?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Managing GraphQL data in React apps", "is_correct": true },
+      { "option_text": "Handling REST APIs", "is_correct": false },
+      { "option_text": "Replacing Redux", "is_correct": false },
+      { "option_text": "Validating forms", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is a disadvantage of `client-side rendering` (CSR)?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Poor SEO and slow initial load", "is_correct": true },
+      { "option_text": "High server load", "is_correct": false },
+      { "option_text": "Requires SSR", "is_correct": false },
+      { "option_text": "No interactivity", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `hydration` in React SSR?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Attaching event listeners to static HTML on the client", "is_correct": true },
+      { "option_text": "Rendering HTML on client only", "is_correct": false },
+      { "option_text": "A MongoDB process", "is_correct": false },
+      { "option_text": "Encrypting data", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "How can you reduce TTFB (Time To First Byte) in Express?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Enable compression, caching, and optimize queries", "is_correct": true },
+      { "option_text": "Add more middleware", "is_correct": false },
+      { "option_text": "Use heavier templates", "is_correct": false },
+      { "option_text": "Disable logging", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `memoization` in React performance optimization?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Caching function results to avoid recomputation", "is_correct": true },
+      { "option_text": "Deleting unused components", "is_correct": false },
+      { "option_text": "A database indexing technique", "is_correct": false },
+      { "option_text": "A way to reduce bundle size", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is true about `JWT blacklisting`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Required to invalidate tokens before expiry using Redis or DB", "is_correct": true },
+      { "option_text": "Built into JWT by default", "is_correct": false },
+      { "option_text": "Only works with localStorage", "is_correct": false },
+      { "option_text": "Not needed for security", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `micro-frontend` architecture in React?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Breaking frontend into independent, deployable modules", "is_correct": true },
+      { "option_text": "Using only one React app", "is_correct": false },
+      { "option_text": "A backend pattern", "is_correct": false },
+      { "option_text": "A way to reduce CSS", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "How do you secure Express routes against CSRF attacks?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Use `csurf` or SameSite cookies with anti-CSRF tokens", "is_correct": true },
+      { "option_text": "Store tokens in localStorage", "is_correct": false },
+      { "option_text": "Disable cookies", "is_correct": false },
+      { "option_text": "Use JWT only", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is the role of `Babel` in a React project?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Transpile modern JS (ES6+) to backward-compatible versions", "is_correct": true },
+      { "option_text": "Bundle CSS files", "is_correct": false },
+      { "option_text": "Minify HTML", "is_correct": false },
+      { "option_text": "Connect to MongoDB", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is true about `React 18's Automatic Batching`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Multiple state updates are batched even in async callbacks", "is_correct": true },
+      { "option_text": "Only works in event handlers", "is_correct": false },
+      { "option_text": "Must be manually enabled", "is_correct": false },
+      { "option_text": "Reduces rendering speed", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is ` optimistic UI` in React with Redux?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Update UI immediately before server confirms", "is_correct": true },
+      { "option_text": "Wait for server response before updating", "is_correct": false },
+      { "option_text": "Disable user interaction", "is_correct": false },
+      { "option_text": "Show loading spinner always", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "How can you debug performance issues in React?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Use React DevTools Profiler", "is_correct": true },
+      { "option_text": "Add console.log everywhere", "is_correct": false },
+      { "option_text": "Disable Redux", "is_correct": false },
+      { "option_text": "Use alert()", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is the purpose of `process.nextTick()` in Node.js?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Schedule a callback to run after the current operation, before I/O", "is_correct": true },
+      { "option_text": "Replace setTimeout(0)", "is_correct": false },
+      { "option_text": "Delay HTTP response", "is_correct": false },
+      { "option_text": "Pause event loop", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "Which of the following is true about `circular dependencies` in Node.js?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "They can cause undefined modules or unexpected behavior", "is_correct": true },
+      { "option_text": "Node.js resolves them automatically", "is_correct": false },
+      { "option_text": "They improve performance", "is_correct": false },
+      { "option_text": "They are required for Express", "is_correct": false }
+    ]
+  },
+  {
+  "topic": "45",
+    "question_text": "What is `lazy loading` of routes in React?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Load route components only when navigated to", "is_correct": true },
+      { "option_text": "Load all routes at startup", "is_correct": false },
+      { "option_text": "Disable routing", "is_correct": false },
+      { "option_text": "Use hash-based routing", "is_correct": false }
+    ]
+  }
+]
+
+
+

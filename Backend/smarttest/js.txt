@@ -1,0 +1,1790 @@
+[
+  {
+    "topic": 43,
+    "question_text": "Which keyword is used to declare a block-scoped variable in JavaScript (ES6)?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "let", "is_correct": true },
+      { "option_text": "var", "is_correct": false },
+      { "option_text": "const", "is_correct": false },
+      { "option_text": "static", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which method is used to convert a JSON string into a JavaScript object?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "JSON.parse()", "is_correct": true },
+      { "option_text": "JSON.stringify()", "is_correct": false },
+      { "option_text": "JSON.toObject()", "is_correct": false },
+      { "option_text": "parse.JSON()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What does ES6 stand for?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "ECMAScript 6", "is_correct": true },
+      { "option_text": "Extra Script 6", "is_correct": false },
+      { "option_text": "Extended Script 6", "is_correct": false },
+      { "option_text": "Enterprise Script 6", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which symbol is used for template literals in ES6?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "` (backticks)", "is_correct": true },
+      { "option_text": "\" (double quotes)", "is_correct": false },
+      { "option_text": "' (single quotes)", "is_correct": false },
+      { "option_text": "~ (tilde)", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which keyword is used to declare a constant in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "const", "is_correct": true },
+      { "option_text": "let", "is_correct": false },
+      { "option_text": "var", "is_correct": false },
+      { "option_text": "static", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will 'typeof null' return in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "\"object\"", "is_correct": true },
+      { "option_text": "\"null\"", "is_correct": false },
+      { "option_text": "\"undefined\"", "is_correct": false },
+      { "option_text": "\"string\"", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which method is used to join elements of an array into a string?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "join()", "is_correct": true },
+      { "option_text": "concat()", "is_correct": false },
+      { "option_text": "push()", "is_correct": false },
+      { "option_text": "slice()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the default value of an uninitialized variable in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "undefined", "is_correct": true },
+      { "option_text": "null", "is_correct": false },
+      { "option_text": "0", "is_correct": false },
+      { "option_text": "\"\"", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which function is used to print output to the browser console?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "console.log()", "is_correct": true },
+      { "option_text": "print()", "is_correct": false },
+      { "option_text": "log.console()", "is_correct": false },
+      { "option_text": "echo()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which array method adds an element to the end of an array?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "push()", "is_correct": true },
+      { "option_text": "pop()", "is_correct": false },
+      { "option_text": "shift()", "is_correct": false },
+      { "option_text": "unshift()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which operator is used for strict equality in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "===", "is_correct": true },
+      { "option_text": "==", "is_correct": false },
+      { "option_text": "=", "is_correct": false },
+      { "option_text": "!==", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `typeof undefined`?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "\"undefined\"", "is_correct": true },
+      { "option_text": "\"null\"", "is_correct": false },
+      { "option_text": "\"object\"", "is_correct": false },
+      { "option_text": "\"string\"", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which keyword is used to import functions or objects from another module in ES6?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "import", "is_correct": true },
+      { "option_text": "require", "is_correct": false },
+      { "option_text": "include", "is_correct": false },
+      { "option_text": "use", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which method removes the last element from an array?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "pop()", "is_correct": true },
+      { "option_text": "shift()", "is_correct": false },
+      { "option_text": "slice()", "is_correct": false },
+      { "option_text": "splice()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `Boolean(0)` return?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "false", "is_correct": true },
+      { "option_text": "true", "is_correct": false },
+      { "option_text": "null", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which loop is best suited for iterating over an array’s values?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "for...of", "is_correct": true },
+      { "option_text": "for...in", "is_correct": false },
+      { "option_text": "while", "is_correct": false },
+      { "option_text": "do...while", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which built-in method combines two or more arrays in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "concat()", "is_correct": true },
+      { "option_text": "merge()", "is_correct": false },
+      { "option_text": "append()", "is_correct": false },
+      { "option_text": "combine()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which operator is used for exponentiation in ES6?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "**", "is_correct": true },
+      { "option_text": "^", "is_correct": false },
+      { "option_text": "exp", "is_correct": false },
+      { "option_text": "^^", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which method is used to add elements at the beginning of an array?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "unshift()", "is_correct": true },
+      { "option_text": "push()", "is_correct": false },
+      { "option_text": "prepend()", "is_correct": false },
+      { "option_text": "start()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which function converts a JavaScript object to a JSON string?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "JSON.stringify()", "is_correct": true },
+      { "option_text": "JSON.parse()", "is_correct": false },
+      { "option_text": "JSON.toString()", "is_correct": false },
+      { "option_text": "stringify.JSON()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which keyword declares a variable that cannot be reassigned?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "const", "is_correct": true },
+      { "option_text": "let", "is_correct": false },
+      { "option_text": "var", "is_correct": false },
+      { "option_text": "static", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(typeof NaN);`?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "\"number\"", "is_correct": true },
+      { "option_text": "\"NaN\"", "is_correct": false },
+      { "option_text": "\"undefined\"", "is_correct": false },
+      { "option_text": "\"object\"", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "How do you write a single-line comment in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "// comment", "is_correct": true },
+      { "option_text": "/* comment */", "is_correct": false },
+      { "option_text": "# comment", "is_correct": false },
+      { "option_text": "<!-- comment -->", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is NOT a primitive data type in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "object", "is_correct": true },
+      { "option_text": "string", "is_correct": false },
+      { "option_text": "number", "is_correct": false },
+      { "option_text": "boolean", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `'5' + 3` in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "'53'", "is_correct": true },
+      { "option_text": "8", "is_correct": false },
+      { "option_text": "NaN", "is_correct": false },
+      { "option_text": "TypeError", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `Array.isArray([])` return?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "true", "is_correct": true },
+      { "option_text": "false", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "null", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which method can be used to find the length of an array?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "length", "is_correct": true },
+      { "option_text": "size()", "is_correct": false },
+      { "option_text": "count()", "is_correct": false },
+      { "option_text": "len()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is NOT a valid way to declare a function in ES6?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "function foo() {}", "is_correct": false },
+      { "option_text": "const foo = () => {}", "is_correct": false },
+      { "option_text": "let foo = function() {}", "is_correct": false },
+      { "option_text": "func foo() {}", "is_correct": true }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which keyword is used to define a class in ES6?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "class", "is_correct": true },
+      { "option_text": "function", "is_correct": false },
+      { "option_text": "object", "is_correct": false },
+      { "option_text": "struct", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the correct syntax to create an arrow function?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "const func = () => {}", "is_correct": true },
+      { "option_text": "function() => {}", "is_correct": false },
+      { "option_text": "() => function {}", "is_correct": false },
+      { "option_text": "func => () {}", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `0 == false` return?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "true", "is_correct": true },
+      { "option_text": "false", "is_correct": false },
+      { "option_text": "TypeError", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of these is a JavaScript primitive value?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "undefined", "is_correct": true },
+      { "option_text": "array", "is_correct": false },
+      { "option_text": "object", "is_correct": false },
+      { "option_text": "function", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following correctly declares a JavaScript array?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "let arr = [1, 2, 3];", "is_correct": true },
+      { "option_text": "let arr = (1, 2, 3);", "is_correct": false },
+      { "option_text": "let arr = {1, 2, 3};", "is_correct": false },
+      { "option_text": "let arr = <1, 2, 3>;", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which keyword declares a variable with function scope?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "var", "is_correct": true },
+      { "option_text": "let", "is_correct": false },
+      { "option_text": "const", "is_correct": false },
+      { "option_text": "static", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(1 + '2' + 3);`?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "'123'", "is_correct": true },
+      { "option_text": "6", "is_correct": false },
+      { "option_text": "'33'", "is_correct": false },
+      { "option_text": "NaN", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is used to create a promise in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "new Promise()", "is_correct": true },
+      { "option_text": "Promise.create()", "is_correct": false },
+      { "option_text": "promise()", "is_correct": false },
+      { "option_text": "create.Promise()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of these is NOT a valid JavaScript identifier?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "2name", "is_correct": true },
+      { "option_text": "name2", "is_correct": false },
+      { "option_text": "_name", "is_correct": false },
+      { "option_text": "$name", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following keywords is used to handle errors in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "try", "is_correct": true },
+      { "option_text": "catch", "is_correct": false },
+      { "option_text": "error", "is_correct": false },
+      { "option_text": "throw", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which built-in object is used to handle dates and times in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "Date", "is_correct": true },
+      { "option_text": "Time", "is_correct": false },
+      { "option_text": "Calendar", "is_correct": false },
+      { "option_text": "Clock", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "How do you declare a default parameter in a JavaScript function?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "function foo(x = 5) {}", "is_correct": true },
+      { "option_text": "function foo(x : 5) {}", "is_correct": false },
+      { "option_text": "function foo(default x = 5) {}", "is_correct": false },
+      { "option_text": "function foo(x ?= 5) {}", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `'Hello'.charAt(1);`?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "'e'", "is_correct": true },
+      { "option_text": "'H'", "is_correct": false },
+      { "option_text": "'l'", "is_correct": false },
+      { "option_text": "'o'", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is a falsy value in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "0", "is_correct": true },
+      { "option_text": "\"false\"", "is_correct": false },
+      { "option_text": "\"0\"", "is_correct": false },
+      { "option_text": "[]", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which symbol is used to denote a rest parameter in a function?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "...", "is_correct": true },
+      { "option_text": "&", "is_correct": false },
+      { "option_text": "*", "is_correct": false },
+      { "option_text": "^", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the purpose of the `break` statement in loops?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "Exit the loop immediately", "is_correct": true },
+      { "option_text": "Skip the current iteration", "is_correct": false },
+      { "option_text": "Restart the loop", "is_correct": false },
+      { "option_text": "Pause the loop", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following will correctly check if a variable `x` is an array?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "Array.isArray(x)", "is_correct": true },
+      { "option_text": "x instanceof Array", "is_correct": false },
+      { "option_text": "typeof x === 'array'", "is_correct": false },
+      { "option_text": "x.constructor === Array", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of these is a way to define a string in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "'string'", "is_correct": true },
+      { "option_text": "%string%", "is_correct": false },
+      { "option_text": "!string!", "is_correct": false },
+      { "option_text": "#string#", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "How can you add a comment that spans multiple lines in JavaScript?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "/* comment */", "is_correct": true },
+      { "option_text": "// comment", "is_correct": false },
+      { "option_text": "# comment", "is_correct": false },
+      { "option_text": "<!-- comment -->", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `typeof NaN` return?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "\"number\"", "is_correct": true },
+      { "option_text": "\"NaN\"", "is_correct": false },
+      { "option_text": "\"undefined\"", "is_correct": false },
+      { "option_text": "\"object\"", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will this expression return: `3 > 2 && 2 > 1`?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "true", "is_correct": true },
+      { "option_text": "false", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "null", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(typeof undefined === typeof null)` in JavaScript?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "true", "is_correct": false },
+      { "option_text": "false", "is_correct": true },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "null", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log([...[1, 2, 3]].map(x => x * 2))` return?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "[2, 4, 6]", "is_correct": true },
+      { "option_text": "[1, 2, 3]", "is_correct": false },
+      { "option_text": "6", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the correct way to define a method in a JavaScript class using ES6 syntax?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "methodName() { }", "is_correct": true },
+      { "option_text": "function methodName() { }", "is_correct": false },
+      { "option_text": "methodName: function() { }", "is_correct": false },
+      { "option_text": "let methodName = () => { }", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What does the `Promise.all()` method do?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Returns a promise that resolves when all promises in the iterable are resolved", "is_correct": true },
+      { "option_text": "Returns the first promise that resolves", "is_correct": false },
+      { "option_text": "Rejects if any promise resolves", "is_correct": false },
+      { "option_text": "Waits for the slowest promise to reject", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(Reflect.has({ x: 1 }, 'x'))`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "true", "is_correct": true },
+      { "option_text": "false", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "1", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is true about `const` in JavaScript?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "It prevents reassignment but not mutation of object properties", "is_correct": true },
+      { "option_text": "It allows redeclaration in the same scope", "is_correct": false },
+      { "option_text": "It is function-scoped", "is_correct": false },
+      { "option_text": "It can be accessed before declaration", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log([...new Set([1, 2, 2, 3])])` return?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "[1, 2, 3]", "is_correct": true },
+      { "option_text": "[1, 2, 2, 3]", "is_correct": false },
+      { "option_text": "Set {1, 2, 3}", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the purpose of the `Symbol` data type in ES6?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To create unique and non-string property keys", "is_correct": true },
+      { "option_text": "To define constants", "is_correct": false },
+      { "option_text": "To replace strings in objects", "is_correct": false },
+      { "option_text": "To create private methods", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log((() => { let x = 1; return ++x; })())`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "2", "is_correct": true },
+      { "option_text": "1", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "SyntaxError", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which syntax correctly uses destructuring to extract `name` and `age` from an object?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "const { name, age } = person;", "is_correct": true },
+      { "option_text": "const [name, age] = person;", "is_correct": false },
+      { "option_text": "let name, age = person.name, person.age;", "is_correct": false },
+      { "option_text": "const person.{name, age};", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log(JSON.stringify([1, [2, 3], { a: 4 }], null, 1))` do?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Return a formatted JSON string with indentation", "is_correct": true },
+      { "option_text": "Return a minified string", "is_correct": false },
+      { "option_text": "Throw an error", "is_correct": false },
+      { "option_text": "Return undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the correct way to export a function as the default export in ES6 modules?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "export default function myFunc() {}", "is_correct": true },
+      { "option_text": "export function default myFunc() {}", "is_correct": false },
+      { "option_text": "default export myFunc() {}", "is_correct": false },
+      { "option_text": "module.export = myFunc", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What does the `async` keyword do when prefixed to a function?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Makes the function return a Promise", "is_correct": true },
+      { "option_text": "Makes the function synchronous", "is_correct": false },
+      { "option_text": "Blocks the event loop", "is_correct": false },
+      { "option_text": "Prevents the use of await", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(`${1 + 2} ${'a'.toUpperCase()}`)`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "3 A", "is_correct": true },
+      { "option_text": "1+2 a", "is_correct": false },
+      { "option_text": "3 a", "is_correct": false },
+      { "option_text": "12A", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which method is used to handle errors in a Promise chain?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": ".catch()", "is_correct": true },
+      { "option_text": ".then()", "is_correct": false },
+      { "option_text": ".finally()", "is_correct": false },
+      { "option_text": ".error()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `Array.from('hello')`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "['h', 'e', 'l', 'l', 'o']", "is_correct": true },
+      { "option_text": "'hello'", "is_correct": false },
+      { "option_text": "['hello']", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log(Object.is(NaN, NaN))` return?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "true", "is_correct": true },
+      { "option_text": "false", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "NaN", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following correctly uses the spread operator to merge two arrays?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "[...arr1, ...arr2]", "is_correct": true },
+      { "option_text": "arr1.concat(arr2)", "is_correct": false },
+      { "option_text": "arr1 + arr2", "is_correct": false },
+      { "option_text": "merge(arr1, arr2)", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the purpose of `Object.freeze()`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Prevents adding, removing, or changing properties", "is_correct": true },
+      { "option_text": "Allows property changes but not deletion", "is_correct": false },
+      { "option_text": "Makes an object enumerable", "is_correct": false },
+      { "option_text": "Converts an object to JSON", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(typeof class {})`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "function", "is_correct": true },
+      { "option_text": "object", "is_correct": false },
+      { "option_text": "class", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is a valid way to define a computed property in an object literal?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "{ [propName]: value }", "is_correct": true },
+      { "option_text": "{ propName: [value] }", "is_correct": false },
+      { "option_text": "{ 'propName': value }", "is_correct": false },
+      { "option_text": "{ get propName() { return value; } }", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What does `for...of` loop iterate over?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Iterable objects like arrays, strings, maps", "is_correct": true },
+      { "option_text": "All properties of an object", "is_correct": false },
+      { "option_text": "Only numeric indices", "is_correct": false },
+      { "option_text": "DOM elements only", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log((x => x ** 2)(4))` return?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "16", "is_correct": true },
+      { "option_text": "8", "is_correct": false },
+      { "option_text": "4", "is_correct": false },
+      { "option_text": "SyntaxError", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is true about `async/await`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "await can only be used inside an async function", "is_correct": true },
+      { "option_text": "await works with any function", "is_correct": false },
+      { "option_text": "async functions return regular values", "is_correct": false },
+      { "option_text": "await blocks the entire JavaScript thread", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `console.log([...document.querySelectorAll('p')].map(p => p.textContent))`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "An array of text contents of all <p> elements", "is_correct": true },
+      { "option_text": "A NodeList", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "An error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What does the `?.` operator (optional chaining) do?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Safely accesses nested properties without throwing errors", "is_correct": true },
+      { "option_text": "Checks if a value is null", "is_correct": false },
+      { "option_text": "Assigns a default value", "is_correct": false },
+      { "option_text": "Converts undefined to null", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(new Date().toISOString().slice(0, 10))`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Today's date in YYYY-MM-DD format", "is_correct": true },
+      { "option_text": "Current timestamp", "is_correct": false },
+      { "option_text": "Time only", "is_correct": false },
+      { "option_text": "Invalid date", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which syntax correctly uses default parameters in a function?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "function greet(name = 'Guest') {}", "is_correct": true },
+      { "option_text": "function greet(name: 'Guest') {}", "is_correct": false },
+      { "option_text": "function greet(name || 'Guest') {}", "is_correct": false },
+      { "option_text": "function greet(default name = 'Guest') {}", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the purpose of `Map` in ES6?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To store key-value pairs with any type of key", "is_correct": true },
+      { "option_text": "To replace all objects", "is_correct": false },
+      { "option_text": "To create arrays with named indices", "is_correct": false },
+      { "option_text": "To define constants", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log(Object.keys({ a: 1, b: 2 }))` return?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "['a', 'b']", "is_correct": true },
+      { "option_text": "[1, 2]", "is_correct": false },
+      { "option_text": "{ a: 1, b: 2 }", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is true about `template literals`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "They allow embedded expressions using ${}", "is_correct": true },
+      { "option_text": "They only work with double quotes", "is_correct": false },
+      { "option_text": "They cannot span multiple lines", "is_correct": false },
+      { "option_text": "They are slower than string concatenation", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log([...'hello'].reverse().join(''))`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "olleh", "is_correct": true },
+      { "option_text": "hello", "is_correct": false },
+      { "option_text": "['o','l','l','e','h']", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following correctly imports a default export from a module?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "import myFunc from './module.js';", "is_correct": true },
+      { "option_text": "import { myFunc } from './module.js';", "is_correct": false },
+      { "option_text": "import default myFunc from './module.js';", "is_correct": false },
+      { "option_text": "require('./module.js').default;", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `console.log(0.1 + 0.2 === 0.3)`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "false", "is_correct": true },
+      { "option_text": "true", "is_correct": false },
+      { "option_text": "NaN", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What does `Array.prototype.includes()` method do?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Checks if an array contains a certain element", "is_correct": true },
+      { "option_text": "Adds an element to the array", "is_correct": false },
+      { "option_text": "Removes duplicates", "is_correct": false },
+      { "option_text": "Sorts the array", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is a valid way to define a getter in an object?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "get fullName() { return this.first + ' ' + this.last; }", "is_correct": true },
+      { "option_text": "getter fullName() {}", "is_correct": false },
+      { "option_text": "fullName: get() {}", "is_correct": false },
+      { "option_text": "get() fullName {}", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(typeof Symbol('test'))`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "symbol", "is_correct": true },
+      { "option_text": "string", "is_correct": false },
+      { "option_text": "object", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which method is used to make a shallow copy of an object?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Object.assign({}, obj)", "is_correct": true },
+      { "option_text": "Object.create(obj)", "is_correct": false },
+      { "option_text": "new Object(obj)", "is_correct": false },
+      { "option_text": "JSON.parse(obj)", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What does `Promise.resolve('hello')` return?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "A resolved Promise with value 'hello'", "is_correct": true },
+      { "option_text": "The string 'hello'", "is_correct": false },
+      { "option_text": "A rejected Promise", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the purpose of `WeakMap` in JavaScript?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To store key-value pairs where keys are objects and don't prevent garbage collection", "is_correct": true },
+      { "option_text": "To create a map with string keys only", "is_correct": false },
+      { "option_text": "To replace regular Map", "is_correct": false },
+      { "option_text": "To store primitive values only", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log([...new Map([['a', 1], ['b', 2]])].map(x => x[0]))` return?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "['a', 'b']", "is_correct": true },
+      { "option_text": "[1, 2]", "is_correct": false },
+      { "option_text": "[['a', 1], ['b', 2]]", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is true about `let` and `const`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "They are block-scoped", "is_correct": true },
+      { "option_text": "They are function-scoped", "is_correct": false },
+      { "option_text": "They can be hoisted without TDZ", "is_correct": false },
+      { "option_text": "They allow redeclaration in the same scope", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(Boolean(''))`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "false", "is_correct": true },
+      { "option_text": "true", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "null", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following correctly uses the rest parameter in a function?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "function f(...args) {}", "is_correct": true },
+      { "option_text": "function f(args...)", "is_correct": false },
+      { "option_text": "function f(rest args)", "is_correct": false },
+      { "option_text": "function f([...args])", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What does `Object.entries(obj)` return?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "An array of [key, value] pairs", "is_correct": true },
+      { "option_text": "An array of keys", "is_correct": false },
+      { "option_text": "An array of values", "is_correct": false },
+      { "option_text": "A new object", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `console.log(typeof async () => {})`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "function", "is_correct": true },
+      { "option_text": "object", "is_correct": false },
+      { "option_text": "async", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is a valid way to define a private class field?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "#privateField", "is_correct": true },
+      { "option_text": "private privateField", "is_correct": false },
+      { "option_text": "_privateField", "is_correct": false },
+      { "option_text": "const privateField", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the purpose of `Promise.race()`?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Returns a promise that resolves or rejects as soon as one of the promises resolves or rejects", "is_correct": true },
+      { "option_text": "Waits for all promises to resolve", "is_correct": false },
+      { "option_text": "Returns the slowest promise", "is_correct": false },
+      { "option_text": "Combines all promise values", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log(String.raw`Hello\\nWorld`);` output?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Hello\\nWorld", "is_correct": true },
+      { "option_text": "Hello\nWorld", "is_correct": false },
+      { "option_text": "Hello World", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will be logged to the console in this code?\n```js\nconst obj = { a: 1 };\nconst proxy = new Proxy(obj, {\n  get(target, prop) {\n    console.log('Accessed:', prop);\n    return target[prop];\n  }\n});\nproxy.a;\nproxy.b;\n```",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Accessed: a, Accessed: b", "is_correct": true },
+      { "option_text": "Accessed: a, undefined", "is_correct": false },
+      { "option_text": "a, b", "is_correct": false },
+      { "option_text": "No output", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(Reflect.ownKeys([...[1,2]].entries()))`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "['0', '1']", "is_correct": true },
+      { "option_text": "['0', '1', 'length']", "is_correct": false },
+      { "option_text": "['0', '1', 'values']", "is_correct": false },
+      { "option_text": "['iterator']", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following correctly describes the behavior of `Object.getOwnPropertyDescriptors()`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Returns all own property descriptors of an object, including getters, setters, and attributes", "is_correct": true },
+      { "option_text": "Returns only enumerable property values", "is_correct": false },
+      { "option_text": "Returns a JSON-serializable copy of the object", "is_correct": false },
+      { "option_text": "Lists only method names", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What does the following code log?\n```js\nconst sym = Symbol.for('key');\nconst sym2 = Symbol.for('key');\nconsole.log(sym === sym2);\nconsole.log(Symbol.keyFor(sym2));\n```",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "true, 'key'", "is_correct": true },
+      { "option_text": "false, undefined", "is_correct": false },
+      { "option_text": "true, undefined", "is_correct": false },
+      { "option_text": "false, 'key'", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `console.log([...new Set([1, 2, Promise.resolve(3), Promise.resolve(3)])].length)`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "4", "is_correct": true },
+      { "option_text": "3", "is_correct": false },
+      { "option_text": "2", "is_correct": false },
+      { "option_text": "1", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log((async () => { throw new Error('Boom'); })().catch(console.log))` output?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Logs the Error object", "is_correct": true },
+      { "option_text": "Throws a runtime error", "is_correct": false },
+      { "option_text": "Logs undefined", "is_correct": false },
+      { "option_text": "Silently fails", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is true about `import()` (dynamic import)?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It returns a Promise that resolves to the module namespace object", "is_correct": true },
+      { "option_text": "It can only be used at the top level", "is_correct": false },
+      { "option_text": "It is synchronous", "is_correct": false },
+      { "option_text": "It is not supported in browsers", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(Object.getPrototypeOf(async function() {}) === Function.prototype)`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "true", "is_correct": true },
+      { "option_text": "false", "is_correct": false },
+      { "option_text": "TypeError", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will the following code output?\n```js\nsetTimeout(() => console.log('a'), 0);\nPromise.resolve().then(() => console.log('b'));\nconsole.log('c');\n```",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "c, b, a", "is_correct": true },
+      { "option_text": "a, b, c", "is_correct": false },
+      { "option_text": "c, a, b", "is_correct": false },
+      { "option_text": "b, c, a", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the purpose of `@@species` in ES6?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "To define which constructor should be used by methods like map, filter on derived classes", "is_correct": true },
+      { "option_text": "To set the prototype of a class", "is_correct": false },
+      { "option_text": "To specify inheritance chain", "is_correct": false },
+      { "option_text": "To enable private fields", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log(JSON.stringify({ x: [1, [2, 3]], y: {} }, ['x']))` return?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "{\"x\":[1,[2,3]]}", "is_correct": true },
+      { "option_text": "{\"x\":[1]}", "is_correct": false },
+      { "option_text": "{\"x\":[]}", "is_correct": false },
+      { "option_text": "{}", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `console.log(new class { constructor() { return Object.create(null); } }.hasOwnProperty('x'))`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "TypeError", "is_correct": true },
+      { "option_text": "false", "is_correct": false },
+      { "option_text": "true", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is true about `globalThis`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It provides a universal way to access the global object across environments (browser, Node.js, etc.)", "is_correct": true },
+      { "option_text": "It is the same as `window` in all environments", "is_correct": false },
+      { "option_text": "It is not supported in ES6", "is_correct": false },
+      { "option_text": "It refers to the current function context", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What does the `FinalizationRegistry` do in JavaScript?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Allows cleanup code to run when an object is garbage collected", "is_correct": true },
+      { "option_text": "Prevents garbage collection", "is_correct": false },
+      { "option_text": "Registers objects for deep cloning", "is_correct": false },
+      { "option_text": "Tracks memory usage", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log((function*() { yield 1; yield* [2, 3]; yield 4; })()[Symbol.iterator]().next().value)` return?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "1", "is_correct": true },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "Generator object", "is_correct": false },
+      { "option_text": "4", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(Object.getOwnPropertyDescriptor(class { get x() { return 1; } }, 'x').get instanceof Function)`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "true", "is_correct": true },
+      { "option_text": "false", "is_correct": false },
+      { "option_text": "TypeError", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is a correct use of `WeakRef`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "new WeakRef(obj).deref()", "is_correct": true },
+      { "option_text": "WeakRef.create(obj)", "is_correct": false },
+      { "option_text": "obj.weakRef()", "is_correct": false },
+      { "option_text": "new WeakRef(obj).get()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log([...document.querySelectorAll('*')].reduce((a, b) => a + (b instanceof Element), 0))` return in a non-empty page?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Total number of DOM elements", "is_correct": true },
+      { "option_text": "0", "is_correct": false },
+      { "option_text": "NaN", "is_correct": false },
+      { "option_text": "TypeError", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `console.log((() => { let x = 1; { let x = 2; } return x; })())`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "1", "is_correct": true },
+      { "option_text": "2", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "ReferenceError", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(new Date('invalid').valueOf())`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "NaN", "is_correct": true },
+      { "option_text": "Invalid Date", "is_correct": false },
+      { "option_text": "null", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following correctly defines a private method in a JavaScript class?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "#privateMethod() {}", "is_correct": true },
+      { "option_text": "private privateMethod() {}", "is_correct": false },
+      { "option_text": "_privateMethod() {}", "is_correct": false },
+      { "option_text": "method #privateMethod {}", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log(Promise.resolve().then(() => console.log(1), () => console.log(2)), console.log(3))` output?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "3, 1", "is_correct": true },
+      { "option_text": "1, 3", "is_correct": false },
+      { "option_text": "3, 2", "is_correct": false },
+      { "option_text": "2, 1", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `console.log(String.raw`Hello\\nWorld`.includes('\\\\n'))`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "true", "is_correct": true },
+      { "option_text": "false", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "TypeError", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What does `Object.setPrototypeOf()` do?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Sets the prototype of an object directly", "is_correct": true },
+      { "option_text": "Creates a new object with given prototype", "is_correct": false },
+      { "option_text": "Returns the prototype chain", "is_correct": false },
+      { "option_text": "Freezes the prototype", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log((class { static [Symbol.hasInstance]() { return true; } }) instanceof class {})` return?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "true", "is_correct": true },
+      { "option_text": "false", "is_correct": false },
+      { "option_text": "TypeError", "is_correct": false },
+      { "option_text": "SyntaxError", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is true about `for...await...of`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It is used to iterate over async iterables", "is_correct": true },
+      { "option_text": "It works with regular arrays only", "is_correct": false },
+      { "option_text": "It blocks the event loop", "is_correct": false },
+      { "option_text": "It cannot be used with generators", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(Reflect.deleteProperty({ x: 1 }, 'x'))`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "true", "is_correct": true },
+      { "option_text": "false", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "1", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log((async function*() { yield await Promise.resolve(1); })().next().then(r => r.value))` return?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "A Promise resolving to 1", "is_correct": true },
+      { "option_text": "1", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "SyntaxError", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `console.log(Object.isExtensible(Object.preventExtensions({})))`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "false", "is_correct": true },
+      { "option_text": "true", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "null", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is a correct use of `Promise.withResolvers()` (proposed feature)?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "const { promise, resolve, reject } = Promise.withResolvers();", "is_correct": true },
+      { "option_text": "Promise.resolve().withResolvers()", "is_correct": false },
+      { "option_text": "new Promise.withResolvers()", "is_correct": false },
+      { "option_text": "Promise.getResolvers()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log((() => { try { return 1; } finally { return 2; } })())` return?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "2", "is_correct": true },
+      { "option_text": "1", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(/\\s+/y.lastIndex, /\\s+/y.exec('  '))`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "0, ['  ']", "is_correct": false },
+      { "option_text": "2, null", "is_correct": false },
+      { "option_text": "0, null", "is_correct": false },
+      { "option_text": "0, ['  '] and lastIndex becomes 2", "is_correct": true }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following correctly uses `import.meta`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "import.meta.url", "is_correct": true },
+      { "option_text": "meta.import.url", "is_correct": false },
+      { "option_text": "module.meta.url", "is_correct": false },
+      { "option_text": "import.url", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `console.log(0 ** -1)`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Infinity", "is_correct": true },
+      { "option_text": "0", "is_correct": false },
+      { "option_text": "NaN", "is_correct": false },
+      { "option_text": "SyntaxError", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log(new (class extends Array {})().concat([1,2]))` return?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "An instance of the subclass with elements 1, 2", "is_correct": true },
+      { "option_text": "[1, 2]", "is_correct": false },
+      { "option_text": "TypeError", "is_correct": false },
+      { "option_text": "[]", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is true about `@@toPrimitive`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It allows an object to define its primitive value for type coercion", "is_correct": true },
+      { "option_text": "It converts an object to JSON", "is_correct": false },
+      { "option_text": "It is called when using 'new'", "is_correct": false },
+      { "option_text": "It prevents inheritance", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log(String.fromCodePoint(0x1F600))`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "😀", "is_correct": true },
+      { "option_text": "\\u{1F600}", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log(Reflect.construct(Date, [], String)) instanceof String` return?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "true", "is_correct": true },
+      { "option_text": "false", "is_correct": false },
+      { "option_text": "TypeError", "is_correct": false },
+      { "option_text": "Date", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is a valid way to create a module-level singleton in ES6?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Export a class with a private constructor and static getInstance()", "is_correct": true },
+      { "option_text": "Use var in global scope", "is_correct": false },
+      { "option_text": "Use const with Math.random()", "is_correct": false },
+      { "option_text": "Export a function that always returns new Object", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `console.log(Object.getOwnPropertyNames(Symbol.iterator))`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "[]", "is_correct": true },
+      { "option_text": "['description']", "is_correct": false },
+      { "option_text": "['toString']", "is_correct": false },
+      { "option_text": "['iterator']", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log((class { #x = 1; getX() { return this.#x; } }).prototype.getX.call({ #x: 2 }))` return?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "TypeError", "is_correct": true },
+      { "option_text": "2", "is_correct": false },
+      { "option_text": "1", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is true about `Temporal.deadline()` (proposed)?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It creates a promise that rejects after a given time", "is_correct": true },
+      { "option_text": "It sets a timeout for garbage collection", "is_correct": false },
+      { "option_text": "It measures execution time", "is_correct": false },
+      { "option_text": "It is part of Date API", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log([...new Set([NaN, NaN, 0, -0])].length)`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "3", "is_correct": true },
+      { "option_text": "4", "is_correct": false },
+      { "option_text": "2", "is_correct": false },
+      { "option_text": "1", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log((async function*() { await 1; yield 2; })().next().then(r => r.value))` return?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "A Promise resolving to 2", "is_correct": true },
+      { "option_text": "2", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false },
+      { "option_text": "1", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following correctly uses `at()` method on arrays?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "[1,2,3].at(-1)", "is_correct": true },
+      { "option_text": "at([1,2,3], -1)", "is_correct": false },
+      { "option_text": "Array.at([1,2,3], -1)", "is_correct": false },
+      { "option_text": "[1,2,3].get(-1)", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the result of `console.log(Object.hasOwn({ __proto__: null }, '__proto__'))`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "false", "is_correct": true },
+      { "option_text": "true", "is_correct": false },
+      { "option_text": "TypeError", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log((() => { let x; { const x = 1; } return x; })())` return?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "undefined", "is_correct": true },
+      { "option_text": "1", "is_correct": false },
+      { "option_text": "ReferenceError", "is_correct": false },
+      { "option_text": "null", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is true about `Intl.DurationFormat` (proposed)?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Formats time durations like '2 hours 30 minutes'", "is_correct": true },
+      { "option_text": "Formats dates only", "is_correct": false },
+      { "option_text": "Replaces Date object", "is_correct": false },
+      { "option_text": "Measures performance", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What is the output of `console.log((/a/g).flags)`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "g", "is_correct": true },
+      { "option_text": "global", "is_correct": false },
+      { "option_text": "gi", "is_correct": false },
+      { "option_text": "undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "What will `console.log(Reflect.ownKeys({ a: 1, [Symbol('b')]: 2 }).length)` return?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "2", "is_correct": true },
+      { "option_text": "1", "is_correct": false },
+      { "option_text": "3", "is_correct": false },
+      { "option_text": "0", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 43,
+    "question_text": "Which of the following is a correct use of `Error.captureStackTrace()`?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Error.captureStackTrace(error, func)", "is_correct": true },
+      { "option_text": "error.captureStackTrace()", "is_correct": false },
+      { "option_text": "captureStackTrace(error)", "is_correct": false },
+      { "option_text": "new Error().stack = 'custom'", "is_correct": false }
+    ]
+  }
+]

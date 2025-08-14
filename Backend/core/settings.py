@@ -171,3 +171,26 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.UserAccount' # this is the custom user model we created in user/models.py
 
+# settings.py
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'smarttest.models': {  
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        # Optional: Uncomment to see logs from all your apps
+        # 'your_app_name': {
+        #     'handlers': ['console'],
+        #     'level': 'INFO',
+        # }
+    },
+}

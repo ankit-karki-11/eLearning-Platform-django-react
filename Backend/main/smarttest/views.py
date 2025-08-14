@@ -42,19 +42,8 @@ class TopicViewSet(viewsets.ModelViewSet):
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
-    permission_classes = [IsAdmin]
+    permission_classes = [IsAuthenticated, IsAdmin]
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        topic_id = self.request.query_params.get("topic_id")
-        level = self.request.query_params.get("level")
-
-        if topic_id:
-            queryset = queryset.filter(topic_id=topic_id)
-        if level:
-            queryset = queryset.filter(level=level)
-        return queryset
-    
     def create(self, request, *args, **kwargs):
         is_many = isinstance(request.data, list)
 

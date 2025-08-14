@@ -1,0 +1,2902 @@
+[
+    {
+        "id": 989,
+        "topic": 35,
+        "question_text": "Which HTTP method is used to retrieve a resource?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 553,
+                "option_text": "POST",
+                "is_correct": false
+            },
+            {
+                "id": 554,
+                "option_text": "PUT",
+                "is_correct": false
+            },
+            {
+                "id": 555,
+                "option_text": "GET",
+                "is_correct": true
+            },
+            {
+                "id": 556,
+                "option_text": "DELETE",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 990,
+        "topic": 35,
+        "question_text": "What does REST stand for?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 557,
+                "option_text": "Remote Execution State Transfer",
+                "is_correct": false
+            },
+            {
+                "id": 558,
+                "option_text": "Representational State Transfer",
+                "is_correct": true
+            },
+            {
+                "id": 559,
+                "option_text": "Request Entity Session Transport",
+                "is_correct": false
+            },
+            {
+                "id": 560,
+                "option_text": "Realtime Event Stream Technology",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 991,
+        "topic": 35,
+        "question_text": "Which status code indicates 'Created'?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 561,
+                "option_text": "200",
+                "is_correct": false
+            },
+            {
+                "id": 562,
+                "option_text": "201",
+                "is_correct": true
+            },
+            {
+                "id": 563,
+                "option_text": "404",
+                "is_correct": false
+            },
+            {
+                "id": 564,
+                "option_text": "500",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 992,
+        "topic": 35,
+        "question_text": "Which HTTP method is idempotent?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 565,
+                "option_text": "POST",
+                "is_correct": false
+            },
+            {
+                "id": 566,
+                "option_text": "PATCH",
+                "is_correct": false
+            },
+            {
+                "id": 567,
+                "option_text": "PUT",
+                "is_correct": true
+            },
+            {
+                "id": 568,
+                "option_text": "All of the above",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 993,
+        "topic": 35,
+        "question_text": "Where is the API endpoint typically defined?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 569,
+                "option_text": "HTTP Header",
+                "is_correct": false
+            },
+            {
+                "id": 570,
+                "option_text": "URL Path",
+                "is_correct": true
+            },
+            {
+                "id": 571,
+                "option_text": "Body",
+                "is_correct": false
+            },
+            {
+                "id": 572,
+                "option_text": "Cookie",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 994,
+        "topic": 35,
+        "question_text": "What format is commonly used for sending data in REST APIs?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 573,
+                "option_text": "XML",
+                "is_correct": false
+            },
+            {
+                "id": 574,
+                "option_text": "JSON",
+                "is_correct": true
+            },
+            {
+                "id": 575,
+                "option_text": "HTML",
+                "is_correct": false
+            },
+            {
+                "id": 576,
+                "option_text": "CSV",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 995,
+        "topic": 35,
+        "question_text": "Which header is used to specify the media type of the request body?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 577,
+                "option_text": "Authorization",
+                "is_correct": false
+            },
+            {
+                "id": 578,
+                "option_text": "Content-Type",
+                "is_correct": true
+            },
+            {
+                "id": 579,
+                "option_text": "Accept",
+                "is_correct": false
+            },
+            {
+                "id": 580,
+                "option_text": "User-Agent",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 996,
+        "topic": 35,
+        "question_text": "What is the purpose of API versioning?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 581,
+                "option_text": "To increase security",
+                "is_correct": false
+            },
+            {
+                "id": 582,
+                "option_text": "To allow backward compatibility",
+                "is_correct": true
+            },
+            {
+                "id": 583,
+                "option_text": "To reduce payload size",
+                "is_correct": false
+            },
+            {
+                "id": 584,
+                "option_text": "To improve caching",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 997,
+        "topic": 35,
+        "question_text": "Which status code means 'Not Found'?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 585,
+                "option_text": "200",
+                "is_correct": false
+            },
+            {
+                "id": 586,
+                "option_text": "400",
+                "is_correct": false
+            },
+            {
+                "id": 587,
+                "option_text": "404",
+                "is_correct": true
+            },
+            {
+                "id": 588,
+                "option_text": "500",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 998,
+        "topic": 35,
+        "question_text": "What is an API endpoint?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 589,
+                "option_text": "A server name",
+                "is_correct": false
+            },
+            {
+                "id": 590,
+                "option_text": "A specific URL to access a resource",
+                "is_correct": true
+            },
+            {
+                "id": 591,
+                "option_text": "An authentication token",
+                "is_correct": false
+            },
+            {
+                "id": 592,
+                "option_text": "A database table",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 999,
+        "topic": 35,
+        "question_text": "Which HTTP method is used to create a new resource?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 593,
+                "option_text": "GET",
+                "is_correct": false
+            },
+            {
+                "id": 594,
+                "option_text": "PUT",
+                "is_correct": false
+            },
+            {
+                "id": 595,
+                "option_text": "POST",
+                "is_correct": true
+            },
+            {
+                "id": 596,
+                "option_text": "PATCH",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1000,
+        "topic": 35,
+        "question_text": "What does CORS stand for?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 597,
+                "option_text": "Cross-Origin Resource Sharing",
+                "is_correct": true
+            },
+            {
+                "id": 598,
+                "option_text": "Client-Origin Request System",
+                "is_correct": false
+            },
+            {
+                "id": 599,
+                "option_text": "Cross-Operation Resource Security",
+                "is_correct": false
+            },
+            {
+                "id": 600,
+                "option_text": "Centralized Online Request Service",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1001,
+        "topic": 35,
+        "question_text": "Which tool is commonly used to test REST APIs?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 601,
+                "option_text": "Git",
+                "is_correct": false
+            },
+            {
+                "id": 602,
+                "option_text": "Postman",
+                "is_correct": true
+            },
+            {
+                "id": 603,
+                "option_text": "VS Code",
+                "is_correct": false
+            },
+            {
+                "id": 604,
+                "option_text": "Docker",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1002,
+        "topic": 35,
+        "question_text": "What is the default port for HTTPS?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 605,
+                "option_text": "80",
+                "is_correct": false
+            },
+            {
+                "id": 606,
+                "option_text": "443",
+                "is_correct": true
+            },
+            {
+                "id": 607,
+                "option_text": "8080",
+                "is_correct": false
+            },
+            {
+                "id": 608,
+                "option_text": "3000",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1003,
+        "topic": 35,
+        "question_text": "Which HTTP header is used for authentication?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 609,
+                "option_text": "Content-Type",
+                "is_correct": false
+            },
+            {
+                "id": 610,
+                "option_text": "User-Agent",
+                "is_correct": false
+            },
+            {
+                "id": 611,
+                "option_text": "Authorization",
+                "is_correct": true
+            },
+            {
+                "id": 612,
+                "option_text": "Location",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1004,
+        "topic": 35,
+        "question_text": "What is a query parameter in a URL?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 613,
+                "option_text": "Text after #",
+                "is_correct": false
+            },
+            {
+                "id": 614,
+                "option_text": "Text after ?",
+                "is_correct": true
+            },
+            {
+                "id": 615,
+                "option_text": "Path segment",
+                "is_correct": false
+            },
+            {
+                "id": 616,
+                "option_text": "HTTP method",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1005,
+        "topic": 35,
+        "question_text": "Which status code indicates server error?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 617,
+                "option_text": "200",
+                "is_correct": false
+            },
+            {
+                "id": 618,
+                "option_text": "302",
+                "is_correct": false
+            },
+            {
+                "id": 619,
+                "option_text": "400",
+                "is_correct": false
+            },
+            {
+                "id": 620,
+                "option_text": "500",
+                "is_correct": true
+            }
+        ]
+    },
+    {
+        "id": 1006,
+        "topic": 35,
+        "question_text": "What is Swagger used for?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 621,
+                "option_text": "API documentation",
+                "is_correct": true
+            },
+            {
+                "id": 622,
+                "option_text": "Database migration",
+                "is_correct": false
+            },
+            {
+                "id": 623,
+                "option_text": "Code compilation",
+                "is_correct": false
+            },
+            {
+                "id": 624,
+                "option_text": "Version control",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1007,
+        "topic": 35,
+        "question_text": "Which part of HTTP request contains the data being sent?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 625,
+                "option_text": "Header",
+                "is_correct": false
+            },
+            {
+                "id": 626,
+                "option_text": "Body",
+                "is_correct": true
+            },
+            {
+                "id": 627,
+                "option_text": "URL",
+                "is_correct": false
+            },
+            {
+                "id": 628,
+                "option_text": "Method",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1008,
+        "topic": 35,
+        "question_text": "What is rate limiting in APIs?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 629,
+                "option_text": "Blocking all requests",
+                "is_correct": false
+            },
+            {
+                "id": 630,
+                "option_text": "Limiting number of requests per client",
+                "is_correct": true
+            },
+            {
+                "id": 631,
+                "option_text": "Slowing down responses",
+                "is_correct": false
+            },
+            {
+                "id": 632,
+                "option_text": "Encrypting data",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1009,
+        "topic": 35,
+        "question_text": "What is the output of the following code?\n\nfetch('/api/data')\n  .then(res => res.json())\n  .then(data => console.log(data));",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 633,
+                "option_text": "Raw HTTP response",
+                "is_correct": false
+            },
+            {
+                "id": 634,
+                "option_text": "JSON-parsed data",
+                "is_correct": true
+            },
+            {
+                "id": 635,
+                "option_text": "Error always",
+                "is_correct": false
+            },
+            {
+                "id": 636,
+                "option_text": "URL only",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1010,
+        "topic": 35,
+        "question_text": "Which HTTP method should be used to update a user's email partially?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 637,
+                "option_text": "PUT",
+                "is_correct": false
+            },
+            {
+                "id": 638,
+                "option_text": "POST",
+                "is_correct": false
+            },
+            {
+                "id": 639,
+                "option_text": "PATCH",
+                "is_correct": true
+            },
+            {
+                "id": 640,
+                "option_text": "GET",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1011,
+        "topic": 35,
+        "question_text": "What is the purpose of HATEOAS in REST?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 641,
+                "option_text": "To compress responses",
+                "is_correct": false
+            },
+            {
+                "id": 642,
+                "option_text": "To include hyperlinks in responses for navigation",
+                "is_correct": true
+            },
+            {
+                "id": 643,
+                "option_text": "To encrypt data",
+                "is_correct": false
+            },
+            {
+                "id": 644,
+                "option_text": "To validate JSON",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1012,
+        "topic": 35,
+        "question_text": "Which of the following is NOT a best practice for REST API design?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 645,
+                "option_text": "Use nouns instead of verbs in URLs",
+                "is_correct": false
+            },
+            {
+                "id": 646,
+                "option_text": "Use status codes correctly",
+                "is_correct": false
+            },
+            {
+                "id": 647,
+                "option_text": "Use POST for all operations",
+                "is_correct": true
+            },
+            {
+                "id": 648,
+                "option_text": "Support filtering and pagination",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1013,
+        "topic": 35,
+        "question_text": "How can you authenticate a request using JWT?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 649,
+                "option_text": "Send it in URL",
+                "is_correct": false
+            },
+            {
+                "id": 650,
+                "option_text": "Send it in Authorization header as Bearer token",
+                "is_correct": true
+            },
+            {
+                "id": 651,
+                "option_text": "Send it in body",
+                "is_correct": false
+            },
+            {
+                "id": 652,
+                "option_text": "Set it as cookie only",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1014,
+        "topic": 35,
+        "question_text": "What is the difference between PUT and PATCH?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 653,
+                "option_text": "PUT is for creation, PATCH for update",
+                "is_correct": false
+            },
+            {
+                "id": 654,
+                "option_text": "PUT updates partially, PATCH fully",
+                "is_correct": false
+            },
+            {
+                "id": 655,
+                "option_text": "PUT replaces entire resource, PATCH updates partially",
+                "is_correct": true
+            },
+            {
+                "id": 656,
+                "option_text": "No difference",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1015,
+        "topic": 35,
+        "question_text": "Which status code is returned when a client is not authorized?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 657,
+                "option_text": "401",
+                "is_correct": true
+            },
+            {
+                "id": 658,
+                "option_text": "403",
+                "is_correct": false
+            },
+            {
+                "id": 659,
+                "option_text": "404",
+                "is_correct": false
+            },
+            {
+                "id": 660,
+                "option_text": "500",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1016,
+        "topic": 35,
+        "question_text": "What is OpenAPI Specification?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 661,
+                "option_text": "A tool for API testing",
+                "is_correct": false
+            },
+            {
+                "id": 662,
+                "option_text": "A language for describing REST APIs",
+                "is_correct": true
+            },
+            {
+                "id": 663,
+                "option_text": "A database schema",
+                "is_correct": false
+            },
+            {
+                "id": 664,
+                "option_text": "An authentication protocol",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1017,
+        "topic": 35,
+        "question_text": "Which header tells the server what response format the client expects?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 665,
+                "option_text": "Content-Type",
+                "is_correct": false
+            },
+            {
+                "id": 666,
+                "option_text": "Accept",
+                "is_correct": true
+            },
+            {
+                "id": 667,
+                "option_text": "Authorization",
+                "is_correct": false
+            },
+            {
+                "id": 668,
+                "option_text": "User-Agent",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1018,
+        "topic": 35,
+        "question_text": "What is the main advantage of using API gateways?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 669,
+                "option_text": "They replace databases",
+                "is_correct": false
+            },
+            {
+                "id": 670,
+                "option_text": "They provide caching, rate limiting, and authentication in one layer",
+                "is_correct": true
+            },
+            {
+                "id": 671,
+                "option_text": "They write business logic",
+                "is_correct": false
+            },
+            {
+                "id": 672,
+                "option_text": "They generate frontend code",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1019,
+        "topic": 35,
+        "question_text": "Which of the following is true about idempotency in REST?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 673,
+                "option_text": "POST is idempotent",
+                "is_correct": false
+            },
+            {
+                "id": 674,
+                "option_text": "Multiple identical PUT requests have same effect as one",
+                "is_correct": true
+            },
+            {
+                "id": 675,
+                "option_text": "PATCH is never idempotent",
+                "is_correct": false
+            },
+            {
+                "id": 676,
+                "option_text": "DELETE cannot be idempotent",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1020,
+        "topic": 35,
+        "question_text": "What is the purpose of ETags in HTTP caching?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 677,
+                "option_text": "To encrypt data",
+                "is_correct": false
+            },
+            {
+                "id": 678,
+                "option_text": "To validate cache freshness",
+                "is_correct": true
+            },
+            {
+                "id": 679,
+                "option_text": "To compress responses",
+                "is_correct": false
+            },
+            {
+                "id": 680,
+                "option_text": "To authenticate users",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1021,
+        "topic": 35,
+        "question_text": "Which of the following is a security risk in APIs?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 681,
+                "option_text": "Using HTTPS",
+                "is_correct": false
+            },
+            {
+                "id": 682,
+                "option_text": "Proper rate limiting",
+                "is_correct": false
+            },
+            {
+                "id": 683,
+                "option_text": "Exposing sensitive data in responses",
+                "is_correct": true
+            },
+            {
+                "id": 684,
+                "option_text": "Using JWT",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1022,
+        "topic": 35,
+        "question_text": "What is the difference between OAuth 2.0 and OpenID Connect?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 685,
+                "option_text": "OAuth 2.0 is for authentication, OIDC for authorization",
+                "is_correct": false
+            },
+            {
+                "id": 686,
+                "option_text": "OAuth 2.0 is for authorization, OIDC adds authentication on top",
+                "is_correct": true
+            },
+            {
+                "id": 687,
+                "option_text": "They are the same",
+                "is_correct": false
+            },
+            {
+                "id": 688,
+                "option_text": "OIDC is older",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1023,
+        "topic": 35,
+        "question_text": "Which HTTP header can be used to prevent XSS attacks?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 689,
+                "option_text": "Content-Type",
+                "is_correct": false
+            },
+            {
+                "id": 690,
+                "option_text": "X-Content-Type-Options",
+                "is_correct": false
+            },
+            {
+                "id": 691,
+                "option_text": "X-Frame-Options",
+                "is_correct": false
+            },
+            {
+                "id": 692,
+                "option_text": "Content-Security-Policy",
+                "is_correct": true
+            }
+        ]
+    },
+    {
+        "id": 1024,
+        "topic": 35,
+        "question_text": "What is Webhook in API context?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 693,
+                "option_text": "A way to call API synchronously",
+                "is_correct": false
+            },
+            {
+                "id": 694,
+                "option_text": "A user-defined HTTP callback triggered by events",
+                "is_correct": true
+            },
+            {
+                "id": 695,
+                "option_text": "A database backup",
+                "is_correct": false
+            },
+            {
+                "id": 696,
+                "option_text": "An API documentation tool",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1025,
+        "topic": 35,
+        "question_text": "Which of the following is NOT part of OAuth 2.0 roles?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 697,
+                "option_text": "Resource Owner",
+                "is_correct": false
+            },
+            {
+                "id": 698,
+                "option_text": "Client",
+                "is_correct": false
+            },
+            {
+                "id": 699,
+                "option_text": "Authorization Server",
+                "is_correct": false
+            },
+            {
+                "id": 700,
+                "option_text": "Load Balancer",
+                "is_correct": true
+            }
+        ]
+    },
+    {
+        "id": 1026,
+        "topic": 35,
+        "question_text": "What is gRPC and how does it differ from REST?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 701,
+                "option_text": "gRPC uses JSON and HTTP/1.1",
+                "is_correct": false
+            },
+            {
+                "id": 702,
+                "option_text": "gRPC uses Protocol Buffers and HTTP/2, and is faster",
+                "is_correct": true
+            },
+            {
+                "id": 703,
+                "option_text": "gRPC is only for web browsers",
+                "is_correct": false
+            },
+            {
+                "id": 704,
+                "option_text": "gRPC is slower but more readable",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1027,
+        "topic": 35,
+        "question_text": "Which of the following improves API performance?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 705,
+                "option_text": "Returning full data always",
+                "is_correct": false
+            },
+            {
+                "id": 706,
+                "option_text": "Avoiding caching",
+                "is_correct": false
+            },
+            {
+                "id": 707,
+                "option_text": "Using pagination and field selection",
+                "is_correct": true
+            },
+            {
+                "id": 708,
+                "option_text": "Using large payloads",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1028,
+        "topic": 35,
+        "question_text": "What is the purpose of 'Circuit Breaker' pattern in microservices?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 709,
+                "option_text": "To speed up APIs",
+                "is_correct": false
+            },
+            {
+                "id": 710,
+                "option_text": "To prevent cascading failures",
+                "is_correct": true
+            },
+            {
+                "id": 711,
+                "option_text": "To compress data",
+                "is_correct": false
+            },
+            {
+                "id": 712,
+                "option_text": "To log requests",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1078,
+        "topic": 35,
+        "question_text": "Which keyword is used to create a subclass in Java?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 909,
+                "option_text": "extends",
+                "is_correct": true
+            },
+            {
+                "id": 910,
+                "option_text": "implements",
+                "is_correct": false
+            },
+            {
+                "id": 911,
+                "option_text": "super",
+                "is_correct": false
+            },
+            {
+                "id": 912,
+                "option_text": "final",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1079,
+        "topic": 35,
+        "question_text": "Which method is the entry point of a Java program?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 913,
+                "option_text": "main",
+                "is_correct": true
+            },
+            {
+                "id": 914,
+                "option_text": "start",
+                "is_correct": false
+            },
+            {
+                "id": 915,
+                "option_text": "run",
+                "is_correct": false
+            },
+            {
+                "id": 916,
+                "option_text": "init",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1080,
+        "topic": 35,
+        "question_text": "Which keyword is used to prevent inheritance?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 917,
+                "option_text": "final",
+                "is_correct": true
+            },
+            {
+                "id": 918,
+                "option_text": "static",
+                "is_correct": false
+            },
+            {
+                "id": 919,
+                "option_text": "const",
+                "is_correct": false
+            },
+            {
+                "id": 920,
+                "option_text": "sealed",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1081,
+        "topic": 35,
+        "question_text": "Which of the following is not a Java primitive type?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 921,
+                "option_text": "String",
+                "is_correct": true
+            },
+            {
+                "id": 922,
+                "option_text": "int",
+                "is_correct": false
+            },
+            {
+                "id": 923,
+                "option_text": "float",
+                "is_correct": false
+            },
+            {
+                "id": 924,
+                "option_text": "char",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1082,
+        "topic": 35,
+        "question_text": "Which access modifier makes a member visible everywhere?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 925,
+                "option_text": "public",
+                "is_correct": true
+            },
+            {
+                "id": 926,
+                "option_text": "private",
+                "is_correct": false
+            },
+            {
+                "id": 927,
+                "option_text": "protected",
+                "is_correct": false
+            },
+            {
+                "id": 928,
+                "option_text": "default",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1083,
+        "topic": 35,
+        "question_text": "What is the size of an int in Java?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 929,
+                "option_text": "4 bytes",
+                "is_correct": true
+            },
+            {
+                "id": 930,
+                "option_text": "2 bytes",
+                "is_correct": false
+            },
+            {
+                "id": 931,
+                "option_text": "8 bytes",
+                "is_correct": false
+            },
+            {
+                "id": 932,
+                "option_text": "1 byte",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1084,
+        "topic": 35,
+        "question_text": "Which keyword is used for exception handling?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 933,
+                "option_text": "try",
+                "is_correct": true
+            },
+            {
+                "id": 934,
+                "option_text": "catch",
+                "is_correct": false
+            },
+            {
+                "id": 935,
+                "option_text": "throw",
+                "is_correct": false
+            },
+            {
+                "id": 936,
+                "option_text": "throws",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1085,
+        "topic": 35,
+        "question_text": "Java is platform-___ language.",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 937,
+                "option_text": "independent",
+                "is_correct": true
+            },
+            {
+                "id": 938,
+                "option_text": "dependent",
+                "is_correct": false
+            },
+            {
+                "id": 939,
+                "option_text": "specific",
+                "is_correct": false
+            },
+            {
+                "id": 940,
+                "option_text": "native",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1086,
+        "topic": 35,
+        "question_text": "Which of the following is used to allocate memory dynamically in Java?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 941,
+                "option_text": "new",
+                "is_correct": true
+            },
+            {
+                "id": 942,
+                "option_text": "malloc",
+                "is_correct": false
+            },
+            {
+                "id": 943,
+                "option_text": "alloc",
+                "is_correct": false
+            },
+            {
+                "id": 944,
+                "option_text": "calloc",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1087,
+        "topic": 35,
+        "question_text": "Which loop is guaranteed to run at least once?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 945,
+                "option_text": "do-while",
+                "is_correct": true
+            },
+            {
+                "id": 946,
+                "option_text": "for",
+                "is_correct": false
+            },
+            {
+                "id": 947,
+                "option_text": "while",
+                "is_correct": false
+            },
+            {
+                "id": 948,
+                "option_text": "foreach",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1088,
+        "topic": 35,
+        "question_text": "What is JVM short for?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 949,
+                "option_text": "Java Virtual Machine",
+                "is_correct": true
+            },
+            {
+                "id": 950,
+                "option_text": "Java Version Manager",
+                "is_correct": false
+            },
+            {
+                "id": 951,
+                "option_text": "Java Verified Mode",
+                "is_correct": false
+            },
+            {
+                "id": 952,
+                "option_text": "Java Value Method",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1089,
+        "topic": 35,
+        "question_text": "What is the default value of a boolean variable in Java?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 953,
+                "option_text": "false",
+                "is_correct": true
+            },
+            {
+                "id": 954,
+                "option_text": "true",
+                "is_correct": false
+            },
+            {
+                "id": 955,
+                "option_text": "null",
+                "is_correct": false
+            },
+            {
+                "id": 956,
+                "option_text": "0",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1090,
+        "topic": 35,
+        "question_text": "Which interface is used to sort elements in Java?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 957,
+                "option_text": "Comparable",
+                "is_correct": true
+            },
+            {
+                "id": 958,
+                "option_text": "Comparator",
+                "is_correct": false
+            },
+            {
+                "id": 959,
+                "option_text": "Sorter",
+                "is_correct": false
+            },
+            {
+                "id": 960,
+                "option_text": "Orderable",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1091,
+        "topic": 35,
+        "question_text": "Which method is used to compare strings?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 961,
+                "option_text": "equals()",
+                "is_correct": true
+            },
+            {
+                "id": 962,
+                "option_text": "==",
+                "is_correct": false
+            },
+            {
+                "id": 963,
+                "option_text": "compare()",
+                "is_correct": false
+            },
+            {
+                "id": 964,
+                "option_text": "isEqual()",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1092,
+        "topic": 35,
+        "question_text": "Which of these is a valid identifier in Java?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 965,
+                "option_text": "my_var1",
+                "is_correct": true
+            },
+            {
+                "id": 966,
+                "option_text": "1var",
+                "is_correct": false
+            },
+            {
+                "id": 967,
+                "option_text": "var-1",
+                "is_correct": false
+            },
+            {
+                "id": 968,
+                "option_text": "my var",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1093,
+        "topic": 35,
+        "question_text": "Which of the following is not an OOP principle?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 969,
+                "option_text": "Compilation",
+                "is_correct": true
+            },
+            {
+                "id": 970,
+                "option_text": "Encapsulation",
+                "is_correct": false
+            },
+            {
+                "id": 971,
+                "option_text": "Abstraction",
+                "is_correct": false
+            },
+            {
+                "id": 972,
+                "option_text": "Inheritance",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1094,
+        "topic": 35,
+        "question_text": "Java code is first compiled to which format?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 973,
+                "option_text": "Bytecode",
+                "is_correct": true
+            },
+            {
+                "id": 974,
+                "option_text": "Assembly",
+                "is_correct": false
+            },
+            {
+                "id": 975,
+                "option_text": "Binary",
+                "is_correct": false
+            },
+            {
+                "id": 976,
+                "option_text": "Machine code",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1095,
+        "topic": 35,
+        "question_text": "Which of these is a correct way to declare an array?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 977,
+                "option_text": "int[] arr = new int[5];",
+                "is_correct": true
+            },
+            {
+                "id": 978,
+                "option_text": "int arr[] = int[5];",
+                "is_correct": false
+            },
+            {
+                "id": 979,
+                "option_text": "array arr = new array(5);",
+                "is_correct": false
+            },
+            {
+                "id": 980,
+                "option_text": "new int arr[5];",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1096,
+        "topic": 35,
+        "question_text": "What will System.out.println(3 + 4 + \"Java\") print?",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 981,
+                "option_text": "7Java",
+                "is_correct": true
+            },
+            {
+                "id": 982,
+                "option_text": "Java7",
+                "is_correct": false
+            },
+            {
+                "id": 983,
+                "option_text": "3+4Java",
+                "is_correct": false
+            },
+            {
+                "id": 984,
+                "option_text": "Java34",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1097,
+        "topic": 35,
+        "question_text": "What is the output of: console.log(typeof null);",
+        "level": "basic",
+        "marks": 1,
+        "options": [
+            {
+                "id": 985,
+                "option_text": "null",
+                "is_correct": false
+            },
+            {
+                "id": 986,
+                "option_text": "object",
+                "is_correct": true
+            },
+            {
+                "id": 987,
+                "option_text": "undefined",
+                "is_correct": false
+            },
+            {
+                "id": 988,
+                "option_text": "boolean",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1098,
+        "topic": 35,
+        "question_text": "Which of the following best describes method overloading in Java?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 989,
+                "option_text": "Same method name with same parameter list",
+                "is_correct": false
+            },
+            {
+                "id": 990,
+                "option_text": "Same method name with different parameter list",
+                "is_correct": true
+            },
+            {
+                "id": 991,
+                "option_text": "Methods with different names in the same class",
+                "is_correct": false
+            },
+            {
+                "id": 992,
+                "option_text": "Same method name with different return type",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1099,
+        "topic": 35,
+        "question_text": "What will be the output?\r\n\r\nint x = 5;\r\nSystem.out.println(x++ + ++x);",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 993,
+                "option_text": "10",
+                "is_correct": false
+            },
+            {
+                "id": 994,
+                "option_text": "11",
+                "is_correct": false
+            },
+            {
+                "id": 995,
+                "option_text": "12",
+                "is_correct": true
+            },
+            {
+                "id": 996,
+                "option_text": "13",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1100,
+        "topic": 35,
+        "question_text": "Which keyword is used to call the constructor of the parent class?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 997,
+                "option_text": "this",
+                "is_correct": false
+            },
+            {
+                "id": 998,
+                "option_text": "super",
+                "is_correct": true
+            },
+            {
+                "id": 999,
+                "option_text": "parent",
+                "is_correct": false
+            },
+            {
+                "id": 1000,
+                "option_text": "base",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1101,
+        "topic": 35,
+        "question_text": "What will be the output of the following code?\n\nString s = \"hello\";\nSystem.out.println(s.equals(\"Hello\"));",
+        "level": "medium",
+        "marks": 2,
+        "options": [
+            {
+                "id": 1001,
+                "option_text": "true",
+                "is_correct": false
+            },
+            {
+                "id": 1002,
+                "option_text": "false",
+                "is_correct": true
+            },
+            {
+                "id": 1003,
+                "option_text": "Compile time error",
+                "is_correct": false
+            },
+            {
+                "id": 1004,
+                "option_text": "null",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1102,
+        "topic": 35,
+        "question_text": "Which access modifier makes a member visible only within its own package?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1005,
+                "option_text": "private",
+                "is_correct": false
+            },
+            {
+                "id": 1006,
+                "option_text": "protected",
+                "is_correct": false
+            },
+            {
+                "id": 1007,
+                "option_text": "default (no modifier)",
+                "is_correct": true
+            },
+            {
+                "id": 1008,
+                "option_text": "public",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1103,
+        "topic": 35,
+        "question_text": "What is returned by the expression \"Java\".substring(1, 3)?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1009,
+                "option_text": "Ja",
+                "is_correct": false
+            },
+            {
+                "id": 1010,
+                "option_text": "av",
+                "is_correct": true
+            },
+            {
+                "id": 1011,
+                "option_text": "ava",
+                "is_correct": false
+            },
+            {
+                "id": 1012,
+                "option_text": "a",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1104,
+        "topic": 35,
+        "question_text": "What is the correct way to handle exceptions in Java?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1013,
+                "option_text": "Using if-else",
+                "is_correct": false
+            },
+            {
+                "id": 1014,
+                "option_text": "Using try-catch block",
+                "is_correct": true
+            },
+            {
+                "id": 1015,
+                "option_text": "Using loops",
+                "is_correct": false
+            },
+            {
+                "id": 1016,
+                "option_text": "Using assertions",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1105,
+        "topic": 35,
+        "question_text": "Which of the following is not a valid Java collection?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1017,
+                "option_text": "ArrayList",
+                "is_correct": false
+            },
+            {
+                "id": 1018,
+                "option_text": "LinkedList",
+                "is_correct": false
+            },
+            {
+                "id": 1019,
+                "option_text": "TreeMap",
+                "is_correct": false
+            },
+            {
+                "id": 1020,
+                "option_text": "HashVector",
+                "is_correct": true
+            }
+        ]
+    },
+    {
+        "id": 1106,
+        "topic": 35,
+        "question_text": "Which interface needs to be implemented to create a thread in Java?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1021,
+                "option_text": "Runnable",
+                "is_correct": true
+            },
+            {
+                "id": 1022,
+                "option_text": "Thread",
+                "is_correct": false
+            },
+            {
+                "id": 1023,
+                "option_text": "Callable",
+                "is_correct": false
+            },
+            {
+                "id": 1024,
+                "option_text": "Cloneable",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1107,
+        "topic": 35,
+        "question_text": "Which of the following is a valid lambda expression in Java 8?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1025,
+                "option_text": "(a, b) -> a + b",
+                "is_correct": true
+            },
+            {
+                "id": 1026,
+                "option_text": "a + b =>",
+                "is_correct": false
+            },
+            {
+                "id": 1027,
+                "option_text": "-> a + b",
+                "is_correct": false
+            },
+            {
+                "id": 1028,
+                "option_text": "lambda a, b: a + b",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1108,
+        "topic": 35,
+        "question_text": "How many objects are created in the following code?\r\n\r\nString s1 = new String(\"Hello\");\r\nString s2 = \"Hello\";",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1029,
+                "option_text": "1",
+                "is_correct": false
+            },
+            {
+                "id": 1030,
+                "option_text": "2",
+                "is_correct": true
+            },
+            {
+                "id": 1031,
+                "option_text": "3",
+                "is_correct": false
+            },
+            {
+                "id": 1032,
+                "option_text": "0",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1109,
+        "topic": 35,
+        "question_text": "What is the default value of a boolean variable in Java class scope?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1033,
+                "option_text": "true",
+                "is_correct": false
+            },
+            {
+                "id": 1034,
+                "option_text": "false",
+                "is_correct": true
+            },
+            {
+                "id": 1035,
+                "option_text": "null",
+                "is_correct": false
+            },
+            {
+                "id": 1036,
+                "option_text": "0",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1110,
+        "topic": 35,
+        "question_text": "Which of the following is used to prevent method overriding?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1037,
+                "option_text": "final",
+                "is_correct": true
+            },
+            {
+                "id": 1038,
+                "option_text": "abstract",
+                "is_correct": false
+            },
+            {
+                "id": 1039,
+                "option_text": "static",
+                "is_correct": false
+            },
+            {
+                "id": 1040,
+                "option_text": "private",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1111,
+        "topic": 35,
+        "question_text": "Which method is called when an object is garbage collected?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1041,
+                "option_text": "final()",
+                "is_correct": false
+            },
+            {
+                "id": 1042,
+                "option_text": "finalize()",
+                "is_correct": true
+            },
+            {
+                "id": 1043,
+                "option_text": "destroy()",
+                "is_correct": false
+            },
+            {
+                "id": 1044,
+                "option_text": "delete()",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1112,
+        "topic": 35,
+        "question_text": "Which of these exceptions is unchecked in Java?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1045,
+                "option_text": "IOException",
+                "is_correct": false
+            },
+            {
+                "id": 1046,
+                "option_text": "ArithmeticException",
+                "is_correct": true
+            },
+            {
+                "id": 1047,
+                "option_text": "FileNotFoundException",
+                "is_correct": false
+            },
+            {
+                "id": 1048,
+                "option_text": "SQLException",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1113,
+        "topic": 35,
+        "question_text": "Which keyword is used for inheritance in Java?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1049,
+                "option_text": "inherits",
+                "is_correct": false
+            },
+            {
+                "id": 1050,
+                "option_text": "extends",
+                "is_correct": true
+            },
+            {
+                "id": 1051,
+                "option_text": "implements",
+                "is_correct": false
+            },
+            {
+                "id": 1052,
+                "option_text": "instanceof",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1114,
+        "topic": 35,
+        "question_text": "What will be the result?\r\n\r\nSystem.out.println(\"2\" + 3 + 4);",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1053,
+                "option_text": "234",
+                "is_correct": true
+            },
+            {
+                "id": 1054,
+                "option_text": "9",
+                "is_correct": false
+            },
+            {
+                "id": 1055,
+                "option_text": "7",
+                "is_correct": false
+            },
+            {
+                "id": 1056,
+                "option_text": "Compiler error",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1115,
+        "topic": 35,
+        "question_text": "Which collection class allows duplicate elements and maintains insertion order?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1057,
+                "option_text": "HashSet",
+                "is_correct": false
+            },
+            {
+                "id": 1058,
+                "option_text": "TreeSet",
+                "is_correct": false
+            },
+            {
+                "id": 1059,
+                "option_text": "LinkedHashSet",
+                "is_correct": false
+            },
+            {
+                "id": 1060,
+                "option_text": "ArrayList",
+                "is_correct": true
+            }
+        ]
+    },
+    {
+        "id": 1116,
+        "topic": 35,
+        "question_text": "Which statement is used to stop a loop in Java?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1061,
+                "option_text": "stop",
+                "is_correct": false
+            },
+            {
+                "id": 1062,
+                "option_text": "exit",
+                "is_correct": false
+            },
+            {
+                "id": 1063,
+                "option_text": "break",
+                "is_correct": true
+            },
+            {
+                "id": 1064,
+                "option_text": "end",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1117,
+        "topic": 35,
+        "question_text": "How can a class prevent being inherited?",
+        "level": "medium",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1065,
+                "option_text": "Using private constructor",
+                "is_correct": false
+            },
+            {
+                "id": 1066,
+                "option_text": "Declaring the class as final",
+                "is_correct": true
+            },
+            {
+                "id": 1067,
+                "option_text": "Using static methods",
+                "is_correct": false
+            },
+            {
+                "id": 1068,
+                "option_text": "Using abstract class",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1118,
+        "topic": 35,
+        "question_text": "Which Java keyword is used to prevent method overriding?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1069,
+                "option_text": "static",
+                "is_correct": false
+            },
+            {
+                "id": 1070,
+                "option_text": "final",
+                "is_correct": true
+            },
+            {
+                "id": 1071,
+                "option_text": "private",
+                "is_correct": false
+            },
+            {
+                "id": 1072,
+                "option_text": "protected",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1119,
+        "topic": 35,
+        "question_text": "What is the time complexity of searching in a balanced binary search tree?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1073,
+                "option_text": "O(1)",
+                "is_correct": false
+            },
+            {
+                "id": 1074,
+                "option_text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "id": 1075,
+                "option_text": "O(log n)",
+                "is_correct": true
+            },
+            {
+                "id": 1076,
+                "option_text": "O(n log n)",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1120,
+        "topic": 35,
+        "question_text": "Which of the following collections is thread-safe?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1077,
+                "option_text": "ArrayList",
+                "is_correct": false
+            },
+            {
+                "id": 1078,
+                "option_text": "LinkedList",
+                "is_correct": false
+            },
+            {
+                "id": 1079,
+                "option_text": "Vector",
+                "is_correct": true
+            },
+            {
+                "id": 1080,
+                "option_text": "HashMap",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1121,
+        "topic": 35,
+        "question_text": "What is the output?\n\nSystem.out.println(\"abc\" + 1 + 2);",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1081,
+                "option_text": "3abc",
+                "is_correct": false
+            },
+            {
+                "id": 1082,
+                "option_text": "abc3",
+                "is_correct": false
+            },
+            {
+                "id": 1083,
+                "option_text": "abc12",
+                "is_correct": true
+            },
+            {
+                "id": 1084,
+                "option_text": "12abc",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1122,
+        "topic": 35,
+        "question_text": "Which of these exceptions is thrown when a negative array size is declared?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1085,
+                "option_text": "IllegalArgumentException",
+                "is_correct": false
+            },
+            {
+                "id": 1086,
+                "option_text": "NegativeArraySizeException",
+                "is_correct": true
+            },
+            {
+                "id": 1087,
+                "option_text": "ArrayIndexOutOfBoundsException",
+                "is_correct": false
+            },
+            {
+                "id": 1088,
+                "option_text": "NullPointerException",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1123,
+        "topic": 35,
+        "question_text": "What will happen if a class implements two interfaces with conflicting method signatures?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1089,
+                "option_text": "Compile-time error",
+                "is_correct": true
+            },
+            {
+                "id": 1090,
+                "option_text": "Runtime error",
+                "is_correct": false
+            },
+            {
+                "id": 1091,
+                "option_text": "Methods are merged",
+                "is_correct": false
+            },
+            {
+                "id": 1092,
+                "option_text": "The JVM decides",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1124,
+        "topic": 35,
+        "question_text": "Which design pattern ensures only one instance of a class exists?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1093,
+                "option_text": "Factory",
+                "is_correct": false
+            },
+            {
+                "id": 1094,
+                "option_text": "Observer",
+                "is_correct": false
+            },
+            {
+                "id": 1095,
+                "option_text": "Singleton",
+                "is_correct": true
+            },
+            {
+                "id": 1096,
+                "option_text": "Builder",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1125,
+        "topic": 35,
+        "question_text": "How do you make a class immutable in Java?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1097,
+                "option_text": "Use 'abstract' keyword",
+                "is_correct": false
+            },
+            {
+                "id": 1098,
+                "option_text": "Make it final and all fields private and final",
+                "is_correct": true
+            },
+            {
+                "id": 1099,
+                "option_text": "Implement Runnable",
+                "is_correct": false
+            },
+            {
+                "id": 1100,
+                "option_text": "Use static fields only",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1126,
+        "topic": 35,
+        "question_text": "Which of the following is true about Java memory model?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1101,
+                "option_text": "All variables are stored in heap",
+                "is_correct": false
+            },
+            {
+                "id": 1102,
+                "option_text": "Objects are stored in heap and references in stack",
+                "is_correct": true
+            },
+            {
+                "id": 1103,
+                "option_text": "Everything is in stack",
+                "is_correct": false
+            },
+            {
+                "id": 1104,
+                "option_text": "Memory model is same as C++",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1127,
+        "topic": 35,
+        "question_text": "Which of the following best describes 'volatile' keyword in Java?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1105,
+                "option_text": "Ensures a variable can’t be modified",
+                "is_correct": false
+            },
+            {
+                "id": 1106,
+                "option_text": "Ensures visibility across threads",
+                "is_correct": true
+            },
+            {
+                "id": 1107,
+                "option_text": "Used for immutable variables",
+                "is_correct": false
+            },
+            {
+                "id": 1108,
+                "option_text": "Used to lock the object",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1128,
+        "topic": 35,
+        "question_text": "How do you implement thread-safe singleton in Java?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1109,
+                "option_text": "Using synchronized block",
+                "is_correct": true
+            },
+            {
+                "id": 1110,
+                "option_text": "Using static fields only",
+                "is_correct": false
+            },
+            {
+                "id": 1111,
+                "option_text": "Using private constructors",
+                "is_correct": false
+            },
+            {
+                "id": 1112,
+                "option_text": "Using abstract class",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1129,
+        "topic": 35,
+        "question_text": "What happens if main() is declared as private?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1113,
+                "option_text": "Program compiles but doesn't run",
+                "is_correct": true
+            },
+            {
+                "id": 1114,
+                "option_text": "Program runs normally",
+                "is_correct": false
+            },
+            {
+                "id": 1115,
+                "option_text": "Program throws exception",
+                "is_correct": false
+            },
+            {
+                "id": 1116,
+                "option_text": "Runtime error only",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1130,
+        "topic": 35,
+        "question_text": "What does the following code print?\n\nint[] arr = new int[5];\nSystem.out.println(arr[0]);",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1117,
+                "option_text": "null",
+                "is_correct": false
+            },
+            {
+                "id": 1118,
+                "option_text": "0",
+                "is_correct": true
+            },
+            {
+                "id": 1119,
+                "option_text": "Garbage value",
+                "is_correct": false
+            },
+            {
+                "id": 1120,
+                "option_text": "Exception",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1131,
+        "topic": 35,
+        "question_text": "Which annotation is used to suppress warnings in Java?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1121,
+                "option_text": "@Ignore",
+                "is_correct": false
+            },
+            {
+                "id": 1122,
+                "option_text": "@SuppressWarnings",
+                "is_correct": true
+            },
+            {
+                "id": 1123,
+                "option_text": "@Override",
+                "is_correct": false
+            },
+            {
+                "id": 1124,
+                "option_text": "@Deprecated",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1132,
+        "topic": 35,
+        "question_text": "Which Java collection uses hashing internally?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1125,
+                "option_text": "TreeMap",
+                "is_correct": false
+            },
+            {
+                "id": 1126,
+                "option_text": "HashMap",
+                "is_correct": true
+            },
+            {
+                "id": 1127,
+                "option_text": "ArrayList",
+                "is_correct": false
+            },
+            {
+                "id": 1128,
+                "option_text": "LinkedList",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1133,
+        "topic": 35,
+        "question_text": "Which feature allows multiple interfaces with default methods to be implemented in Java 8?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1129,
+                "option_text": "Lambda expressions",
+                "is_correct": false
+            },
+            {
+                "id": 1130,
+                "option_text": "Multiple inheritance",
+                "is_correct": true
+            },
+            {
+                "id": 1131,
+                "option_text": "Streams",
+                "is_correct": false
+            },
+            {
+                "id": 1132,
+                "option_text": "Functional interfaces",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1134,
+        "topic": 35,
+        "question_text": "What is the primary advantage of the 'try-with-resources' statement?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1133,
+                "option_text": "It handles all exceptions",
+                "is_correct": false
+            },
+            {
+                "id": 1134,
+                "option_text": "It closes resources automatically",
+                "is_correct": true
+            },
+            {
+                "id": 1135,
+                "option_text": "It saves memory",
+                "is_correct": false
+            },
+            {
+                "id": 1136,
+                "option_text": "It opens multiple files",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1135,
+        "topic": 35,
+        "question_text": "Which class is used to create an immutable list in Java 9?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1137,
+                "option_text": "ImmutableList",
+                "is_correct": false
+            },
+            {
+                "id": 1138,
+                "option_text": "Collections",
+                "is_correct": false
+            },
+            {
+                "id": 1139,
+                "option_text": "List.of()",
+                "is_correct": true
+            },
+            {
+                "id": 1140,
+                "option_text": "List.unmodifiable()",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1136,
+        "topic": 35,
+        "question_text": "What is the result of: Integer.valueOf(\"1010\", 2)?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1141,
+                "option_text": "10",
+                "is_correct": true
+            },
+            {
+                "id": 1142,
+                "option_text": "1010",
+                "is_correct": false
+            },
+            {
+                "id": 1143,
+                "option_text": "0",
+                "is_correct": false
+            },
+            {
+                "id": 1144,
+                "option_text": "Exception",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "id": 1137,
+        "topic": 35,
+        "question_text": "How do you sort a list using lambda expression in Java?",
+        "level": "hard",
+        "marks": 1,
+        "options": [
+            {
+                "id": 1145,
+                "option_text": "Collections.sort(list, lambda)",
+                "is_correct": true
+            },
+            {
+                "id": 1146,
+                "option_text": "list.sort()",
+                "is_correct": false
+            },
+            {
+                "id": 1147,
+                "option_text": "sort(lambda, list)",
+                "is_correct": false
+            },
+            {
+                "id": 1148,
+                "option_text": "SortUtils.sort(list, lambda)",
+                "is_correct": false
+            }
+        ]
+    }
+]

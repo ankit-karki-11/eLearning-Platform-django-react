@@ -1,0 +1,2537 @@
+[
+  {
+    "topic": 26,
+    "question_text": "Which of the following is the correct way to declare a variable in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "x = 10",
+        "is_correct": true
+      },
+      {
+        "option_text": "int x = 10",
+        "is_correct": false
+      },
+      {
+        "option_text": "var x = 10",
+        "is_correct": false
+      },
+      {
+        "option_text": "declare x = 10",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will be the output of: print(type(3.14))?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "<class 'float'>",
+        "is_correct": true
+      },
+      {
+        "option_text": "<class 'int'>",
+        "is_correct": false
+      },
+      {
+        "option_text": "<class 'str'>",
+        "is_correct": false
+      },
+      {
+        "option_text": "<class 'bool'>",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which symbol is used to start a comment in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "#",
+        "is_correct": true
+      },
+      {
+        "option_text": "//",
+        "is_correct": false
+      },
+      {
+        "option_text": "/*",
+        "is_correct": false
+      },
+      {
+        "option_text": "<!--",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of print(len('Python'))?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "6",
+        "is_correct": true
+      },
+      {
+        "option_text": "5",
+        "is_correct": false
+      },
+      {
+        "option_text": "7",
+        "is_correct": false
+      },
+      {
+        "option_text": "Error",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which data type is used to store a sequence of characters in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "str",
+        "is_correct": true
+      },
+      {
+        "option_text": "int",
+        "is_correct": false
+      },
+      {
+        "option_text": "float",
+        "is_correct": false
+      },
+      {
+        "option_text": "bool",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the output be?\n\nprint(2 + 3 * 4)",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "14",
+        "is_correct": true
+      },
+      {
+        "option_text": "20",
+        "is_correct": false
+      },
+      {
+        "option_text": "24",
+        "is_correct": false
+      },
+      {
+        "option_text": "None",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is a valid Python list?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "[1, 2, 3, 4]",
+        "is_correct": true
+      },
+      {
+        "option_text": "(1, 2, 3, 4)",
+        "is_correct": false
+      },
+      {
+        "option_text": "{1, 2, 3, 4}",
+        "is_correct": false
+      },
+      {
+        "option_text": "<1, 2, 3, 4>",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint('Hello'.lower())",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "hello",
+        "is_correct": true
+      },
+      {
+        "option_text": "HELLO",
+        "is_correct": false
+      },
+      {
+        "option_text": "Hello",
+        "is_correct": false
+      },
+      {
+        "option_text": "error",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which keyword is used to create a function in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "def",
+        "is_correct": true
+      },
+      {
+        "option_text": "function",
+        "is_correct": false
+      },
+      {
+        "option_text": "fun",
+        "is_correct": false
+      },
+      {
+        "option_text": "define",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint(5 // 2)",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "2",
+        "is_correct": true
+      },
+      {
+        "option_text": "2.5",
+        "is_correct": false
+      },
+      {
+        "option_text": "3",
+        "is_correct": false
+      },
+      {
+        "option_text": "1",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you start a conditional statement in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "if",
+        "is_correct": true
+      },
+      {
+        "option_text": "cond",
+        "is_correct": false
+      },
+      {
+        "option_text": "when",
+        "is_correct": false
+      },
+      {
+        "option_text": "case",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is used to iterate over a sequence in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "for loop",
+        "is_correct": true
+      },
+      {
+        "option_text": "while loop",
+        "is_correct": false
+      },
+      {
+        "option_text": "do while loop",
+        "is_correct": false
+      },
+      {
+        "option_text": "repeat until loop",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint(bool(''))",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "False",
+        "is_correct": true
+      },
+      {
+        "option_text": "True",
+        "is_correct": false
+      },
+      {
+        "option_text": "None",
+        "is_correct": false
+      },
+      {
+        "option_text": "Error",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the correct way to import a module named math?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "import math",
+        "is_correct": true
+      },
+      {
+        "option_text": "include math",
+        "is_correct": false
+      },
+      {
+        "option_text": "#import math",
+        "is_correct": false
+      },
+      {
+        "option_text": "using math",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of these is a tuple?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "(1, 2, 3)",
+        "is_correct": true
+      },
+      {
+        "option_text": "[1, 2, 3]",
+        "is_correct": false
+      },
+      {
+        "option_text": "{1, 2, 3}",
+        "is_correct": false
+      },
+      {
+        "option_text": "<1, 2, 3>",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the 'break' statement do inside a loop?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "Exits the loop immediately",
+        "is_correct": true
+      },
+      {
+        "option_text": "Skips the current iteration",
+        "is_correct": false
+      },
+      {
+        "option_text": "Restarts the loop",
+        "is_correct": false
+      },
+      {
+        "option_text": "Pauses the loop",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will be the output?\n\nprint(type([]))",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "<class 'list'>",
+        "is_correct": true
+      },
+      {
+        "option_text": "<class 'tuple'>",
+        "is_correct": false
+      },
+      {
+        "option_text": "<class 'dict'>",
+        "is_correct": false
+      },
+      {
+        "option_text": "<class 'set'>",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint('Python'[0])",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "P",
+        "is_correct": true
+      },
+      {
+        "option_text": "y",
+        "is_correct": false
+      },
+      {
+        "option_text": "n",
+        "is_correct": false
+      },
+      {
+        "option_text": "Error",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which function converts a string to an integer in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "int()",
+        "is_correct": true
+      },
+      {
+        "option_text": "str()",
+        "is_correct": false
+      },
+      {
+        "option_text": "float()",
+        "is_correct": false
+      },
+      {
+        "option_text": "bool()",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint(10 % 3)",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "1",
+        "is_correct": true
+      },
+      {
+        "option_text": "3",
+        "is_correct": false
+      },
+      {
+        "option_text": "0",
+        "is_correct": false
+      },
+      {
+        "option_text": "Error",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the following code print?\n\nprint(bool(0))",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "False",
+        "is_correct": true
+      },
+      {
+        "option_text": "True",
+        "is_correct": false
+      },
+      {
+        "option_text": "0",
+        "is_correct": false
+      },
+      {
+        "option_text": "None",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is NOT a Python keyword?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "then",
+        "is_correct": true
+      },
+      {
+        "option_text": "else",
+        "is_correct": false
+      },
+      {
+        "option_text": "for",
+        "is_correct": false
+      },
+      {
+        "option_text": "while",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the correct file extension for Python files?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": ".py",
+        "is_correct": true
+      },
+      {
+        "option_text": ".pt",
+        "is_correct": false
+      },
+      {
+        "option_text": ".pyt",
+        "is_correct": false
+      },
+      {
+        "option_text": ".python",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will be the output?\n\nprint('5' + '3')",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "53",
+        "is_correct": true
+      },
+      {
+        "option_text": "8",
+        "is_correct": false
+      },
+      {
+        "option_text": "Error",
+        "is_correct": false
+      },
+      {
+        "option_text": "None",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which function is used to output text to the console?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "print()",
+        "is_correct": true
+      },
+      {
+        "option_text": "echo()",
+        "is_correct": false
+      },
+      {
+        "option_text": "console.log()",
+        "is_correct": false
+      },
+      {
+        "option_text": "write()",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of these is mutable in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "list",
+        "is_correct": true
+      },
+      {
+        "option_text": "tuple",
+        "is_correct": false
+      },
+      {
+        "option_text": "string",
+        "is_correct": false
+      },
+      {
+        "option_text": "int",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which operator is used for exponentiation in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "**",
+        "is_correct": true
+      },
+      {
+        "option_text": "^",
+        "is_correct": false
+      },
+      {
+        "option_text": "^^",
+        "is_correct": false
+      },
+      {
+        "option_text": "exp()",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint(7 == 7)",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "True",
+        "is_correct": true
+      },
+      {
+        "option_text": "False",
+        "is_correct": false
+      },
+      {
+        "option_text": "7",
+        "is_correct": false
+      },
+      {
+        "option_text": "None",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following can store key-value pairs?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "dictionary",
+        "is_correct": true
+      },
+      {
+        "option_text": "list",
+        "is_correct": false
+      },
+      {
+        "option_text": "tuple",
+        "is_correct": false
+      },
+      {
+        "option_text": "set",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you create a set in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "Using curly braces with comma-separated values, e.g., {1, 2, 3}",
+        "is_correct": true
+      },
+      {
+        "option_text": "[1, 2, 3]",
+        "is_correct": false
+      },
+      {
+        "option_text": "(1, 2, 3)",
+        "is_correct": false
+      },
+      {
+        "option_text": "<1, 2, 3>",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following converts a list to a string?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "str()",
+        "is_correct": true
+      },
+      {
+        "option_text": "int()",
+        "is_correct": false
+      },
+      {
+        "option_text": "list()",
+        "is_correct": false
+      },
+      {
+        "option_text": "float()",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint(type(True))",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "<class 'bool'>",
+        "is_correct": true
+      },
+      {
+        "option_text": "<class 'int'>",
+        "is_correct": false
+      },
+      {
+        "option_text": "<class 'str'>",
+        "is_correct": false
+      },
+      {
+        "option_text": "<class 'NoneType'>",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which function returns the absolute value of a number?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "abs()",
+        "is_correct": true
+      },
+      {
+        "option_text": "round()",
+        "is_correct": false
+      },
+      {
+        "option_text": "floor()",
+        "is_correct": false
+      },
+      {
+        "option_text": "ceil()",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the following code print?\n\nprint( 'abc'.capitalize() )",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "Abc",
+        "is_correct": true
+      },
+      {
+        "option_text": "abc",
+        "is_correct": false
+      },
+      {
+        "option_text": "ABC",
+        "is_correct": false
+      },
+      {
+        "option_text": "Error",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint(type(None))",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "<class 'NoneType'>",
+        "is_correct": true
+      },
+      {
+        "option_text": "<class 'int'>",
+        "is_correct": false
+      },
+      {
+        "option_text": "<class 'str'>",
+        "is_correct": false
+      },
+      {
+        "option_text": "<class 'bool'>",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of these is NOT a valid variable name in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "2nd_value",
+        "is_correct": true
+      },
+      {
+        "option_text": "value_2",
+        "is_correct": false
+      },
+      {
+        "option_text": "_value",
+        "is_correct": false
+      },
+      {
+        "option_text": "value2",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you start a while loop in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "while condition:",
+        "is_correct": true
+      },
+      {
+        "option_text": "while(condition)",
+        "is_correct": false
+      },
+      {
+        "option_text": "loop while condition",
+        "is_correct": false
+      },
+      {
+        "option_text": "do while condition",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will be the output of:\n\nprint(3 != 3)",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      {
+        "option_text": "False",
+        "is_correct": true
+      },
+      {
+        "option_text": "True",
+        "is_correct": false
+      },
+      {
+        "option_text": "3",
+        "is_correct": false
+      },
+      {
+        "option_text": "Error",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the 'continue' statement do inside a loop?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "Skips the current iteration and moves to the next", "is_correct": true },
+      { "option_text": "Exits the loop immediately", "is_correct": false },
+      { "option_text": "Restarts the loop", "is_correct": false },
+      { "option_text": "Pauses the loop", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you create an empty dictionary in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "{}", "is_correct": true },
+      { "option_text": "[]", "is_correct": false },
+      { "option_text": "()", "is_correct": false },
+      { "option_text": "<>", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint('Python'[::-1])",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "nohtyP", "is_correct": true },
+      { "option_text": "Python", "is_correct": false },
+      { "option_text": "Error", "is_correct": false },
+      { "option_text": "Pytho", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which keyword is used to handle exceptions in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "try", "is_correct": true },
+      { "option_text": "catch", "is_correct": false },
+      { "option_text": "handle", "is_correct": false },
+      { "option_text": "excepted", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the result of:\n\nprint(4 ** 2)",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "16", "is_correct": true },
+      { "option_text": "8", "is_correct": false },
+      { "option_text": "6", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of these is used to define a block of code in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "Indentation", "is_correct": true },
+      { "option_text": "Curly braces {}", "is_correct": false },
+      { "option_text": "Parentheses ()", "is_correct": false },
+      { "option_text": "Square brackets []", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of these functions is used to read input from the user?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "input()", "is_correct": true },
+      { "option_text": "scan()", "is_correct": false },
+      { "option_text": "read()", "is_correct": false },
+      { "option_text": "get()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the following code print?\n\nprint(type({1, 2, 3}))",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "<class 'set'>", "is_correct": true },
+      { "option_text": "<class 'list'>", "is_correct": false },
+      { "option_text": "<class 'tuple'>", "is_correct": false },
+      { "option_text": "<class 'dict'>", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint(type('123'))",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "<class 'str'>", "is_correct": true },
+      { "option_text": "<class 'int'>", "is_correct": false },
+      { "option_text": "<class 'float'>", "is_correct": false },
+      { "option_text": "<class 'bool'>", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is used to check if two variables refer to the same object in memory?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "is", "is_correct": true },
+      { "option_text": "==", "is_correct": false },
+      { "option_text": "equals", "is_correct": false },
+      { "option_text": "same", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint(type(5 / 2))",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "<class 'float'>", "is_correct": true },
+      { "option_text": "<class 'int'>", "is_correct": false },
+      { "option_text": "<class 'str'>", "is_correct": false },
+      { "option_text": "<class 'bool'>", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of these can be used to terminate a function and return a value?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "return", "is_correct": true },
+      { "option_text": "exit", "is_correct": false },
+      { "option_text": "break", "is_correct": false },
+      { "option_text": "stop", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will be the output of:\n\nprint(type((1, 2, 3)))",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "<class 'tuple'>", "is_correct": true },
+      { "option_text": "<class 'list'>", "is_correct": false },
+      { "option_text": "<class 'set'>", "is_correct": false },
+      { "option_text": "<class 'dict'>", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you add an element to a Python list named my_list?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "my_list.append(element)", "is_correct": true },
+      { "option_text": "my_list.add(element)", "is_correct": false },
+      { "option_text": "my_list.insert(element)", "is_correct": false },
+      { "option_text": "my_list.put(element)", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of these is used to represent an empty value in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "None", "is_correct": true },
+      { "option_text": "null", "is_correct": false },
+      { "option_text": "empty", "is_correct": false },
+      { "option_text": "void", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following will raise a syntax error?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "if 5 > 2 print('yes')", "is_correct": true },
+      { "option_text": "if 5 > 2:\n  print('yes')", "is_correct": false },
+      { "option_text": "if (5 > 2):\n  print('yes')", "is_correct": false },
+      { "option_text": "if 5 > 2:\nprint('yes')", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint(bool([]))",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "False", "is_correct": true },
+      { "option_text": "True", "is_correct": false },
+      { "option_text": "Error", "is_correct": false },
+      { "option_text": "None", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which operator is used for floor division in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "//", "is_correct": true },
+      { "option_text": "/", "is_correct": false },
+      { "option_text": "%", "is_correct": false },
+      { "option_text": "**", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is NOT a valid Python data type?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "character", "is_correct": true },
+      { "option_text": "list", "is_correct": false },
+      { "option_text": "tuple", "is_correct": false },
+      { "option_text": "set", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you create a multi-line string in Python?",
+    "level": "basic",
+    "marks": 1,
+    "options": [
+      { "option_text": "Using triple quotes ''' or \"\"\"", "is_correct": true },
+      { "option_text": "Using double quotes only", "is_correct": false },
+      { "option_text": "Using single quotes only", "is_correct": false },
+      { "option_text": "Using brackets []", "is_correct": false }
+    ]
+  },
+
+  {
+    "topic": 26,
+    "question_text": "Which of the following is a Python web framework?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Django", "is_correct": true },
+      { "option_text": "React", "is_correct": false },
+      { "option_text": "Angular", "is_correct": false },
+      { "option_text": "Vue", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is a Python generator?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "A function that returns an iterator and produces values lazily", "is_correct": true },
+      { "option_text": "A function that returns all values at once", "is_correct": false },
+      { "option_text": "A type of list", "is_correct": false },
+      { "option_text": "A class", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the 'yield' keyword do in Python?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Pauses function execution and returns a value to the caller without destroying local variables", "is_correct": true },
+      { "option_text": "Stops a loop", "is_correct": false },
+      { "option_text": "Returns multiple values at once", "is_correct": false },
+      { "option_text": "Raises an exception", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is a Python decorator?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "A function that modifies another function without changing its code", "is_correct": true },
+      { "option_text": "A class", "is_correct": false },
+      { "option_text": "A type of variable", "is_correct": false },
+      { "option_text": "A syntax error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the purpose of the 'with' statement in Python?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "It simplifies exception handling by encapsulating common preparation and cleanup tasks", "is_correct": true },
+      { "option_text": "Starts a loop", "is_correct": false },
+      { "option_text": "Defines a function", "is_correct": false },
+      { "option_text": "Imports modules", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which module in Python is used for regular expressions?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "re", "is_correct": true },
+      { "option_text": "regex", "is_correct": false },
+      { "option_text": "expression", "is_correct": false },
+      { "option_text": "regexp", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the following code output?\n\nprint([i for i in range(3)])",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "[0, 1, 2]", "is_correct": true },
+      { "option_text": "[1, 2, 3]", "is_correct": false },
+      { "option_text": "[0, 1, 2, 3]", "is_correct": false },
+      { "option_text": "[3, 2, 1]", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of these statements about Python lists is true?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Lists are mutable and can store elements of different types", "is_correct": true },
+      { "option_text": "Lists are immutable", "is_correct": false },
+      { "option_text": "Lists can only store integers", "is_correct": false },
+      { "option_text": "Lists do not support slicing", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint('Python'.count('t'))",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "1", "is_correct": true },
+      { "option_text": "0", "is_correct": false },
+      { "option_text": "2", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How can you open a file for writing in Python?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "open('filename.txt', 'w')", "is_correct": true },
+      { "option_text": "open('filename.txt', 'r')", "is_correct": false },
+      { "option_text": "open('filename.txt', 'a')", "is_correct": false },
+      { "option_text": "open('filename.txt', 'x')", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will this code output?\n\nprint({1, 2, 3} & {2, 3, 4})",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "{2, 3}", "is_correct": true },
+      { "option_text": "{1, 4}", "is_correct": false },
+      { "option_text": "{1, 2, 3, 4}", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which method is used to add an element to the end of a list?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "append()", "is_correct": true },
+      { "option_text": "add()", "is_correct": false },
+      { "option_text": "insert()", "is_correct": false },
+      { "option_text": "extend()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint( list(map(lambda x: x*2, [1, 2, 3])) )",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "[2, 4, 6]", "is_correct": true },
+      { "option_text": "[1, 2, 3]", "is_correct": false },
+      { "option_text": "[3, 4, 5]", "is_correct": false },
+      { "option_text": "[1, 4, 9]", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the 'assert' statement do?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Checks a condition and raises AssertionError if false", "is_correct": true },
+      { "option_text": "Stops program execution unconditionally", "is_correct": false },
+      { "option_text": "Returns a value", "is_correct": false },
+      { "option_text": "Defines a function", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which built-in function can be used to get the length of an object?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "len()", "is_correct": true },
+      { "option_text": "length()", "is_correct": false },
+      { "option_text": "size()", "is_correct": false },
+      { "option_text": "count()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you create a set in Python?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Using curly braces {} with comma-separated values", "is_correct": true },
+      { "option_text": "Using square brackets []", "is_correct": false },
+      { "option_text": "Using parentheses ()", "is_correct": false },
+      { "option_text": "Using angle brackets <>", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the following code output?\n\nprint(bool('False'))",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "True", "is_correct": true },
+      { "option_text": "False", "is_correct": false },
+      { "option_text": "Error", "is_correct": false },
+      { "option_text": "None", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is a mutable data type?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "List", "is_correct": true },
+      { "option_text": "Tuple", "is_correct": false },
+      { "option_text": "String", "is_correct": false },
+      { "option_text": "Integer", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which keyword is used to define an anonymous function in Python?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "lambda", "is_correct": true },
+      { "option_text": "def", "is_correct": false },
+      { "option_text": "func", "is_correct": false },
+      { "option_text": "anonymous", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you import only the 'sqrt' function from the math module?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "from math import sqrt", "is_correct": true },
+      { "option_text": "import math.sqrt", "is_correct": false },
+      { "option_text": "import sqrt from math", "is_correct": false },
+      { "option_text": "from math import all", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the code below print?\n\nprint([x for x in range(5) if x % 2 == 0])",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "[0, 2, 4]", "is_correct": true },
+      { "option_text": "[1, 3, 5]", "is_correct": false },
+      { "option_text": "[0, 1, 2, 3, 4]", "is_correct": false },
+      { "option_text": "[2, 4, 6]", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the difference between a shallow copy and a deep copy?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Shallow copy copies references, deep copy copies objects recursively", "is_correct": true },
+      { "option_text": "Shallow copy copies objects recursively", "is_correct": false },
+      { "option_text": "Deep copy copies only references", "is_correct": false },
+      { "option_text": "They are the same", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the purpose of the 'global' keyword in Python?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "To modify a variable outside the current scope", "is_correct": true },
+      { "option_text": "To declare a variable inside a function", "is_correct": false },
+      { "option_text": "To create a global function", "is_correct": false },
+      { "option_text": "To stop the program", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you check the data type of a variable in Python?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Using type()", "is_correct": true },
+      { "option_text": "Using dtype()", "is_correct": false },
+      { "option_text": "Using class()", "is_correct": false },
+      { "option_text": "Using typeof()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will be the output of this code?\n\nx = [1, 2, 3]\ny = x\nx.append(4)\nprint(y)",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "[1, 2, 3, 4]", "is_correct": true },
+      { "option_text": "[1, 2, 3]", "is_correct": false },
+      { "option_text": "[4]", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of these is NOT a valid way to define a function in Python?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "function my_func():", "is_correct": true },
+      { "option_text": "def my_func():", "is_correct": false },
+      { "option_text": "def my_func(arg):", "is_correct": false },
+      { "option_text": "def my_func(): return 5", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of these data structures preserves the order of insertion?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "List", "is_correct": true },
+      { "option_text": "Set", "is_correct": false },
+      { "option_text": "Dictionary (before Python 3.7)", "is_correct": false },
+      { "option_text": "Tuple", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the 'pass' statement do?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "It does nothing and acts as a placeholder", "is_correct": true },
+      { "option_text": "Stops program execution", "is_correct": false },
+      { "option_text": "Raises an error", "is_correct": false },
+      { "option_text": "Returns a value", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following will open a file for appending?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "open('file.txt', 'a')", "is_correct": true },
+      { "option_text": "open('file.txt', 'r')", "is_correct": false },
+      { "option_text": "open('file.txt', 'w')", "is_correct": false },
+      { "option_text": "open('file.txt', 'x')", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint(bool(0))",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "False", "is_correct": true },
+      { "option_text": "True", "is_correct": false },
+      { "option_text": "0", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How can you convert a string '123' to an integer?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "int('123')", "is_correct": true },
+      { "option_text": "str('123')", "is_correct": false },
+      { "option_text": "float('123')", "is_correct": false },
+      { "option_text": "bool('123')", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of this list comprehension?\n\n[x*x for x in range(3)]",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "[0, 1, 4]", "is_correct": true },
+      { "option_text": "[1, 4, 9]", "is_correct": false },
+      { "option_text": "[0, 1, 2]", "is_correct": false },
+      { "option_text": "[1, 2, 3]", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which method is used to remove an item from a list by value?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "remove()", "is_correct": true },
+      { "option_text": "pop()", "is_correct": false },
+      { "option_text": "delete()", "is_correct": false },
+      { "option_text": "discard()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the following code output?\n\nprint( all([True, False, True]) )",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "False", "is_correct": true },
+      { "option_text": "True", "is_correct": false },
+      { "option_text": "None", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which built-in Python function can be used to create an iterator that yields pairs from two iterables?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "zip()", "is_correct": true },
+      { "option_text": "map()", "is_correct": false },
+      { "option_text": "filter()", "is_correct": false },
+      { "option_text": "enumerate()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of this code?\n\nprint(sorted([3, 1, 2]))",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "[1, 2, 3]", "is_correct": true },
+      { "option_text": "[3, 2, 1]", "is_correct": false },
+      { "option_text": "[1, 3, 2]", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following statements about Python tuples is true?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Tuples are immutable sequences", "is_correct": true },
+      { "option_text": "Tuples can be changed after creation", "is_correct": false },
+      { "option_text": "Tuples support item assignment", "is_correct": false },
+      { "option_text": "Tuples are mutable like lists", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the method 'strip()' do when called on a string?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Removes leading and trailing whitespace", "is_correct": true },
+      { "option_text": "Removes all spaces", "is_correct": false },
+      { "option_text": "Converts string to uppercase", "is_correct": false },
+      { "option_text": "Reverses the string", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How can you check if a key exists in a Python dictionary?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "'key' in dict", "is_correct": true },
+      { "option_text": "dict.has_key('key')", "is_correct": false },
+      { "option_text": "dict.contains('key')", "is_correct": false },
+      { "option_text": "'key' inside dict", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which Python keyword is used to create a class?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "class", "is_correct": true },
+      { "option_text": "def", "is_correct": false },
+      { "option_text": "object", "is_correct": false },
+      { "option_text": "struct", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will this code output?\n\nprint(bool(''))",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "False", "is_correct": true },
+      { "option_text": "True", "is_correct": false },
+      { "option_text": "None", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the 'isinstance()' function do?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Checks if an object is an instance of a class or a tuple of classes", "is_correct": true },
+      { "option_text": "Creates an instance of a class", "is_correct": false },
+      { "option_text": "Checks if two variables are identical", "is_correct": false },
+      { "option_text": "Returns the type of an object", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the following code output?\n\nprint(dict(a=1, b=2))",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "{'a': 1, 'b': 2}", "is_correct": true },
+      { "option_text": "{a=1, b=2}", "is_correct": false },
+      { "option_text": "[('a', 1), ('b', 2)]", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which built-in function is used to iterate over a sequence and keep track of the index?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "enumerate()", "is_correct": true },
+      { "option_text": "zip()", "is_correct": false },
+      { "option_text": "range()", "is_correct": false },
+      { "option_text": "iter()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint('abc'.upper())",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "ABC", "is_correct": true },
+      { "option_text": "abc", "is_correct": false },
+      { "option_text": "Abc", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will this code print?\n\nprint(list(range(1,5)))",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "[1, 2, 3, 4]", "is_correct": true },
+      { "option_text": "[0, 1, 2, 3, 4]", "is_correct": false },
+      { "option_text": "[1, 2, 3, 4, 5]", "is_correct": false },
+      { "option_text": "[5]", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the expression '5' + 3 evaluate to in Python?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "TypeError", "is_correct": true },
+      { "option_text": "8", "is_correct": false },
+      { "option_text": "'53'", "is_correct": false },
+      { "option_text": "'8'", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the correct way to handle multiple exceptions in one except block?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "except (TypeError, ValueError):", "is_correct": true },
+      { "option_text": "except TypeError or ValueError:", "is_correct": false },
+      { "option_text": "except TypeError, ValueError:", "is_correct": false },
+      { "option_text": "except TypeError & ValueError:", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you create a class attribute in Python?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Define the attribute inside the class but outside any method", "is_correct": true },
+      { "option_text": "Define the attribute inside the __init__ method", "is_correct": false },
+      { "option_text": "Use the global keyword", "is_correct": false },
+      { "option_text": "Define the attribute inside an instance method", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of these statements about Python sets is true?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Sets are unordered collections of unique elements", "is_correct": true },
+      { "option_text": "Sets allow duplicate elements", "is_correct": false },
+      { "option_text": "Sets are indexed like lists", "is_correct": false },
+      { "option_text": "Sets support slicing", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the following code print?\n\nprint(len({'a':1, 'b':2, 'c':3}))",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "3", "is_correct": true },
+      { "option_text": "2", "is_correct": false },
+      { "option_text": "1", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of:\n\nprint(type(lambda x: x))",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "<class 'function'>", "is_correct": true },
+      { "option_text": "<class 'lambda'>", "is_correct": false },
+      { "option_text": "<class 'object'>", "is_correct": false },
+      { "option_text": "<class 'method'>", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the 'del' keyword do in Python?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Deletes a variable or item", "is_correct": true },
+      { "option_text": "Declares a variable", "is_correct": false },
+      { "option_text": "Deletes a function", "is_correct": false },
+      { "option_text": "Exits the program", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is NOT true about Python functions?",
+    "level": "medium",
+    "marks": 1,
+    "options": [
+      { "option_text": "Functions can return multiple values as tuples", "is_correct": false },
+      { "option_text": "Functions can have default argument values", "is_correct": false },
+      { "option_text": "Functions must always return a value", "is_correct": true },
+      { "option_text": "Functions can accept variable numbers of arguments", "is_correct": false }
+    ]
+  },
+
+  {
+    "topic": 26,
+    "question_text": "What is a metaclass in Python?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "A class of a class that defines how a class behaves", "is_correct": true },
+      { "option_text": "A special method inside a class", "is_correct": false },
+      { "option_text": "A subclass", "is_correct": false },
+      { "option_text": "A decorator function", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the difference between @staticmethod and @classmethod?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "@staticmethod does not take class or instance as argument, @classmethod takes the class as first argument", "is_correct": true },
+      { "option_text": "Both are the same", "is_correct": false },
+      { "option_text": "@classmethod requires an instance", "is_correct": false },
+      { "option_text": "@staticmethod can access instance variables", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which Python module provides support for unit testing?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "unittest", "is_correct": true },
+      { "option_text": "pytest", "is_correct": false },
+      { "option_text": "test", "is_correct": false },
+      { "option_text": "check", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the following code output?\n\nprint([i for i in range(5) if i != 3])",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "[0, 1, 2, 4]", "is_correct": true },
+      { "option_text": "[0, 1, 2, 3, 4]", "is_correct": false },
+      { "option_text": "[3]", "is_correct": false },
+      { "option_text": "[0, 1, 2]", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is true about Python's GIL (Global Interpreter Lock)?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It allows only one thread to execute Python bytecode at a time", "is_correct": true },
+      { "option_text": "It allows true parallelism in multi-threading", "is_correct": false },
+      { "option_text": "It is present in all Python implementations", "is_correct": false },
+      { "option_text": "It is related to garbage collection", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is a Python context manager?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "An object that defines __enter__ and __exit__ methods to manage resources", "is_correct": true },
+      { "option_text": "A function to manage exceptions", "is_correct": false },
+      { "option_text": "A type of generator", "is_correct": false },
+      { "option_text": "A module for concurrency", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you define a coroutine in Python?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Using async def", "is_correct": true },
+      { "option_text": "Using def with yield", "is_correct": false },
+      { "option_text": "Using def with return", "is_correct": false },
+      { "option_text": "Using coroutine keyword", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the purpose of the 'nonlocal' keyword?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It allows modifying variables in the nearest enclosing scope excluding globals", "is_correct": true },
+      { "option_text": "It declares global variables", "is_correct": false },
+      { "option_text": "It stops variable shadowing", "is_correct": false },
+      { "option_text": "It deletes variables", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which function is used to create an iterator from a callable until a sentinel value is found?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "iter(callable, sentinel)", "is_correct": true },
+      { "option_text": "next(callable, sentinel)", "is_correct": false },
+      { "option_text": "range(callable, sentinel)", "is_correct": false },
+      { "option_text": "enumerate(callable, sentinel)", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following correctly describes Python's method resolution order (MRO)?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It is the order in which base classes are searched when looking for a method", "is_correct": true },
+      { "option_text": "It is the order in which methods are defined in the class", "is_correct": false },
+      { "option_text": "It is a list of all methods in a class", "is_correct": false },
+      { "option_text": "It is the order of function calls inside a method", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the 'yield' keyword do?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It produces a value and pauses the function, making it a generator", "is_correct": true },
+      { "option_text": "Returns a value and exits the function", "is_correct": false },
+      { "option_text": "Terminates the program", "is_correct": false },
+      { "option_text": "Raises an exception", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How can you optimize a function in Python for faster execution?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Use built-in functions and libraries when possible", "is_correct": true },
+      { "option_text": "Write all code manually", "is_correct": false },
+      { "option_text": "Avoid using imports", "is_correct": false },
+      { "option_text": "Use print statements for debugging", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which Python built-in module provides support for regular expressions?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "re", "is_correct": true },
+      { "option_text": "regex", "is_correct": false },
+      { "option_text": "expression", "is_correct": false },
+      { "option_text": "pattern", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the difference between a generator and an iterator?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Generators are iterators created with functions using yield", "is_correct": true },
+      { "option_text": "All iterators are generators", "is_correct": false },
+      { "option_text": "Generators store all values in memory", "is_correct": false },
+      { "option_text": "Iterators cannot be used in for loops", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you create a decorator function in Python?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Define a function that takes another function and returns a modified function", "is_correct": true },
+      { "option_text": "Define a class with a __call__ method", "is_correct": false },
+      { "option_text": "Use the @classmethod keyword", "is_correct": false },
+      { "option_text": "Use a lambda function", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following describes Python's garbage collection mechanism?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It uses reference counting with cycle detection", "is_correct": true },
+      { "option_text": "It only uses reference counting", "is_correct": false },
+      { "option_text": "It requires manual memory management", "is_correct": false },
+      { "option_text": "It does not manage memory", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the use of the 'with' statement in Python?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It simplifies exception handling by encapsulating common preparation and cleanup tasks", "is_correct": true },
+      { "option_text": "It defines a function", "is_correct": false },
+      { "option_text": "It declares variables", "is_correct": false },
+      { "option_text": "It creates loops", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will this code output?\n\nprint(type([1, 2, 3]))",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "<class 'list'>", "is_correct": true },
+      { "option_text": "<class 'tuple'>", "is_correct": false },
+      { "option_text": "<class 'dict'>", "is_correct": false },
+      { "option_text": "<class 'set'>", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is NOT a valid way to import a module in Python?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "import module_name", "is_correct": false },
+      { "option_text": "from module_name import function_name", "is_correct": false },
+      { "option_text": "include module_name", "is_correct": true },
+      { "option_text": "import module_name as alias", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How can you create a custom exception in Python?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "By subclassing the Exception class", "is_correct": true },
+      { "option_text": "By using the raise keyword alone", "is_correct": false },
+      { "option_text": "By importing from errors module", "is_correct": false },
+      { "option_text": "By defining a function", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of this code?\n\nprint({x: x*x for x in range(3)})",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "{0: 0, 1: 1, 2: 4}", "is_correct": true },
+      { "option_text": "[0, 1, 4]", "is_correct": false },
+      { "option_text": "{0, 1, 4}", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the main purpose of Python's 'asyncio' module?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "To write concurrent code using the async/await syntax", "is_correct": true },
+      { "option_text": "To handle exceptions", "is_correct": false },
+      { "option_text": "To create GUI applications", "is_correct": false },
+      { "option_text": "To interact with databases", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will happen if you try to modify a tuple after creation?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It will raise a TypeError", "is_correct": true },
+      { "option_text": "It will modify successfully", "is_correct": false },
+      { "option_text": "It will convert the tuple to list", "is_correct": false },
+      { "option_text": "It will ignore the modification", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which function is used to find the memory size of an object in Python?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "sys.getsizeof()", "is_correct": true },
+      { "option_text": "memory.sizeof()", "is_correct": false },
+      { "option_text": "sizeof()", "is_correct": false },
+      { "option_text": "getmemsize()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How can you handle file exceptions when opening files in Python?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Using try-except blocks around file operations", "is_correct": true },
+      { "option_text": "Using if-else statements", "is_correct": false },
+      { "option_text": "Using file.exists() method", "is_correct": false },
+      { "option_text": "Using with statement alone", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the result of the expression:\n\n'Python'[::-1]",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "nohtyP", "is_correct": true },
+      { "option_text": "Python", "is_correct": false },
+      { "option_text": "Error", "is_correct": false },
+      { "option_text": "nothyP", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which statement about Python's 'super()' function is correct?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It is used to call a method from the parent class", "is_correct": true },
+      { "option_text": "It creates a new class", "is_correct": false },
+      { "option_text": "It replaces the current method", "is_correct": false },
+      { "option_text": "It initializes variables", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the following code output?\n\nprint({1, 2, 3} & {2, 3, 4})",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "{2, 3}", "is_correct": true },
+      { "option_text": "{1, 2, 3, 4}", "is_correct": false },
+      { "option_text": "{1}", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which statement about Python's memory management is false?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Python uses automatic garbage collection", "is_correct": false },
+      { "option_text": "Memory is manually managed by the programmer", "is_correct": true },
+      { "option_text": "Python uses reference counting", "is_correct": false },
+      { "option_text": "Cyclic references are detected and cleaned", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is true about Python's 'property' decorator?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It allows defining getter, setter, and deleter methods for an attribute", "is_correct": true },
+      { "option_text": "It makes a method static", "is_correct": false },
+      { "option_text": "It converts a function into a coroutine", "is_correct": false },
+      { "option_text": "It marks a method as abstract", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the difference between '==' and 'is' in Python?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "'==' checks value equality, 'is' checks object identity", "is_correct": true },
+      { "option_text": "'==' checks object identity, 'is' checks value equality", "is_correct": false },
+      { "option_text": "Both are the same", "is_correct": false },
+      { "option_text": "Neither are valid operators", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How do you make a Python script executable on Unix-based systems?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Add a shebang line (e.g. #!/usr/bin/env python3) and make the file executable", "is_correct": true },
+      { "option_text": "Rename the file to .exe", "is_correct": false },
+      { "option_text": "Use chmod 000 filename.py", "is_correct": false },
+      { "option_text": "Put the file in /bin directory", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is a feature of Python's 'dataclasses' module?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Provides a decorator and functions for automatically adding special methods to classes", "is_correct": true },
+      { "option_text": "Allows defining database schemas", "is_correct": false },
+      { "option_text": "Handles database connections", "is_correct": false },
+      { "option_text": "Generates documentation", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the 'async with' statement do?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It allows asynchronous context management for resources", "is_correct": true },
+      { "option_text": "It runs a function asynchronously", "is_correct": false },
+      { "option_text": "It creates an async generator", "is_correct": false },
+      { "option_text": "It defines an asynchronous function", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of this code?\n\nprint(sum([i*i for i in range(4)]))",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "14", "is_correct": true },
+      { "option_text": "10", "is_correct": false },
+      { "option_text": "20", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which Python built-in can be used to introspect an object’s attributes?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "dir()", "is_correct": true },
+      { "option_text": "inspect()", "is_correct": false },
+      { "option_text": "attributes()", "is_correct": false },
+      { "option_text": "vars()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the correct syntax to raise a custom exception with a message?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "raise MyError('Error message')", "is_correct": true },
+      { "option_text": "throw MyError('Error message')", "is_correct": false },
+      { "option_text": "raise Error, 'Error message'", "is_correct": false },
+      { "option_text": "throw Error, 'Error message'", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the purpose of the __slots__ declaration in a Python class?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "To declare fixed attributes and save memory by preventing creation of __dict__", "is_correct": true },
+      { "option_text": "To enable multiple inheritance", "is_correct": false },
+      { "option_text": "To make a class abstract", "is_correct": false },
+      { "option_text": "To declare class constants", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will happen if you try to access a local variable before assignment inside a function?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "UnboundLocalError is raised", "is_correct": true },
+      { "option_text": "The variable defaults to None", "is_correct": false },
+      { "option_text": "The global variable with the same name is accessed", "is_correct": false },
+      { "option_text": "No error, but returns undefined", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the functools.lru_cache decorator do?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Caches the results of function calls to optimize repeated calls", "is_correct": true },
+      { "option_text": "Enables asynchronous execution", "is_correct": false },
+      { "option_text": "Automatically retries function on failure", "is_correct": false },
+      { "option_text": "Makes the function thread-safe", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of this code?\n\nprint(type(type(int)))",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "<class 'type'>", "is_correct": true },
+      { "option_text": "<class 'int'>", "is_correct": false },
+      { "option_text": "<class 'object'>", "is_correct": false },
+      { "option_text": "<class 'meta'>", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which method would you override to customize object creation in Python?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "__new__", "is_correct": true },
+      { "option_text": "__init__", "is_correct": false },
+      { "option_text": "__create__", "is_correct": false },
+      { "option_text": "__call__", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "In Python, how do you enforce that a method must be implemented by subclasses?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "By defining it as an abstract method in an abstract base class", "is_correct": true },
+      { "option_text": "By raising NotImplementedError in the base method", "is_correct": false },
+      { "option_text": "By making the method private", "is_correct": false },
+      { "option_text": "By using the final keyword", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the difference between 'deepcopy' and 'copy' in the copy module?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "deepcopy copies nested objects recursively; copy copies top-level only", "is_correct": true },
+      { "option_text": "copy creates a new reference, deepcopy modifies the original", "is_correct": false },
+      { "option_text": "Both perform the same operation", "is_correct": false },
+      { "option_text": "deepcopy is slower but shallow", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will the following code output?\n\nprint(bool([]) and bool([0]))",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "False", "is_correct": true },
+      { "option_text": "True", "is_correct": false },
+      { "option_text": "None", "is_correct": false },
+      { "option_text": "Error", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which Python built-in can convert an iterable into a list?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "list()", "is_correct": true },
+      { "option_text": "set()", "is_correct": false },
+      { "option_text": "dict()", "is_correct": false },
+      { "option_text": "tuple()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the 'global' keyword do inside a function?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Allows modifying a variable defined in the global scope", "is_correct": true },
+      { "option_text": "Declares a variable local to the function", "is_correct": false },
+      { "option_text": "Creates a new global variable", "is_correct": false },
+      { "option_text": "Prevents variable reassignment", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of the following code?\n\nprint(type([1, 2]) is list)",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "True", "is_correct": true },
+      { "option_text": "False", "is_correct": false },
+      { "option_text": "Error", "is_correct": false },
+      { "option_text": "None", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which method is used to define a custom iterator in a Python class?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "__iter__", "is_correct": true },
+      { "option_text": "__next__", "is_correct": false },
+      { "option_text": "__getitem__", "is_correct": false },
+      { "option_text": "__call__", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How can you create a Python virtual environment?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Using the command: python -m venv env_name", "is_correct": true },
+      { "option_text": "Using the command: pip install virtualenv env_name", "is_correct": false },
+      { "option_text": "Using the command: python createenv env_name", "is_correct": false },
+      { "option_text": "By creating a folder named 'env'", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of these is NOT a Python built-in data type?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Stack", "is_correct": true },
+      { "option_text": "List", "is_correct": false },
+      { "option_text": "Tuple", "is_correct": false },
+      { "option_text": "Set", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the 'assert' statement do?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Raises an AssertionError if the given expression is false", "is_correct": true },
+      { "option_text": "Checks for syntax errors", "is_correct": false },
+      { "option_text": "Stops program execution unconditionally", "is_correct": false },
+      { "option_text": "Ignores exceptions", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What will be the output of:\n\nprint(list(map(lambda x: x*2, [1, 2, 3])))",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "[2, 4, 6]", "is_correct": true },
+      { "option_text": "[1, 2, 3]", "is_correct": false },
+      { "option_text": "[3, 4, 5]", "is_correct": false },
+      { "option_text": "[1, 4, 9]", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "How can you read a file line by line in Python efficiently?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Using a for loop directly on the file object", "is_correct": true },
+      { "option_text": "Using file.readlines() only", "is_correct": false },
+      { "option_text": "Using file.read()", "is_correct": false },
+      { "option_text": "Using os.read()", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is a Python descriptor?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "An object attribute with binding behavior, defined by methods __get__, __set__, and __delete__", "is_correct": true },
+      { "option_text": "A decorator for functions", "is_correct": false },
+      { "option_text": "A special kind of list", "is_correct": false },
+      { "option_text": "A type of exception", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is true about Python's Global Interpreter Lock (GIL)?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "It prevents multiple native threads from executing Python bytecodes at once", "is_correct": true },
+      { "option_text": "It allows multi-core parallel execution of Python threads", "is_correct": false },
+      { "option_text": "It is only present in Python 3.10+", "is_correct": false },
+      { "option_text": "It is used to lock global variables", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What does the Python 'yield from' expression do?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Delegates part of a generator's operations to another generator", "is_correct": true },
+      { "option_text": "Stops the generator", "is_correct": false },
+      { "option_text": "Returns a value from a function", "is_correct": false },
+      { "option_text": "Imports all functions from a module", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following is NOT a valid way to format strings in Python?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Using f-strings", "is_correct": false },
+      { "option_text": "Using % operator", "is_correct": false },
+      { "option_text": "Using format() method", "is_correct": false },
+      { "option_text": "Using the & operator", "is_correct": true }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which function is used to create anonymous functions in Python?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "lambda", "is_correct": true },
+      { "option_text": "def", "is_correct": false },
+      { "option_text": "anonymous", "is_correct": false },
+      { "option_text": "func", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "What is the output of this code?\n\nprint([x for x in range(5) if x % 2 == 0])",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "[0, 2, 4]", "is_correct": true },
+      { "option_text": "[1, 3, 5]", "is_correct": false },
+      { "option_text": "[0, 1, 2, 3, 4]", "is_correct": false },
+      { "option_text": "[]", "is_correct": false }
+    ]
+  },
+  {
+    "topic": 26,
+    "question_text": "Which of the following statements about Python's memory management is true?",
+    "level": "hard",
+    "marks": 1,
+    "options": [
+      { "option_text": "Python uses automatic memory management with reference counting and garbage collection", "is_correct": true },
+      { "option_text": "Python requires manual memory allocation", "is_correct": false },
+      { "option_text": "Python does not support garbage collection", "is_correct": false },
+      { "option_text": "Memory leaks are impossible in Python", "is_correct": false }
+    ]
+  }
+]
+

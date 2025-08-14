@@ -820,7 +820,7 @@ def recommend_courses_with_scores(course_slug: str, top_n: int = 4):
         ).flatten()
 
     
-        threshold = 0.60
+        threshold = 0.40
         # Filter indices where similarity is above threshold and exclude the course itself
         filtered_indices = [
             i for i, score in enumerate(similarity_scores)

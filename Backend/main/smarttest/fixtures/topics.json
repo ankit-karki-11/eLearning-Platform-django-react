@@ -1,0 +1,202 @@
+[
+  {
+    "model": "smarttest.topic",
+    "pk": 1,
+    "fields": {
+      "title": "Object-Oriented Programming",
+      "description": "Concepts like classes, objects, inheritance, polymorphism, encapsulation, and abstraction."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 2,
+    "fields": {
+      "title": "Data Structures",
+      "description": "Study of arrays, linked lists, stacks, queues, trees, graphs, and hash tables."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 3,
+    "fields": {
+      "title": "Algorithms",
+      "description": "Sorting, searching, recursion, dynamic programming, and complexity analysis."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 4,
+    "fields": {
+      "title": "Database Management Systems",
+      "description": "Relational databases, SQL queries, normalization, transactions, and indexing."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 5,
+    "fields": {
+      "title": "Web Development",
+      "description": "Frontend and backend concepts, HTTP protocol, REST APIs, and web frameworks."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 6,
+    "fields": {
+      "title": "JavaScript Basics",
+      "description": "Syntax, variables, functions, scopes, closures, event handling, DOM manipulation."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 7,
+    "fields": {
+      "title": "CSS Fundamentals",
+      "description": "Selectors, box model, flexbox, grid, positioning, styling techniques."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 8,
+    "fields": {
+      "title": "Operating Systems",
+      "description": "Processes, threads, memory management, scheduling, file systems."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 9,
+    "fields": {
+      "title": "Computer Networks",
+      "description": "OSI model, TCP/IP, protocols, routing, switching, network security."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 10,
+    "fields": {
+      "title": "Software Engineering",
+      "description": "SDLC models, requirements, design patterns, testing, agile methodologies."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 11,
+    "fields": {
+      "title": "Computer Architecture",
+      "description": "Instruction cycles, CPU architecture, memory hierarchy, pipelining, and I/O systems."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 12,
+    "fields": {
+      "title": "Programming Paradigms",
+      "description": "Procedural, object-oriented, functional, and logic programming approaches."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 13,
+    "fields": {
+      "title": "Python Programming",
+      "description": "Variables, data types, control structures, functions, modules, OOP, and file handling."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 14,
+    "fields": {
+      "title": "Version Control with Git",
+      "description": "Git basics, branching, merging, commits, and GitHub workflow."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 15,
+    "fields": {
+      "title": "DevOps Basics",
+      "description": "Introduction to CI/CD, Docker, Jenkins, and containerized deployments."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 16,
+    "fields": {
+      "title": "Unit Testing and Debugging",
+      "description": "Writing and running unit tests, debugging techniques, and test-driven development."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 17,
+    "fields": {
+      "title": "Frontend Development",
+      "description": "HTML, CSS, JavaScript, responsive design, and frameworks like React."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 18,
+    "fields": {
+      "title": "Backend Development",
+      "description": "Server-side logic, databases, authentication, and frameworks like Django and Node.js."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 19,
+    "fields": {
+      "title": "JavaScript Advanced",
+      "description": "Asynchronous JS, Promises, async/await, closures, and module patterns."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 20,
+    "fields": {
+      "title": "Mobile App Development",
+      "description": "Basics of Flutter or Android, widgets, state management, and app lifecycle."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 21,
+    "fields": {
+      "title": "Data Science Basics",
+      "description": "Exploratory data analysis, NumPy, Pandas, and Matplotlib for visualization."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 22,
+    "fields": {
+      "title": "Machine Learning",
+      "description": "Supervised and unsupervised learning, regression, classification, and model evaluation."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 23,
+    "fields": {
+      "title": "Artificial Intelligence",
+      "description": "Search algorithms, knowledge representation, logic-based AI, and basic NLP."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 24,
+    "fields": {
+      "title": "APIs and Microservices",
+      "description": "RESTful APIs, JSON, API design, and basics of microservice architecture."
+    }
+  },
+  {
+    "model": "smarttest.topic",
+    "pk": 25,
+    "fields": {
+      "title": "Django Web Development",
+      "description": "Models, views, templates, authentication, and Django REST Framework."
+    }
+  }
+]
