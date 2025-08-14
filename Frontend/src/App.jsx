@@ -40,6 +40,9 @@ import AddCategory from './pages/admin/course/AddCategory'
 import SectionTable from './pages/admin/section/SectionTable'
 import AddSection from './pages/admin/section/AddSection'
 import UpdateCourse from './pages/admin/course/UpdateCourse'
+import TopicTable from './pages/admin/test-topic/TopicTable'
+import TestTable from './pages/admin/test-topic/TestTable'
+// import StartTest from './pages/student/smarttest/StartTest'
 // import TestSubmittedPage from './pages/student/smarttest/TestSubmittedPage'
 // import UsersLoving from './pages/student/UsersLoving'
 
@@ -53,9 +56,9 @@ const appRouter = createBrowserRouter([
         element: (
           <>
             <Hero />
-            <Categories />
+            {/* <Categories /> */}
             <Courses />
-            
+
 
           </>
 
@@ -132,19 +135,24 @@ const appRouter = createBrowserRouter([
             element: <Certificate />
           },
           {
+            
             path: "/smart-test/test",
             element: <CreateTest />
           },
+          //   {
+          //   path: "/smart-test/test",
+          //   element: <CreateTest />
+          // },
           {
-            path: "/test-attempts/test/:testId/attempt/:attemptId/start",
+            path: "/test-attempts/:attemptId/start",
             element: <TestAttemptPage />
           },
           {
-            path: "/test-attempts/:attemptId/results",
-            element: <TestResultPage />,
+            path: "/test-results/:attemptId",
+            element: <TestResultPage />
           },
           {
-            path: "test-attempts/history",
+            path: "/my-tests",
             element: <MyTestPage />
           },
         ]
@@ -167,7 +175,7 @@ const appRouter = createBrowserRouter([
                 path: '',
                 element: <Dashboard />
               },
-           
+
               {
                 path: 'courses/section',
                 element: <AddSection />
@@ -180,19 +188,19 @@ const appRouter = createBrowserRouter([
                 path: 'courses/add',
                 element: <AddCourse />
               },
-               {
+              {
                 path: 'courses/:slug',
                 element: <UpdateCourse />
               },
-               {
+              {
                 path: 'courses/categories',
                 element: <CategoryTable />
               },
               {
                 path: 'courses/categories/add',
-                element:<AddCategory />
+                element: <AddCategory />
               },
-               {
+              {
                 path: 'sections',
                 element: <SectionTable />
               },
@@ -202,8 +210,9 @@ const appRouter = createBrowserRouter([
                 path: 'sections/add',
                 element: <AddSection />
               },
+
               //  {
-              
+
               //   path: 'courses/${courseId}/sections/add',
               //   element: <AddSectionByCourse />
               // },
@@ -212,8 +221,15 @@ const appRouter = createBrowserRouter([
               // /admin/courses/${courseId}/sections
 
               // /admin/sections/edit/${sectionId}
-              
 
+              {
+                path: 'tests/topics',
+                element: <TopicTable />
+              },
+              {
+                path: 'tests',
+                element: <TestTable />
+              },
 
             ],
           },

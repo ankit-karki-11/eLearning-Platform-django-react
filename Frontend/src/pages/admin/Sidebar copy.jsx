@@ -26,6 +26,15 @@ const Sidebar = () => {
                     <User size={22} />
                     <h1>Students</h1>
                 </Link>
+                    <Link to="/admin/tests" className='flex items-center gap-2'>
+                    <User size={22} />
+                    <h1>Tests</h1>
+                </Link>
+                   <Link to="/admin/tests/topics" className='flex items-center gap-2'>
+                    <User size={22} />
+                    <h1>Topics</h1>
+                </Link>
+               
 
         
             </div>

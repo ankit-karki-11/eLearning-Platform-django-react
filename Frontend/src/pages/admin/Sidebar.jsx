@@ -1,4 +1,4 @@
-import { LayoutDashboard, BookOpen, ListOrdered, Tags } from 'lucide-react';
+import { LayoutDashboard, BookOpen, ListOrdered, Tags, PanelTopIcon, List } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -6,7 +6,9 @@ const Sidebar = () => {
     { path: '/admin', icon: <LayoutDashboard size={18} />, label: 'Dashboard', end: true },
     { path: '/admin/courses', icon: <BookOpen size={18} />, label: 'Courses', end: true },
     { path: '/admin/sections', icon: <ListOrdered size={18} />, label: 'Lectures', end: true },
-    { path: '/admin/courses/categories', icon: <Tags size={18} />, label: 'Categories' },
+    { path: '/admin/courses/categories', icon: <Tags size={18} />, label: 'Categories' , end: true },
+    { path: '/admin/tests/topics', icon: <PanelTopIcon size={18} />, label: 'Topics' , end: true },
+    { path: '/admin/tests', icon: <List size={18} />, label: 'Tests' , end: true },
   ];
 
   return (

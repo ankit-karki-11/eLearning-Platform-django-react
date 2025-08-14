@@ -1,38 +1,44 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const SMARTTEST_API = "http://localhost:8000/api/v1/smarttest/";
+const BASE_URL = "http://localhost:8000/api/v1/smarttest/";
 
 export const smarttestApi = createApi({
     reducerPath: "smarttestApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: SMARTTEST_API,
+        baseUrl: BASE_URL,
         credentials: "include",
         prepareHeaders: (headers) => {
             const token = localStorage.getItem("accessToken");
-            if (token) {
-                headers.set("Authorization", `Bearer ${token}`);
-            }
+            if (token) headers.set("Authorization", `Bearer ${token}`);
             return headers;
         },
     }),
     tagTypes: ['Test', 'Topic', 'Attempt'],
+
     endpoints: (builder) => ({
-        // Test Management
+        // Topics (Admin can create, students can list)
+        getTopics: builder.query({
+            query: () => "topics/",
+            providesTags: ['Topic'],
+        }),
+        createTopic: builder.mutation({
+            query: (topicData) => ({
+                url: "topics/",
+                method: "POST",
+                body: topicData,
+            }),
+            invalidatesTags: ['Topic'],
+        }),
+
+        // Tests (Admin CRUD, students list public)
         getTests: builder.query({
             query: () => "tests/",
             providesTags: ['Test'],
         }),
-
-        getMyTests: builder.query({
-            query: () => 'tests/my_tests/',
-            providesTags: ['Test'],
-        }),
-
         getTestDetails: builder.query({
             query: (id) => `tests/${id}/`,
             providesTags: (result, error, id) => [{ type: 'Test', id }],
         }),
-
         createTest: builder.mutation({
             query: (testData) => ({
                 url: "tests/",
@@ -42,84 +48,77 @@ export const smarttestApi = createApi({
             invalidatesTags: ['Test'],
         }),
 
+        // Test Attempts (student only)
+        getMyAttempts: builder.query({
+            query: () => "test-attempts/",
+            providesTags: ['Attempt'],
+        }),
+        getAttemptDetails: builder.query({
+            query: (attemptId) => `test-attempts/${attemptId}/`,
+            providesTags: (result, error, attemptId) => [{ type: 'Attempt', id: attemptId }],
+        }),
+
+        // Start a formal test attempt by test ID (admin created test)
         startAttempt: builder.mutation({
             query: (testId) => ({
                 url: "test-attempts/",
                 method: "POST",
                 body: { test_id: testId },
             }),
-
             invalidatesTags: ['Attempt'],
         }),
 
-        getActiveAttempt: builder.query({
-            query: (testId) => `test-attempts/active/?test_id=${testId}`,
-            providesTags: ['Attempt'],
+        // Start a practice attempt by topic and level (dynamic questions)
+        startPracticeAttempt: builder.mutation({
+            query: ({ topicId, level }) => ({
+                url: "test-attempts/",
+                method: "POST",
+                body: {
+                    topic_id: topicId,
+                    level: level,
+                },
+            }),
+            invalidatesTags: ['Attempt'],
         }),
 
+        // Submit answer for a question in an attempt
         submitAnswer: builder.mutation({
-            query: ({ attemptId, questionId, response }) => ({
-                url: "answers/",
+            query: ({ attemptId, questionId, selectedOptionId }) => ({
+                url: "results/",  // match your backend endpoint for submitting answers
                 method: "POST",
                 body: {
                     attempt: attemptId,
                     question: questionId,
-                    response: response
+                    selected_option: selectedOptionId,
                 },
             }),
             invalidatesTags: (result, error, { attemptId }) => [
-                { type: 'Attempt', id: attemptId }
+                { type: 'Attempt', id: attemptId },
             ],
         }),
 
+        // Submit whole test attempt (finish test)
         submitAttempt: builder.mutation({
-            query: ({ testId, attemptId }) => ({
-                // url: `test-attempts/test/${testId}/attempt/${attemptId}/submit/`,
+            query: ({ attemptId, results }) => ({
                 url: `test-attempts/${attemptId}/submit/`,
                 method: "POST",
+                body: { results },
             }),
             invalidatesTags: ['Attempt'],
-        }),
-        getAttempt: builder.query({
-            query: (attemptId) => `test-attempts/${attemptId}`,
-            providesTags: ['Attempt']
-        }),
-
-        getAttemptResults: builder.query({
-            query: ({ attemptId }) => ({
-                url: `test-attempts/${attemptId}/results/`,
-            }),
-            providesTags: ['Attempt'],
-        }),
-
-        // Admin Management
-        getTopics: builder.query({
-            query: () => "topics/",
-            providesTags: ['Topic'],
-        }),
-
-        createTopic: builder.mutation({
-            query: (topicData) => ({
-                url: "topics/",
-                method: "POST",
-                body: topicData,
-            }),
-            invalidatesTags: ['Topic'],
         }),
     }),
 });
 
 export const {
-    useGetTestsQuery,
-    useGetMyTestsQuery,
-    useGetTestDetailsQuery,
-    useCreateTestMutation,
-    useStartAttemptMutation,
-    useGetActiveAttemptQuery,
-    useSubmitAnswerMutation,
-    useSubmitAttemptMutation,
-    useGetAttemptResultsQuery,
-    useGetAttemptQuery,
     useGetTopicsQuery,
     useCreateTopicMutation,
+    useGetTestsQuery,
+    useGetTestDetailsQuery,
+    useCreateTestMutation,
+    useGetMyAttemptsQuery,
+    useGetAttemptDetailsQuery,
+    useStartAttemptMutation,
+    useStartPracticeAttemptMutation,
+    useSubmitAnswerMutation,
+    useSubmitAttemptMutation,
 } = smarttestApi;

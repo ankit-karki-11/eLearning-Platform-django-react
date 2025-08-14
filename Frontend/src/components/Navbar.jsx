@@ -111,7 +111,7 @@ const Navbar = () => {
               )}
 
               {user?.role === "student" && (
-                <NavLink to="/smart-test/test">Smart-Test</NavLink>
+                <NavLink to="/smart-test/test">MCQ Test</NavLink>
               )}
               {user?.role === "admin" && (
                 <NavLink to="/admin">Dashboard</NavLink>
