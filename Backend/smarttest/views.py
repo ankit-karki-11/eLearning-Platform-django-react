@@ -26,7 +26,6 @@ class IsAdmin(BasePermission):
     def has_permission(self, request, view):
         return request.user.role == 'admin'
 
-
 # Admin views
 
 class TopicViewSet(viewsets.ModelViewSet):

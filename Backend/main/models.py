@@ -393,11 +393,11 @@ class Certificate(models.Model):
 #review model ,discussion model , reply of the comment model will be fo fututre features,   
 class Review(models.Model):
     RATING_CHOICES = [
-        (1, '⭐'),
-        (2, '⭐⭐'),
-        (3, '⭐⭐⭐'),
-        (4, '⭐⭐⭐⭐'),
-        (5, '⭐⭐⭐⭐⭐'),
+        (1, '*'),
+        (2, '**'),
+        (3, '***'),
+        (4, '****'),
+        (5, '*****'),
     ]
 
     student = models.ForeignKey(

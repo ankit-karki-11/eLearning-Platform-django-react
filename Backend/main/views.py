@@ -802,7 +802,7 @@ def recommend_courses_with_scores(course_slug: str, top_n: int = 4):
         try:
             stop_words = list(stopwords.words("english"))
         except LookupError:
-            import nltk
+            import nltk #type: ignore
             nltk.download("stopwords")
             stop_words = list(stopwords.words("english"))
 

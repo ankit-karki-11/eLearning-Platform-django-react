@@ -95,11 +95,12 @@ class TestAttempt(models.Model):
     is_practice = models.BooleanField(default=False)
 
     time_limit = models.PositiveIntegerField(
-        null=True,
-        blank=True,
+        null=False,
+        blank=True,default=30,
         help_text="Time limit in minutes (applies only to formal tests)"
     )
     started_at = models.DateTimeField(auto_now_add=True)
+    
     completed_at = models.DateTimeField(null=True, blank=True)
 
     selected_questions = models.ManyToManyField('Question', blank=True)
