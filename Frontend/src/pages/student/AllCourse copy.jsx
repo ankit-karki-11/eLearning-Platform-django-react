@@ -3,19 +3,20 @@ import { useLoadCourseQuery } from '@/features/api/courseApi';
 import Course from './Course';
 import CourseSearch from './CourseSearch';
 
-const AllCourse = () => {
+const AllCourse = ({course}) => {
   const [searchResults, setSearchResults] = useState(null);
   const { data, error, isLoading } = useLoadCourseQuery();
-
   const handleSearchResults = (results) => {
     setSearchResults(results);
+
   };
 
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-6xl mx-auto px-8 py-8">
-        {/* Search Section - Compact */}
-        <div className="mb-6">
+       
+       {/* Search Section */}
+        <div className="mb-2">
           <CourseSearch onSearchResults={handleSearchResults} />
         </div>
 
