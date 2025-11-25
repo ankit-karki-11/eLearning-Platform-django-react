@@ -1,3 +1,4 @@
+from modulefinder import test
 from django.db import models
 from users.models import UserAccount
 
@@ -6,6 +7,8 @@ from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError  
 from django.utils import timezone
 from django.contrib.postgres.indexes import GinIndex
+from django.core.validators import FileExtensionValidator
+
 
 #course
 class Category(models.Model):
@@ -43,11 +46,18 @@ class Course(models.Model):
         ('hindi', 'Hindi'),
         ('nepenglish', 'NepEnglish'),
     ]
+
+    # COURSE_LEVEL_TO_QUESTION_LEVEL= {
+    #     'beginner':'basic',
+    #     'intermediate':'medium',
+    #     'advanced':'hard'
+    # }
     
     title=models.CharField(max_length=200,unique=True)
     slug=models.SlugField(max_length=200,unique=True,null=True,blank=True)
     keywords=models.CharField(max_length=200,blank=True,null=True,help_text="Separate Keywords with commas (e.g., Python, Django, Web Development) for recommendation")
-    
+    # topics added for formaltest(coursetest)
+    topics= models.ManyToManyField('smarttest.Topic',related_name='courses',blank=True)
     description=models.TextField(null=True,blank=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
@@ -88,6 +98,7 @@ class Course(models.Model):
     )
      # Stats
     average_rating = models.FloatField(default=0)
+    total_reviews = models.PositiveIntegerField(default=0) 
     total_students = models.PositiveIntegerField(default=0) # Total number of students enrolled in the course
    
     
@@ -116,6 +127,7 @@ class Course(models.Model):
     thumbnail=models.ImageField(upload_to="course_thumbnails/%Y/%m/%d/",blank=True,null=True)
     is_published=models.BooleanField(default=False)
     
+    is_test_required = models.BooleanField(default=True)
     def save(self,*args,**kwargs):
         if not self.slug:
             self.slug=slugify(self.title)
@@ -124,6 +136,10 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+    # def get_question_level_for_course(course):
+    #     return COURSE_LEVEL_TO_QUESTION_LEVEL.get(course.level,'basic')
+    
+    
     # def inside class is called methods
     def enrolled_students(self):
         return[enrollment.student for enrollment in self.enrollments.all()]
@@ -151,7 +167,7 @@ class Course(models.Model):
             GinIndex(fields=["keywords"],name='keywords_trgm',opclasses=['gin_trgm_ops']),
         ]
 
-from django.core.validators import FileExtensionValidator
+
 #Section Model
 class Section(models.Model):
     title=models.CharField(max_length=150)
@@ -193,14 +209,21 @@ class Section(models.Model):
         ordering = ["order"]
         unique_together = ["course", "title"]
 
+from django.db import models
+from django.core.exceptions import ValidationError
+from django.utils import timezone
+from users.models import UserAccount
+from smarttest.models import TestAttempt
+
 class Enrollment(models.Model):
     STATUS_CHOICES = [
         ('in_progress', 'In Progress'),
         ('completed', 'Completed'),
         ('certified', 'Certified'),
     ]
+
     student = models.ForeignKey(
-        'users.UserAccount',
+        UserAccount,
         on_delete=models.CASCADE,
         limit_choices_to={'role': 'student'},
         related_name='enrollments'
@@ -210,15 +233,13 @@ class Enrollment(models.Model):
         on_delete=models.CASCADE,
         related_name='enrollments'
     )
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default='in_progress'
-    )
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='in_progress')
     progress = models.FloatField(default=0)
     last_accessed = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    PASS_MARK = 6  # 6 out of 10
 
     class Meta:
         db_table = "enrollment"
@@ -229,27 +250,73 @@ class Enrollment(models.Model):
     def __str__(self):
         return f"{self.student.full_name} -> {self.course.title} ({self.status})"
 
-    def mark_completed(self):
-        if self.status == 'in_progress':
-            self.status = 'completed'
-            self.progress = 100
-        self.save()
-
-    def computed_progress(self):
+    def update_progress(self):
         total_sections = self.course.sections.count()
-        completed_sections = self.section_progresses.filter(is_completed=True).count()
-        return (completed_sections / total_sections * 100) if total_sections > 0 else 0
+        completed_sections = self.section_progresses.filter(is_completed=True).count() if total_sections else 0
+        self.progress = round(completed_sections / total_sections * 100, 2) if total_sections else 0
+        self.save(update_fields=["progress"])
 
-    @property
-    def is_completed(self):
-        return self.status == 'completed'
+    def check_completion_and_generate_certificate(self):
+        """Check if enrollment is completed, tests passed, and generate certificate if needed."""
+        self.update_progress()
 
-    @property
-    def is_certified(self):
-        return self.status == 'certified'
+        # If sections are not fully completed
+        if self.progress < 100:
+            self.status = 'in_progress'
+            self.save(update_fields=['status'])
+            return
 
+        # Sections are fully completed
+        if getattr(self.course, 'is_test_required', False):
+            formal_tests = self.course.tests.filter(is_practice=False)
 
-#section-progress
+            if formal_tests.exists():
+                # Check if all formal tests have been passed
+                all_tests_passed = all(
+                    TestAttempt.objects.filter(
+                        student=self.student,
+                        test=test,
+                        status='submitted',
+                        total_score__gte=self.PASS_MARK
+                    ).exists()
+                    for test in formal_tests
+                )
+
+                if not all_tests_passed:
+                    self.status = 'completed'
+                    self.save(update_fields=['status'])
+                    return
+
+                # All tests passed → generate certificate if not exists
+                certificate, created = Certificate.objects.get_or_create(enrollment=self)
+                
+                # Generate and save certificate file if not already generated
+                if not certificate.certificate_file:
+                    file_obj = generate_certificate(
+                        student_name=self.student.full_name,
+                        course_name=self.course.title,
+                        issued_at=certificate.issued_at,
+                        certificate_id=certificate.certificate_id
+                    )
+                    certificate.certificate_file.save(
+                        file_obj.name,
+                        file_obj,
+                        save=True
+                    )
+
+                self.status = 'certified'
+                self.save(update_fields=['status'])
+
+            else:
+                # Test is required but no formal tests exist → mark completed
+                self.status = 'completed'
+                self.save(update_fields=['status'])
+        else:
+            # Test is not required → mark completed
+            self.status = 'completed'
+            self.save(update_fields=['status'])
+            
+            
 class SectionProgress(models.Model):
     enrollment = models.ForeignKey(
         Enrollment,
@@ -257,58 +324,74 @@ class SectionProgress(models.Model):
         related_name='section_progresses'
     )
     section = models.ForeignKey(
-        Section,
+        'Section',
         on_delete=models.CASCADE,
         related_name='progresses'
     )
-    
     is_completed = models.BooleanField(default=False)
     started_at = models.DateTimeField(auto_now_add=True)
-    completed_at=models.DateTimeField(null=True,blank=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    time_spent = models.FloatField(default=0)
-    
+
     class Meta:
         unique_together = ('enrollment', 'section')
         db_table = "section_progress"
         verbose_name = "Section Progress"
         verbose_name_plural = "Section Progresses"
-      
 
     def __str__(self):
-        return f"{self.enrollment.student.full_name} - {self.section.title} ({'Completed' if self.is_completed else 'In Progress'})"
-   
-    def save(self, *args, **kwargs):
-        if self.is_completed and self.started_at and self.completed_at:
-            if self.completed_at < self.started_at:
-                self.completed_at = self.started_at
-            time_diff = (self.completed_at - self.started_at).total_seconds()
-            self.time_spent = max(time_diff, 0)  # Assign to time_spent
-        super().save(*args, **kwargs)
+        status = "Completed" if self.is_completed else "In Progress"
+        return f"{self.enrollment.student.full_name} - {self.section.title} ({status})"
+
+    def mark_completed(self):
+        self.is_completed = True
+        self.completed_at = timezone.now()
+        self.save()
+        # Update overall enrollment progress
+        self.enrollment.update_progress()
 
     def clean(self):
-        # Check secion belong to enrollment's course
         if self.section.course != self.enrollment.course:
             raise ValidationError("Section must belong to the same course as the enrollment.")
-    
-    def get_progress_percentage(self):
-        #Calculate the progress percentage for this section
-        if self.is_completed:
-            return 100
-        elif self.started_at and self.completed_at:
-            return int((self.completed_at - self.started_at).total_seconds() / self.section.duration) * 100
-        return 0
-    @property
-    def time_spent(self):
-        """Calculate total time spent on this section"""
-        if self.is_completed and self.completed_at:
-            return (self.completed_at - self.started_at).total_seconds()
-        return 0
-    
-    @time_spent.setter
-    def time_spent(self, value):
-        self._time_spent = value
+
+from django.core.files import File
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.utils import timezone
+import os
+from main.utils import generate_certificate
+
+
+from django.db import models
+from django.utils import timezone
+import uuid
+
+class Certificate(models.Model):
+    enrollment = models.OneToOneField(
+        Enrollment,
+        on_delete=models.CASCADE,
+        related_name="certificate",
+        limit_choices_to={"status": "completed"},
+    )
+    certificate_id = models.CharField(max_length=12, unique=True, blank=True)  # Shorter ID
+    certificate_file = models.FileField(upload_to="certificates/%Y/%m/%d/")
+    issued_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "certificate"
+        ordering = ["-issued_at"]
+
+    def __str__(self):
+        return self.certificate_id
+
+    def save(self, *args, **kwargs):
+        if not self.certificate_id:
+            # Format: YYMMDD-XXX (e.g., 240615-A7F)
+            date_str = timezone.now().strftime("%y%m%d")  # 2-digit year + month + day
+            random_chars = uuid.uuid4().hex[:3].upper()   # 3-character random code
+            self.certificate_id = f"{date_str}-{random_chars}"
+        super().save(*args, **kwargs)
 
  
 # cart model
@@ -331,7 +414,7 @@ class Cart(models.Model):
             db_table = "cart"
             verbose_name_plural = "Carts"
             unique_together = ["student", "course"]    
-    
+   
  
 class Attachment(models.Model):
     section=models.ForeignKey(
@@ -389,15 +472,16 @@ class Certificate(models.Model):
             random_chars = uuid.uuid4().hex[:3].upper()   # 3-character random code
             self.certificate_id = f"{date_str}-{random_chars}"
         super().save(*args, **kwargs)
-
-#review model ,discussion model , reply of the comment model will be fo fututre features,   
+from django.db import models, transaction
+#review model ,discussion model , reply of the comment model will be fo fututre features, 
+  
 class Review(models.Model):
     RATING_CHOICES = [
-        (1, '*'),
-        (2, '**'),
-        (3, '***'),
-        (4, '****'),
-        (5, '*****'),
+        (1, '★☆☆☆☆'),
+        (2, '★★☆☆☆'),
+        (3, '★★★☆☆'),
+        (4, '★★★★☆'),
+        (5, '★★★★★'),
     ]
 
     student = models.ForeignKey(
@@ -412,6 +496,7 @@ class Review(models.Model):
         related_name='reviews'
     )
     rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
+    review_text = models.TextField(blank=True, null=True, help_text="Optional detailed feedback")
     comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -421,20 +506,41 @@ class Review(models.Model):
         verbose_name_plural = "Reviews"
         ordering = ["-created_at"]
         unique_together = ['student', 'course']  # One review per student per course
-
+        indexes = [
+            models.Index(fields=['course', 'created_at']),  # Recent reviews per course
+            models.Index(fields=['student', 'course']),     # Enforce unique + speed up lookup
+        ]
     def __str__(self):
         return f"{self.student.full_name} - {self.course.title}: {self.rating} stars"
 
     def clean(self):
-        # Ensure only enrolled students can review
-        if not Enrollment.objects.filter(student=self.student, course=self.course).exists():
-            raise ValidationError("Only enrolled students can leave a review.")
+    # Only allow review if student has status 'completed' or 'certified'
+        valid_statuses = ['completed', 'certified']
+        enrollment = Enrollment.objects.filter(
+            student=self.student,
+            course=self.course,
+            status__in=valid_statuses
+        ).first()
 
+        if not enrollment:
+            raise ValidationError(
+                "Only students who have completed or certified this course can leave a review."
+            )
     def save(self, *args, **kwargs):
-        self.clean()  # Validate before saving
+        self.clean()
+        is_new = self.pk is None  # Track if this is a new review
         super().save(*args, **kwargs)
-        # Update course average rating
-        self.course.average_rating = self.course.reviews.aggregate(
-            avg_rating=models.Avg('rating')
-        )['avg_rating'] or 0.0
-        self.course.save(update_fields=['average_rating'])
+
+        # 🔄 Update course stats atomically
+        with transaction.atomic():
+            course = Course.objects.select_for_update().get(id=self.course.id)
+             # Recalculate average rating
+            avg = course.reviews.aggregate(avg_rating=models.Avg('rating'))['avg_rating'] or 0.0
+            course.average_rating = round(avg, 2)
+            
+            # Update total_reviews only if new
+            if is_new:
+                course.total_reviews = course.reviews.count()
+            
+            course.save(update_fields=['average_rating', 'total_reviews'])
+            

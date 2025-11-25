@@ -1,59 +1,58 @@
 import os
 from django.conf import settings
 from django.utils import timezone
+from django.core.files import File
 from PIL import Image, ImageDraw, ImageFont
+from io import BytesIO
 
 
 def generate_certificate(student_name, course_name, issued_at=None, certificate_id=None):
+    """
+    Generate a certificate as a Django File object.
+    Ensures font fallbacks and memory-safe operation.
+    """
     try:
-        # Handle default values
         issued_at = issued_at or timezone.now()
-        certificate_id = certificate_id or f"cert{issued_at.strftime('%Y%m%d%H%M%S')}"
-        course_name = course_name or 'Course'
+        certificate_id = certificate_id or f"CERT-{issued_at.strftime('%Y%m%d%H%M%S')}"
 
-        # File paths
+        # Paths for template and fonts
         template_path = os.path.join(settings.MEDIA_ROOT, 'certificates', 'templates', 'certificate_template.png')
-        output_dir = os.path.join(settings.MEDIA_ROOT, 'certificates', issued_at.strftime('%Y/%m/%d'))
-        font_regular_path = os.path.join(settings.MEDIA_ROOT, 'certificates', 'fonts', 'arial.ttf')
-        font_bold_path = os.path.join(settings.MEDIA_ROOT, 'certificates', 'fonts', 'arialbd.ttf')
-        font_name_path = os.path.join(settings.MEDIA_ROOT, 'certificates', 'fonts', 'DancingScript-Regular.ttf')  # Script for name
+        font_arial_path = os.path.join(settings.MEDIA_ROOT, 'certificates', 'fonts', 'arial.ttf')
+        font_script_path = os.path.join(settings.MEDIA_ROOT, 'certificates', 'fonts', 'DancingScript-Regular.ttf')
 
-        # Validate template image exists
         if not os.path.exists(template_path):
-            raise FileNotFoundError(f"Certificate template not found at: {template_path}")
+            raise FileNotFoundError(f"Certificate template not found at {template_path}")
 
-        # Ensure output directory exists
-        os.makedirs(output_dir, exist_ok=True)
-
-        # Load image
-        img = Image.open(template_path)
+        # Open template image
+        img = Image.open(template_path).convert("RGB")
         draw = ImageDraw.Draw(img)
 
-        # Load fonts with fallback
-        def load_font(path, size):
-            try:
-                return ImageFont.truetype(path, size)
-            except Exception:
-                return ImageFont.load_default()
+        # Load fonts with fallbacks
+        if os.path.exists(font_script_path):
+            font_large = ImageFont.truetype(font_script_path, 80)  # student name
+        else:
+            font_large = ImageFont.load_default()
 
-        font_name = load_font(font_name_path, 80)           
-        font_course = load_font(font_bold_path, 40)      
-        font_id = load_font(font_regular_path, 30)       
-        font_date = load_font(font_regular_path, 34)   
+        if os.path.exists(font_arial_path):
+            font_medium = ImageFont.truetype(font_arial_path, 50)  # course name
+            font_small = ImageFont.truetype(font_arial_path, 40)   # ID and date
+        else:
+            font_medium = font_small = ImageFont.load_default()
 
-        # Draw certificate coordinates based on template
-        draw.text((170, 210), f"Certificate ID: {certificate_id}", font=font_id, fill=(0, 0, 0))
-        draw.text((170, 700), student_name, font=font_name, fill=(0, 0, 0))
-        draw.text((170, 940), course_name, font=font_course, fill=(0, 0, 0))
-        draw.text((170, 1040), f"Issued on: {issued_at.strftime('%Y-%m-%d')}", font=font_date, fill=(0, 0, 0))
+        # Draw text on the certificate (coordinates preserved)
+        draw.text((180, 240), f"Certificate ID: {certificate_id}", font=font_small, fill=(0, 0, 0))
+        draw.text((170, 700), student_name, font=font_large, fill=(0, 0, 0))
+        draw.text((170, 910), course_name, font=font_medium, fill=(0, 0, 0))
+        draw.text((170, 1000), f"Issued at: {issued_at.strftime('%Y-%m-%d')}", font=font_small, fill=(0, 0, 0))
 
-        # Save certificate image
-        filename = f"{student_name.split()[0]}_{certificate_id}.png"
-        file_path = os.path.join(output_dir, filename)
-        img.save(file_path, 'PNG')
+        # Save image to memory buffer
+        buffer = BytesIO()
+        img.save(buffer, format="PNG")
+        buffer.seek(0)
 
-        # Return relative media path
-        return os.path.relpath(file_path, settings.MEDIA_ROOT).replace("\\", "/")
+        # Return Django File object
+        file_name = f"cert_{certificate_id}.png"
+        return File(buffer, name=file_name)
 
     except Exception as e:
         raise ValueError(f"Certificate generation failed: {str(e)}")

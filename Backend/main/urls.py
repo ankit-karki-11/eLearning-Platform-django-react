@@ -4,7 +4,7 @@ from .views import (
     CategoryViewSet, CourseViewSet, SectionViewSet,
     CartViewSet,AttachmentViewSet, 
     EnrollmentViewSet,SectionProgressViewSet,RecommendationViewSet,
-   CertificateViewSet,CourseSearchView
+   CertificateViewSet,CourseSearchView,ReviewViewSet
 )
 router= DefaultRouter()
 router.register(r"category", CategoryViewSet, basename="category")
@@ -17,10 +17,17 @@ router.register(r"section-progress", SectionProgressViewSet, basename="section-p
 
 router.register(r"recommendations", RecommendationViewSet, basename="recommendation")
 router.register(r'certificates', CertificateViewSet, basename='certificate')
-
+router.register(r'reviews', ReviewViewSet, basename='review')
 
 urlpatterns = [
     path('courses/search/', CourseSearchView.as_view(), name='course-search'),
+    #  path('reviews/course/<slug:course_slug>/', 
+    #      ReviewViewSet.as_view({'get': 'list_course_reviews', 'post': 'create_review'}),
+    #      name='course-reviews'),
+    # path('reviews/course/<slug:course_slug>/', 
+    #      ReviewViewSet.as_view({'get': 'list_course_reviews', 'post': 'create_course_review'}),
+    #      name='course-reviews'),
 ]
+
 
 urlpatterns += router.urls

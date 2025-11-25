@@ -177,7 +177,7 @@ class CourseViewSet(ModelViewSet):
                 )
                 
             # prevent publishing if there are no sections
-        if request.data.get("is_Published")== True:
+        if request.data.get("is_published")== True:
             if not course.sections.exists():
                 return Response(
                     status=status.HTTP_400_BAD_REQUEST,
@@ -464,16 +464,15 @@ class CartViewSet(ModelViewSet):
             "item_count": cart_items.count()
         })
 
-#enrollment viewset
-from rest_framework import viewsets, status, permissions
+# enrollment viewset
+from rest_framework import viewsets, status, permissions, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from rest_framework import filters
-from .models import Enrollment, Section, SectionProgress
+from .models import Enrollment, Section, SectionProgress, Certificate
 from .serializers import EnrollmentSerializer, EnrolledCourseDetailSerializer, SectionProgressSerializer
-# from .permissions import IsStudentUser
+# from smarttest.models import TestAttempt
 
 class EnrollmentViewSet(viewsets.ModelViewSet):
     queryset = Enrollment.objects.all()
@@ -491,77 +490,102 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve', 'mark_completed', 'section_progress', 'mark_section_completed', 'update_last_accessed']:
             return [permissions.IsAuthenticated()]
-        return [IsStudentUser()]
+        return [IsStudentUser()]  # custom permission for students
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Enrollment.objects.select_related('course', 'student').prefetch_related('section_progresses', 'course__sections')
-        if user.is_staff or user.role == 'admin':
+        queryset = Enrollment.objects.select_related(
+            'course', 'student'
+        ).prefetch_related(
+            'section_progresses', 'course__sections', 'course__tests'
+        )
+        if user.is_staff or getattr(user, 'role', None) == 'admin':
             return queryset
         return queryset.filter(student=user)
 
     def get_object(self):
         queryset = self.get_queryset()
         slug = self.kwargs.get('course__slug')
-        obj = get_object_or_404(queryset, course__slug=slug, student=self.request.user)
-        return obj
+        return get_object_or_404(queryset, course__slug=slug, student=self.request.user)
 
-    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
+    # ---------- ACTIONS ----------
+    @action(detail=True, methods=['post'])
     def mark_completed(self, request, course__slug=None):
         enrollment = self.get_object()
-        enrollment.mark_completed()
-        return Response({'status': 'Enrollment marked as completed'}, status=status.HTTP_200_OK)
+        enrollment.check_completion_and_generate_certificate()
 
-    @action(detail=True, methods=['get'], url_path=r'section/(?P<section_id>[^/.]+)')
+        if enrollment.status in ['completed', 'certified']:
+            return Response({'status': enrollment.status}, status=status.HTTP_200_OK)
+
+        return Response(
+            {'detail': 'You must complete all sections and pass all required tests.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    @action(detail=True, methods=['get'], url_path=r'section/(?P<section_id>\d+)')
     def section_progress(self, request, course__slug=None, section_id=None):
         enrollment = self.get_object()
-        try:
-            section = enrollment.course.sections.get(id=section_id)
-        except Section.DoesNotExist:
+        section = enrollment.course.sections.filter(id=section_id).first()
+        if not section:
             return Response({'detail': 'Section not found in this course.'}, status=status.HTTP_404_NOT_FOUND)
+
         progress = SectionProgress.objects.filter(enrollment=enrollment, section=section).first()
         serializer = SectionProgressSerializer(progress, context={'request': request})
         return Response(serializer.data)
 
     @action(detail=True, methods=['post'], url_path=r'section/(?P<section_id>\d+)/completed')
     def mark_section_completed(self, request, course__slug=None, section_id=None):
-        try:
-            enrollment = self.get_object()
-            section = Section.objects.get(id=section_id, course=enrollment.course)
-            section_progress, created = SectionProgress.objects.get_or_create(
-                enrollment=enrollment,
-                section=section,
-                defaults={
-                    'is_completed': True,
-                    'started_at': timezone.now(),
-                    'completed_at': timezone.now()
-                }
-            )
-            if not created and not section_progress.is_completed:
-                section_progress.is_completed = True
-                section_progress.started_at = section_progress.started_at or timezone.now()
-                section_progress.completed_at = timezone.now()
-                section_progress.save()
-            # Update enrollment progress
-            total_sections = enrollment.course.sections.count()
-            completed_sections = enrollment.section_progresses.filter(is_completed=True).count()
-            enrollment.progress = (completed_sections / total_sections * 100) if total_sections > 0 else 0
-            enrollment.status = 'completed' if enrollment.progress == 100 else 'in_progress'
-            enrollment.save()
-            return Response({'message': 'Section marked as completed'}, status=status.HTTP_200_OK)
-        except Section.DoesNotExist:
+        enrollment = self.get_object()
+        section = Section.objects.filter(id=section_id, course=enrollment.course).first()
+        if not section:
             return Response({'detail': 'Section not found'}, status=status.HTTP_404_NOT_FOUND)
-        except Exception as e:
-            return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+        section_progress, created = SectionProgress.objects.get_or_create(
+            enrollment=enrollment,
+            section=section,
+            defaults={'is_completed': True, 'started_at': timezone.now(), 'completed_at': timezone.now()}
+        )
+        if not created and not section_progress.is_completed:
+            section_progress.is_completed = True
+            section_progress.completed_at = timezone.now()
+            section_progress.save(update_fields=['is_completed', 'completed_at'])
+
+        # Update enrollment status based on sections + tests
+        enrollment.check_completion_and_generate_certificate()
+        return Response({'message': 'Section marked as completed', 'status': enrollment.status}, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['patch'], url_path='update-last-accessed')
     def update_last_accessed(self, request, course__slug=None):
         enrollment = self.get_object()
         enrollment.last_accessed = timezone.now()
-        enrollment.save()
+        enrollment.save(update_fields=["last_accessed"])
         serializer = self.get_serializer(enrollment)
         return Response(serializer.data)
     
+    @action(detail=True, methods=['post'], url_path='start-course')
+    def start_course(self, request, course__slug=None):
+        student = request.user
+        course = get_object_or_404(Course, slug=course__slug)
+
+        # Check if student is already enrolled
+        enrollment, created = Enrollment.objects.get_or_create(
+            student=student,
+            course=course
+        )
+
+        # If the course is free, auto-enroll and allow starting immediately
+        if course.price == 0 and created:
+            # Optional: check if all sections are already marked complete
+            enrollment.check_completion_and_generate_certificate()
+
+        return Response({
+            "message": "Enrollment successful" if created else "Already enrolled",
+            "course": course.title,
+            "enrollment_status": enrollment.status,
+            "progress": enrollment.progress
+        }, status=status.HTTP_200_OK)
+
+
 #Sectionprogress viewset
 class SectionProgressViewSet(ModelViewSet):
     queryset = SectionProgress.objects.all()
@@ -631,8 +655,6 @@ class AttachmentViewSet(ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
             
-#certificate viewset 
-
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
@@ -641,23 +663,33 @@ from django.shortcuts import get_object_or_404
 from .models import Certificate, Enrollment, Course
 from .serializers import CertificateSerializer
 from .utils import generate_certificate
-from django.utils import timezone
+
 
 class CertificateViewSet(ModelViewSet):
+    """
+    ViewSet for handling certificates:
+    - List certificates for a student (or all for staff)
+    - Generate certificate if sections completed and test passed
+    """
     queryset = Certificate.objects.all()
     serializer_class = CertificateSerializer
     lookup_field = 'certificate_id'
 
     def get_queryset(self):
-        """Restrict access to certificates based on user"""
+        """
+        Filter certificates for logged-in student,
+        unless user is staff.
+        Supports optional filters:
+        - enrollment_id
+        - course_slug
+        """
         queryset = super().get_queryset()
         user = self.request.user
 
-        # If not admin, only allow certificates belonging to the user
         if not user.is_staff:
             queryset = queryset.filter(enrollment__student=user)
 
-        # Optional filters
+        # Optional query params
         enrollment_id = self.request.query_params.get('enrollment_id')
         course_slug = self.request.query_params.get('course_slug')
 
@@ -668,110 +700,188 @@ class CertificateViewSet(ModelViewSet):
 
         return queryset
 
-    def create(self, request, *args, **kwargs):
-        """Create certificate using enrollment_id — only for logged-in student"""
-        enrollment_id = request.data.get('enrollment_id')
-        try:
-            enrollment = Enrollment.objects.get(id=enrollment_id)
-
-            # Check student ownership
-            if enrollment.student != request.user:
-                return Response({"error": "Unauthorized"}, status=status.HTTP_403_FORBIDDEN)
-
-            return self._generate_certificate(enrollment)
-
-        except Enrollment.DoesNotExist:
-            return Response({"error": "Enrollment not found"}, status=status.HTTP_404_NOT_FOUND)
-
     @action(detail=False, methods=['post'], url_path='generate/(?P<course_slug>[^/.]+)')
     def generate_with_slug(self, request, course_slug=None):
-        """Generate certificate by course_slug — only for completed course by student"""
+        """
+        Generate a certificate for a course by slug.
+        Only if all sections are completed AND the formal test is passed.
+        """
         student = request.user
-        print(f"[DEBUG] Generating certificate for user: {student}, course_slug: {course_slug}")
-
         course = get_object_or_404(Course, slug=course_slug)
 
-        enrollment = get_object_or_404(
-            Enrollment,
-            course=course,
-            student=student,
-            status='completed'
-        )
+        # Ensure enrollment exists
+        enrollment = get_object_or_404(Enrollment, course=course, student=student)
+
+        # Check sections completed AND test passed
+        if not enrollment.is_sections_completed or not getattr(enrollment, 'is_test_passed', False):
+            return Response(
+                {"error": "Complete all sections and pass the test to generate certificate."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         return self._generate_certificate(enrollment)
 
     def _generate_certificate(self, enrollment):
-        """Generate and return certificate for a given enrollment"""
-        # Strict security check
-        if self.request.user != enrollment.student:
-            return Response(
-                {"error": "Unauthorized access to this enrollment"},
-                status=status.HTTP_403_FORBIDDEN
-            )
-
-        # Return existing certificate if already generated
+        """
+        Core certificate generation logic:
+        - Prevents duplicate generation
+        - Generates file and saves to model
+        """
+        # Return existing certificate if it already exists
         if hasattr(enrollment, 'certificate'):
-            serializer = self.get_serializer(enrollment.certificate)
+            serializer = self.get_serializer(enrollment.certificate, context={'request': self.request})
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         try:
-            # Create certificate record
+            # Step 1: Create certificate object (generates certificate_id in model)
             certificate = Certificate.objects.create(enrollment=enrollment)
 
-            # Generate the certificate image
-            file_path = generate_certificate(
+            # Step 2: Generate certificate file (returns Django File object)
+            certificate_file = generate_certificate(
                 student_name=enrollment.student.full_name,
                 course_name=enrollment.course.title,
                 issued_at=certificate.issued_at,
                 certificate_id=certificate.certificate_id
             )
 
-            # Save file path to model
-            certificate.certificate_file = file_path
-            certificate.save()
+            # Step 3: Save the file into FileField
+            certificate.certificate_file.save(certificate_file.name, certificate_file, save=True)
 
-            serializer = self.get_serializer(certificate)
+            # Step 4: Serialize and return
+            serializer = self.get_serializer(certificate, context={'request': self.request})
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         except Exception as e:
+            # Rollback on failure
+            if 'certificate' in locals():
+                certificate.delete()
             return Response(
                 {"error": f"Certificate generation failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
     def list(self, request, *args, **kwargs):
-        """List certificates — limited to the logged-in user's certificates"""
+        """
+        List all certificates for the user (or all for staff).
+        Adds download_url to each certificate automatically.
+        """
         response = super().list(request, *args, **kwargs)
+        data = response.data
 
-        if 'results' in response.data:  # Paginated response
-            for cert_data in response.data['results']:
-                cert_data['download_url'] = request.build_absolute_uri(cert_data['certificate_file'])
-        else:  # Non-paginated
-            for cert_data in response.data:
-                cert_data['download_url'] = request.build_absolute_uri(cert_data['certificate_file'])
+        # Paginated
+        if isinstance(data, dict) and "results" in data:
+            for cert_data in data["results"]:
+                if cert_data.get("certificate_file"):
+                    cert_data["download_url"] = request.build_absolute_uri(cert_data["certificate_file"])
+        # Non-paginated
+        elif isinstance(data, list):
+            for cert_data in data:
+                if cert_data.get("certificate_file"):
+                    cert_data["download_url"] = request.build_absolute_uri(cert_data["certificate_file"])
 
         return response
 
 
+# review view set
 
+from rest_framework import viewsets, permissions, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+from django.core.exceptions import PermissionDenied
+from .models import Review, Enrollment, Course
+from .serializers import ReviewSerializer, ReviewListSerializer
 
+class ReviewViewSet(viewsets.ModelViewSet):
+    serializer_class = ReviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
-
-
-
-
-
-
-
-
-
-
-
-
-  
+    def get_queryset(self):
+        """
+        Students can only see their own reviews.
+        Admins can see all.
+        Allow filtering by course_slug via query parameter.
+        """
+        queryset = Review.objects.all().select_related('student', 'course')
         
+        # Filter by course if course_slug provided
+        course_slug = self.request.query_params.get('course_slug')
+        if course_slug:
+            course = get_object_or_404(Course, slug=course_slug)
+            queryset = queryset.filter(course=course)
+            
+            # If filtering by course, return ALL reviews for that course (public)
+            # Only apply user filtering for personal reviews (when no course_slug)
+            return queryset
         
-#recommendation view set
+        # For personal reviews (no course_slug), filter by current user
+        if not self.request.user.is_staff:
+            queryset = queryset.filter(student=self.request.user)
+            
+        return queryset
+
+
+    def create(self, request, *args, **kwargs):
+        """
+        Standard create method with course_slug in request data.
+        """
+        course_slug = request.data.get('course_slug')
+        if not course_slug:
+            return Response(
+                {"error": "course_slug is required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        course = get_object_or_404(Course, slug=course_slug)
+
+        # Check if user already reviewed this course
+        if Review.objects.filter(student=request.user, course=course).exists():
+            return Response(
+                {"error": "You have already reviewed this course."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Check enrollment status
+        enrollment = Enrollment.objects.filter(
+            student=request.user,
+            course=course,
+            status__in=['completed', 'certified']
+        ).first()
+
+        if not enrollment:
+            return Response(
+                {"error": "You must complete or certify this course to leave a review."},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        # Create the review
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(student=request.user, course=course)
+        
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def get_serializer_class(self):
+        """
+        Use different serializer for public listing.
+        """
+        # Use ReviewListSerializer when listing course reviews (public)
+        if self.request.query_params.get('course_slug'):
+            return ReviewListSerializer
+        return ReviewSerializer
+
+    def get_permissions(self):
+        """
+        Allow public access when filtering by course_slug.
+        """
+        # Allow anyone to view course reviews (when filtered by course_slug)
+        if self.request.method == 'GET' and self.request.query_params.get('course_slug'):
+            return [permissions.AllowAny()]
+        return super().get_permissions()
+
+
+
+
 #content based recommendation system
 import pandas as pd #type: ignore
 from sklearn.feature_extraction.text import TfidfVectorizer #type: ignore
@@ -796,6 +906,7 @@ def recommend_courses_with_scores(course_slug: str, top_n: int = 4):
             df["category__title"].fillna("") + " " +
             df["description"].fillna("") + " " +
             df["level"].fillna("") + " " +
+            # df["price"].fillna("") + " " +
             df["language"].fillna("")
         ).str.lower()
 
@@ -807,6 +918,8 @@ def recommend_courses_with_scores(course_slug: str, top_n: int = 4):
             stop_words = list(stopwords.words("english"))
 
         vectorizer = TfidfVectorizer(stop_words=stop_words, max_features=5000)
+        # vectorizer = TfidfVectorizer(stop_words=stop_words, max_features=5000, ngram_range=(1,2))
+
         tfidf_matrix = vectorizer.fit_transform(df["combined_text"])
 
         try:
@@ -820,7 +933,7 @@ def recommend_courses_with_scores(course_slug: str, top_n: int = 4):
         ).flatten()
 
     
-        threshold = 0.40
+        threshold = 0.10
         # Filter indices where similarity is above threshold and exclude the course itself
         filtered_indices = [
             i for i, score in enumerate(similarity_scores)

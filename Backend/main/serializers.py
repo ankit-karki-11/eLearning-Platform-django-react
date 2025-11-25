@@ -62,6 +62,7 @@ class CourseSerializer(serializers.ModelSerializer):
         },
     )
     total_enrolled = serializers.SerializerMethodField()
+    is_test_required = serializers.BooleanField()
     class Meta:
         model=Course
         fields=[
@@ -89,7 +90,9 @@ class CourseSerializer(serializers.ModelSerializer):
             "requirements",
             "learning_outcomes",
             "syllabus",
-            'total_enrolled'
+            'total_enrolled',
+            'is_test_required',
+            # 'total_reviews',
             # 'student_count',
         ]
         
@@ -129,6 +132,8 @@ class CourseListSerializer(serializers.ModelSerializer):
             "requirements",
             "learning_outcomes",
             "syllabus",
+            'is_test_required',
+            # 'total_reviews'
         ]
 
     def get_thumbnail(self, obj):
@@ -233,13 +238,13 @@ class SectionProgressSerializer(serializers.ModelSerializer):
             'started_at',
             'completed_at',
             'video_url',
-            'time_spent'       
+            # 'time_spent'       
         ]
         read_only_fields = [
             'id', 
             'started_at', 
             'completed_at',
-            'time_spent'
+            # 'time_spent'
         ]
     
     def get_video_url(self, obj):
@@ -313,63 +318,50 @@ class CourseNestedSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'slug',
+            'category',
             'description',
             'sections',
             'created_at',
             'updated_at',
         ]
         
-class EnrolledCourseDetailSerializer(serializers.ModelSerializer):
-    course = CourseNestedSerializer(read_only=True)
-    # sections = SectionWithCompletionSerializer(many=True, read_only=True)
-    progress = serializers.SerializerMethodField()
-    
-    class Meta:
-        model = Enrollment
-        fields = [
-            'course',
-            # 'sections',
-            'progress',
-            'status',
-            'last_accessed',
-            'created_at',
-            'updated_at',
-        ]
-    
-        read_only_fields = [
-            'progress',
-            'created_at',
-            'updated_at'
-        ]
-    
-    def get_progress(self, obj):
-        return obj.progress
+from rest_framework import serializers
+from .models import Enrollment, SectionProgress, Certificate
+from users.serializers import UserAccountListSerializer
+from main.serializers import CourseListSerializer, CourseNestedSerializer
+from smarttest.models import TestAttempt
 
 class EnrollmentSerializer(serializers.ModelSerializer):
-    course=CourseListSerializer(read_only=True)
-    course_id=serializers.PrimaryKeyRelatedField(
+    course = CourseListSerializer(read_only=True)
+    course_id = serializers.PrimaryKeyRelatedField(
         queryset=Course.objects.all(),
         source="course",
         write_only=True,
     )
-    student=UserAccountListSerializer(read_only=True)
-    student_id=serializers.PrimaryKeyRelatedField(
+    student = UserAccountListSerializer(read_only=True)
+    student_id = serializers.PrimaryKeyRelatedField(
         queryset=UserAccount.objects.filter(role="student"),
         source="student",
         write_only=True,
     )
-    
-    status= serializers.ChoiceField(
+
+    status = serializers.ChoiceField(
         choices=Enrollment.STATUS_CHOICES,
         read_only=True,
     )
     last_accessed = serializers.DateTimeField(read_only=True)
-    progress = serializers.SerializerMethodField()
+    progress = serializers.FloatField(read_only=True)  # directly from model
     section_progresses = SectionProgressSerializer(many=True, read_only=True)
-    
+
+    # Flags
+    is_completed = serializers.BooleanField( read_only=True)
+    is_certified = serializers.BooleanField( read_only=True)
+    is_sections_completed = serializers.SerializerMethodField()
+    is_test_passed = serializers.SerializerMethodField()
+
     class Meta:
-        model=Enrollment
-        fields=[
+        model = Enrollment
+        fields = [
             "id",
             "course", "course_id",
             "student", "student_id",
@@ -378,23 +370,109 @@ class EnrollmentSerializer(serializers.ModelSerializer):
             "last_accessed",
             "created_at",
             "updated_at",
-            'section_progresses',
+            "section_progresses",
+            "is_completed",
+            "is_certified",
+            "is_sections_completed",
+            "is_test_passed",
         ]
-        
         read_only_fields = [
-                "id", 
-                "progress",
-                "created_at",
-                "updated_at"
-            ]
-        
-    def get_progress(self, obj):
+            "id",
+            "progress",
+            "created_at",
+            "updated_at",
+            "status",
+            "is_completed",
+            "is_certified",
+            "is_sections_completed",
+            "is_test_passed",
+        ]
+
+    def get_is_sections_completed(self, obj):
         total_sections = obj.course.sections.count()
         if total_sections == 0:
-            return 0
+            return False
         completed_sections = obj.section_progresses.filter(is_completed=True).count()
-        return (completed_sections / total_sections) * 100
-    
+        return completed_sections == total_sections
+
+    def get_is_test_passed(self, obj):
+        if hasattr(obj.course, "is_test_required") and not obj.course.is_test_required:
+            return True
+        formal_tests = obj.course.tests.filter(is_practice=False)
+        if not formal_tests.exists():
+            return False
+        return all(
+            TestAttempt.objects.filter(
+                student=obj.student,
+                test=test,
+                status="submitted",
+                total_score__gte=obj.PASS_MARK
+            ).exists()
+            for test in formal_tests
+        )
+
+
+class EnrolledCourseDetailSerializer(serializers.ModelSerializer):
+    # course = CourseListSerializer(read_only=True)
+    course = CourseNestedSerializer(read_only=True)
+    progress = serializers.FloatField(read_only=True)
+
+    # Flags for frontend
+    is_completed = serializers.BooleanField( read_only=True)
+    is_certified = serializers.BooleanField( read_only=True)
+    is_sections_completed = serializers.SerializerMethodField()
+    is_test_passed = serializers.SerializerMethodField()
+
+    is_test_required = serializers.BooleanField(source='course.is_test_required', read_only=True)
+    class Meta:
+        model = Enrollment
+        fields = [
+            "course",
+            "progress",
+            "status",
+            "last_accessed",
+            "created_at",
+            "updated_at",
+            "is_completed",
+            "is_certified",
+            "is_sections_completed",
+          'is_test_required',  "is_test_passed",
+        ]
+        read_only_fields = [
+            "progress",
+            "created_at",
+            "updated_at",
+            "status",
+            "is_completed",
+            "is_certified",
+            "is_sections_completed",
+            "is_test_passed",
+            'is_test_required',
+        ]
+
+    def get_is_sections_completed(self, obj):
+        total_sections = obj.course.sections.count()
+        if total_sections == 0:
+            return False
+        completed_sections = obj.section_progresses.filter(is_completed=True).count()
+        return completed_sections == total_sections
+
+    def get_is_test_passed(self, obj):
+        if hasattr(obj.course, "is_test_required") and not obj.course.is_test_required:
+            return True
+        formal_tests = obj.course.tests.filter(is_practice=False)
+        if not formal_tests.exists():
+            return False
+        return all(
+            TestAttempt.objects.filter(
+                student=obj.student,
+                test=test,
+                status="submitted",
+                total_score__gte=obj.PASS_MARK
+            ).exists()
+            for test in formal_tests
+        )
+
     
 class AttachmentSerializer(serializers.ModelSerializer):
     section_id=serializers.PrimaryKeyRelatedField(
@@ -451,44 +529,88 @@ class CartSerializer(serializers.ModelSerializer):
             "updated_at",
         ]
 
+
+from django.core.files import File
 from rest_framework import serializers
-from .models import Certificate
-from .utils import generate_certificate
 from django.utils import timezone
+from .models import Certificate
+from .utils import generate_certificate  # returns Django File object
+
 
 class CertificateSerializer(serializers.ModelSerializer):
     course_slug = serializers.CharField(source='enrollment.course.slug', read_only=True)
-
+    certificate_file_url = serializers.SerializerMethodField()  # Dynamic full URL
 
     class Meta:
         model = Certificate
-        fields = ['certificate_id', 'certificate_file', 'issued_at', 'course_slug']
-        read_only_fields = ['certificate_id', 'issued_at', 'course_slug']
+        fields = ['certificate_id', 'certificate_file', 'certificate_file_url', 'issued_at', 'course_slug']
+        read_only_fields = ['certificate_id', 'issued_at', 'course_slug', 'certificate_file_url']
 
-    def get_course_slug(self, obj):
-        return obj.enrollment.course.slug
+    def get_certificate_file_url(self, obj):
+        request = self.context.get('request')
+        if obj.certificate_file:
+            return request.build_absolute_uri(obj.certificate_file.url)
+        return None
 
     def create(self, validated_data):
         enrollment = validated_data['enrollment']
         student_name = enrollment.student.full_name
         course_title = enrollment.course.title
 
-        # Create the certificate instance to generate its ID
+        # Step 1: Create certificate instance (generates certificate_id)
         certificate = Certificate.objects.create(enrollment=enrollment)
 
-        # Generate the certificate image
-        certificate_path = generate_certificate(
+        # Step 2: Generate the certificate file (returns Django File object)
+        certificate_file = generate_certificate(
             student_name=student_name,
             course_name=course_title,
             issued_at=timezone.now(),
             certificate_id=certificate.certificate_id
         )
 
-        # Save the generated file path
-        certificate.certificate_file = certificate_path
-        certificate.save()
+        # Step 3: Save File object directly to FileField
+        certificate.certificate_file.save(
+            certificate_file.name,
+            certificate_file,
+            save=True
+        )
 
         return certificate
+
+
+# class CertificateSerializer(serializers.ModelSerializer):
+#     course_slug = serializers.CharField(source='enrollment.course.slug', read_only=True)
+
+
+#     class Meta:
+#         model = Certificate
+#         fields = ['certificate_id', 'certificate_file', 'issued_at', 'course_slug']
+#         read_only_fields = ['certificate_id', 'issued_at', 'course_slug']
+
+#     def get_course_slug(self, obj):
+#         return obj.enrollment.course.slug
+
+#     def create(self, validated_data):
+#         enrollment = validated_data['enrollment']
+#         student_name = enrollment.student.full_name
+#         course_title = enrollment.course.title
+
+#         # Create the certificate instance to generate its ID
+#         certificate = Certificate.objects.create(enrollment=enrollment)
+
+#         # Generate the certificate image
+#         certificate_path = generate_certificate(
+#             student_name=student_name,
+#             course_name=course_title,
+#             issued_at=timezone.now(),
+#             certificate_id=certificate.certificate_id
+#         )
+
+#         # Save the generated file path
+#         certificate.certificate_file = certificate_path
+#         certificate.save()
+
+#         return certificate
 
 # from rest_framework import serializers
 # from .models import Certificate
@@ -512,3 +634,58 @@ class CertificateSerializer(serializers.ModelSerializer):
 #         fields = ["id", "course", "student", "enrollment", "certificate_url", "issued_at"]
 #         read_only_fields = ["certificate_url", "issued_at"]
 #         extra_kwargs = {"enrollment": {"required": True}}
+
+# serializers.py
+from rest_framework import serializers
+from .models import Review
+
+class ReviewSerializer(serializers.ModelSerializer):
+    student_name = serializers.CharField(source='student.full_name', read_only=True)
+    course_title = serializers.CharField(source='course.title', read_only=True)
+    rating_display = serializers.CharField(source='get_rating_display', read_only=True)
+
+    class Meta:
+        model = Review
+        fields = [
+            'id',
+            'student',
+            'course',
+            'rating',
+            'review_text',
+            'rating_display',
+            'student_name',
+            'course_title',
+            'created_at',
+        ]
+        read_only_fields = [
+            'id',
+            'created_at',
+            'student_name',
+            'course_title',
+            'rating_display',
+            'student',    # ← Prevent frontend from setting
+            'course',     # ← Prevent frontend from setting
+        ]
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        if request and hasattr(request, 'user'):
+            validated_data['student'] = request.user
+        return super().create(validated_data)
+    
+class ReviewListSerializer(serializers.ModelSerializer):
+    student_name = serializers.CharField(source='student.full_name', read_only=True)
+    rating_display = serializers.CharField(source='get_rating_display', read_only=True)
+    # course_slug = serializers.CharField(source='course.slug', read_only=True)
+    class Meta:
+        model = Review
+        fields = [
+            'id',
+            'student_name',
+            'rating',
+            'rating_display',
+            # 'course_slug', 
+            'review_text',
+            'created_at',
+        ]
+        read_only_fields = fields
