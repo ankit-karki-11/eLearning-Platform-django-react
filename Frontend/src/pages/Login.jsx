@@ -128,7 +128,7 @@ const Login = () => {
     }, [loginIsLoading, registerIsLoading, loginIsSuccess, registerIsSuccess, registerData, registerError, loginData, loginError, navigate, redirect])
 
     return (
-        <div className="flex mt-16 items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-100 p-4">
+        <div className="flex mt-16 items-center justify-center min-h-screen bg-white p-4">
             <Tabs defaultValue="signup" className="w-full max-w-md">
                 <TabsList className="grid grid-cols-2 w-full mb-4 bg-gray-100 p- rounded-md shadow-inner">
                     <TabsTrigger value="signup" className="rounded-md">Signup</TabsTrigger>

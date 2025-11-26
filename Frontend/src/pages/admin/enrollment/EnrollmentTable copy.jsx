@@ -11,32 +11,33 @@ import {
   TableFooter,
 } from '@/components/ui/table';
 import { useNavigate } from 'react-router-dom';
-import { useLoadCourseQuery } from '@/features/api/adminCourseApi';
+import { useLoadEnrollmentQuery } from '@/features/api/adminEnrollmentApi';
+
 import { Delete, Edit, Edit2, PlusCircle, Ticket, Trash2 } from 'lucide-react';
 
 
-const CourseTable = () => {
+const EnrollmentTable = () => {
   const navigate = useNavigate();
-  const { data: courses = [], isLoading,refetch  } = useLoadCourseQuery();
+  const { data: enrollments = [], isLoading,refetch  } = useLoadEnrollmentQuery();
 
   return (
     <div className="w-full px-3 py-14">
       <div className="flex justify-between items-center mb-3">
-        <h2 className="text-sm font-semibold">Courses</h2>
+        <h2 className="text-sm font-semibold">Enrollments</h2>
         <Button onClick={() => navigate('add')} size="sm" className="h-8 px-3 text-xs cursor-pointer">
-          <PlusCircle className="h-4 w-4 inline-block" /> Add New Course
+          <PlusCircle className="h-4 w-4 inline-block" /> Add New Enrollment
         </Button>
       </div>
 
       <Table className="text-xs border">
         <TableCaption className="text-[11px] text-muted-foreground mb-2">
-          List of your recent courses.
+          List of recent Course enrollments.
         </TableCaption>
         <TableHeader>
           <TableRow className="bg-muted">
             <TableHead className="px-2 py-1">Id</TableHead>
             <TableHead className="px-2 py-1">Title</TableHead>
-            <TableHead className="px-2 py-1">Rating(Avg)</TableHead>
+            {/* <TableHead className="px-2 py-1">Rating(Avg)</TableHead> */}
             <TableHead className="px-2 py-1">Price</TableHead>
             <TableHead className="px-2 py-1">Total Enrolled</TableHead>
             <TableHead className="px-2 py-1">Published</TableHead>
@@ -51,26 +52,26 @@ const CourseTable = () => {
                 Loading...
               </TableCell>
             </TableRow>
-          ) : courses.length === 0 ? (
+          ) : enrollments.length === 0 ? (
             <TableRow>
               <TableCell colSpan={4} className="text-center py-3">
-                No courses found.
+                No enrollments found.
               </TableCell>
             </TableRow>
           ) : (
-            courses.map((course) => (
-              <TableRow key={course.id} className="hover:bg-muted/50">
-                <TableCell className="px-2 py-1">{course.id}</TableCell>
-                <TableCell className="px-2 py-1">{course.title}</TableCell>
-                <TableCell className="px-2 py-1">{course.average_rating}</TableCell>
-                <TableCell className="px-2 py-1">Rs{course.price}</TableCell>
-                <TableCell className="px-2 py-1"> {course.total_enrolled}</TableCell>
+            enrollments.map((enrollment) => (
+              <TableRow key={enrollment.id} className="hover:bg-muted/50">
+                <TableCell className="px-2 py-1">{enrollment.id}</TableCell>
+                {/* <TableCell className="px-2 py-1">{enrollment.title}</TableCell> */}
+                {/* <TableCell className="px-2 py-1">{enrollment.average_rating}</TableCell> */}
+                {/* <TableCell className="px-2 py-1">Rs{enrollment.price}</TableCell> */}
+                {/* <TableCell className="px-2 py-1"> {enrollment.total_enrolled}</TableCell> */}
                 <TableCell className="px-2 py-1">
                   <span
-                    className={`inline-block px-2 py-1 rounded text-xs ${course.is_published ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                    className={`inline-block px-2 py-1 rounded text-xs ${enrollment.is_published ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
                       }`}
                   >
-                    {course.is_published ? "True" : "False"}
+                    {enrollment.is_published ? "True" : "False"}
                   </span>
                 </TableCell>
                <TableCell className="px-2 py-1 text-right">
@@ -78,7 +79,7 @@ const CourseTable = () => {
                     size="sm"
                     variant="ghost"
                     className="h-6 px-2 text-blue-500 text-xs cursor-pointer"
-                    onClick={() => navigate(`/admin/courses/${course.slug}`)}
+                    onClick={() => navigate(`/admin/enrollments/${enrollment.slug}`)}
                   >
                     <Edit className="h-4 w-4" />
                   </Button>
@@ -86,7 +87,7 @@ const CourseTable = () => {
                     size="sm"
                     variant="ghost"
                     className="h-6 px-2 text-red-500 text-xs cursor-pointer"
-                    onClick={() => handleDeleteCourse(course.id)}
+                    onClick={() => handleDeleteenrollment(enrollment.id)}
                     // disabled={isDeleting}
                   >
                     <Trash2 className="h-4 w-4" />
@@ -100,7 +101,7 @@ const CourseTable = () => {
         <TableFooter>
           <TableRow>
             <TableCell colSpan={4} className="text-right text-[11px] text-muted-foreground py-1">
-              Total: {courses.length}
+              Total: {enrollments.length}
             </TableCell>
           </TableRow>
         </TableFooter>
@@ -109,4 +110,4 @@ const CourseTable = () => {
   );
 };
 
-export default CourseTable;
+export default EnrollmentTable;

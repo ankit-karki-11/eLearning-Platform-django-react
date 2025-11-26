@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoadCoursesQuery } from '@/features/api/courseApi';  // Assuming this API hook exists
+import { useLoadCoursesQuery } from '@/features/api/courseApi';
 import { useNavigate } from 'react-router-dom';
 import { User2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -21,7 +21,7 @@ const UsersLoving = () => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h2 className="text-2xl font-bold mb-4">Courses Students Love ❤️</h2>
+            <h2 className="text-2xl font-bold mb-4">Courses Students Love </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {popularCourses.map(course => (
                     <div

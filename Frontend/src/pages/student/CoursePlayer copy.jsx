@@ -5,7 +5,7 @@ import {
   useMarkSectionAsCompletedMutation,
   useUpdateLastAccessedMutation,
 } from '@/features/api/enrollmentApi';
-import { ArrowLeft, ArrowRight, Check, CheckCircle, Download, Play, Clock, Award, FileText, Menu, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, CheckCircle, Download, Play, Clock, Award, FileText } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 
@@ -24,14 +24,13 @@ const CoursePlayer = () => {
   const [selectedSectionId, setSelectedSectionId] = useState(null);
   const [videoError, setVideoError] = useState(null);
   const [activeTab, setActiveTab] = useState('content');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const videoRef = useRef(null);
 
   const [markSectionAsCompleted, { isLoading: marking, error: markError }] =
     useMarkSectionAsCompletedMutation();
   const navigate = useNavigate();
   const [updateLastAccessed] = useUpdateLastAccessedMutation();
-
+  
   // Update last accessed when component mounts
   useEffect(() => {
     if (slug) {
@@ -108,7 +107,7 @@ const CoursePlayer = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex">
         {/* Sidebar Loading */}
-        <div className="w-80 bg-white border-r border-gray-200 p-6 animate-pulse max-lg:hidden">
+        <div className="w-80 bg-white border-r border-gray-200 p-6 animate-pulse">
           <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
           <div className="space-y-3">
             {[...Array(5)].map((_, i) => (
@@ -128,7 +127,7 @@ const CoursePlayer = () => {
 
   if (isError) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200 text-center max-w-md">
           <p className="font-semibold text-gray-900 mb-2">Failed to load course</p>
           <p className="text-sm text-gray-600">{error?.data?.detail || 'Please refresh or try again later'}</p>
@@ -139,7 +138,7 @@ const CoursePlayer = () => {
 
   if (!data?.course || !data.course.sections?.length) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200 text-center max-w-md">
           <p className="font-semibold text-gray-900 mb-2">Course content unavailable</p>
           <p className="text-sm text-gray-600">This course doesn't have any sections yet</p>
@@ -158,26 +157,13 @@ const CoursePlayer = () => {
   if (!selectedSection) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50 flex mt-12 flex-col lg:flex-row">
-      {/* Mobile Header */}
-      <div className="lg:hidden bg-white border-b border-gray-200 p-4 flex justify-between items-center">
-        <button
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-2 rounded-lg bg-gray-100"
-        >
-          {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-        <h1 className="text-lg font-semibold text-gray-900 truncate max-w-xs">
-          {course.title}
-        </h1>
-        <div className="w-10"></div> {/* Spacer for balance */}
-      </div>
-
+    <div className="min-h-screen bg-gray-50 flex mt-12">
       {/* Sidebar - Course Sections */}
-      <div className={`w-80 bg-white border-r border-gray-200 flex flex-col fixed lg:static inset-0 z-40 transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className="w-80 bg-white border-r border-gray-200 flex flex-col">
+        {/* Course Header */}
         <div className="p-6 border-b border-gray-200">
           <h1 className="text-lg font-semibold text-gray-900 mb-3">{course.title}</h1>
-
+          
           {/* Progress Bar */}
           <div className="mb-3">
             <div className="flex justify-between text-sm text-gray-600 mb-1">
@@ -191,7 +177,7 @@ const CoursePlayer = () => {
               ></div>
             </div>
           </div>
-
+          
           <p className="text-sm text-gray-500">
             {completedCount} of {course.sections.length} sections completed
           </p>
@@ -203,29 +189,29 @@ const CoursePlayer = () => {
             {course.sections.map((section, index) => (
               <button
                 key={section.id}
-                onClick={() => {
-                  setSelectedSectionId(section.id);
-                  setSidebarOpen(false);
-                }}
-                className={`w-full text-left p-3 mb-2 rounded-lg transition-all duration-200 flex items-center gap-3 ${selectedSectionId === section.id
-                    ? 'bg-black text-white'
+                onClick={() => setSelectedSectionId(section.id)}
+                className={`w-full text-left p-3 mb-2 rounded-lg transition-all duration-200 flex items-center gap-3 ${
+                  selectedSectionId === section.id 
+                    ? 'bg-black text-white' 
                     : 'hover:bg-gray-50 text-gray-700'
-                  }`}
+                }`}
               >
                 <div className="flex-shrink-0">
                   {section.is_completed ? (
                     <CheckCircle size={18} className={selectedSectionId === section.id ? 'text-white' : 'text-green-600'} />
                   ) : (
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectedSectionId === section.id ? 'border-white' : 'border-gray-300'
-                      }`}>
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      selectedSectionId === section.id ? 'border-white' : 'border-gray-300'
+                    }`}>
                       <span className="text-xs font-medium">{index + 1}</span>
                     </div>
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="text-sm font-medium truncate">{section.title}</h3>
-                  <p className={`text-xs mt-1 ${selectedSectionId === section.id ? 'text-gray-300' : 'text-gray-500'
-                    }`}>
+                  <p className={`text-xs mt-1 ${
+                    selectedSectionId === section.id ? 'text-gray-300' : 'text-gray-500'
+                  }`}>
                     Section {section.order}
                   </p>
                 </div>
@@ -235,19 +221,11 @@ const CoursePlayer = () => {
         </div>
       </div>
 
-      {/* Overlay for mobile sidebar */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        ></div>
-      )}
-
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col lg:ml-0">
+      <div className="flex-1 flex flex-col">
         {/* Video Player */}
         <div className="bg-white border-b border-gray-200">
-          <div className="aspect-video bg-black rounded-lg lg:rounded-xl m-4 lg:m-6 overflow-hidden">
+          <div className="aspect-video bg-black rounded-none overflow-hidden">
             {selectedSection.video_url ? (
               <video
                 ref={videoRef}
@@ -276,7 +254,7 @@ const CoursePlayer = () => {
               </div>
             )}
           </div>
-
+          
           {/* Navigation Controls */}
           <div className="flex justify-between items-center p-4 bg-gray-50">
             <Button
@@ -284,23 +262,21 @@ const CoursePlayer = () => {
               disabled={course.sections.findIndex((s) => s.id === selectedSectionId) === 0}
               variant="outline"
               size="sm"
-              className="flex items-center"
             >
               <ArrowLeft className="h-4 w-4 mr-1" />
-              <span className="hidden sm:inline">Previous</span>
+              Previous
             </Button>
-
-            <h2 className="font-medium text-gray-900 text-center flex-1 mx-2 sm:mx-4 truncate">
+            
+            <h2 className="font-medium text-gray-900 text-center flex-1 mx-4">
               {selectedSection.title}
             </h2>
-
+            
             <Button
               onClick={handleNextSection}
               disabled={course.sections.findIndex((s) => s.id === selectedSectionId) === course.sections.length - 1}
               size="sm"
-              className="flex items-center"
             >
-              <span className="hidden sm:inline">Next</span>
+              Next
               <ArrowRight className="h-4 w-4 ml-1" />
             </Button>
           </div>
@@ -310,41 +286,44 @@ const CoursePlayer = () => {
         <div className="flex-1 bg-white">
           {/* Tab Navigation */}
           <div className="border-b border-gray-200">
-            <div className="flex px-4 sm:px-6 overflow-x-auto">
+            <div className="flex px-6">
               <button
                 onClick={() => setActiveTab('content')}
-                className={`py-4 px-2 sm:px-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === 'content'
+                className={`py-4 px-4 text-sm font-medium border-b-2 transition-colors ${
+                  activeTab === 'content'
                     ? 'border-black text-black'
                     : 'border-transparent text-gray-500 hover:text-gray-700'
-                  }`}
+                }`}
               >
                 <FileText className="inline w-4 h-4 mr-2" />
                 Content
               </button>
-
+              
               <button
                 onClick={() => setActiveTab('test')}
                 disabled={!isCourseCompleted}
-                className={`py-4 px-2 sm:px-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === 'test' && isCourseCompleted
+                className={`py-4 px-4 text-sm font-medium border-b-2 transition-colors ${
+                  activeTab === 'test' && isCourseCompleted
                     ? 'border-black text-black'
                     : !isCourseCompleted
-                      ? 'border-transparent text-gray-400 cursor-not-allowed'
-                      : 'border-transparent text-gray-500 hover:text-gray-700'
-                  }`}
+                    ? 'border-transparent text-gray-400 cursor-not-allowed'
+                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
               >
                 <Clock className="inline w-4 h-4 mr-2" />
                 Test
               </button>
-
+              
               <button
                 onClick={() => setActiveTab('certificate')}
                 disabled={!data.is_test_passed}
-                className={`py-4 px-2 sm:px-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === 'certificate' && data.is_test_passed
+                className={`py-4 px-4 text-sm font-medium border-b-2 transition-colors ${
+                  activeTab === 'certificate' && data.is_test_passed
                     ? 'border-black text-black'
                     : !data.is_test_passed
-                      ? 'border-transparent text-gray-400 cursor-not-allowed'
-                      : 'border-transparent text-gray-500 hover:text-gray-700'
-                  }`}
+                    ? 'border-transparent text-gray-400 cursor-not-allowed'
+                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
               >
                 <Award className="inline w-4 h-4 mr-2" />
                 Certificate
@@ -353,7 +332,7 @@ const CoursePlayer = () => {
           </div>
 
           {/* Tab Content */}
-          <div className="p-4 sm:p-6">
+          <div className="p-6">
             {activeTab === 'content' && (
               <div className="space-y-6">
                 <div>
@@ -364,7 +343,7 @@ const CoursePlayer = () => {
                     {selectedSection.description || 'No description provided for this section.'}
                   </p>
                 </div>
-
+                
                 <div className="border-t border-gray-200 pt-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-3">About This Course</h3>
                   <p className="text-gray-600 leading-relaxed">
@@ -372,7 +351,7 @@ const CoursePlayer = () => {
                   </p>
                   {course.category && (
                     <p className="text-sm text-gray-500 mt-2">
-                      Category: {course.category.title}
+                      Category: {course.category}
                     </p>
                   )}
                 </div>
@@ -380,13 +359,12 @@ const CoursePlayer = () => {
             )}
 
             {activeTab === 'test' && (
-              <div className="text-center py-8 sm:py-12">
+              <div className="text-center py-12">
                 {!isCourseCompleted ? (
                   <div>
                     <Clock size={48} className="mx-auto mb-4 text-gray-400" />
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">Complete All Sections First</h3>
                     <p className="text-gray-600 mb-6">
-
                       You need to complete all course sections before taking the test.
                     </p>
                     <div className="bg-gray-50 rounded-lg p-4 max-w-md mx-auto">
@@ -415,7 +393,6 @@ const CoursePlayer = () => {
                     <CheckCircle size={48} className="mx-auto mb-4 text-green-600" />
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">Test Completed!</h3>
                     <p className="text-gray-600">
-
                       Congratulations! You've successfully passed the test.
                     </p>
                   </div>
@@ -424,7 +401,7 @@ const CoursePlayer = () => {
             )}
 
             {activeTab === 'certificate' && (
-              <div className="text-center py-8 sm:py-12">
+              <div className="text-center py-12">
                 {!data.is_test_passed ? (
                   <div>
                     <Award size={48} className="mx-auto mb-4 text-gray-400" />

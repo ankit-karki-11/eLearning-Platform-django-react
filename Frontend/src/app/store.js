@@ -11,6 +11,9 @@ import { smarttestApi } from "@/features/api/smarttestApi";
 import { adminCourseApi } from "@/features/api/adminCourseApi";
 import { adminSectionApi } from "@/features/api/adminSectionApi";
 import { adminCategoryApi } from "@/features/api/adminCategoryApi";
+import { reviewApi } from "@/features/api/reviewApi";
+import { adminEnrollmentApi } from "@/features/api/adminEnrollmentApi";
+// import { adminEnrollmentApi } from "@/features/api/adminEnrollmentApi";
 
 export const appStore = configureStore({
     reducer: rootReducer,
@@ -25,7 +28,9 @@ export const appStore = configureStore({
         smarttestApi.middleware,
         adminCourseApi.middleware,
         adminCategoryApi.middleware,
-        adminSectionApi.middleware
+        adminSectionApi.middleware,
+        reviewApi.middleware,
+        adminEnrollmentApi.middleware,
     )
 });
 

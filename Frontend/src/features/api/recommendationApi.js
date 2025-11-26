@@ -8,13 +8,13 @@ export const recommendationApi = createApi({
     baseQuery: fetchBaseQuery({ 
         baseUrl: RECOMMENDATION_API,
         credentials: 'include',
-        prepareHeaders: (headers) => {
-            const token = localStorage.getItem('accessToken');
-            if (token) {
-                headers.set('Authorization', `Bearer ${token}`);
-            }
-            return headers;
-        },
+        // prepareHeaders: (headers) => {
+        //     const token = localStorage.getItem('accessToken');
+        //     if (token) {
+        //         headers.set('Authorization', `Bearer ${token}`);
+        //     }
+        //     return headers;
+        // },
     }),
     endpoints: (builder) => ({
         getRecommendedCourses: builder.query({

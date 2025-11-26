@@ -4,6 +4,7 @@ import { useLoadMyEnrollmentsQuery } from '@/features/api/enrollmentApi';
 import { BookOpen, Clock, Award, Filter } from 'lucide-react';
 
 const MyLearning = () => {
+    
     const { data: enrollments, isLoading } = useLoadMyEnrollmentsQuery();
     const [filter, setFilter] = useState('all'); // 'all', 'in-progress', 'completed'
 
@@ -25,11 +26,13 @@ const MyLearning = () => {
 
     return (
         <div className='min-h-screen bg-white py-8 mt-12'>
-            <div className='max-w-4xl mx-auto px-4'>
+             {/* <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-full'> */}
+               
+            <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
                 {/* Header */}
                 <div className='mb-8'>
                     <h1 className='text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2'>
-                      
+                     
                         My Learning
                     </h1>
                     <p className='text-gray-600'>Your enrolled courses and progress</p>
@@ -80,7 +83,7 @@ const MyLearning = () => {
                 {!isLoading && enrollments && enrollments.length > 0 && (
                     <div className='mb-6 bg-white p-4 rounded-lg'>
                         <div className='flex items-center gap-2 mb-3'>
-                            <Filter size={18} className='text-gray-500' />
+                            {/* <Filter size={18} className='text-gray-500' /> */}
                             <span className='text-sm font-medium text-gray-700'>Filter by:</span>
                         </div>
                         <div className='flex flex-wrap gap-2'>
@@ -133,10 +136,10 @@ const MyLearning = () => {
                         ))}
                     </div>
                 ) : filteredEnrollments && filteredEnrollments.length === 0 ? (
-                    <div className="bg-white p-8 rounded-lg border shadow-sm text-center">
-                        <div className='w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4'>
+                    <div className="bg-gray-50 p-8 rounded-lg border shadow-sm text-center">
+                        {/* <div className='w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4'>
                             <BookOpen size={32} className='text-gray-400' />
-                        </div>
+                        </div> */}
                         <h3 className="text-lg font-medium text-gray-800 mb-2">
                             {filter !== 'all' ? `No ${filter.replace('-', ' ')} courses` : 'No courses yet'}
                         </h3>
@@ -148,14 +151,14 @@ const MyLearning = () => {
                         </p>
                         <button 
                             onClick={() => filter !== 'all' ? setFilter('all') : window.location.href = '/courses'}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm flex items-center gap-2 mx-auto"
+                            className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-950 text-sm flex items-center gap-2 mx-auto"
                         >
-                            <BookOpen size={16} />
+                            {/* <BookOpen size={16} /> */}
                             {filter !== 'all' ? 'View All Courses' : 'Browse Courses'}
                         </button>
                     </div>
                 ) : (
-                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
                         {filteredEnrollments?.map((enrollment) => (
                             <Course
                                 key={enrollment.course.slug}

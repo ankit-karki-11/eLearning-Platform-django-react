@@ -42,6 +42,15 @@ import AddSection from './pages/admin/section/AddSection'
 import UpdateCourse from './pages/admin/course/UpdateCourse'
 import TopicTable from './pages/admin/test-topic/TopicTable'
 import TestTable from './pages/admin/test-topic/TestTable'
+
+// enrollments
+import EnrollmentTable from './pages/admin/enrollment/EnrollmentTable'
+import StartTest from './pages/student/StartTest'
+import MyLearningHero from './pages/student/MyLearningHero'
+import LearningProcess from './pages/student/LearningProcess'
+import TestAttempt from './pages/student/TestAttempt'
+import CourseReviewsPage from './pages/student/CourseReviewsPage'
+import Testimonials from './pages/student/Testimonials'
 // import StartTest from './pages/student/smarttest/StartTest'
 // import TestSubmittedPage from './pages/student/smarttest/TestSubmittedPage'
 // import UsersLoving from './pages/student/UsersLoving'
@@ -57,8 +66,10 @@ const appRouter = createBrowserRouter([
           <>
             <Hero />
             {/* <Categories /> */}
+            <MyLearningHero />
             <Courses />
-
+            <Testimonials />
+            <LearningProcess />
 
           </>
 
@@ -135,8 +146,8 @@ const appRouter = createBrowserRouter([
             element: <Certificate />
           },
           {
-            
-            path: "/smart-test/test",
+
+            path: "/practice/test",
             element: <CreateTest />
           },
           //   {
@@ -155,6 +166,23 @@ const appRouter = createBrowserRouter([
             path: "/my-tests",
             element: <MyTestPage />
           },
+
+          // for formal test
+          {
+            path: "/course/:slug/test",
+            element: <StartTest />
+          },
+          {
+            path: "//course/:slug/attempt/:id",
+            element: <TestAttempt />
+          },
+          {
+            path: "/course/:slug/reviews",
+            element: <CourseReviewsPage />
+          },
+          // <Route path="/course/:slug/attempt/:id" element={<TestAttempt />} />
+
+          //  <Route path="/course/:slug/start-test" element={<StartTest />} />
         ]
       },
 
@@ -191,6 +219,10 @@ const appRouter = createBrowserRouter([
               {
                 path: 'courses/:slug',
                 element: <UpdateCourse />
+              },
+              {
+                path: 'enrollments',
+                element: <EnrollmentTable />
               },
               {
                 path: 'courses/categories',

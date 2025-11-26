@@ -48,7 +48,14 @@ export const enrollmentApi = createApi({
       }),
       providesTags: ['Enrollment'],
     }),
-    
+
+    MarkCompleted: builder.mutation({
+      query: (slug) => ({
+        url: `enrollments/${slug}/mark_completed/`,
+        method: "POST",
+      }),
+      invalidatesTags: ['Enrollment'],
+    }),
     MarkSectionAsCompleted: builder.mutation({
       query: ({ courseSlug, sectionId }) => ({
         url: `enrollments/${courseSlug}/section/${sectionId}/completed/`,
@@ -73,6 +80,14 @@ export const enrollmentApi = createApi({
       }),
       invalidatesTags: ['Enrollment'],
     }),
+    StartFreeCourse: builder.mutation({
+      query: (slug) => ({
+        url: `enrollments/${slug}/start-course/`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Enrollment'],
+    }),
+
 
   }),
 });
@@ -83,4 +98,6 @@ export const {
   useGetCourseSectionProgressQuery,
   useMarkSectionAsCompletedMutation,
   useUpdateLastAccessedMutation,
+  useMarkCompletedMutation,
+  useStartFreeCourseMutation, 
 } = enrollmentApi;

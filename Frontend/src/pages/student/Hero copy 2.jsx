@@ -66,9 +66,14 @@ const Hero = () => {
 
   return (
     <div className='relative pt-24 pb-16 md:pt-36 md:pb-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950 overflow-hidden'>
+      {/* Subtle grid pattern */}
+      {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,_rgba(0,0,0,0.05)_1px,_transparent_0)] dark:bg-[radial-gradient(circle_at_1px_1px,_rgba(255,255,255,0.05)_1px,_transparent_0)] bg-[size:20px_20px]"></div> */}
+      {/* modern grid pattern */}
+      {/* <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div> */}
 
       <div className='relative max-w-3xl mx-auto text-center'>
 
+        {/* === PERSONALIZED WELCOME FOR LOGGED-IN USERS === */}
         {userData && !userLoading && (
           <div className={`inline-flex items-center gap-2 font-medium px-4 py-2 mb-6 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-300 text-sm transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} shadow-sm shadow-blue-100/50 dark:shadow-blue-900/20`}>
             <Avatar className="h-6 w-6">
@@ -78,14 +83,14 @@ const Hero = () => {
               </AvatarFallback>
             </Avatar>
             Welcome back, <strong className="font-semibold">{userData.full_name.split(' ')[0]}</strong>!
-           
+            {/* <Badge variant="outline" className="ml-1 bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-200 text-xs"> */}
             <Badge variant="secondary" className="ml-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs">
               {userData.role}
             </Badge>
           </div>
         )}
 
-
+        {/* === UNIVERSAL TAGLINE FOR GUESTS === */}
         {!userData && !userLoading && (
           <div className={`inline-flex items-center font-medium px-3 py-1.5 mb-6 rounded-full bg-white/50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-200 text-sm transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             <Sparkles className="mr-2 h-3 w-3 text-blue-500 dark:text-blue-400" />
@@ -156,7 +161,7 @@ const Hero = () => {
               <div className="text-xs text-gray-900 dark:text-gray-400 mt-1">COURSES</div>
             </div>
           ) : (
-            <div className="p-3 border-l border-r  border-gray-200 dark:border-gray-800  text-gray-900opacity-80 hover:scale-100 transition-transform">
+            <div className="p-3 border-l border-r border-gray-200 dark:border-gray-800 cursor-default opacity-80 hover:scale-100 transition-transform">
               <div className="text-3xl font-medium">
                 {statsLoading ? '0' : counters.courses.toLocaleString()}
               </div>
@@ -169,7 +174,7 @@ const Hero = () => {
             <div className="text-3xl font-medium">
               {statsLoading ? '0' : `${counters.success}+`}
             </div>
-            <div className="text-xs text-gray-900 dark:text-gray-400 mt-1 uppercase">Tests Taken</div>
+            <div className="text-xs text-gray-900 dark:text-gray-400 mt-1 uppercase">MCQ Tests Taken</div>
           </div>
         </div>
       </div>

@@ -61,11 +61,16 @@ export const courseApi = createApi({
                 };
             },
         }),
+        // startFreeCourse: builder.mutation({
+        //     query: (slug) => ({
+        //         url: `enrollments/${slug}/start-course/`,
+        //         method: "POST",
+        //     }),
+        // }),
     }),
 })
 
 export const {
-
     useLoadCourseQuery,
     useGetCourseStatsQuery,
     useGetSectionsByCourseQuery,

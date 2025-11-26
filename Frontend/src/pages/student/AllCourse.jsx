@@ -1,16 +1,16 @@
 import React, { useState, useMemo } from 'react';
-import { useLoadCourseQuery } from '@/features/api/courseApi';
+import { useLoadCourseQuery, useSearchCoursesQuery } from '@/features/api/courseApi';
 import { useLoadCategoryQuery } from '@/features/api/categoryApi';
 import Course from './Course';
-import CourseSearch from './CourseSearch';
 
 const AllCourse = () => {
-  // Search results from CourseSearch component (fallback to all courses if null)
-  const [searchResults, setSearchResults] = useState(null);
+  // Search state
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [categoryQuery, setCategoryQuery] = useState('');
   const [sortOrder, setSortOrder] = useState('default');
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [searchField, setSearchField] = useState('both'); // 'title', 'keywords', or 'both'
 
   // Data
   const {
@@ -25,6 +25,16 @@ const AllCourse = () => {
     isLoading: catLoading
   } = useLoadCategoryQuery();
 
+  // Search query using trigram similarity
+  const {
+    data: searchResults,
+    error: searchError,
+    isLoading: searchLoading
+  } = useSearchCoursesQuery(
+    { q: searchQuery, field: searchField, sort: sortOrder },
+    { skip: !searchQuery.trim() } // Only run when there's a search query
+  );
+
   // Normalize courses
   const courses = useMemo(() => {
     if (!coursesRaw) return [];
@@ -33,6 +43,16 @@ const AllCourse = () => {
     if (Array.isArray(coursesRaw.data)) return coursesRaw.data;
     return [];
   }, [coursesRaw]);
+
+  // Normalize search results
+  const normalizedSearchResults = useMemo(() => {
+    if (!searchQuery.trim()) return null;
+    if (!searchResults) return [];
+    if (Array.isArray(searchResults)) return searchResults;
+    if (Array.isArray(searchResults.results)) return searchResults.results;
+    if (Array.isArray(searchResults.data)) return searchResults.data;
+    return [];
+  }, [searchResults, searchQuery]);
 
   // Normalize categories
   const categories = useMemo(() => {
@@ -54,24 +74,35 @@ const AllCourse = () => {
 
   // Courses after category + search + sort
   const filteredCourses = useMemo(() => {
-    let list = searchResults || courses;
+    // Use search results if available, otherwise use all courses
+    let list = normalizedSearchResults || courses;
 
-    // Category filter (by slug)
-    if (selectedCategory !== 'all') {
+    // Category filter (by slug) - only apply if not using search results
+    // because search API might not return category data in the same format
+    if (selectedCategory !== 'all' && !normalizedSearchResults) {
       list = list.filter(c => c.category && c.category.slug === selectedCategory);
     }
 
-    // Sorting
-    if (sortOrder === 'price-asc') {
-      list = [...list].sort((a, b) => (a.price || 0) - (b.price || 0));
-    } else if (sortOrder === 'price-desc') {
-      list = [...list].sort((a, b) => (b.price || 0) - (a.price || 0));
+    // For client-side sorting when not using search API sorting
+    if (!normalizedSearchResults) {
+      if (sortOrder === 'price-asc') {
+        list = [...list].sort((a, b) => (a.price || 0) - (b.price || 0));
+      } else if (sortOrder === 'price-desc') {
+        list = [...list].sort((a, b) => (b.price || 0) - (a.price || 0));
+      }
     }
 
     return list;
-  }, [searchResults, courses, selectedCategory, sortOrder]);
+  }, [normalizedSearchResults, courses, selectedCategory, sortOrder]);
 
-  const handleSearchResults = (results) => setSearchResults(results);
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    // The search is handled by the useSearchCoursesQuery hook
+  };
+
+  const clearSearch = () => {
+    setSearchQuery('');
+  };
 
   return (
     <div className="min-h-screen bg-white mt-16">
@@ -84,9 +115,66 @@ const AllCourse = () => {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
-            <div className="w-full sm:w-auto">
-              <CourseSearch onSearchResults={handleSearchResults} />
-            </div>
+            {/* Search Form */}
+            <form onSubmit={handleSearchSubmit} className="w-full sm:w-auto">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search courses..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full sm:w-64 border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={clearSearch}
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+              
+              {/* Search field options */}
+              {searchQuery && (
+                <div className="flex items-center gap-2 mt-2 text-xs">
+                  <span className="text-gray-600">Search in:</span>
+                  <label className="flex items-center gap-1">
+                    <input
+                      type="radio"
+                      name="searchField"
+                      value="both"
+                      checked={searchField === 'both'}
+                      onChange={() => setSearchField('both')}
+                    />
+                    Both
+                  </label>
+                  <label className="flex items-center gap-1">
+                    <input
+                      type="radio"
+                      name="searchField"
+                      value="title"
+                      checked={searchField === 'title'}
+                      onChange={() => setSearchField('title')}
+                    />
+                    Title
+                  </label>
+                  <label className="flex items-center gap-1">
+                    <input
+                      type="radio"
+                      name="searchField"
+                      value="keywords"
+                      checked={searchField === 'keywords'}
+                      onChange={() => setSearchField('keywords')}
+                    />
+                    Keywords
+                  </label>
+                </div>
+              )}
+            </form>
             
             <div className="flex items-center gap-2">
               <span className="text-sm text-gray-600 whitespace-nowrap">Sort by:</span>
@@ -159,19 +247,22 @@ const AllCourse = () => {
                   >
                     All Categories
                   </button>
-                  {visibleCategories.map(cat => (
-                    <button
-                      key={cat.id}
-                      className={`w-full text-left px-3 py-2 text-sm rounded ${
-                        selectedCategory === cat.slug
-                          ? 'bg-blue-50 text-blue-700'
-                          : 'text-gray-700 hover:bg-gray-100'
-                      }`}
-                      onClick={() => setSelectedCategory(cat.slug)}
-                    >
-                      {cat.title}
-                    </button>
-                  ))}
+                  {visibleCategories
+                    .slice()
+                    .sort((a, b) => (a.title || '').localeCompare(b.title || ''))
+                    .map(cat => (
+                      <button
+                        key={cat.id}
+                        className={`w-full text-left px-3 py-2 text-sm rounded ${
+                          selectedCategory === cat.slug
+                            ? 'bg-blue-50 text-blue-700'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
+                        onClick={() => setSelectedCategory(cat.slug)}
+                      >
+                        {cat.title}
+                      </button>
+                    ))}
                 </div>
               </div>
             </div>
@@ -223,19 +314,22 @@ const AllCourse = () => {
                   >
                     All Categories
                   </button>
-                  {visibleCategories.map(cat => (
-                    <button
-                      key={cat.id}
-                      className={`w-full text-left px-3 py-2 text-sm rounded ${
-                        selectedCategory === cat.slug
-                          ? 'bg-blue-50 text-blue-700'
-                          : 'text-gray-700 hover:bg-gray-100'
-                      }`}
-                      onClick={() => setSelectedCategory(cat.slug)}
-                    >
-                      {cat.title}
-                    </button>
-                  ))}
+                  {visibleCategories
+                    .slice()
+                    .sort((a, b) => (a.title || '').localeCompare(b.title || ''))
+                    .map(cat => (
+                      <button
+                        key={cat.id}
+                        className={`w-full text-left px-3 py-2 text-sm rounded ${
+                          selectedCategory === cat.slug
+                            ? 'bg-blue-50 text-blue-700'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
+                        onClick={() => setSelectedCategory(cat.slug)}
+                      >
+                        {cat.title}
+                      </button>
+                    ))}
                 </div>
               )}
             </div>
@@ -245,7 +339,7 @@ const AllCourse = () => {
           <main className="flex-1">
             <div className="mb-6 flex items-center justify-between">
               <div>
-                {selectedCategory !== 'all' && (
+                {selectedCategory !== 'all' && !searchQuery && (
                   <div className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 text-blue-700 mb-2">
                     {categories.find(c => c.slug === selectedCategory)?.title || selectedCategory}
                     <button 
@@ -259,8 +353,14 @@ const AllCourse = () => {
                   </div>
                 )}
                 <h2 className="text-xl font-medium text-gray-900">
-                  {searchResults ? 'Search Results' : 'All Courses'}
+                  {searchQuery ? 'Search Results' : 'All Courses'}
                 </h2>
+                {searchQuery && (
+                  <p className="text-sm text-gray-600 mt-1">
+                    Results for "{searchQuery}"
+                    {searchField !== 'both' && ` in ${searchField}`}
+                  </p>
+                )}
               </div>
               
               <div className="text-sm text-gray-500">
@@ -268,7 +368,7 @@ const AllCourse = () => {
               </div>
             </div>
 
-            {coursesLoading ? (
+            {(coursesLoading || searchLoading) ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div key={i} className="bg-white rounded-lg border overflow-hidden">
@@ -281,7 +381,7 @@ const AllCourse = () => {
                   </div>
                 ))}
               </div>
-            ) : coursesError ? (
+            ) : (coursesError || searchError) ? (
               <div className="text-center py-12">
                 <div className="text-gray-400 mb-4">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -300,6 +400,17 @@ const AllCourse = () => {
                 </div>
                 <h3 className="text-gray-700">No courses found</h3>
                 <p className="text-gray-500 text-sm mt-1">Try adjusting your search or filters</p>
+                {(searchQuery || selectedCategory !== 'all') && (
+                  <button
+                    onClick={() => {
+                      setSearchQuery('');
+                      setSelectedCategory('all');
+                    }}
+                    className="mt-4 px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700"
+                  >
+                    Clear all filters
+                  </button>
+                )}
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -11,6 +11,9 @@ import { smarttestApi } from '@/features/api/smarttestApi';
 import { adminCourseApi } from '@/features/api/adminCourseApi';
 import { adminSectionApi } from '@/features/api/adminSectionApi';
 import { adminCategoryApi } from '@/features/api/adminCategoryApi';
+import { reviewApi } from '@/features/api/reviewApi';
+import { adminEnrollmentApi } from '@/features/api/adminEnrollmentApi';
+
 
 const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
@@ -24,6 +27,8 @@ const rootReducer = combineReducers({
     [adminCourseApi.reducerPath]: adminCourseApi.reducer,
     [adminSectionApi.reducerPath]: adminSectionApi.reducer,
     [adminCategoryApi.reducerPath]: adminCategoryApi.reducer,
+    [reviewApi.reducerPath]: reviewApi.reducer,
+    [adminEnrollmentApi.reducerPath]: adminEnrollmentApi.reducer,
     auth: authReducer,
 
 });
