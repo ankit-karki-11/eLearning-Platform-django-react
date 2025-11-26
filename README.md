@@ -58,13 +58,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 ### 4. Screenshots / Demo
 
-<img width="1897" height="1061" alt="image" src="https://github.com/user-attachments/assets/fc375946-de74-4846-abbd-5db975da1029" />
+<img src="https://github.com/user-attachments/assets/db270ead-2fd6-4a2b-9874-69e21ab4c216" alt="Course List" width="600" />
+<p align="center"></p>
 
-<img width="1885" height="970" alt="image" src="https://github.com/user-attachments/assets/db270ead-2fd6-4a2b-9874-69e21ab4c216" />
-
-<img width="1893" height="1059" alt="image" src="https://github.com/user-attachments/assets/76c36d73-4c03-4a1b-845d-9680831ea854" />
-
-<img width="1888" height="1055" alt="image" src="https://github.com/user-attachments/assets/b8274211-29a5-4722-b6bf-bd09b665580a" />
+<img src="https://github.com/user-attachments/assets/76c36d73-4c03-4a1b-845d-9680831ea854" alt="Dashboard" width="600" />
+<p align="center"></p>
 
 
 
@@ -84,5 +82,3 @@ Email: ankitkarki8088@gmail.com
 GitHub: https://github.com/ankitkarki27
 Portfolio: https://karkiankit.com.np
 ```
-
-
